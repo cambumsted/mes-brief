@@ -1,0 +1,758 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Wireframes — Marketing Effectiveness Solution</title>
+<style>
+  :root {
+    --c-dark-blue: #091F2E;
+    --c-med-blue: #0078D4;
+    --c-teal: #49C5B1;
+    --c-white: #FFFFFF;
+    --c-n05: #F2F2F2;
+    --c-n15: #D9D9D9;
+    --c-n25: #BFBFBF;
+    --c-n35: #A6A6A6;
+    --c-n50: #7F7F7F;
+    --c-light-blue: #8DC8E8;
+    --c-aqua: #B9DCD2;
+    --c-lavender: #C5B4E3;
+    --c-light-green: #8DE971;
+
+    --ms-blue: var(--c-med-blue);
+    --ms-blue-dark: var(--c-dark-blue);
+    --ms-blue-light: #E6F2FB;
+    --ink: var(--c-dark-blue);
+    --ink-soft: var(--c-n50);
+    --line: var(--c-n15);
+    --bg: var(--c-n05);
+    --card: var(--c-white);
+    --shadow: 0 1.6px 3.6px rgba(9,31,46,0.08), 0 0.3px 0.9px rgba(9,31,46,0.06);
+
+    /* Wireframe palette */
+    --wf-bg: #FAFAFA;
+    --wf-line: #C7C7C7;
+    --wf-fill: #E8E8E8;
+    --wf-fill-dark: #D0D0D0;
+    --wf-ink: #6E6E6E;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    font-family: "Segoe UI", -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
+    color: var(--ink);
+    background: var(--bg);
+    line-height: 1.55;
+    font-size: 16px;
+  }
+  a { color: var(--ms-blue-dark); }
+  h1, h2, h3, h4 { color: var(--ink); margin-top: 0; line-height: 1.25; }
+  h1 { font-size: 2.4rem; font-weight: 600; letter-spacing: -0.5px; }
+  h2 { font-size: 1.6rem; font-weight: 600; margin-bottom: 0.4rem; }
+  h3 { font-size: 1.15rem; font-weight: 600; margin-bottom: 0.3rem; }
+  h4 { font-size: 0.95rem; font-weight: 600; margin-bottom: 0.25rem; text-transform: uppercase; letter-spacing: 0.5px; color: var(--ink-soft); }
+  p { margin: 0.5rem 0; }
+
+  /* Top nav (matches brief page) */
+  .nav {
+    position: sticky; top: 0; z-index: 100;
+    background: rgba(255,255,255,0.96);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line);
+    padding: 0.6rem 1.5rem;
+    display: flex; align-items: center; gap: 1rem;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+  .nav .brand { font-weight: 600; color: var(--ms-blue-dark); margin-right: 1rem; flex-shrink: 0; }
+  .nav a {
+    color: var(--ink-soft);
+    text-decoration: none;
+    font-size: 0.85rem;
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    flex-shrink: 0;
+  }
+  .nav a:hover { background: var(--ms-blue-light); color: var(--ms-blue-dark); }
+  .nav a.is-active { background: var(--c-dark-blue); color: white; }
+
+  main {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem 1.5rem 4rem;
+  }
+
+  .intro {
+    background: linear-gradient(135deg, var(--c-dark-blue) 0%, var(--c-med-blue) 100%);
+    color: white;
+    padding: 2.5rem 2rem;
+    border-radius: 8px;
+    border-top: 4px solid var(--c-teal);
+    margin-bottom: 2rem;
+    box-shadow: var(--shadow);
+  }
+  .intro h1 { color: white; }
+  .intro .meta { font-size: 0.85rem; opacity: 0.8; letter-spacing: 0.5px; text-transform: uppercase; }
+  .intro p { max-width: 800px; opacity: 0.95; }
+  .intro .disclaimer {
+    margin-top: 1.25rem;
+    background: rgba(255,255,255,0.12);
+    border: 1px dashed rgba(255,255,255,0.4);
+    padding: 0.6rem 0.9rem;
+    border-radius: 6px;
+    font-size: 0.85rem;
+  }
+
+  /* Wireframe section wrapper */
+  .wf-section {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 1.75rem;
+    margin-bottom: 1.5rem;
+    box-shadow: var(--shadow);
+  }
+  .wf-section .section-num {
+    display: inline-block;
+    color: var(--ms-blue);
+    font-weight: 600;
+    font-size: 0.85rem;
+    letter-spacing: 1px;
+    margin-bottom: 0.4rem;
+  }
+  .wf-section .lead {
+    color: var(--ink-soft);
+    margin: 0 0 1.25rem;
+    max-width: 820px;
+  }
+
+  /* Wireframe "frame" — a fake browser/app chrome */
+  .wf {
+    border: 1.5px solid var(--wf-line);
+    border-radius: 8px;
+    background: var(--wf-bg);
+    overflow: hidden;
+  }
+  .wf-chrome {
+    display: flex; align-items: center; gap: 0.5rem;
+    padding: 0.5rem 0.85rem;
+    background: var(--wf-fill);
+    border-bottom: 1.5px solid var(--wf-line);
+    font-size: 0.8rem; color: var(--wf-ink);
+  }
+  .wf-chrome .dot {
+    width: 10px; height: 10px; border-radius: 50%;
+    background: var(--wf-fill-dark); border: 1px solid var(--wf-line);
+  }
+  .wf-chrome .url {
+    flex: 1; background: var(--c-white);
+    border: 1px solid var(--wf-line);
+    border-radius: 4px;
+    padding: 0.15rem 0.6rem;
+    font-family: "Cascadia Code", Consolas, monospace;
+    font-size: 0.75rem;
+    color: var(--wf-ink);
+  }
+
+  /* App layout: sidebar + main */
+  .wf-app { display: grid; grid-template-columns: 200px 1fr; min-height: 520px; }
+  .wf-sidebar {
+    background: var(--c-dark-blue);
+    color: rgba(255,255,255,0.85);
+    padding: 1rem 0.75rem;
+    font-size: 0.85rem;
+  }
+  .wf-sidebar .wf-logo {
+    color: white; font-weight: 600;
+    padding: 0.4rem 0.5rem 0.9rem;
+    border-bottom: 1px solid rgba(255,255,255,0.15);
+    margin-bottom: 0.6rem;
+    font-size: 0.9rem;
+  }
+  .wf-sidebar .nav-group { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 1px; opacity: 0.55; padding: 0.75rem 0.5rem 0.3rem; }
+  .wf-sidebar .nav-item {
+    display: flex; align-items: center; gap: 0.5rem;
+    padding: 0.45rem 0.6rem;
+    border-radius: 4px;
+    cursor: default;
+  }
+  .wf-sidebar .nav-item .ico {
+    width: 14px; height: 14px; border-radius: 3px;
+    background: rgba(255,255,255,0.2);
+    flex-shrink: 0;
+  }
+  .wf-sidebar .nav-item.active { background: var(--ms-blue); color: white; }
+  .wf-sidebar .nav-item.active .ico { background: var(--c-teal); }
+
+  .wf-main { padding: 1.25rem 1.5rem; background: var(--wf-bg); }
+  .wf-topbar {
+    display: flex; align-items: center; justify-content: space-between;
+    margin-bottom: 1rem; padding-bottom: 0.75rem;
+    border-bottom: 1px solid var(--wf-line);
+  }
+  .wf-topbar h3 { margin: 0; font-size: 1.1rem; color: var(--ink); }
+  .wf-topbar .filters { display: flex; gap: 0.4rem; }
+  .wf-chip {
+    background: var(--c-white);
+    border: 1px solid var(--wf-line);
+    border-radius: 16px;
+    padding: 0.2rem 0.7rem;
+    font-size: 0.75rem;
+    color: var(--wf-ink);
+  }
+  .wf-chip.active { background: var(--ms-blue-light); border-color: var(--ms-blue); color: var(--ms-blue-dark); }
+
+  /* KPI strip */
+  .wf-kpis { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.75rem; margin-bottom: 1rem; }
+  .wf-kpi {
+    background: var(--c-white);
+    border: 1px solid var(--wf-line);
+    border-radius: 6px;
+    padding: 0.75rem 0.9rem;
+  }
+  .wf-kpi .label { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.5px; color: var(--wf-ink); }
+  .wf-kpi .val { font-size: 1.4rem; font-weight: 600; color: var(--ink); margin-top: 0.15rem; }
+  .wf-kpi .delta { font-size: 0.75rem; margin-top: 0.15rem; }
+  .wf-kpi .delta.up { color: #2C7A4B; }
+  .wf-kpi .delta.down { color: #B91C1C; }
+  .wf-kpi .delta.flat { color: var(--wf-ink); }
+
+  /* Tile grid */
+  .wf-grid { display: grid; gap: 0.75rem; }
+  .wf-grid.cols-2 { grid-template-columns: 2fr 1fr; }
+  .wf-grid.cols-3 { grid-template-columns: repeat(3, 1fr); }
+  .wf-tile {
+    background: var(--c-white);
+    border: 1px solid var(--wf-line);
+    border-radius: 6px;
+    padding: 0.85rem;
+  }
+  .wf-tile h4 {
+    color: var(--ink); text-transform: none; letter-spacing: 0;
+    font-size: 0.9rem; margin-bottom: 0.6rem;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .wf-tile h4 .pill-tag {
+    font-size: 0.65rem; font-weight: 600;
+    background: var(--ms-blue-light); color: var(--ms-blue-dark);
+    padding: 0.1rem 0.5rem; border-radius: 10px;
+    text-transform: uppercase; letter-spacing: 0.5px;
+  }
+
+  /* Fake chart visuals */
+  .chart-bars {
+    display: flex; align-items: flex-end; gap: 8px;
+    height: 120px; padding-top: 0.4rem;
+    border-bottom: 1px solid var(--wf-line);
+  }
+  .chart-bars .bar { flex: 1; background: var(--ms-blue); border-radius: 3px 3px 0 0; opacity: 0.8; }
+  .chart-bars .bar.alt { background: var(--c-teal); }
+  .chart-axis {
+    display: flex; justify-content: space-between;
+    font-size: 0.7rem; color: var(--wf-ink); margin-top: 0.3rem;
+  }
+  .chart-line {
+    height: 120px; padding: 0.4rem 0;
+    border-bottom: 1px solid var(--wf-line);
+    position: relative;
+  }
+  .chart-line svg { width: 100%; height: 100%; display: block; }
+  .chart-donut { display: flex; align-items: center; gap: 1rem; }
+  .chart-donut svg { width: 100px; height: 100px; flex-shrink: 0; }
+  .chart-donut .legend { font-size: 0.78rem; color: var(--wf-ink); }
+  .chart-donut .legend div { display: flex; align-items: center; gap: 0.4rem; margin-bottom: 0.25rem; }
+  .chart-donut .legend .swatch { width: 10px; height: 10px; border-radius: 2px; }
+
+  /* Fake table */
+  .wf-table { width: 100%; border-collapse: collapse; font-size: 0.82rem; }
+  .wf-table th, .wf-table td {
+    text-align: left; padding: 0.45rem 0.5rem;
+    border-bottom: 1px solid var(--wf-line);
+  }
+  .wf-table th {
+    font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.5px;
+    color: var(--wf-ink); font-weight: 600;
+    background: var(--wf-fill);
+  }
+  .wf-table td .bar-cell {
+    display: inline-block; height: 8px;
+    background: var(--ms-blue); border-radius: 2px;
+    vertical-align: middle;
+  }
+  .status-dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; margin-right: 0.4rem; }
+  .status-dot.green { background: #2C7A4B; }
+  .status-dot.amber { background: #D49500; }
+  .status-dot.red { background: #B91C1C; }
+
+  /* Annotations */
+  .annotations {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 0.75rem;
+    margin-top: 1rem;
+  }
+  .annotation {
+    border-left: 3px solid var(--c-teal);
+    background: var(--bg);
+    padding: 0.6rem 0.8rem;
+    border-radius: 4px;
+    font-size: 0.85rem;
+  }
+  .annotation .num {
+    display: inline-block; width: 18px; height: 18px; border-radius: 50%;
+    background: var(--c-teal); color: white;
+    text-align: center; line-height: 18px; font-size: 0.7rem; font-weight: 700;
+    margin-right: 0.4rem;
+  }
+
+  /* Numbered callouts overlaid on tiles */
+  .wf-tile { position: relative; }
+  .wf-tile .num-marker {
+    position: absolute; top: -8px; left: -8px;
+    width: 22px; height: 22px; border-radius: 50%;
+    background: var(--c-teal); color: white;
+    text-align: center; line-height: 22px;
+    font-size: 0.75rem; font-weight: 700;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.15);
+  }
+
+  /* Drilldown demo */
+  .wf-breadcrumb {
+    font-size: 0.78rem; color: var(--wf-ink);
+    margin-bottom: 0.75rem;
+  }
+  .wf-breadcrumb a { color: var(--ms-blue); text-decoration: none; }
+  .wf-breadcrumb .sep { margin: 0 0.4rem; opacity: 0.5; }
+
+  @media (max-width: 900px) {
+    .wf-app { grid-template-columns: 1fr; }
+    .wf-sidebar { display: none; }
+    .wf-kpis { grid-template-columns: repeat(2, 1fr); }
+    .wf-grid.cols-2, .wf-grid.cols-3 { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<nav class="nav" aria-label="Section navigation">
+  <span class="brand">Marketing Effectiveness Solution</span>
+  <a href="index.html">← Brief</a>
+  <a href="#intro" class="is-active">Wireframes</a>
+  <a href="#exec">Executive Home</a>
+  <a href="#trends">Performance Trends</a>
+  <a href="#campaign">Campaign Drilldown</a>
+  <a href="#partners">Partnerships</a>
+  <a href="#roi">Investment &amp; ROI</a>
+</nav>
+
+<main>
+
+<!-- INTRO -->
+<section id="intro" class="intro">
+  <div class="meta">DDS Marketing · Solution Wireframes · Draft v0.1</div>
+  <h1>What it could look like.</h1>
+  <p>
+    Low-fidelity wireframes showing how the four pillars come together as a single, leadership-ready surface.
+    These are deliberately rough — meant to spark discussion about layout, navigation, and depth-of-detail,
+    not to lock in visual design.
+  </p>
+  <div class="disclaimer">
+    <strong>Read this as:</strong> "If we built it, here's the shape." Numbers are illustrative only.
+  </div>
+</section>
+
+<!-- 1. EXECUTIVE HOME -->
+<section id="exec" class="wf-section">
+  <span class="section-num">01 · Executive Home</span>
+  <h2>One page. Four answers.</h2>
+  <p class="lead">
+    The landing view a DDS leader sees first. Top KPIs across all four pillars, each clickable to drill in.
+    Designed to answer "How is marketing doing right now?" in 10 seconds.
+  </p>
+
+  <div class="wf">
+    <div class="wf-chrome">
+      <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+      <span class="url">marketing-effectiveness.dds.microsoft.com / home</span>
+    </div>
+    <div class="wf-app">
+      <aside class="wf-sidebar">
+        <div class="wf-logo">MES</div>
+        <div class="nav-group">Overview</div>
+        <div class="nav-item active"><span class="ico"></span>Executive Home</div>
+        <div class="nav-group">Pillars</div>
+        <div class="nav-item"><span class="ico"></span>Investment &amp; ROI</div>
+        <div class="nav-item"><span class="ico"></span>Performance Trends</div>
+        <div class="nav-item"><span class="ico"></span>Campaigns</div>
+        <div class="nav-item"><span class="ico"></span>Partnerships</div>
+        <div class="nav-group">Tools</div>
+        <div class="nav-item"><span class="ico"></span>Saved Views</div>
+        <div class="nav-item"><span class="ico"></span>Export &amp; Share</div>
+      </aside>
+
+      <div class="wf-main">
+        <div class="wf-topbar">
+          <h3>Executive Home — FY26 Q3</h3>
+          <div class="filters">
+            <span class="wf-chip">Region: All</span>
+            <span class="wf-chip active">Period: QTD</span>
+            <span class="wf-chip">Compare: PY</span>
+          </div>
+        </div>
+
+        <div class="wf-kpis">
+          <div class="wf-kpi">
+            <span class="num-marker" style="position:absolute;">1</span>
+            <div class="label">Marketing ROI</div>
+            <div class="val">3.4x</div>
+            <div class="delta up">▲ 0.3 vs PY</div>
+          </div>
+          <div class="wf-kpi">
+            <div class="label">Pipeline Influenced</div>
+            <div class="val">$48.2M</div>
+            <div class="delta up">▲ 12%</div>
+          </div>
+          <div class="wf-kpi">
+            <div class="label">Active Campaigns</div>
+            <div class="val">14</div>
+            <div class="delta flat">— 6 on track</div>
+          </div>
+          <div class="wf-kpi">
+            <div class="label">Top Partner ROI</div>
+            <div class="val">5.1x</div>
+            <div class="delta up">▲ Best Buy / WCMR</div>
+          </div>
+        </div>
+
+        <div class="wf-grid cols-2">
+          <div class="wf-tile">
+            <span class="num-marker">2</span>
+            <h4>Pipeline Trend (last 6 months) <span class="pill-tag">Trends</span></h4>
+            <div class="chart-line">
+              <svg viewBox="0 0 300 120" preserveAspectRatio="none">
+                <polyline points="0,90 50,70 100,75 150,55 200,40 250,30 300,20"
+                  fill="none" stroke="#0078D4" stroke-width="2.5"/>
+                <polyline points="0,90 50,70 100,75 150,55 200,40 250,30 300,20"
+                  fill="rgba(0,120,212,0.1)" stroke="none"
+                  transform="translate(0,0)"/>
+                <polyline points="0,100 50,95 100,90 150,85 200,80 250,75 300,72"
+                  fill="none" stroke="#49C5B1" stroke-width="2" stroke-dasharray="4 4"/>
+              </svg>
+            </div>
+            <div class="chart-axis"><span>Oct</span><span>Nov</span><span>Dec</span><span>Jan</span><span>Feb</span><span>Mar</span></div>
+          </div>
+          <div class="wf-tile">
+            <span class="num-marker">3</span>
+            <h4>Spend Mix <span class="pill-tag">Investment</span></h4>
+            <div class="chart-donut">
+              <svg viewBox="0 0 36 36">
+                <circle cx="18" cy="18" r="15.9" fill="none" stroke="#E8E8E8" stroke-width="3.5"/>
+                <circle cx="18" cy="18" r="15.9" fill="none" stroke="#0078D4" stroke-width="3.5"
+                  stroke-dasharray="40 100" stroke-dashoffset="0" transform="rotate(-90 18 18)"/>
+                <circle cx="18" cy="18" r="15.9" fill="none" stroke="#49C5B1" stroke-width="3.5"
+                  stroke-dasharray="30 100" stroke-dashoffset="-40" transform="rotate(-90 18 18)"/>
+                <circle cx="18" cy="18" r="15.9" fill="none" stroke="#8DC8E8" stroke-width="3.5"
+                  stroke-dasharray="20 100" stroke-dashoffset="-70" transform="rotate(-90 18 18)"/>
+                <circle cx="18" cy="18" r="15.9" fill="none" stroke="#C5B4E3" stroke-width="3.5"
+                  stroke-dasharray="10 100" stroke-dashoffset="-90" transform="rotate(-90 18 18)"/>
+              </svg>
+              <div class="legend">
+                <div><span class="swatch" style="background:#0078D4"></span>Paid Media · 40%</div>
+                <div><span class="swatch" style="background:#49C5B1"></span>Partner Co-Mkt · 30%</div>
+                <div><span class="swatch" style="background:#8DC8E8"></span>Events · 20%</div>
+                <div><span class="swatch" style="background:#C5B4E3"></span>Owned · 10%</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="wf-grid cols-2" style="margin-top: 0.75rem;">
+          <div class="wf-tile">
+            <span class="num-marker">4</span>
+            <h4>Active GTM Moments <span class="pill-tag">Campaigns</span></h4>
+            <table class="wf-table">
+              <thead>
+                <tr><th>Moment</th><th>Status</th><th>Pipeline</th><th>vs Target</th></tr>
+              </thead>
+              <tbody>
+                <tr><td>Back-to-School FY26</td><td><span class="status-dot green"></span>On track</td><td>$12.4M</td><td><span class="bar-cell" style="width:80px"></span> 108%</td></tr>
+                <tr><td>Surface Launch</td><td><span class="status-dot amber"></span>At risk</td><td>$6.1M</td><td><span class="bar-cell" style="width:55px"></span> 72%</td></tr>
+                <tr><td>Holiday FY26</td><td><span class="status-dot green"></span>On track</td><td>$9.3M</td><td><span class="bar-cell" style="width:70px"></span> 95%</td></tr>
+                <tr><td>Copilot+ PC Push</td><td><span class="status-dot red"></span>Behind</td><td>$3.0M</td><td><span class="bar-cell" style="width:35px"></span> 48%</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="wf-tile">
+            <h4>Partnership Leaderboard <span class="pill-tag">Partners</span></h4>
+            <table class="wf-table">
+              <thead>
+                <tr><th>Partner</th><th>Region</th><th>ROI</th></tr>
+              </thead>
+              <tbody>
+                <tr><td>Best Buy</td><td>WCMR</td><td>5.1x</td></tr>
+                <tr><td>Currys</td><td>WERA</td><td>4.2x</td></tr>
+                <tr><td>JD.com</td><td>GCR</td><td>3.8x</td></tr>
+                <tr><td>Amazon</td><td>Global</td><td>3.5x</td></tr>
+                <tr><td>Costco</td><td>WCMR</td><td>2.9x</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="annotations">
+    <div class="annotation"><span class="num">1</span><strong>KPI strip</strong> — one-glance answer to "how is marketing doing." Each card drills into its pillar.</div>
+    <div class="annotation"><span class="num">2</span><strong>Trend chart</strong> — solid = actual, dashed = target. Replaces the "wait for next MBR" pattern.</div>
+    <div class="annotation"><span class="num">3</span><strong>Spend mix</strong> — shows where dollars are flowing today; click any slice to filter the page.</div>
+    <div class="annotation"><span class="num">4</span><strong>GTM moment view</strong> — bridges tactical execution to outcome. New view we don't have today.</div>
+  </div>
+</section>
+
+<!-- 2. CAMPAIGN DRILLDOWN -->
+<section id="campaign" class="wf-section">
+  <span class="section-num">02 · Campaign Drilldown</span>
+  <h2>From "Back-to-School" down to channel.</h2>
+  <p class="lead">
+    Click any GTM moment from the home page and land here. Shows the rolled-up moment view we don't have today,
+    plus drilldowns into the channels and assets that contributed.
+  </p>
+
+  <div class="wf">
+    <div class="wf-chrome">
+      <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+      <span class="url">marketing-effectiveness.dds.microsoft.com / campaigns / back-to-school-fy26</span>
+    </div>
+    <div class="wf-app">
+      <aside class="wf-sidebar">
+        <div class="wf-logo">MES</div>
+        <div class="nav-group">Overview</div>
+        <div class="nav-item"><span class="ico"></span>Executive Home</div>
+        <div class="nav-group">Pillars</div>
+        <div class="nav-item"><span class="ico"></span>Investment &amp; ROI</div>
+        <div class="nav-item"><span class="ico"></span>Performance Trends</div>
+        <div class="nav-item active"><span class="ico"></span>Campaigns</div>
+        <div class="nav-item"><span class="ico"></span>Partnerships</div>
+      </aside>
+
+      <div class="wf-main">
+        <div class="wf-breadcrumb">
+          <a href="#">Home</a><span class="sep">›</span>
+          <a href="#">Campaigns</a><span class="sep">›</span>
+          <strong>Back-to-School FY26</strong>
+        </div>
+
+        <div class="wf-topbar">
+          <h3>Back-to-School FY26 · Moment view</h3>
+          <div class="filters">
+            <span class="wf-chip active">All channels</span>
+            <span class="wf-chip">Paid Media</span>
+            <span class="wf-chip">Partner</span>
+            <span class="wf-chip">Events</span>
+          </div>
+        </div>
+
+        <div class="wf-kpis">
+          <div class="wf-kpi">
+            <div class="label">Total Spend</div>
+            <div class="val">$3.6M</div>
+            <div class="delta flat">— Budget: $4.0M</div>
+          </div>
+          <div class="wf-kpi">
+            <div class="label">Pipeline Generated</div>
+            <div class="val">$12.4M</div>
+            <div class="delta up">▲ 108% of target</div>
+          </div>
+          <div class="wf-kpi">
+            <div class="label">ROI</div>
+            <div class="val">3.4x</div>
+            <div class="delta up">▲ vs 2.8x target</div>
+          </div>
+          <div class="wf-kpi">
+            <div class="label">Top Channel</div>
+            <div class="val">Paid Media</div>
+            <div class="delta flat">— 52% of pipeline</div>
+          </div>
+        </div>
+
+        <div class="wf-grid cols-2">
+          <div class="wf-tile">
+            <h4>Channel Contribution <span class="pill-tag">$ Pipeline</span></h4>
+            <div class="chart-bars">
+              <div class="bar" style="height:90%"></div>
+              <div class="bar" style="height:60%"></div>
+              <div class="bar" style="height:45%"></div>
+              <div class="bar" style="height:30%"></div>
+              <div class="bar alt" style="height:25%"></div>
+            </div>
+            <div class="chart-axis">
+              <span>Paid Media</span><span>Partner</span><span>Events</span><span>Email</span><span>Social</span>
+            </div>
+          </div>
+          <div class="wf-tile">
+            <h4>Spend vs Return by Channel <span class="pill-tag">Investment</span></h4>
+            <table class="wf-table">
+              <thead>
+                <tr><th>Channel</th><th>Spend</th><th>Pipeline</th><th>ROI</th></tr>
+              </thead>
+              <tbody>
+                <tr><td>Paid Media</td><td>$1.6M</td><td>$6.4M</td><td><strong>4.0x</strong></td></tr>
+                <tr><td>Partner Co-Mkt</td><td>$0.9M</td><td>$3.2M</td><td><strong>3.6x</strong></td></tr>
+                <tr><td>Events</td><td>$0.6M</td><td>$1.5M</td><td>2.5x</td></tr>
+                <tr><td>Email</td><td>$0.3M</td><td>$0.9M</td><td>3.0x</td></tr>
+                <tr><td>Social</td><td>$0.2M</td><td>$0.4M</td><td>2.0x</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="wf-tile" style="margin-top:0.75rem;">
+          <h4>Top Contributing Assets <span class="pill-tag">Tactics</span></h4>
+          <table class="wf-table">
+            <thead>
+              <tr><th>Asset</th><th>Channel</th><th>Owner</th><th>Pipeline</th><th>Status</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Surface Pro 11 — Search Campaign</td><td>Paid Media</td><td>Channel Lead</td><td>$2.1M</td><td><span class="status-dot green"></span>Active</td></tr>
+              <tr><td>Best Buy Endcap Promotion</td><td>Partner</td><td>Partner Lead</td><td>$1.8M</td><td><span class="status-dot green"></span>Active</td></tr>
+              <tr><td>BTS Landing Page Refresh</td><td>Owned</td><td>GTM</td><td>$0.7M</td><td><span class="status-dot green"></span>Live</td></tr>
+              <tr><td>Educator Webinar Series</td><td>Events</td><td>Field Mktg</td><td>$0.5M</td><td><span class="status-dot amber"></span>Underperforming</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="annotations">
+    <div class="annotation"><strong>Why this matters:</strong> Today no view rolls up "Outbound Marketing drove $X for Back-to-School." This solves that.</div>
+    <div class="annotation"><strong>Drilldown depth:</strong> Moment → Channel → Asset → (future) creative-level detail.</div>
+    <div class="annotation"><strong>Re-uses source data:</strong> Pulls from existing channel reports + GTM trackers; doesn't replace them.</div>
+  </div>
+</section>
+
+<!-- 3. PARTNERSHIPS -->
+<section id="partners" class="wf-section">
+  <span class="section-num">03 · Partnership Performance</span>
+  <h2>Cross-portfolio visibility, not regional silos.</h2>
+  <p class="lead">
+    Today partnership performance rarely escapes its region of origin. This view rolls up every partnership across every region into one comparable lens.
+  </p>
+
+  <div class="wf">
+    <div class="wf-chrome">
+      <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+      <span class="url">marketing-effectiveness.dds.microsoft.com / partnerships</span>
+    </div>
+    <div class="wf-app">
+      <aside class="wf-sidebar">
+        <div class="wf-logo">MES</div>
+        <div class="nav-group">Overview</div>
+        <div class="nav-item"><span class="ico"></span>Executive Home</div>
+        <div class="nav-group">Pillars</div>
+        <div class="nav-item"><span class="ico"></span>Investment &amp; ROI</div>
+        <div class="nav-item"><span class="ico"></span>Performance Trends</div>
+        <div class="nav-item"><span class="ico"></span>Campaigns</div>
+        <div class="nav-item active"><span class="ico"></span>Partnerships</div>
+      </aside>
+
+      <div class="wf-main">
+        <div class="wf-topbar">
+          <h3>Partnership Performance</h3>
+          <div class="filters">
+            <span class="wf-chip active">All regions</span>
+            <span class="wf-chip">WCMR</span>
+            <span class="wf-chip">WERA</span>
+            <span class="wf-chip">GCR</span>
+            <span class="wf-chip">APAC</span>
+          </div>
+        </div>
+
+        <div class="wf-grid cols-2">
+          <div class="wf-tile">
+            <h4>ROI by Partner</h4>
+            <div class="chart-bars">
+              <div class="bar" style="height:95%"></div>
+              <div class="bar" style="height:78%"></div>
+              <div class="bar" style="height:70%"></div>
+              <div class="bar" style="height:65%"></div>
+              <div class="bar" style="height:55%"></div>
+              <div class="bar" style="height:40%"></div>
+              <div class="bar" style="height:30%"></div>
+            </div>
+            <div class="chart-axis">
+              <span>BB</span><span>Currys</span><span>JD</span><span>Amzn</span><span>Cstco</span><span>MM</span><span>Other</span>
+            </div>
+          </div>
+
+          <div class="wf-tile">
+            <h4>Partner Mix by Region</h4>
+            <div class="chart-donut">
+              <svg viewBox="0 0 36 36">
+                <circle cx="18" cy="18" r="15.9" fill="none" stroke="#0078D4" stroke-width="3.5"
+                  stroke-dasharray="38 100" stroke-dashoffset="0" transform="rotate(-90 18 18)"/>
+                <circle cx="18" cy="18" r="15.9" fill="none" stroke="#49C5B1" stroke-width="3.5"
+                  stroke-dasharray="28 100" stroke-dashoffset="-38" transform="rotate(-90 18 18)"/>
+                <circle cx="18" cy="18" r="15.9" fill="none" stroke="#8DC8E8" stroke-width="3.5"
+                  stroke-dasharray="22 100" stroke-dashoffset="-66" transform="rotate(-90 18 18)"/>
+                <circle cx="18" cy="18" r="15.9" fill="none" stroke="#C5B4E3" stroke-width="3.5"
+                  stroke-dasharray="12 100" stroke-dashoffset="-88" transform="rotate(-90 18 18)"/>
+              </svg>
+              <div class="legend">
+                <div><span class="swatch" style="background:#0078D4"></span>WCMR · 38%</div>
+                <div><span class="swatch" style="background:#49C5B1"></span>WERA · 28%</div>
+                <div><span class="swatch" style="background:#8DC8E8"></span>GCR · 22%</div>
+                <div><span class="swatch" style="background:#C5B4E3"></span>APAC · 12%</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="wf-tile" style="margin-top:0.75rem;">
+          <h4>Partner Detail (sortable)</h4>
+          <table class="wf-table">
+            <thead>
+              <tr><th>Partner</th><th>Region</th><th>Spend</th><th>Pipeline</th><th>ROI</th><th>Trend</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Best Buy</td><td>WCMR</td><td>$0.9M</td><td>$4.6M</td><td><strong>5.1x</strong></td><td><span class="status-dot green"></span>↑</td></tr>
+              <tr><td>Currys</td><td>WERA</td><td>$0.5M</td><td>$2.1M</td><td><strong>4.2x</strong></td><td><span class="status-dot green"></span>↑</td></tr>
+              <tr><td>JD.com</td><td>GCR</td><td>$0.7M</td><td>$2.7M</td><td>3.8x</td><td><span class="status-dot amber"></span>→</td></tr>
+              <tr><td>Amazon</td><td>Global</td><td>$1.1M</td><td>$3.9M</td><td>3.5x</td><td><span class="status-dot green"></span>↑</td></tr>
+              <tr><td>Costco</td><td>WCMR</td><td>$0.4M</td><td>$1.2M</td><td>2.9x</td><td><span class="status-dot amber"></span>→</td></tr>
+              <tr><td>MediaMarkt</td><td>WERA</td><td>$0.3M</td><td>$0.7M</td><td>2.3x</td><td><span class="status-dot red"></span>↓</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 4. NOTES -->
+<section class="wf-section">
+  <span class="section-num">04 · What These Wireframes Are (and Aren't)</span>
+  <h2>Frame the conversation, not the design.</h2>
+
+  <div class="wf-grid cols-3" style="margin-top:1rem;">
+    <div class="wf-tile">
+      <h4>What this is</h4>
+      <p style="font-size:0.9rem;">A shared mental model so leadership can react to <em>shape and scope</em> before we invest in build.</p>
+    </div>
+    <div class="wf-tile">
+      <h4>What this isn't</h4>
+      <p style="font-size:0.9rem;">Not final visuals. Not a tool selection (Power BI vs. Fabric vs. custom is downstream of agreeing on the views).</p>
+    </div>
+    <div class="wf-tile">
+      <h4>What we need from you</h4>
+      <p style="font-size:0.9rem;">Reactions to: which views matter most, what's missing, and where leadership would actually <em>start</em>.</p>
+    </div>
+  </div>
+</section>
+
+</main>
+
+</body>
+</html>
