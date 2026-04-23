@@ -243,6 +243,34 @@
   .badge.freq-weekly { background: #E6F2FB; color: #00477A; border-color: #B3D7F0; }
   .badge.freq-daily { background: #DEF5EF; color: #1E6657; border-color: #A8DDD0; }
   .badge.freq-adhoc { background: #EFE9F8; color: #5A4585; border-color: #C5B4E3; }
+  .badge.region { background: #B9DCD2; color: #1E5A4D; border-color: #8FCABB; }
+
+  /* Sub-region groups inside a channel */
+  .subregion {
+    margin-top: 1.25rem;
+  }
+  .subregion:first-child { margin-top: 0; }
+  .subregion-header {
+    display: flex; align-items: center; gap: 0.6rem;
+    padding: 0.5rem 0.25rem;
+    margin-bottom: 0.6rem;
+    border-bottom: 1px solid var(--line);
+  }
+  .subregion-header .swatch {
+    width: 10px; height: 10px; border-radius: 50%;
+    background: var(--c-teal);
+    flex-shrink: 0;
+  }
+  .subregion-header h3 {
+    margin: 0; font-size: 0.95rem; font-weight: 600;
+    color: var(--ms-blue-dark);
+    text-transform: uppercase; letter-spacing: 0.5px;
+  }
+  .subregion-header .subcount {
+    font-size: 0.75rem; color: var(--ink-soft);
+    margin-left: auto;
+  }
+  .subregion.empty { display: none; }
 
   .field {
     font-size: 0.85rem;
@@ -492,55 +520,139 @@
         <div class="channel-icon">PA</div>
         <div>
           <h2>Partnership Marketing</h2>
-          <div class="summary">Partnership campaign and initiative reporting across LOBs.</div>
+          <div class="summary">Organized by region: Americas, EMEA, Asia, and Cross-regional.</div>
         </div>
       </div>
       <div class="right">
-        <span class="report-count">1 report</span>
+        <span class="report-count">2 reports</span>
         <span class="toggle-arrow">▾</span>
       </div>
     </div>
 
     <div class="reports-body">
-      <div class="reports-grid">
 
-        <!-- Report -->
-        <article class="report-card" data-freq="adhoc">
-          <div class="card-head">
-            <h3>By Partnership Campaign / Initiative</h3>
-          </div>
-          <div class="badges">
-            <span class="badge lob">All LOBs</span>
-            <span class="badge freq-adhoc">Ad hoc</span>
-          </div>
-          <div class="field">
-            <span class="field-label">Purpose</span>
-            <span class="field-value">Learn from tests, set benchmarks, and inform DDS stakeholders.</span>
-          </div>
-          <div class="field-row">
-            <div class="field">
-              <span class="field-label">Owner</span>
-              <span class="field-value">Vanessa</span>
-            </div>
-            <div class="field">
-              <span class="field-label">Audience</span>
-              <span class="field-value">DDS All</span>
-            </div>
-          </div>
-          <div class="field">
-            <span class="field-label">Tools / Source</span>
-            <span class="field-value">Adobe Reports</span>
-          </div>
-          <div class="field">
-            <span class="field-label">Notes</span>
-            <span class="field-value">Example link applies to the NFL–Microsoft partnership across three stages: BTS (summer campaign), Holiday, and evergreen.</span>
-          </div>
-          <div class="card-foot">
-            <a href="https://www5.an.adobe.com/x/5_22g7ch" class="source-link" target="_blank" rel="noopener">Adobe report ↗</a>
-          </div>
-        </article>
-
+      <!-- Region: Americas -->
+      <div class="subregion" data-region="americas">
+        <div class="subregion-header">
+          <span class="swatch" style="background:#0078D4"></span>
+          <h3>Americas</h3>
+          <span class="subcount"></span>
+        </div>
+        <div class="reports-grid">
+          <!-- Add Americas-specific partnership reports here -->
+        </div>
       </div>
+
+      <!-- Region: EMEA -->
+      <div class="subregion" data-region="emea">
+        <div class="subregion-header">
+          <span class="swatch" style="background:#49C5B1"></span>
+          <h3>EMEA</h3>
+          <span class="subcount"></span>
+        </div>
+        <div class="reports-grid">
+          <!-- Add EMEA-specific partnership reports here -->
+        </div>
+      </div>
+
+      <!-- Region: Asia -->
+      <div class="subregion" data-region="asia">
+        <div class="subregion-header">
+          <span class="swatch" style="background:#8DC8E8"></span>
+          <h3>Asia</h3>
+          <span class="subcount"></span>
+        </div>
+        <div class="reports-grid">
+          <!-- Add Asia-specific partnership reports here -->
+        </div>
+      </div>
+
+      <!-- Region: Cross-regional -->
+      <div class="subregion" data-region="cross-regional">
+        <div class="subregion-header">
+          <span class="swatch" style="background:#C5B4E3"></span>
+          <h3>Cross-regional</h3>
+          <span class="subcount"></span>
+        </div>
+        <div class="reports-grid">
+
+          <!-- Report -->
+          <article class="report-card" data-freq="adhoc">
+            <div class="card-head">
+              <h3>By Partnership Campaign / Initiative</h3>
+            </div>
+            <div class="badges">
+              <span class="badge region">Cross-regional</span>
+              <span class="badge lob">All LOBs</span>
+              <span class="badge freq-adhoc">Ad hoc</span>
+            </div>
+            <div class="field">
+              <span class="field-label">Purpose</span>
+              <span class="field-value">Learn from tests, set benchmarks, and inform DDS stakeholders.</span>
+            </div>
+            <div class="field-row">
+              <div class="field">
+                <span class="field-label">Owner</span>
+                <span class="field-value">Vanessa</span>
+              </div>
+              <div class="field">
+                <span class="field-label">Audience</span>
+                <span class="field-value">DDS All</span>
+              </div>
+            </div>
+            <div class="field">
+              <span class="field-label">Tools / Source</span>
+              <span class="field-value">Adobe Reports</span>
+            </div>
+            <div class="field">
+              <span class="field-label">Notes</span>
+              <span class="field-value">Example link applies to the NFL–Microsoft partnership across three stages: BTS (summer campaign), Holiday, and evergreen.</span>
+            </div>
+            <div class="card-foot">
+              <a href="https://www5.an.adobe.com/x/5_22g7ch" class="source-link" target="_blank" rel="noopener">Adobe report ↗</a>
+            </div>
+          </article>
+
+          <!-- Report -->
+          <article class="report-card" data-freq="adhoc">
+            <div class="card-head">
+              <h3>Partnership Budget Tracker</h3>
+            </div>
+            <div class="badges">
+              <span class="badge region">Cross-regional</span>
+              <span class="badge lob">All LOBs</span>
+              <span class="badge freq-adhoc">Ad hoc</span>
+            </div>
+            <div class="field">
+              <span class="field-label">Purpose</span>
+              <span class="field-value">Finance tracking doc used to determine how much budget is allocated to each partnership activation.</span>
+            </div>
+            <div class="field-row">
+              <div class="field">
+                <span class="field-label">Owner</span>
+                <span class="field-value">Finance / Partnership team</span>
+              </div>
+              <div class="field">
+                <span class="field-label">Audience</span>
+                <span class="field-value">DDS All</span>
+              </div>
+            </div>
+            <div class="field">
+              <span class="field-label">Tools / Source</span>
+              <span class="field-value">Excel (SharePoint)</span>
+            </div>
+            <div class="field">
+              <span class="field-label">Notes</span>
+              <span class="field-value">Single source of truth for partnership budget allocation.</span>
+            </div>
+            <div class="card-foot">
+              <a href="https://microsofteur-my.sharepoint.com/:x:/g/personal/cpraga_microsoft_com/IQBuJmEDi-KbRJ8MF7B4-sSYAeOThTueqdkiLhy_zXx0p3s?e=20lBkw&nav=MTVfezg3RUUyQTYyLTRFQ0EtNEJFRS1BNTZGLUI1QzBGRjBGQ0JBMX0" class="source-link" target="_blank" rel="noopener">Budget tracker ↗</a>
+            </div>
+          </article>
+
+        </div>
+      </div>
+
     </div>
   </section>
 
@@ -667,6 +779,16 @@
           c.classList.toggle('hidden', !show);
           if (show) { anyMatch = true; visibleCards++; }
         });
+
+        // Per-subregion visibility + counts (if any exist)
+        var subs = g.querySelectorAll('.subregion');
+        subs.forEach(function (s) {
+          var visibleInSub = s.querySelectorAll('.report-card:not(.hidden)').length;
+          s.classList.toggle('empty', visibleInSub === 0);
+          var sc = s.querySelector('.subcount');
+          if (sc) sc.textContent = visibleInSub + ' report' + (visibleInSub === 1 ? '' : 's');
+        });
+
         g.classList.toggle('hidden', !anyMatch);
         if (anyMatch) visibleGroups++;
       });
