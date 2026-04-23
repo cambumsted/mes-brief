@@ -17,7 +17,6 @@
     --c-light-blue: #8DC8E8;
     --c-aqua: #B9DCD2;
     --c-lavender: #C5B4E3;
-    --c-light-green: #8DE971;
 
     --ms-blue: var(--c-med-blue);
     --ms-blue-dark: var(--c-dark-blue);
@@ -43,9 +42,9 @@
   h1, h2, h3, h4 { color: var(--ink); margin-top: 0; line-height: 1.25; }
   h1 { font-size: 2.2rem; font-weight: 600; letter-spacing: -0.5px; }
   h2 { font-size: 1.4rem; font-weight: 600; margin-bottom: 0.4rem; }
-  h3 { font-size: 1.1rem; font-weight: 600; margin-bottom: 0.3rem; }
-  h4 { font-size: 0.85rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; color: var(--ms-blue); margin-bottom: 0.5rem; }
-  p { margin: 0.5rem 0; }
+  h3 { font-size: 1.05rem; font-weight: 600; margin-bottom: 0.3rem; }
+  h4 { font-size: 0.7rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; color: var(--ink-soft); margin-bottom: 0.25rem; }
+  p { margin: 0.4rem 0; }
 
   /* Top nav */
   .nav {
@@ -59,16 +58,12 @@
   }
   .nav .brand { font-weight: 600; color: var(--ms-blue-dark); margin-right: auto; flex-shrink: 0; font-size: 0.95rem; }
   .nav a {
-    color: var(--ink-soft);
-    text-decoration: none;
-    font-size: 0.85rem;
-    padding: 0.25rem 0.5rem;
-    border-radius: 4px;
-    flex-shrink: 0;
+    color: var(--ink-soft); text-decoration: none;
+    font-size: 0.85rem; padding: 0.25rem 0.5rem;
+    border-radius: 4px; flex-shrink: 0;
   }
   .nav a:hover { background: var(--ms-blue-light); color: var(--ms-blue-dark); }
 
-  /* Dropdown */
   .nav-dd { position: relative; flex-shrink: 0; }
   .nav-dd > summary {
     list-style: none; cursor: pointer;
@@ -86,7 +81,7 @@
     background: var(--c-white);
     border: 1px solid var(--line); border-radius: 6px;
     box-shadow: 0 6px 20px rgba(9,31,46,0.12);
-    padding: 0.35rem; min-width: 200px;
+    padding: 0.35rem; min-width: 220px;
     display: flex; flex-direction: column; z-index: 200;
   }
   .nav-dd .dd-menu a {
@@ -110,7 +105,6 @@
   }
   .page-header p { opacity: 0.95; max-width: 720px; font-size: 1.05rem; }
 
-  /* Main */
   main {
     max-width: 1200px;
     margin: 0 auto;
@@ -183,9 +177,7 @@
   }
   .channel-header:hover { background: var(--bg); }
   .channel-header.collapsed { border-bottom: none; }
-  .channel-header .left {
-    display: flex; align-items: center; gap: 0.85rem;
-  }
+  .channel-header .left { display: flex; align-items: center; gap: 0.85rem; }
   .channel-icon {
     width: 38px; height: 38px;
     border-radius: 8px;
@@ -195,28 +187,11 @@
     font-weight: 700; font-size: 0.95rem;
     flex-shrink: 0;
   }
-  .channel-header h2 {
-    margin: 0; font-size: 1.15rem;
-    display: flex; align-items: center; gap: 0.5rem;
-  }
-  .channel-header .pillar-tag {
-    font-size: 0.65rem; font-weight: 600;
-    padding: 0.15rem 0.55rem; border-radius: 10px;
-    text-transform: uppercase; letter-spacing: 0.5px;
-    background: var(--bg); color: var(--ink-soft);
-    border: 1px solid var(--line);
-  }
-  .channel-header .pillar-tag.investment { background: #E6F2FB; color: #00477A; border-color: #B3D7F0; }
-  .channel-header .pillar-tag.trends { background: #DEF5EF; color: #1E6657; border-color: #A8DDD0; }
-  .channel-header .pillar-tag.campaigns { background: #EAF4FB; color: #2E5C7A; border-color: #BBDBEC; }
-  .channel-header .pillar-tag.partnerships { background: #EFE9F8; color: #5A4585; border-color: #C5B4E3; }
+  .channel-header h2 { margin: 0; font-size: 1.15rem; }
   .channel-header .summary {
-    font-size: 0.85rem; color: var(--ink-soft);
-    margin-top: 0.15rem;
+    font-size: 0.85rem; color: var(--ink-soft); margin-top: 0.15rem;
   }
-  .channel-header .right {
-    display: flex; align-items: center; gap: 0.85rem;
-  }
+  .channel-header .right { display: flex; align-items: center; gap: 0.85rem; }
   .report-count {
     font-size: 0.8rem; color: var(--ink-soft);
     background: var(--bg);
@@ -229,55 +204,78 @@
   }
   .channel-header.collapsed .toggle-arrow { transform: rotate(-90deg); }
 
-  /* Reports table */
-  .reports-table-wrap {
-    overflow-x: auto;
+  /* Report cards inside a channel */
+  .reports-body { padding: 1rem 1.25rem 1.25rem; }
+  .reports-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+    gap: 1rem;
   }
-  .reports-table {
-    width: 100%;
-    border-collapse: collapse;
-    font-size: 0.9rem;
-  }
-  .reports-table th, .reports-table td {
-    text-align: left;
-    padding: 0.7rem 1rem;
-    border-bottom: 1px solid var(--line);
-    vertical-align: top;
-  }
-  .reports-table th {
-    font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.5px;
-    color: var(--ink-soft); font-weight: 600;
+  .report-card {
+    border: 1px solid var(--line);
+    border-radius: 8px;
     background: var(--bg);
-    border-bottom: 1px solid var(--line);
+    padding: 1rem 1.1rem;
+    display: flex; flex-direction: column;
   }
-  .reports-table tbody tr:hover { background: #FAFBFC; }
-  .reports-table tbody tr:last-child td { border-bottom: none; }
-  .reports-table .col-report { font-weight: 600; min-width: 200px; }
-  .reports-table .col-desc { color: var(--ink-soft); min-width: 260px; }
-  .reports-table .col-owner { white-space: nowrap; }
-  .reports-table .col-cadence { white-space: nowrap; }
-  .reports-table .col-link { white-space: nowrap; }
-
-  .cadence-badge {
+  .report-card .card-head {
+    display: flex; align-items: flex-start; justify-content: space-between;
+    gap: 0.5rem; margin-bottom: 0.5rem;
+  }
+  .report-card .card-head h3 { margin: 0; }
+  .report-card .badges {
+    display: flex; flex-wrap: wrap; gap: 0.3rem;
+    margin-bottom: 0.6rem;
+  }
+  .badge {
     display: inline-block;
-    font-size: 0.75rem;
+    font-size: 0.7rem;
+    font-weight: 600;
     padding: 0.15rem 0.55rem;
     border-radius: 10px;
-    background: var(--bg);
+    background: var(--c-white);
     color: var(--ink-soft);
     border: 1px solid var(--line);
+    white-space: nowrap;
   }
-  .cadence-badge.daily { background: #DEF5EF; color: #1E6657; border-color: #A8DDD0; }
-  .cadence-badge.weekly { background: #E6F2FB; color: #00477A; border-color: #B3D7F0; }
-  .cadence-badge.monthly { background: #FFF4CE; color: #8A6D00; border-color: #F6D679; }
-  .cadence-badge.adhoc { background: var(--bg); color: var(--ink-soft); }
+  .badge.lob { background: var(--ms-blue-light); color: var(--ms-blue-dark); border-color: #B3D7F0; }
+  .badge.freq-monthly { background: #FFF4CE; color: #8A6D00; border-color: #F6D679; }
+  .badge.freq-weekly { background: #E6F2FB; color: #00477A; border-color: #B3D7F0; }
+  .badge.freq-daily { background: #DEF5EF; color: #1E6657; border-color: #A8DDD0; }
+  .badge.freq-adhoc { background: #EFE9F8; color: #5A4585; border-color: #C5B4E3; }
 
+  .field {
+    font-size: 0.85rem;
+    margin-bottom: 0.55rem;
+    line-height: 1.45;
+  }
+  .field .field-label {
+    font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.5px;
+    color: var(--ink-soft); font-weight: 600;
+    display: block; margin-bottom: 0.1rem;
+  }
+  .field .field-value { color: var(--ink); }
+  .field .field-value.muted { color: var(--ink-soft); font-style: italic; }
+
+  .field-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.75rem;
+    margin-bottom: 0.55rem;
+  }
+
+  .card-foot {
+    margin-top: auto;
+    padding-top: 0.75rem;
+    border-top: 1px dashed var(--c-n25);
+    display: flex; flex-wrap: wrap; gap: 0.5rem; align-items: center;
+  }
   .source-link {
     display: inline-flex; align-items: center; gap: 0.3rem;
     color: var(--ms-blue);
     text-decoration: none;
     font-weight: 600;
-    font-size: 0.85rem;
+    font-size: 0.82rem;
     padding: 0.3rem 0.65rem;
     border: 1px solid var(--ms-blue-light);
     background: var(--ms-blue-light);
@@ -286,15 +284,15 @@
   .source-link:hover { background: var(--ms-blue); color: white; border-color: var(--ms-blue); }
   .source-link.tbd {
     color: var(--ink-soft);
-    background: var(--bg);
+    background: var(--c-white);
     border-color: var(--line);
     font-style: italic;
   }
-  .source-link.tbd:hover { background: var(--bg); color: var(--ink-soft); }
+  .source-link.tbd:hover { background: var(--c-white); color: var(--ink-soft); }
 
-  /* Empty state when filtered */
+  /* Hidden states */
   .channel-group.hidden { display: none; }
-  tr.row-hidden { display: none; }
+  .report-card.hidden { display: none; }
   .empty-state {
     text-align: center;
     padding: 3rem 1rem;
@@ -302,24 +300,6 @@
     background: var(--c-white);
     border: 1px dashed var(--c-n25);
     border-radius: 8px;
-  }
-
-  /* Editing instructions box */
-  .edit-tip {
-    background: var(--ms-blue-light);
-    border-left: 4px solid var(--ms-blue);
-    padding: 0.85rem 1.1rem;
-    border-radius: 4px;
-    font-size: 0.9rem;
-    margin-bottom: 1.25rem;
-  }
-  .edit-tip strong { color: var(--ms-blue-dark); }
-  .edit-tip code {
-    background: var(--c-white);
-    padding: 0.1rem 0.4rem;
-    border-radius: 3px;
-    font-family: "Cascadia Code", Consolas, monospace;
-    font-size: 0.85em;
   }
 </style>
 </head>
@@ -332,11 +312,8 @@
     <summary>Reports inventory</summary>
     <div class="dd-menu">
       <a href="#paid-media">Paid Media</a>
-      <a href="#partnerships">Partnerships</a>
-      <a href="#events">Events</a>
-      <a href="#owned">Owned (Email/Web/Social)</a>
-      <a href="#field">Field Marketing</a>
-      <a href="#finance">Finance</a>
+      <a href="#partnership-marketing">Partnership Marketing</a>
+      <a href="#cross-channel">Cross-channel</a>
     </div>
   </details>
 </nav>
@@ -346,45 +323,35 @@
     <div class="meta">DDS Marketing · Reports Inventory · Working Doc</div>
     <h1>Channels, reports, and where to find them.</h1>
     <p>
-      A living inventory of every report each channel produces today — what it covers, who owns it, how often
-      it lands, and a link to the source. Step 1 of the roadmap: know what already exists before building anything new.
+      A living inventory of every report each channel produces today — what it covers, who owns it, and a
+      link to the source. Step 1 of the roadmap: know what already exists before building anything new.
     </p>
   </div>
 </header>
 
 <main>
 
-  <div class="edit-tip">
-    <strong>How to edit this page:</strong> Each channel section below is a <code>&lt;div class="channel-group"&gt;</code>
-    in <code>reports.html</code>. Add or remove rows in the table, swap <code>href="#"</code> with the real source URL,
-    and update owner/cadence as you go. Pillar tags map to the four solution pillars; cadence badges support
-    <code>daily</code> / <code>weekly</code> / <code>monthly</code> / <code>adhoc</code>.
-  </div>
-
   <div class="toolbar">
-    <input type="search" id="search" placeholder="Search reports, channels, owners…" />
-    <span class="filter-label">Pillar:</span>
-    <span class="filter-chip active" data-pillar="all">All</span>
-    <span class="filter-chip" data-pillar="investment">Investment &amp; ROI</span>
-    <span class="filter-chip" data-pillar="trends">Performance</span>
-    <span class="filter-chip" data-pillar="campaigns">Campaigns</span>
-    <span class="filter-chip" data-pillar="partnerships">Partnerships</span>
+    <input type="search" id="search" placeholder="Search reports, owners, LOBs, tools…" />
+    <span class="filter-label">Frequency:</span>
+    <span class="filter-chip active" data-freq="all">All</span>
+    <span class="filter-chip" data-freq="monthly">Monthly</span>
+    <span class="filter-chip" data-freq="weekly">Weekly</span>
+    <span class="filter-chip" data-freq="daily">Daily</span>
+    <span class="filter-chip" data-freq="adhoc">Ad hoc</span>
     <span class="count" id="count"></span>
   </div>
 
   <!-- ============================== -->
   <!-- CHANNEL: PAID MEDIA            -->
   <!-- ============================== -->
-  <section class="channel-group" id="paid-media" data-pillars="investment campaigns trends">
+  <section class="channel-group" id="paid-media">
     <div class="channel-header">
       <div class="left">
         <div class="channel-icon">PM</div>
         <div>
-          <h2>Paid Media
-            <span class="pillar-tag investment">Investment</span>
-            <span class="pillar-tag campaigns">Campaigns</span>
-          </h2>
-          <div class="summary">Search, display, social paid, video. Channel leads + agency partners.</div>
+          <h2>Paid Media</h2>
+          <div class="summary">Surface direct consumer and small business performance reporting.</div>
         </div>
       </div>
       <div class="right">
@@ -392,299 +359,249 @@
         <span class="toggle-arrow">▾</span>
       </div>
     </div>
-    <div class="reports-table-wrap">
-      <table class="reports-table">
-        <thead>
-          <tr>
-            <th class="col-report">Report</th>
-            <th class="col-desc">What it covers</th>
-            <th class="col-owner">Owner</th>
-            <th class="col-cadence">Cadence</th>
-            <th class="col-link">Source</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td class="col-report">[Report name]</td>
-            <td class="col-desc">[1-line description of what's in this report]</td>
-            <td class="col-owner">[Owner name / team]</td>
-            <td class="col-cadence"><span class="cadence-badge weekly">Weekly</span></td>
-            <td class="col-link"><a href="#" class="source-link" target="_blank" rel="noopener">Open ↗</a></td>
-          </tr>
-          <tr>
-            <td class="col-report">[Report name]</td>
-            <td class="col-desc">[1-line description]</td>
-            <td class="col-owner">[Owner]</td>
-            <td class="col-cadence"><span class="cadence-badge monthly">Monthly</span></td>
-            <td class="col-link"><a href="#" class="source-link" target="_blank" rel="noopener">Open ↗</a></td>
-          </tr>
-          <tr>
-            <td class="col-report">[Report name]</td>
-            <td class="col-desc">[1-line description]</td>
-            <td class="col-owner">[Owner]</td>
-            <td class="col-cadence"><span class="cadence-badge adhoc">Ad hoc</span></td>
-            <td class="col-link"><a href="#" class="source-link tbd">TBD</a></td>
-          </tr>
-        </tbody>
-      </table>
+
+    <div class="reports-body">
+      <div class="reports-grid">
+
+        <!-- Report -->
+        <article class="report-card" data-freq="monthly">
+          <div class="card-head">
+            <h3>Monthly Report (MBR)</h3>
+          </div>
+          <div class="badges">
+            <span class="badge lob">Surface</span>
+            <span class="badge freq-monthly">Monthly</span>
+          </div>
+          <div class="field">
+            <span class="field-label">Purpose</span>
+            <span class="field-value">Surface direct consumer and small business performance.</span>
+          </div>
+          <div class="field-row">
+            <div class="field">
+              <span class="field-label">Owner</span>
+              <span class="field-value">Rissa</span>
+            </div>
+            <div class="field">
+              <span class="field-label">Audience</span>
+              <span class="field-value">DDS All</span>
+            </div>
+          </div>
+          <div class="field">
+            <span class="field-label">Tools / Source</span>
+            <span class="field-value">Global Media / Carat · Power BI · Adobe Analytics</span>
+          </div>
+          <div class="field">
+            <span class="field-label">Notes</span>
+            <span class="field-value">GM/Carat provides the media performance report; the paid media team builds the MBR story and threads in Adobe traffic data. Also called the "tri-weekly report" by GM.</span>
+          </div>
+          <div class="field">
+            <span class="field-label">Process</span>
+            <span class="field-value">Assemble all relevant metrics into Excel, use that to fill out the MBR slide, and discuss what the paid story is.</span>
+          </div>
+          <div class="card-foot">
+            <a href="#" class="source-link tbd" target="_blank" rel="noopener">Outbound December FY26 MBR.pptx</a>
+          </div>
+        </article>
+
+        <!-- Report -->
+        <article class="report-card" data-freq="adhoc">
+          <div class="card-head">
+            <h3>Campaign-level Report</h3>
+          </div>
+          <div class="badges">
+            <span class="badge lob">Surface</span>
+            <span class="badge freq-adhoc">Ad hoc</span>
+          </div>
+          <div class="field">
+            <span class="field-label">Purpose</span>
+            <span class="field-value">Tied to specific campaigns and initiatives as needed (Creator, co-marketing, etc.).</span>
+          </div>
+          <div class="field-row">
+            <div class="field">
+              <span class="field-label">Owner</span>
+              <span class="field-value">Rissa</span>
+            </div>
+            <div class="field">
+              <span class="field-label">Audience</span>
+              <span class="field-value">DDS All</span>
+            </div>
+          </div>
+          <div class="field">
+            <span class="field-label">Tools / Source</span>
+            <span class="field-value">Global Media / Carat · Power BI · Adobe Analytics</span>
+          </div>
+          <div class="field">
+            <span class="field-label">Notes</span>
+            <span class="field-value">Format and timing of these reports vary based on campaign, partners, and schedule.</span>
+          </div>
+          <div class="card-foot">
+            <a href="#" class="source-link tbd">No example linked yet</a>
+          </div>
+        </article>
+
+        <!-- Report -->
+        <article class="report-card" data-freq="monthly">
+          <div class="card-head">
+            <h3>Exec Monthly Scorecard</h3>
+          </div>
+          <div class="badges">
+            <span class="badge lob">Surface</span>
+            <span class="badge freq-monthly">Monthly</span>
+          </div>
+          <div class="field">
+            <span class="field-label">Purpose</span>
+            <span class="field-value">Summary of key performance points, learnings, and upcoming Incrementality milestones.</span>
+          </div>
+          <div class="field-row">
+            <div class="field">
+              <span class="field-label">Owner</span>
+              <span class="field-value">Global Media</span>
+            </div>
+            <div class="field">
+              <span class="field-label">Audience</span>
+              <span class="field-value">DDS LT</span>
+            </div>
+          </div>
+          <div class="field">
+            <span class="field-label">Tools / Source</span>
+            <span class="field-value">Global Media</span>
+          </div>
+          <div class="field">
+            <span class="field-label">Notes</span>
+            <span class="field-value">Owned by Global Media; the paid media team reviews and contributes — primarily to Kelly.</span>
+          </div>
+          <div class="field">
+            <span class="field-label">Process</span>
+            <span class="field-value">Comes from Global Media. Very channel-specific; Rissa typically pulls top 3 insights for the TLDR email.</span>
+          </div>
+          <div class="card-foot">
+            <a href="#" class="source-link tbd">No example linked yet</a>
+          </div>
+        </article>
+
+      </div>
     </div>
   </section>
 
   <!-- ============================== -->
-  <!-- CHANNEL: PARTNERSHIPS          -->
+  <!-- CHANNEL: PARTNERSHIP MARKETING -->
   <!-- ============================== -->
-  <section class="channel-group" id="partnerships" data-pillars="partnerships investment">
+  <section class="channel-group" id="partnership-marketing">
     <div class="channel-header">
       <div class="left">
         <div class="channel-icon">PA</div>
         <div>
-          <h2>Partnerships
-            <span class="pillar-tag partnerships">Partnerships</span>
-            <span class="pillar-tag investment">Investment</span>
-          </h2>
-          <div class="summary">Retail partners, OEMs, co-marketing programs by region.</div>
+          <h2>Partnership Marketing</h2>
+          <div class="summary">Partnership campaign and initiative reporting across LOBs.</div>
         </div>
       </div>
       <div class="right">
-        <span class="report-count">2 reports</span>
+        <span class="report-count">1 report</span>
         <span class="toggle-arrow">▾</span>
       </div>
     </div>
-    <div class="reports-table-wrap">
-      <table class="reports-table">
-        <thead>
-          <tr>
-            <th class="col-report">Report</th>
-            <th class="col-desc">What it covers</th>
-            <th class="col-owner">Owner</th>
-            <th class="col-cadence">Cadence</th>
-            <th class="col-link">Source</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td class="col-report">[Regional partner tracker]</td>
-            <td class="col-desc">[Spend, pipeline, ROI by partner — per region]</td>
-            <td class="col-owner">[Regional lead]</td>
-            <td class="col-cadence"><span class="cadence-badge monthly">Monthly</span></td>
-            <td class="col-link"><a href="#" class="source-link" target="_blank" rel="noopener">Open ↗</a></td>
-          </tr>
-          <tr>
-            <td class="col-report">[Co-marketing recap deck]</td>
-            <td class="col-desc">[Per-promotion summary post-flight]</td>
-            <td class="col-owner">[Partner lead]</td>
-            <td class="col-cadence"><span class="cadence-badge adhoc">Per promo</span></td>
-            <td class="col-link"><a href="#" class="source-link tbd">TBD</a></td>
-          </tr>
-        </tbody>
-      </table>
+
+    <div class="reports-body">
+      <div class="reports-grid">
+
+        <!-- Report -->
+        <article class="report-card" data-freq="adhoc">
+          <div class="card-head">
+            <h3>By Partnership Campaign / Initiative</h3>
+          </div>
+          <div class="badges">
+            <span class="badge lob">All LOBs</span>
+            <span class="badge freq-adhoc">Ad hoc</span>
+          </div>
+          <div class="field">
+            <span class="field-label">Purpose</span>
+            <span class="field-value">Learn from tests, set benchmarks, and inform DDS stakeholders.</span>
+          </div>
+          <div class="field-row">
+            <div class="field">
+              <span class="field-label">Owner</span>
+              <span class="field-value">Vanessa</span>
+            </div>
+            <div class="field">
+              <span class="field-label">Audience</span>
+              <span class="field-value">DDS All</span>
+            </div>
+          </div>
+          <div class="field">
+            <span class="field-label">Tools / Source</span>
+            <span class="field-value">Adobe Reports</span>
+          </div>
+          <div class="field">
+            <span class="field-label">Notes</span>
+            <span class="field-value">Example link applies to the NFL–Microsoft partnership across three stages: BTS (summer campaign), Holiday, and evergreen.</span>
+          </div>
+          <div class="card-foot">
+            <a href="https://www5.an.adobe.com/x/5_22g7ch" class="source-link" target="_blank" rel="noopener">Adobe report ↗</a>
+          </div>
+        </article>
+
+      </div>
     </div>
   </section>
 
   <!-- ============================== -->
-  <!-- CHANNEL: EVENTS                -->
+  <!-- CHANNEL: CROSS-CHANNEL         -->
   <!-- ============================== -->
-  <section class="channel-group" id="events" data-pillars="campaigns trends">
+  <section class="channel-group" id="cross-channel">
     <div class="channel-header">
       <div class="left">
-        <div class="channel-icon">EV</div>
+        <div class="channel-icon">XC</div>
         <div>
-          <h2>Events
-            <span class="pillar-tag campaigns">Campaigns</span>
-          </h2>
-          <div class="summary">In-person + virtual events, webinars, conferences.</div>
+          <h2>Cross-channel</h2>
+          <div class="summary">Reports that span multiple channels (e.g., GTM-led post-mortems).</div>
         </div>
       </div>
       <div class="right">
-        <span class="report-count">2 reports</span>
+        <span class="report-count">1 report</span>
         <span class="toggle-arrow">▾</span>
       </div>
     </div>
-    <div class="reports-table-wrap">
-      <table class="reports-table">
-        <thead>
-          <tr>
-            <th class="col-report">Report</th>
-            <th class="col-desc">What it covers</th>
-            <th class="col-owner">Owner</th>
-            <th class="col-cadence">Cadence</th>
-            <th class="col-link">Source</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td class="col-report">[Event recap]</td>
-            <td class="col-desc">[Attendance, leads, pipeline contribution]</td>
-            <td class="col-owner">[Events team]</td>
-            <td class="col-cadence"><span class="cadence-badge adhoc">Per event</span></td>
-            <td class="col-link"><a href="#" class="source-link" target="_blank" rel="noopener">Open ↗</a></td>
-          </tr>
-          <tr>
-            <td class="col-report">[Webinar performance]</td>
-            <td class="col-desc">[Registrants, attendees, follow-up engagement]</td>
-            <td class="col-owner">[Events team]</td>
-            <td class="col-cadence"><span class="cadence-badge monthly">Monthly</span></td>
-            <td class="col-link"><a href="#" class="source-link tbd">TBD</a></td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  </section>
 
-  <!-- ============================== -->
-  <!-- CHANNEL: OWNED (Email/Web/Social) -->
-  <!-- ============================== -->
-  <section class="channel-group" id="owned" data-pillars="trends campaigns">
-    <div class="channel-header">
-      <div class="left">
-        <div class="channel-icon">OW</div>
-        <div>
-          <h2>Owned (Email · Web · Organic Social)
-            <span class="pillar-tag trends">Performance</span>
-          </h2>
-          <div class="summary">Channels we control end-to-end.</div>
-        </div>
-      </div>
-      <div class="right">
-        <span class="report-count">3 reports</span>
-        <span class="toggle-arrow">▾</span>
-      </div>
-    </div>
-    <div class="reports-table-wrap">
-      <table class="reports-table">
-        <thead>
-          <tr>
-            <th class="col-report">Report</th>
-            <th class="col-desc">What it covers</th>
-            <th class="col-owner">Owner</th>
-            <th class="col-cadence">Cadence</th>
-            <th class="col-link">Source</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td class="col-report">[Email engagement dashboard]</td>
-            <td class="col-desc">[Sends, opens, CTR, unsubs by audience]</td>
-            <td class="col-owner">[Email team]</td>
-            <td class="col-cadence"><span class="cadence-badge weekly">Weekly</span></td>
-            <td class="col-link"><a href="#" class="source-link" target="_blank" rel="noopener">Open ↗</a></td>
-          </tr>
-          <tr>
-            <td class="col-report">[Web analytics]</td>
-            <td class="col-desc">[Sessions, conversions, journeys by page/campaign]</td>
-            <td class="col-owner">[Web team]</td>
-            <td class="col-cadence"><span class="cadence-badge daily">Daily</span></td>
-            <td class="col-link"><a href="#" class="source-link" target="_blank" rel="noopener">Open ↗</a></td>
-          </tr>
-          <tr>
-            <td class="col-report">[Organic social]</td>
-            <td class="col-desc">[Reach, engagement, follower growth by platform]</td>
-            <td class="col-owner">[Social team]</td>
-            <td class="col-cadence"><span class="cadence-badge weekly">Weekly</span></td>
-            <td class="col-link"><a href="#" class="source-link tbd">TBD</a></td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  </section>
+    <div class="reports-body">
+      <div class="reports-grid">
 
-  <!-- ============================== -->
-  <!-- CHANNEL: FIELD MARKETING       -->
-  <!-- ============================== -->
-  <section class="channel-group" id="field" data-pillars="campaigns trends">
-    <div class="channel-header">
-      <div class="left">
-        <div class="channel-icon">FM</div>
-        <div>
-          <h2>Field Marketing
-            <span class="pillar-tag campaigns">Campaigns</span>
-          </h2>
-          <div class="summary">Regional activations, account-based marketing, sales support.</div>
-        </div>
-      </div>
-      <div class="right">
-        <span class="report-count">2 reports</span>
-        <span class="toggle-arrow">▾</span>
-      </div>
-    </div>
-    <div class="reports-table-wrap">
-      <table class="reports-table">
-        <thead>
-          <tr>
-            <th class="col-report">Report</th>
-            <th class="col-desc">What it covers</th>
-            <th class="col-owner">Owner</th>
-            <th class="col-cadence">Cadence</th>
-            <th class="col-link">Source</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td class="col-report">[Regional activation report]</td>
-            <td class="col-desc">[Activities, reach, qualified leads by region]</td>
-            <td class="col-owner">[Field marketing lead]</td>
-            <td class="col-cadence"><span class="cadence-badge monthly">Monthly</span></td>
-            <td class="col-link"><a href="#" class="source-link" target="_blank" rel="noopener">Open ↗</a></td>
-          </tr>
-          <tr>
-            <td class="col-report">[ABM tracker]</td>
-            <td class="col-desc">[Target account engagement and progression]</td>
-            <td class="col-owner">[Field marketing lead]</td>
-            <td class="col-cadence"><span class="cadence-badge weekly">Weekly</span></td>
-            <td class="col-link"><a href="#" class="source-link tbd">TBD</a></td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  </section>
+        <!-- Report -->
+        <article class="report-card" data-freq="adhoc">
+          <div class="card-head">
+            <h3>Campaign Post-mortem</h3>
+          </div>
+          <div class="badges">
+            <span class="badge lob">All LOBs</span>
+            <span class="badge freq-adhoc">Ad hoc</span>
+          </div>
+          <div class="field">
+            <span class="field-label">Purpose</span>
+            <span class="field-value">Performance insights and learnings post-campaign, with each outbound channel contributing.</span>
+          </div>
+          <div class="field-row">
+            <div class="field">
+              <span class="field-label">Owner</span>
+              <span class="field-value">GTM</span>
+            </div>
+            <div class="field">
+              <span class="field-label">Audience</span>
+              <span class="field-value">DDS All</span>
+            </div>
+          </div>
+          <div class="field">
+            <span class="field-label">Tools / Source</span>
+            <span class="field-value muted">—</span>
+          </div>
+          <div class="field">
+            <span class="field-label">Notes</span>
+            <span class="field-value">Combination of GTM &amp; IM teams. For GTM, most of the information is not critical immediately after the campaign — better as a YoY planning lookback.</span>
+          </div>
+          <div class="card-foot">
+            <a href="#" class="source-link tbd" target="_blank" rel="noopener">DDS FY26 BTS Campaign Postmortem.pptx</a>
+          </div>
+        </article>
 
-  <!-- ============================== -->
-  <!-- CHANNEL: FINANCE               -->
-  <!-- ============================== -->
-  <section class="channel-group" id="finance" data-pillars="investment">
-    <div class="channel-header">
-      <div class="left">
-        <div class="channel-icon">FI</div>
-        <div>
-          <h2>Finance
-            <span class="pillar-tag investment">Investment</span>
-          </h2>
-          <div class="summary">Budget, actuals, accruals, and reconciliation across channels.</div>
-        </div>
       </div>
-      <div class="right">
-        <span class="report-count">2 reports</span>
-        <span class="toggle-arrow">▾</span>
-      </div>
-    </div>
-    <div class="reports-table-wrap">
-      <table class="reports-table">
-        <thead>
-          <tr>
-            <th class="col-report">Report</th>
-            <th class="col-desc">What it covers</th>
-            <th class="col-owner">Owner</th>
-            <th class="col-cadence">Cadence</th>
-            <th class="col-link">Source</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td class="col-report">[Marketing budget vs actuals]</td>
-            <td class="col-desc">[Spend tracking by channel and program]</td>
-            <td class="col-owner">[Finance partner]</td>
-            <td class="col-cadence"><span class="cadence-badge monthly">Monthly</span></td>
-            <td class="col-link"><a href="#" class="source-link" target="_blank" rel="noopener">Open ↗</a></td>
-          </tr>
-          <tr>
-            <td class="col-report">[Reconciliation file]</td>
-            <td class="col-desc">[Channel reports vs. finance ledger reconciliation]</td>
-            <td class="col-owner">[Finance partner]</td>
-            <td class="col-cadence"><span class="cadence-badge monthly">Monthly</span></td>
-            <td class="col-link"><a href="#" class="source-link tbd">TBD</a></td>
-          </tr>
-        </tbody>
-      </table>
     </div>
   </section>
 
@@ -720,9 +637,9 @@
     document.querySelectorAll('.channel-header').forEach(function (h) {
       h.addEventListener('click', function () {
         var group = h.parentElement;
-        var wrap = group.querySelector('.reports-table-wrap');
+        var body = group.querySelector('.reports-body');
         var collapsed = h.classList.toggle('collapsed');
-        wrap.style.display = collapsed ? 'none' : '';
+        body.style.display = collapsed ? 'none' : '';
       });
     });
 
@@ -732,42 +649,37 @@
     var search = document.getElementById('search');
     var emptyState = document.getElementById('empty');
     var countEl = document.getElementById('count');
-    var activePillar = 'all';
+    var activeFreq = 'all';
 
     function applyFilters() {
       var q = (search.value || '').trim().toLowerCase();
-      var visibleGroups = 0, visibleRows = 0;
+      var visibleGroups = 0, visibleCards = 0;
 
       groups.forEach(function (g) {
-        var pillars = (g.getAttribute('data-pillars') || '').split(/\s+/);
-        var pillarMatch = activePillar === 'all' || pillars.indexOf(activePillar) !== -1;
-
-        var rows = g.querySelectorAll('tbody tr');
-        var anyRowMatches = false;
-        rows.forEach(function (r) {
-          var text = r.textContent.toLowerCase();
-          var rowMatch = q === '' || text.indexOf(q) !== -1;
-          var show = pillarMatch && rowMatch;
-          r.classList.toggle('row-hidden', !show);
-          if (show) { anyRowMatches = true; visibleRows++; }
+        var cards = g.querySelectorAll('.report-card');
+        var anyMatch = false;
+        cards.forEach(function (c) {
+          var freq = c.getAttribute('data-freq');
+          var freqMatch = activeFreq === 'all' || activeFreq === freq;
+          var text = c.textContent.toLowerCase();
+          var textMatch = q === '' || text.indexOf(q) !== -1;
+          var show = freqMatch && textMatch;
+          c.classList.toggle('hidden', !show);
+          if (show) { anyMatch = true; visibleCards++; }
         });
-
-        var headerText = g.querySelector('.channel-header').textContent.toLowerCase();
-        var headerMatch = q === '' || headerText.indexOf(q) !== -1;
-        var showGroup = pillarMatch && (anyRowMatches || (q !== '' && headerMatch));
-        g.classList.toggle('hidden', !showGroup);
-        if (showGroup) visibleGroups++;
+        g.classList.toggle('hidden', !anyMatch);
+        if (anyMatch) visibleGroups++;
       });
 
       emptyState.style.display = visibleGroups === 0 ? '' : 'none';
-      countEl.textContent = visibleRows + ' report' + (visibleRows === 1 ? '' : 's') + ' across ' + visibleGroups + ' channel' + (visibleGroups === 1 ? '' : 's');
+      countEl.textContent = visibleCards + ' report' + (visibleCards === 1 ? '' : 's') + ' across ' + visibleGroups + ' channel' + (visibleGroups === 1 ? '' : 's');
     }
 
     chips.forEach(function (c) {
       c.addEventListener('click', function () {
         chips.forEach(function (x) { x.classList.remove('active'); });
         c.classList.add('active');
-        activePillar = c.getAttribute('data-pillar');
+        activeFreq = c.getAttribute('data-freq');
         applyFilters();
       });
     });
@@ -775,8 +687,8 @@
     document.getElementById('clear-filters').addEventListener('click', function (e) {
       e.preventDefault();
       search.value = '';
-      activePillar = 'all';
-      chips.forEach(function (x) { x.classList.toggle('active', x.getAttribute('data-pillar') === 'all'); });
+      activeFreq = 'all';
+      chips.forEach(function (x) { x.classList.toggle('active', x.getAttribute('data-freq') === 'all'); });
       applyFilters();
     });
 
