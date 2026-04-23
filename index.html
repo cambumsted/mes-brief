@@ -1,0 +1,1209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Marketing Effectiveness Solution — Leadership Brief</title>
+<style>
+  :root {
+    /* Core */
+    --c-dark-blue: #091F2E;
+    --c-med-blue: #0078D4;
+    --c-teal: #49C5B1;
+    /* Neutrals */
+    --c-black: #000000;
+    --c-white: #FFFFFF;
+    --c-n05: #F2F2F2;
+    --c-n15: #D9D9D9;
+    --c-n25: #BFBFBF;
+    --c-n35: #A6A6A6;
+    --c-n50: #7F7F7F;
+    /* Secondary */
+    --c-light-green: #8DE971;
+    --c-light-blue: #8DC8E8;
+    --c-aqua: #B9DCD2;
+    /* Tertiary */
+    --c-lavender: #C5B4E3;
+
+    /* Semantic aliases (preserve white-readable layout) */
+    --ms-blue: var(--c-med-blue);
+    --ms-blue-dark: var(--c-dark-blue);
+    --ms-blue-light: #E6F2FB;
+    --ink: var(--c-dark-blue);
+    --ink-soft: var(--c-n50);
+    --line: var(--c-n15);
+    --bg: var(--c-n05);
+    --card: var(--c-white);
+    --accent-warn: #8A6D00;
+    --accent-warn-bg: #FFF4CE;
+    --accent-good: #2C7A4B;
+    --accent-good-bg: #E4F5DC;
+    --shadow: 0 1.6px 3.6px rgba(9,31,46,0.08), 0 0.3px 0.9px rgba(9,31,46,0.06);
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    font-family: "Segoe UI", -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
+    color: var(--ink);
+    background: var(--bg);
+    line-height: 1.55;
+    font-size: 16px;
+  }
+  a { color: var(--ms-blue-dark); }
+  h1, h2, h3, h4 { color: var(--ink); margin-top: 0; line-height: 1.25; }
+  h1 { font-size: 2.4rem; font-weight: 600; letter-spacing: -0.5px; }
+  h2 { font-size: 1.6rem; font-weight: 600; margin-bottom: 0.4rem; }
+  h3 { font-size: 1.15rem; font-weight: 600; margin-bottom: 0.3rem; }
+  h4 { font-size: 0.95rem; font-weight: 600; margin-bottom: 0.25rem; text-transform: uppercase; letter-spacing: 0.5px; color: var(--ink-soft); }
+  p { margin: 0.5rem 0; }
+
+  /* Layout */
+  .nav {
+    position: sticky; top: 0; z-index: 100;
+    background: rgba(255,255,255,0.96);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line);
+    padding: 0.6rem 1.5rem;
+    display: flex; align-items: center; gap: 1rem;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+  .nav .brand {
+    font-weight: 600; color: var(--ms-blue-dark);
+    margin-right: 1rem; flex-shrink: 0;
+  }
+  .nav a {
+    color: var(--ink-soft);
+    text-decoration: none;
+    font-size: 0.85rem;
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    flex-shrink: 0;
+  }
+  .nav a:hover { background: var(--ms-blue-light); color: var(--ms-blue-dark); }
+  .nav a.is-active {
+    background: var(--c-dark-blue);
+    color: white;
+  }
+
+  main {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 2rem 1.5rem 4rem;
+  }
+  section {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 2rem;
+    margin-bottom: 1.5rem;
+    box-shadow: var(--shadow);
+    transition: opacity 0.4s ease, filter 0.4s ease, transform 0.4s ease, box-shadow 0.4s ease, border-color 0.4s ease;
+  }
+  /* Scroll-spy dimming: dim everything, brighten the active section */
+  body.spy-ready main > section:not(.is-active) {
+    opacity: 0.35;
+    filter: saturate(0.6);
+  }
+  body.spy-ready main > section.is-active {
+    opacity: 1;
+    filter: none;
+    border-color: var(--c-teal);
+    box-shadow: 0 6px 20px rgba(9,31,46,0.12), 0 0 0 1px var(--c-teal);
+  }
+  body.spy-ready main > section.is-active.hero {
+    box-shadow: 0 6px 20px rgba(9,31,46,0.18);
+    border-color: transparent;
+  }
+  /* Hover any dimmed section to peek at full opacity */
+  body.spy-ready main > section:not(.is-active):hover {
+    opacity: 0.85;
+    filter: none;
+  }
+  section .section-num {
+    display: inline-block;
+    color: var(--ms-blue);
+    font-weight: 600;
+    font-size: 0.85rem;
+    letter-spacing: 1px;
+    margin-bottom: 0.4rem;
+  }
+
+  /* Hero */
+  .hero {
+    background: linear-gradient(135deg, var(--c-dark-blue) 0%, var(--c-med-blue) 100%);
+    color: white;
+    padding: 3rem 2rem;
+    border-top: 4px solid var(--c-teal);
+  }
+  .hero h1 { color: white; }
+  .hero .lede {
+    font-size: 1.15rem;
+    opacity: 0.95;
+    max-width: 750px;
+    margin: 1rem 0 1.5rem;
+  }
+  .hero .meta {
+    font-size: 0.85rem; opacity: 0.8; letter-spacing: 0.5px; text-transform: uppercase;
+  }
+  .hero .pill-list {
+    display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1.5rem;
+  }
+  .hero .pill {
+    background: rgba(255,255,255,0.15);
+    border: 1px solid rgba(255,255,255,0.3);
+    border-radius: 16px;
+    padding: 0.3rem 0.85rem;
+    font-size: 0.85rem;
+  }
+
+  /* Cards / grids */
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
+  .grid-4 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; }
+  @media (max-width: 800px) {
+    .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; }
+  }
+  .card {
+    background: var(--bg);
+    border: 1px solid var(--line);
+    border-left: 3px solid var(--ms-blue);
+    border-radius: 6px;
+    padding: 1rem 1.2rem;
+  }
+  .card.pillar {
+    border-left-width: 4px;
+    background: var(--c-white);
+  }
+  #pillars .grid-4 > .card.pillar:nth-child(1) { border-left-color: var(--c-med-blue); }
+  #pillars .grid-4 > .card.pillar:nth-child(2) { border-left-color: var(--c-teal); }
+  #pillars .grid-4 > .card.pillar:nth-child(3) { border-left-color: var(--c-light-blue); }
+  #pillars .grid-4 > .card.pillar:nth-child(4) { border-left-color: var(--c-lavender); }
+  .card .label {
+    font-size: 0.7rem; text-transform: uppercase; letter-spacing: 1px;
+    color: var(--ms-blue-dark); font-weight: 600; margin-bottom: 0.4rem;
+  }
+  .card .example {
+    margin-top: 0.6rem; padding-top: 0.6rem;
+    border-top: 1px dashed var(--line);
+    font-size: 0.88rem; color: var(--ink-soft); font-style: italic;
+  }
+
+  /* Callouts */
+  .callout {
+    border-radius: 6px;
+    padding: 0.75rem 1rem;
+    margin: 0.75rem 0;
+    font-size: 0.92rem;
+  }
+  .callout.gap {
+    background: var(--accent-warn-bg);
+    border-left: 3px solid var(--accent-warn);
+  }
+  .callout.win {
+    background: var(--accent-good-bg);
+    border-left: 3px solid var(--accent-good);
+  }
+  .callout strong { color: var(--ink); }
+
+  /* Tables */
+  table { width: 100%; border-collapse: collapse; font-size: 0.9rem; margin: 0.75rem 0; }
+  th, td { text-align: left; padding: 0.6rem 0.75rem; border-bottom: 1px solid var(--line); vertical-align: top; }
+  th {
+    background: var(--ms-blue-light);
+    color: var(--ms-blue-dark);
+    font-weight: 600;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  tbody tr:hover { background: var(--bg); }
+
+  /* Partnership grid */
+  .partnership-grid th, .partnership-grid td { text-align: center; }
+  .partnership-grid th:first-child, .partnership-grid td:first-child { text-align: left; font-weight: 600; }
+  .partnership-grid .filled {
+    background: var(--c-aqua); color: var(--c-dark-blue); font-weight: 600;
+  }
+  .partnership-grid .blank { color: var(--c-n25); }
+
+  /* Placeholder visuals */
+  .placeholder {
+    border: 2px dashed var(--c-n25);
+    background: repeating-linear-gradient(
+      45deg,
+      var(--c-white),
+      var(--c-white) 10px,
+      var(--c-n05) 10px,
+      var(--c-n05) 20px
+    );
+    border-radius: 6px;
+    padding: 2rem;
+    text-align: center;
+    color: var(--ink-soft);
+    font-size: 0.9rem;
+    margin: 1rem 0;
+  }
+  .placeholder .ph-label {
+    display: inline-block;
+    background: white;
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    padding: 0.25rem 0.6rem;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--ms-blue-dark);
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+  }
+
+  /* Roadmap */
+  .roadmap { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-top: 1rem; }
+  @media (max-width: 800px) { .roadmap { grid-template-columns: 1fr; } }
+  .phase {
+    background: var(--bg);
+    border-top: 4px solid var(--ms-blue);
+    border-radius: 6px;
+    padding: 1rem 1.2rem;
+  }
+  .phase.crawl { border-top-color: var(--c-n35); }
+  .phase.walk { border-top-color: var(--c-med-blue); }
+  .phase.run { border-top-color: var(--c-teal); }
+  .phase .phase-name {
+    font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px;
+    color: var(--ink-soft); margin-bottom: 0.25rem;
+  }
+
+  /* Lists */
+  ul, ol { margin: 0.4rem 0 0.6rem; padding-left: 1.3rem; }
+  li { margin: 0.25rem 0; }
+
+  .tbd {
+    font-size: 0.75rem; background: var(--accent-warn-bg); color: var(--accent-warn);
+    border-radius: 3px; padding: 1px 6px; font-weight: 600; letter-spacing: 0.5px;
+  }
+
+  /* Glossary */
+  dl.glossary { display: grid; grid-template-columns: 200px 1fr; gap: 0.5rem 1rem; margin: 0.5rem 0; }
+  dl.glossary dt { font-weight: 600; color: var(--ms-blue-dark); }
+  dl.glossary dd { margin: 0; color: var(--ink-soft); }
+  @media (max-width: 600px) { dl.glossary { grid-template-columns: 1fr; } dl.glossary dd { margin-bottom: 0.5rem; } }
+
+  /* Print */
+  @media print {
+    .nav { display: none; }
+    body { background: white; }
+    section { box-shadow: none; border: 1px solid #ccc; page-break-inside: avoid; }
+    .hero { background: var(--c-dark-blue) !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  }
+
+  footer {
+    text-align: center;
+    color: var(--ink-soft);
+    font-size: 0.8rem;
+    padding: 2rem 1rem;
+  }
+
+  /* Push main content left when notes panel is open so it doesn't overlap */
+  body { transition: padding-right 0.3s ease; }
+  body.notes-open { padding-right: 380px; }
+  body.notes-open .nav { padding-right: calc(1.5rem + 380px); }
+  @media (max-width: 1100px) {
+    body.notes-open { padding-right: 0; }
+    body.notes-open .nav { padding-right: 1.5rem; }
+  }
+
+  /* Floating notes sidebar */
+  .comment-fab {
+    position: fixed;
+    right: 24px;
+    bottom: 28px;
+    z-index: 200;
+    background: var(--c-teal);
+    color: var(--c-dark-blue);
+    border: 2px solid var(--c-dark-blue);
+    border-radius: 999px;
+    padding: 16px 26px;
+    font-size: 1.05rem;
+    font-weight: 700;
+    font-family: inherit;
+    letter-spacing: 0.3px;
+    cursor: pointer;
+    box-shadow: 0 8px 24px rgba(9,31,46,0.35), 0 2px 6px rgba(9,31,46,0.2);
+    display: inline-flex; align-items: center; gap: 10px;
+    animation: fab-pulse 2.4s ease-in-out infinite;
+  }
+  .comment-fab::before {
+    content: "✏️";
+    font-size: 1.1rem;
+  }
+  .comment-fab:hover {
+    background: var(--c-dark-blue);
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 12px 28px rgba(9,31,46,0.45);
+    animation: none;
+  }
+  .comment-fab .badge {
+    background: var(--c-dark-blue); color: white;
+    border-radius: 999px; padding: 2px 10px;
+    font-size: 0.8rem; font-weight: 700;
+    min-width: 22px; text-align: center;
+  }
+  .comment-fab:hover .badge {
+    background: var(--c-teal); color: var(--c-dark-blue);
+  }
+  @keyframes fab-pulse {
+    0%, 100% { box-shadow: 0 8px 24px rgba(9,31,46,0.35), 0 2px 6px rgba(9,31,46,0.2), 0 0 0 0 rgba(73,197,177,0.6); }
+    50%      { box-shadow: 0 8px 24px rgba(9,31,46,0.35), 0 2px 6px rgba(9,31,46,0.2), 0 0 0 12px rgba(73,197,177,0); }
+  }
+
+  .comment-panel {
+    position: fixed;
+    top: 80px;
+    right: 20px;
+    width: 360px;
+    max-width: calc(100vw - 40px);
+    max-height: calc(100vh - 110px);
+    background: white;
+    border: 1px solid var(--c-n15);
+    border-radius: 8px;
+    box-shadow: 0 8px 24px rgba(9,31,46,0.18);
+    z-index: 200;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+  .comment-panel.hidden { display: none; }
+  .comment-panel-header {
+    background: var(--c-dark-blue);
+    color: white;
+    padding: 0.75rem 1rem;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .comment-panel-header h3 {
+    color: white; font-size: 0.95rem; margin: 0;
+  }
+  .comment-panel-close {
+    background: none; border: none; color: white;
+    font-size: 1.4rem; cursor: pointer; padding: 0; line-height: 1;
+  }
+  .comment-panel-body {
+    padding: 1rem;
+    overflow-y: auto;
+    flex: 1;
+    display: flex; flex-direction: column; gap: 0.85rem;
+  }
+  .comment-panel .section-context {
+    background: var(--c-n05);
+    border-radius: 4px;
+    padding: 0.5rem 0.7rem;
+    font-size: 0.78rem;
+    color: var(--ink-soft);
+  }
+  .comment-panel .section-context .label {
+    text-transform: uppercase; letter-spacing: 0.5px;
+    font-weight: 600; color: var(--c-med-blue);
+    font-size: 0.65rem; display: block; margin-bottom: 2px;
+  }
+  .comment-panel .section-context .value {
+    color: var(--c-dark-blue); font-weight: 600; font-size: 0.85rem;
+  }
+  .note-form {
+    display: grid; gap: 0.5rem;
+  }
+  .note-form label {
+    font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.5px;
+    color: var(--ink-soft); font-weight: 600;
+  }
+  .note-form input,
+  .note-form textarea {
+    font-family: inherit; font-size: 0.9rem;
+    padding: 0.5rem 0.65rem;
+    border: 1px solid var(--c-n15);
+    border-radius: 4px;
+    background: white;
+    color: var(--ink);
+    width: 100%;
+  }
+  .note-form textarea { min-height: 80px; resize: vertical; }
+  .note-form input:focus,
+  .note-form textarea:focus {
+    outline: none;
+    border-color: var(--c-med-blue);
+    box-shadow: 0 0 0 2px rgba(0,120,212,0.15);
+  }
+  .note-add {
+    background: var(--c-med-blue); color: white;
+    border: none; border-radius: 4px;
+    padding: 0.5rem 0.9rem; font-size: 0.85rem; font-weight: 600;
+    cursor: pointer; font-family: inherit;
+    justify-self: start;
+  }
+  .note-add:hover { background: var(--c-dark-blue); }
+
+  .notes-section {
+    border-top: 1px solid var(--c-n15);
+    padding-top: 0.85rem;
+  }
+  .notes-section h4 {
+    font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.5px;
+    color: var(--ink-soft); margin: 0 0 0.5rem;
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .notes-list {
+    display: flex; flex-direction: column; gap: 0.5rem;
+    margin-bottom: 0.75rem;
+  }
+  .notes-list:empty::before {
+    content: "No notes yet. Add notes as you read — they'll all be sent in one email.";
+    color: var(--c-n35); font-size: 0.8rem; font-style: italic;
+  }
+  .note-item {
+    background: var(--c-n05);
+    border-left: 3px solid var(--c-teal);
+    border-radius: 4px;
+    padding: 0.5rem 0.7rem;
+    font-size: 0.85rem;
+    position: relative;
+  }
+  .note-item .note-section-tag {
+    font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.5px;
+    color: var(--c-med-blue); font-weight: 600;
+    margin-bottom: 3px;
+  }
+  .note-item .note-text { white-space: pre-wrap; word-wrap: break-word; }
+  .note-delete {
+    position: absolute; top: 4px; right: 6px;
+    background: none; border: none; color: var(--c-n50);
+    font-size: 0.95rem; cursor: pointer; padding: 0 4px; line-height: 1;
+  }
+  .note-delete:hover { color: #B91C1C; }
+
+  .send-row {
+    display: grid; gap: 0.5rem;
+    border-top: 1px solid var(--c-n15);
+    padding-top: 0.85rem;
+  }
+  .send-help { font-size: 0.75rem; color: var(--ink-soft); }
+  .send-button {
+    background: var(--c-teal); color: var(--c-dark-blue);
+    border: none; border-radius: 4px;
+    padding: 0.65rem 1rem; font-size: 0.9rem; font-weight: 700;
+    cursor: pointer; font-family: inherit;
+  }
+  .send-button:hover { filter: brightness(0.95); }
+  .send-button:disabled {
+    background: var(--c-n15); color: var(--c-n50); cursor: not-allowed;
+  }
+  .clear-button {
+    background: none; border: none; color: var(--ink-soft);
+    font-size: 0.75rem; cursor: pointer; padding: 0; text-decoration: underline;
+    justify-self: start;
+  }
+  .clear-button:hover { color: #B91C1C; }
+
+  @media (max-width: 700px) {
+    .comment-panel { width: calc(100vw - 32px); right: 16px; top: 70px; }
+  }
+  @media print {
+    .comment-fab, .comment-panel { display: none !important; }
+  }
+</style>
+</head>
+<body>
+
+<nav class="nav" aria-label="Section navigation">
+  <span class="brand">Marketing Effectiveness Solution</span>
+  <a href="#hero">Overview</a>
+  <a href="#problem">Problem</a>
+  <a href="#principles">Principles</a>
+  <a href="#pillars">4 Pillars</a>
+  <a href="#current">Current State</a>
+  <a href="#ideal">Ideal State</a>
+  <a href="#gaps">Gaps</a>
+  <a href="#raci">Stakeholders</a>
+  <a href="#roadmap">Roadmap</a>
+  <a href="#metrics">Success Metrics</a>
+  <a href="#risks">Risks</a>
+</nav>
+
+<main>
+
+<!-- 1. HERO -->
+<section id="hero" class="hero">
+  <div class="meta">DDS Marketing · Leadership Brief · Draft v0.1</div>
+  <h1>Marketing Effectiveness Solution</h1>
+  <p class="lede">
+    A single place where DDS leadership can answer any question about how our marketing
+    is performing — investment, trends, campaigns, and partnerships — at a glance,
+    with the detail one click away.
+  </p>
+  <p class="lede" style="font-size:1rem;">
+    <strong>The problem:</strong> Our channels are siloed and our reporting is scattered.
+    No one place tells leadership <em>"here is how marketing is doing right now, and where to invest next."</em>
+  </p>
+</section>
+
+<!-- 2. PROBLEM -->
+<section id="problem">
+  <span class="section-num">01 · The Problem</span>
+  <h2>Leadership has no single source for marketing performance.</h2>
+  <p>
+    Today, DDS leadership relies on a patchwork of meetings, decks, and channel-specific reports
+    to understand how marketing is performing. Each channel — paid media, email, partnerships, SEO —
+    operates and reports in its own silo, and no view stitches them together.
+  </p>
+
+  <div class="grid-2" style="margin-top:1rem;">
+    <div class="card">
+      <div class="label">What's broken today</div>
+      <ul>
+        <li>Leadership can't easily see where marketing dollars should go next — there's no portfolio-level view to guide investment decisions.</li>
+        <li>Each channel — paid media, email, partnerships, SEO — operates and reports in its own silo, with no view stitching them together.</li>
+        <li>Regional partnership performance (Asia, Americas, EMEA) is reported in silos and rarely reaches leadership.</li>
+        <li>No comparable view across partnerships — variables differ, so investment decisions lack a shared baseline.</li>
+        <li>Campaign performance is tracked tactically (asset-by-asset), not by overall contribution to a moment like Back-to-School.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="label">What this costs us</div>
+      <ul>
+        <li>Reactive investment decisions instead of portfolio-level optimization.</li>
+        <li>Partnership dollars allocated by inertia, not evidence.</li>
+        <li>Leadership questions could be answered faster, with less back-and-forth across teams.</li>
+        <li>Marketing's contribution to GTM moments is undersold internally.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- 3. PRINCIPLES -->
+<section id="principles">
+  <span class="section-num">02 · Guiding Principles</span>
+  <h2>How we'll know we built the right thing.</h2>
+  <div class="grid-3">
+    <div class="card">
+      <h3>One place, any question</h3>
+      <p>If a leader has a question about marketing performance, the answer — or the path to it — lives here.</p>
+    </div>
+    <div class="card">
+      <h3>High-level by default, drill-down on demand</h3>
+      <p>Headlines for skim-readers. Detail for the curious. Both audiences served from the same surface.</p>
+    </div>
+    <div class="card">
+      <h3>Solution-agnostic</h3>
+      <p>We're describing capabilities, not picking a tool. Could be a dashboard, a hub, or a hybrid — the right form follows the requirements.</p>
+    </div>
+    <div class="card">
+      <h3>Comparable across silos</h3>
+      <p>Especially partnerships across regions. Different goals are fine; missing comparability is not.</p>
+    </div>
+    <div class="card">
+      <h3>Focused on investable spend</h3>
+      <p>This solution is about the costs leadership actively decides on — like funding an ad campaign — not operational line items like creative template updates.</p>
+    </div>
+    <div class="card">
+      <h3>Built to be used, not admired</h3>
+      <p>Adoption by leadership is the success metric. If it's not in the flow of decisions, we got it wrong.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 4. PILLARS -->
+<section id="pillars">
+  <span class="section-num">03 · Questions This Solution Answers</span>
+  <h2>Four pillars, four questions.</h2>
+
+  <div class="grid-4" style="margin-top:1rem;">
+    <div class="card pillar">
+      <div class="label">Pillar 1</div>
+      <h3>Investment &amp; ROI</h3>
+      <p><strong>Question:</strong> Are we getting return on the marketing dollars we're spending?</p>
+      <div class="example">e.g., "Did Back-to-School paid media beat its ROI target this quarter?"</div>
+    </div>
+
+    <div class="card pillar">
+      <div class="label">Pillar 2</div>
+      <h3>Marketing Performance Trends</h3>
+      <p><strong>Question:</strong> How is marketing doing right now?</p>
+      <p style="font-size:0.88rem;color:var(--ink-soft);">
+        Today this lives in the MBR; we want this information front and center, continuously available
+        rather than waiting for the next review.
+      </p>
+      <div class="example">e.g., "Email engagement is down two months running — is that a leading indicator?"</div>
+    </div>
+
+    <div class="card pillar">
+      <div class="label">Pillar 3</div>
+      <h3>Campaign Performance</h3>
+      <p><strong>Question:</strong> What did marketing contribute to a given GTM moment?</p>
+      <p style="font-size:0.88rem;color:var(--ink-soft);">
+        Today GTM owns campaign assets and promotion coordination, but no view rolls up
+        "Outbound Marketing drove $X for Back-to-School." We want to bridge tactical execution
+        to outcome attribution.
+      </p>
+      <div class="example">e.g., "Which paid media campaigns contributed most to Back-to-School?"</div>
+    </div>
+
+    <div class="card pillar">
+      <div class="label">Pillar 4</div>
+      <h3>Partnership Performance</h3>
+      <p><strong>Question:</strong> Which partnership is delivering the best ROI?</p>
+      <div class="example">e.g., "Across all regions, which partnerships drove the strongest pipeline last quarter?"</div>
+    </div>
+  </div>
+</section>
+
+<!-- 5. CURRENT STATE -->
+<section id="current">
+  <span class="section-num">04 · Current State</span>
+  <h2>Where the data lives today.</h2>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Pillar</th>
+        <th>Where it lives</th>
+        <th>Owner</th>
+        <th>Cadence</th>
+        <th>Consumer</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Investment &amp; ROI</strong></td>
+        <td>Paid media reports + partnership decks; finance reconciliation separate</td>
+        <td>Channel leads + Finance</td>
+        <td>Monthly / ad hoc</td>
+        <td>Channel leadership</td>
+      </tr>
+      <tr>
+        <td><strong>Performance Trends</strong></td>
+        <td>MBR deck</td>
+        <td>DPM</td>
+        <td>Monthly</td>
+        <td>DDS leadership</td>
+      </tr>
+      <tr>
+        <td><strong>Campaign Performance</strong></td>
+        <td>GTM campaign trackers; per-channel reports</td>
+        <td>GTM team</td>
+        <td>Per campaign</td>
+        <td><span class="tbd">TBD</span></td>
+      </tr>
+      <tr>
+        <td><strong>Partnership Performance</strong></td>
+        <td>Regional trackers</td>
+        <td>Regional partnership leads</td>
+        <td><span class="tbd">TBD</span></td>
+        <td><span class="tbd">TBD</span></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="callout gap">
+    <strong>Gap:</strong> No view stitches these four pillars together. Leadership has to attend four different conversations
+    (and assemble the picture themselves) to understand overall marketing health.
+  </div>
+  <div class="callout gap">
+    <strong>Gap:</strong> Partnership performance rarely escapes its region of origin, making cross-portfolio investment decisions guesswork.
+  </div>
+  <div class="callout gap">
+    <strong>Gap:</strong> Campaign performance is tracked at the asset/channel level, not at the moment level (e.g., "Back-to-School").
+  </div>
+</section>
+
+<!-- 6. IDEAL STATE -->
+<section id="ideal">
+  <span class="section-num">05 · Ideal State</span>
+  <h2>What "good" looks like.</h2>
+
+  <div class="grid-2">
+    <div class="card">
+      <h3>Pillar 1 · Investment &amp; ROI</h3>
+      <p><strong>Capability:</strong> A unified view of marketing investment &amp; return for all channels.</p>
+      <p><strong>Drill-down:</strong> from channel → campaign → individual partnership.</p>
+    </div>
+    <div class="card">
+      <h3>Pillar 2 · Performance Trends</h3>
+      <p><strong>Capability:</strong> An always-on "headline" view of marketing health by channel — refreshed continuously, not monthly.</p>
+    </div>
+    <div class="card">
+      <h3>Pillar 3 · Campaign Performance</h3>
+      <p><strong>Capability:</strong> Roll-up of marketing's contribution to each GTM moment, attributing channel and campaign back to the moment it served.</p>
+      <p><strong>Drill-down:</strong> from moment (e.g., Back-to-School) → contributing channels → individual campaign assets.</p>
+    </div>
+    <div class="card">
+      <h3>Pillar 4 · Partnership Performance</h3>
+      <p><strong>Capability:</strong> A cross-region view of partnership performance that surfaces what's working, where to invest more, and where to reconsider.</p>
+      <p><strong>Drill-down:</strong> from portfolio view → individual partnership → regional context.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 7. GAPS -->
+<section id="gaps">
+  <span class="section-num">06 · Gaps &amp; Enhancements Needed</span>
+  <h2>What we need to close to reach the ideal state.</h2>
+
+  <div class="grid-2">
+    <div class="card">
+      <h4>Data Gaps</h4>
+      <ul>
+        <li>No attribution layer linking campaigns to channels and to outbound marketing KPIs for GTM moments.</li>
+        <li>Partnership KPIs not standardized across regions.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h4>Process Gaps</h4>
+      <ul>
+        <li>Regional partnership reporting never aggregates upward.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h4>Tooling Gaps</h4>
+      <ul>
+        <li>No shared layer that pulls MBR + campaign + partnership data into one place.</li>
+        <li>Existing reports are slide-based and not navigable on demand.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h4>Ownership Gaps</h4>
+      <ul>
+        <li>No single owner for cross-channel performance synthesis.</li>
+        <li>Partnership portfolio view has no accountable owner today.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- 8. RACI -->
+<section id="raci">
+  <span class="section-num">07 · Stakeholders &amp; RACI</span>
+  <h2>Draft ownership map.</h2>
+  <p style="color:var(--ink-soft);">A starting point for the working group conversation — names and ownership are TBD.</p>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Workstream</th>
+        <th>Responsible</th>
+        <th>Accountable</th>
+        <th>Consulted</th>
+        <th>Informed</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Solution overall</td>
+        <td><span class="tbd">TBD</span></td>
+        <td><span class="tbd">TBD</span></td>
+        <td><span class="tbd">TBD</span></td>
+        <td><span class="tbd">TBD</span></td>
+      </tr>
+      <tr>
+        <td>Investment &amp; ROI</td>
+        <td><span class="tbd">TBD</span></td>
+        <td><span class="tbd">TBD</span></td>
+        <td><span class="tbd">TBD</span></td>
+        <td><span class="tbd">TBD</span></td>
+      </tr>
+      <tr>
+        <td>Performance Trends</td>
+        <td><span class="tbd">TBD</span></td>
+        <td><span class="tbd">TBD</span></td>
+        <td><span class="tbd">TBD</span></td>
+        <td><span class="tbd">TBD</span></td>
+      </tr>
+      <tr>
+        <td>Campaign Performance</td>
+        <td><span class="tbd">TBD</span></td>
+        <td><span class="tbd">TBD</span></td>
+        <td><span class="tbd">TBD</span></td>
+        <td><span class="tbd">TBD</span></td>
+      </tr>
+      <tr>
+        <td>Partnership Performance</td>
+        <td><span class="tbd">TBD</span></td>
+        <td><span class="tbd">TBD</span></td>
+        <td><span class="tbd">TBD</span></td>
+        <td><span class="tbd">TBD</span></td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- 9. ROADMAP -->
+<section id="roadmap">
+  <span class="section-num">08 · Phased Roadmap</span>
+  <h2>Crawl, walk, run.</h2>
+
+  <div class="roadmap">
+    <div class="phase crawl">
+      <div class="phase-name">Phase 1 · Crawl</div>
+      <h3>Define &amp; align</h3>
+      <ul>
+        <li>Inventory existing reports across all four pillars.</li>
+        <li>Build a shared metrics dictionary (definitions, owners, sources).</li>
+        <li>Standardize the partnership KPI grid template across regions.</li>
+        <li>Manual v1 of the unified view (curated, not automated).</li>
+      </ul>
+    </div>
+    <div class="phase walk">
+      <div class="phase-name">Phase 2 · Walk</div>
+      <h3>Centralize &amp; standardize</h3>
+      <ul>
+        <li>Pilot a landing experience that links to existing reports.</li>
+        <li>Operationalize the partnership grid with regional contributors.</li>
+        <li>Establish a cross-pillar review cadence to test the workflow.</li>
+        <li>Begin attributing campaigns to GTM moments.</li>
+      </ul>
+    </div>
+    <div class="phase run">
+      <div class="phase-name">Phase 3 · Run</div>
+      <h3>Integrate &amp; automate</h3>
+      <ul>
+        <li>Integrated solution with drill-downs across all four pillars.</li>
+        <li>Automate where ROI of automation is justified — leave manual where it's not.</li>
+        <li>Continuous "headline" trend view replaces MBR-only cadence.</li>
+        <li>Embedded into leadership decision rituals.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- 10. METRICS -->
+<section id="metrics">
+  <span class="section-num">09 · Success Metrics</span>
+  <h2>How we'll know it worked.</h2>
+  <div class="grid-3">
+    <div class="card">
+      <h4>Leading</h4>
+      <ul>
+        <li>% of leadership questions answerable from one place</li>
+        <li>Time-to-answer for a typical leadership question</li>
+        <li>% of partnerships represented in the grid</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h4>Lagging</h4>
+      <ul>
+        <li>Investment decisions informed by the solution</li>
+        <li>Partnership reallocation actions taken on the basis of the grid</li>
+        <li>Campaign-to-moment ROI claims made externally with evidence</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h4>Adoption</h4>
+      <ul>
+        <li>Leadership engagement frequency</li>
+        <li>Mentions in leadership meetings as the source-of-truth</li>
+        <li>Self-service usage vs. analyst-pulled reports</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- 11. RISKS -->
+<section id="risks">
+  <span class="section-num">10 · Risks, Dependencies &amp; Open Questions</span>
+  <h2>What could derail this.</h2>
+
+  <div class="grid-2">
+    <div class="card">
+      <h4>Risks</h4>
+      <ul>
+        <li><strong>"Another dashboard nobody uses."</strong> Mitigated by embedding in leadership rituals from Phase 1.</li>
+        <li>Regional partnership data standardization is a people/process problem, not just tooling.</li>
+        <li>Channel leads may resist a comparable view that exposes weaker performance.</li>
+        <li>ROI definition disagreements between Marketing and Finance could stall Pillar 1.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h4>Dependencies</h4>
+      <ul>
+        <li>Finance — for shared ROI definitions.</li>
+        <li>GTM — for canonical campaign and moment taxonomy.</li>
+        <li>Marketing analytics / BI — for any data integration.</li>
+        <li>Regional partnership leads — for grid contributions.</li>
+      </ul>
+    </div>
+  </div>
+
+  <h3 style="margin-top:1.5rem;">Open Questions</h3>
+  <ul>
+    <li>Who owns the solution end-to-end?</li>
+    <li>What's the right cadence for the "headline" trend view — weekly, daily, continuous?</li>
+    <li>Should SEO be a fifth pillar or stay nested under Performance Trends?</li>
+    <li>How do we handle partnerships that don't have a clean ROI tie?</li>
+    <li>Where does this live organizationally — Marketing analytics, GTM, or a new function?</li>
+  </ul>
+</section>
+
+</main>
+
+<footer>
+  Marketing Effectiveness Solution · Draft v0.1 · For internal DDS leadership review
+</footer>
+
+<script>
+(function () {
+  var STORAGE_KEY = 'mes-notes-v1';
+  var NAME_KEY = 'mes-notes-name';
+  var RECIPIENT = 'cambumsted@microsoft.com';
+  var SUBJECT = 'Marketing Effectiveness Solution';
+
+  function load() {
+    try { return JSON.parse(localStorage.getItem(STORAGE_KEY)) || []; }
+    catch (e) { return []; }
+  }
+  function save(arr) {
+    try { localStorage.setItem(STORAGE_KEY, JSON.stringify(arr)); } catch (e) {}
+  }
+  function getName() { return localStorage.getItem(NAME_KEY) || ''; }
+  function setName(n) { try { localStorage.setItem(NAME_KEY, n); } catch (e) {} }
+
+  function escapeHtml(s) {
+    return String(s)
+      .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+  }
+
+  function getCurrentSection() {
+    var sections = document.querySelectorAll('main > section');
+    if (!sections.length) return null;
+    // If scrolled to (or near) the bottom of the page, lock to the last section
+    var scrollBottom = window.innerHeight + window.scrollY;
+    if (scrollBottom >= document.documentElement.scrollHeight - 4) {
+      return sections[sections.length - 1];
+    }
+    var anchor = window.innerHeight * 0.35;
+    var current = sections[0];
+    sections.forEach(function (s) {
+      var rect = s.getBoundingClientRect();
+      if (rect.top <= anchor) current = s;
+    });
+    return current;
+  }
+  function sectionLabel(section) {
+    if (!section) return '';
+    var h = section.querySelector('h2') || section.querySelector('h1');
+    return h ? h.textContent.trim() : section.id;
+  }
+
+  document.addEventListener('DOMContentLoaded', function () {
+    // Scroll-spy: highlight the section currently in view, dim others
+    var sections = Array.prototype.slice.call(document.querySelectorAll('main > section'));
+    var navLinks = Array.prototype.slice.call(document.querySelectorAll('.nav a[href^="#"]'));
+    var navById = {};
+    navLinks.forEach(function (a) {
+      var id = a.getAttribute('href').slice(1);
+      navById[id] = a;
+    });
+
+    var currentActiveId = null;
+    function setActive(id) {
+      if (id === currentActiveId) return;
+      currentActiveId = id;
+      sections.forEach(function (s) {
+        s.classList.toggle('is-active', s.id === id);
+      });
+      navLinks.forEach(function (a) {
+        a.classList.toggle('is-active', a.getAttribute('href') === '#' + id);
+      });
+    }
+    function updateActive() {
+      var active = getCurrentSection();
+      if (active) setActive(active.id);
+    }
+    document.body.classList.add('spy-ready');
+    updateActive();
+    window.addEventListener('scroll', updateActive, { passive: true });
+    window.addEventListener('resize', updateActive);
+
+    var fab = document.createElement('button');
+    fab.type = 'button';
+    fab.className = 'comment-fab';
+    fab.innerHTML = 'Send notes to Cam <span class="badge" id="notes-badge" style="display:none">0</span>';
+    document.body.appendChild(fab);
+
+    var panel = document.createElement('div');
+    panel.className = 'comment-panel hidden';
+    panel.innerHTML =
+      '<div class="comment-panel-header">' +
+        '<h3>Notes for Cam</h3>' +
+        '<button type="button" class="comment-panel-close" aria-label="Close">\u00d7</button>' +
+      '</div>' +
+      '<div class="comment-panel-body">' +
+        '<div class="section-context">' +
+          '<span class="label">Currently viewing</span>' +
+          '<span class="value" id="cmt-section">\u2014</span>' +
+        '</div>' +
+        '<form class="note-form" autocomplete="off">' +
+          '<label for="cmt-body">Add a note on this section</label>' +
+          '<textarea id="cmt-body" maxlength="2000" placeholder="What\'s on your mind?" required></textarea>' +
+          '<button type="submit" class="note-add">+ Add note</button>' +
+        '</form>' +
+        '<div class="notes-section">' +
+          '<h4><span>Your notes <span id="notes-count">(0)</span></span></h4>' +
+          '<div class="notes-list" id="notes-list"></div>' +
+        '</div>' +
+        '<div class="send-row">' +
+          '<label for="cmt-author" style="font-size:0.7rem;text-transform:uppercase;letter-spacing:0.5px;color:var(--ink-soft);font-weight:600;">Your name</label>' +
+          '<input id="cmt-author" type="text" maxlength="60" placeholder="Your name" style="font-family:inherit;font-size:0.9rem;padding:0.5rem 0.65rem;border:1px solid var(--c-n15);border-radius:4px;background:white;color:var(--ink);width:100%;" />' +
+          '<button type="button" class="send-button" id="send-all" disabled>Send notes to Cam</button>' +
+          '<span class="send-help">All your notes will be bundled into a single email draft.</span>' +
+          '<button type="button" class="clear-button" id="clear-all">Clear all notes</button>' +
+        '</div>' +
+      '</div>';
+    document.body.appendChild(panel);
+
+    var sectionEl = panel.querySelector('#cmt-section');
+    var authorInput = panel.querySelector('#cmt-author');
+    var bodyInput = panel.querySelector('#cmt-body');
+    var form = panel.querySelector('.note-form');
+    var closeBtn = panel.querySelector('.comment-panel-close');
+    var listEl = panel.querySelector('#notes-list');
+    var countEl = panel.querySelector('#notes-count');
+    var badgeEl = document.getElementById('notes-badge');
+    var sendBtn = panel.querySelector('#send-all');
+    var clearBtn = panel.querySelector('#clear-all');
+
+    authorInput.value = getName();
+
+    function renderNotes() {
+      var notes = load();
+      listEl.innerHTML = '';
+      notes.forEach(function (n, idx) {
+        var div = document.createElement('div');
+        div.className = 'note-item';
+        div.innerHTML =
+          '<button type="button" class="note-delete" data-idx="' + idx + '" title="Remove note">\u00d7</button>' +
+          '<div class="note-section-tag">' + escapeHtml(n.section) + '</div>' +
+          '<div class="note-text">' + escapeHtml(n.text) + '</div>';
+        listEl.appendChild(div);
+      });
+      countEl.textContent = '(' + notes.length + ')';
+      sendBtn.disabled = notes.length === 0;
+      if (notes.length > 0) {
+        badgeEl.style.display = 'inline-block';
+        badgeEl.textContent = notes.length;
+      } else {
+        badgeEl.style.display = 'none';
+      }
+    }
+
+    function updateSection() {
+      sectionEl.textContent = sectionLabel(getCurrentSection());
+    }
+
+    function openPanel() {
+      panel.classList.remove('hidden');
+      document.body.classList.add('notes-open');
+      updateSection();
+      setTimeout(function () { bodyInput.focus(); }, 50);
+    }
+    function closePanel() {
+      panel.classList.add('hidden');
+      document.body.classList.remove('notes-open');
+    }
+
+    fab.addEventListener('click', function () {
+      panel.classList.contains('hidden') ? openPanel() : closePanel();
+    });
+    closeBtn.addEventListener('click', closePanel);
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && !panel.classList.contains('hidden')) closePanel();
+    });
+    window.addEventListener('scroll', function () {
+      if (!panel.classList.contains('hidden')) updateSection();
+    }, { passive: true });
+
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var text = bodyInput.value.trim();
+      if (!text) return;
+      var notes = load();
+      notes.push({
+        section: sectionLabel(getCurrentSection()),
+        text: text,
+        ts: Date.now()
+      });
+      save(notes);
+      bodyInput.value = '';
+      renderNotes();
+      bodyInput.focus();
+    });
+
+    listEl.addEventListener('click', function (e) {
+      var btn = e.target.closest('.note-delete');
+      if (!btn) return;
+      var idx = parseInt(btn.getAttribute('data-idx'), 10);
+      var notes = load();
+      notes.splice(idx, 1);
+      save(notes);
+      renderNotes();
+    });
+
+    clearBtn.addEventListener('click', function () {
+      var notes = load();
+      if (!notes.length) return;
+      if (!confirm('Clear all notes? This cannot be undone.')) return;
+      save([]);
+      renderNotes();
+    });
+
+    sendBtn.addEventListener('click', function () {
+      var notes = load();
+      if (!notes.length) return;
+      var author = authorInput.value.trim();
+      if (author) setName(author);
+
+      var sectionOrder = [];
+      document.querySelectorAll('main > section').forEach(function (s) {
+        sectionOrder.push(sectionLabel(s));
+      });
+      var grouped = {};
+      notes.forEach(function (n) {
+        if (!grouped[n.section]) grouped[n.section] = [];
+        grouped[n.section].push(n.text);
+      });
+
+      var lines = [];
+      lines.push('Notes on the Marketing Effectiveness Solution brief');
+      lines.push('From: ' + (author || 'Anonymous'));
+      lines.push('Sent: ' + new Date().toLocaleString());
+      lines.push('');
+      sectionOrder.forEach(function (sec) {
+        if (!grouped[sec]) return;
+        lines.push('=== ' + sec + ' ===');
+        grouped[sec].forEach(function (t, i) {
+          lines.push((i + 1) + '. ' + t);
+        });
+        lines.push('');
+        delete grouped[sec];
+      });
+      Object.keys(grouped).forEach(function (sec) {
+        lines.push('=== ' + sec + ' ===');
+        grouped[sec].forEach(function (t, i) {
+          lines.push((i + 1) + '. ' + t);
+        });
+        lines.push('');
+      });
+
+      var mailto = 'mailto:' + RECIPIENT +
+        '?subject=' + encodeURIComponent(SUBJECT) +
+        '&body=' + encodeURIComponent(lines.join('\r\n'));
+      window.location.href = mailto;
+    });
+
+    renderNotes();
+  });
+})();
+</script>
+
+</body>
+</html>
