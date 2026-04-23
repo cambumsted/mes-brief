@@ -113,6 +113,11 @@
     white-space: nowrap;
   }
   .nav-dd .dd-menu a:hover { background: var(--ms-blue-light); color: var(--ms-blue-dark); }
+  .nav-dd .dd-menu a.is-active {
+    background: var(--ms-blue-light);
+    color: var(--ms-blue-dark);
+    font-weight: 600;
+  }
 
   main {
     max-width: 1200px;
@@ -792,6 +797,29 @@
 </section>
 
 </main>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    var dropdowns = Array.prototype.slice.call(document.querySelectorAll('.nav-dd'));
+    dropdowns.forEach(function (dd) {
+      var leaveTimer = null;
+      dd.addEventListener('mouseleave', function () {
+        leaveTimer = setTimeout(function () { dd.removeAttribute('open'); }, 250);
+      });
+      dd.addEventListener('mouseenter', function () {
+        if (leaveTimer) { clearTimeout(leaveTimer); leaveTimer = null; }
+      });
+      dd.querySelectorAll('.dd-menu a').forEach(function (a) {
+        a.addEventListener('click', function () { dd.removeAttribute('open'); });
+      });
+    });
+    document.addEventListener('click', function (e) {
+      dropdowns.forEach(function (dd) {
+        if (dd.hasAttribute('open') && !dd.contains(e.target)) dd.removeAttribute('open');
+      });
+    });
+  });
+</script>
 
 </body>
 </html>
