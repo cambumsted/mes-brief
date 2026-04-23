@@ -87,6 +87,45 @@
     color: white;
   }
 
+  /* Dropdown menu (uses native <details>) */
+  .nav-dd { position: relative; flex-shrink: 0; }
+  .nav-dd > summary {
+    list-style: none;
+    cursor: pointer;
+    color: var(--ink-soft);
+    font-size: 0.85rem;
+    padding: 0.25rem 0.6rem;
+    border-radius: 4px;
+    border: 1px solid var(--line);
+    background: var(--c-white);
+    display: inline-flex; align-items: center; gap: 0.35rem;
+  }
+  .nav-dd > summary::-webkit-details-marker { display: none; }
+  .nav-dd > summary::after {
+    content: "▾"; font-size: 0.7rem; opacity: 0.7;
+  }
+  .nav-dd > summary:hover { background: var(--ms-blue-light); color: var(--ms-blue-dark); border-color: var(--ms-blue); }
+  .nav-dd[open] > summary { background: var(--c-dark-blue); color: white; border-color: var(--c-dark-blue); }
+  .nav-dd .dd-menu {
+    position: absolute; top: calc(100% + 6px); left: 0;
+    background: var(--c-white);
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    box-shadow: 0 6px 20px rgba(9,31,46,0.12);
+    padding: 0.35rem;
+    min-width: 200px;
+    display: flex; flex-direction: column;
+    z-index: 200;
+  }
+  .nav-dd .dd-menu a {
+    color: var(--ink);
+    padding: 0.35rem 0.6rem;
+    border-radius: 4px;
+    font-size: 0.85rem;
+    white-space: nowrap;
+  }
+  .nav-dd .dd-menu a:hover { background: var(--ms-blue-light); color: var(--ms-blue-dark); }
+
   main {
     max-width: 1100px;
     margin: 0 auto;
@@ -515,19 +554,24 @@
 </head>
 <body>
 
-<nav class="nav" aria-label="Section navigation">
+<nav class="nav" aria-label="Primary navigation">
   <span class="brand">Marketing Effectiveness Solution</span>
-  <a href="#hero">Overview</a>
-  <a href="#problem">Problem</a>
-  <a href="#principles">Principles</a>
-  <a href="#pillars">4 Pillars</a>
-  <a href="#current">Current State</a>
-  <a href="#ideal">Ideal State</a>
-  <a href="#gaps">Gaps</a>
-  <a href="#raci">Stakeholders</a>
-  <a href="#roadmap">Roadmap</a>
-  <a href="#metrics">Success Metrics</a>
-  <a href="#risks">Risks</a>
+  <details class="nav-dd">
+    <summary>Brief sections</summary>
+    <div class="dd-menu">
+      <a href="#hero">Overview</a>
+      <a href="#problem">Problem</a>
+      <a href="#principles">Principles</a>
+      <a href="#pillars">4 Pillars</a>
+      <a href="#current">Current State</a>
+      <a href="#ideal">Ideal State</a>
+      <a href="#gaps">Gaps</a>
+      <a href="#raci">Stakeholders</a>
+      <a href="#roadmap">Roadmap</a>
+      <a href="#metrics">Success Metrics</a>
+      <a href="#risks">Risks</a>
+    </div>
+  </details>
   <a href="wireframes.html">Wireframes →</a>
 </nav>
 
