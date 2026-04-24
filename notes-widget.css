@@ -1,0 +1,176 @@
+/* Send notes to Cam — shared widget styles */
+.comment-fab {
+  position: fixed;
+  right: 24px;
+  bottom: 28px;
+  z-index: 200;
+  background: var(--c-teal);
+  color: var(--c-dark-blue);
+  border: 2px solid var(--c-dark-blue);
+  border-radius: 999px;
+  padding: 16px 26px;
+  font-size: 1.05rem;
+  font-weight: 700;
+  font-family: inherit;
+  letter-spacing: 0.3px;
+  cursor: pointer;
+  box-shadow: 0 8px 24px rgba(9,31,46,0.35), 0 2px 6px rgba(9,31,46,0.2);
+  display: inline-flex; align-items: center; gap: 10px;
+  animation: fab-pulse 2.4s ease-in-out infinite;
+}
+.comment-fab::before { content: "✏️"; font-size: 1.1rem; }
+.comment-fab:hover {
+  background: var(--c-dark-blue);
+  color: white;
+  transform: translateY(-2px);
+  box-shadow: 0 12px 28px rgba(9,31,46,0.45);
+  animation: none;
+}
+.comment-fab .badge {
+  background: var(--c-dark-blue); color: white;
+  border-radius: 999px; padding: 2px 10px;
+  font-size: 0.8rem; font-weight: 700;
+  min-width: 22px; text-align: center;
+}
+.comment-fab:hover .badge { background: var(--c-teal); color: var(--c-dark-blue); }
+@keyframes fab-pulse {
+  0%, 100% { box-shadow: 0 8px 24px rgba(9,31,46,0.35), 0 2px 6px rgba(9,31,46,0.2), 0 0 0 0 rgba(73,197,177,0.6); }
+  50%      { box-shadow: 0 8px 24px rgba(9,31,46,0.35), 0 2px 6px rgba(9,31,46,0.2), 0 0 0 12px rgba(73,197,177,0); }
+}
+
+.comment-panel {
+  position: fixed;
+  top: 80px;
+  right: 20px;
+  width: 360px;
+  max-width: calc(100vw - 40px);
+  max-height: calc(100vh - 110px);
+  background: white;
+  border: 1px solid var(--c-n15);
+  border-radius: 8px;
+  box-shadow: 0 8px 24px rgba(9,31,46,0.18);
+  z-index: 200;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+.comment-panel.hidden { display: none; }
+.comment-panel-header {
+  background: var(--c-dark-blue);
+  color: white;
+  padding: 0.75rem 1rem;
+  display: flex; align-items: center; justify-content: space-between;
+}
+.comment-panel-header h3 { color: white; font-size: 0.95rem; margin: 0; }
+.comment-panel-close {
+  background: none; border: none; color: white;
+  font-size: 1.4rem; cursor: pointer; padding: 0; line-height: 1;
+}
+.comment-panel-body {
+  padding: 1rem;
+  overflow-y: auto;
+  flex: 1;
+  display: flex; flex-direction: column; gap: 0.85rem;
+}
+.comment-panel .section-context {
+  background: var(--c-n05);
+  border-radius: 4px;
+  padding: 0.5rem 0.7rem;
+  font-size: 0.78rem;
+  color: var(--ink-soft);
+}
+.comment-panel .section-context .label {
+  text-transform: uppercase; letter-spacing: 0.5px;
+  font-weight: 600; color: var(--c-med-blue);
+  font-size: 0.65rem; display: block; margin-bottom: 2px;
+}
+.comment-panel .section-context .value {
+  color: var(--c-dark-blue); font-weight: 600; font-size: 0.85rem;
+}
+.note-form { display: grid; gap: 0.5rem; }
+.note-form label {
+  font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.5px;
+  color: var(--ink-soft); font-weight: 600;
+}
+.note-form input,
+.note-form textarea {
+  font-family: inherit; font-size: 0.9rem;
+  padding: 0.5rem 0.65rem;
+  border: 1px solid var(--c-n15);
+  border-radius: 4px;
+  background: white;
+  color: var(--ink);
+  width: 100%;
+}
+.note-form textarea { min-height: 80px; resize: vertical; }
+.note-form input:focus,
+.note-form textarea:focus {
+  outline: none;
+  border-color: var(--c-med-blue);
+  box-shadow: 0 0 0 2px rgba(0,120,212,0.15);
+}
+.note-add {
+  background: var(--c-med-blue); color: white;
+  border: none; border-radius: 4px;
+  padding: 0.5rem 0.9rem; font-size: 0.85rem; font-weight: 600;
+  cursor: pointer; font-family: inherit;
+  justify-self: start;
+}
+.note-add:hover { background: var(--c-dark-blue); }
+.notes-section { border-top: 1px solid var(--c-n15); padding-top: 0.85rem; }
+.notes-section h4 {
+  font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.5px;
+  color: var(--ink-soft); margin: 0 0 0.5rem;
+  display: flex; justify-content: space-between; align-items: center;
+}
+.notes-list { display: flex; flex-direction: column; gap: 0.5rem; margin-bottom: 0.75rem; }
+.notes-list:empty::before {
+  content: "No notes yet. Add notes as you read — they'll all be sent in one email.";
+  color: var(--c-n50); font-size: 0.8rem; font-style: italic;
+}
+.note-item {
+  background: var(--c-n05);
+  border-left: 3px solid var(--c-teal);
+  border-radius: 4px;
+  padding: 0.5rem 0.7rem;
+  font-size: 0.85rem;
+  position: relative;
+}
+.note-item .note-section-tag {
+  font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.5px;
+  color: var(--c-med-blue); font-weight: 600;
+  margin-bottom: 3px;
+}
+.note-item .note-text { white-space: pre-wrap; word-wrap: break-word; }
+.note-delete {
+  position: absolute; top: 4px; right: 6px;
+  background: none; border: none; color: var(--c-n50);
+  font-size: 0.95rem; cursor: pointer; padding: 0 4px; line-height: 1;
+}
+.note-delete:hover { color: #B91C1C; }
+.send-row {
+  display: grid; gap: 0.5rem;
+  border-top: 1px solid var(--c-n15);
+  padding-top: 0.85rem;
+}
+.send-help { font-size: 0.75rem; color: var(--ink-soft); }
+.send-button {
+  background: var(--c-teal); color: var(--c-dark-blue);
+  border: none; border-radius: 4px;
+  padding: 0.65rem 1rem; font-size: 0.9rem; font-weight: 700;
+  cursor: pointer; font-family: inherit;
+}
+.send-button:hover { filter: brightness(0.95); }
+.send-button:disabled {
+  background: var(--c-n15); color: var(--c-n50); cursor: not-allowed;
+}
+.clear-button {
+  background: none; border: none; color: var(--ink-soft);
+  font-size: 0.75rem; cursor: pointer; padding: 0; text-decoration: underline;
+  justify-self: start;
+}
+.clear-button:hover { color: #B91C1C; }
+@media (max-width: 700px) {
+  .comment-panel { width: calc(100vw - 32px); right: 16px; top: 70px; }
+}
+@media print { .comment-fab, .comment-panel { display: none !important; } }
