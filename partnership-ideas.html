@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Partnership Marketing Ideas — Marketing Effectiveness Solution</title>
+<style>
+  :root {
+    --c-dark-blue: #091F2E;
+    --c-med-blue: #0078D4;
+    --c-teal: #49C5B1;
+    --c-white: #FFFFFF;
+    --c-n05: #F2F2F2;
+    --c-n15: #D9D9D9;
+    --c-n25: #BFBFBF;
+    --c-n50: #7F7F7F;
+    --c-light-blue: #8DC8E8;
+    --c-aqua: #B9DCD2;
+    --c-lavender: #C5B4E3;
+    --c-amber: #F2C94C;
+
+    --ms-blue: var(--c-med-blue);
+    --ms-blue-dark: var(--c-dark-blue);
+    --ms-blue-light: #E6F2FB;
+    --ink: var(--c-dark-blue);
+    --ink-soft: var(--c-n50);
+    --line: var(--c-n15);
+    --bg: var(--c-n05);
+    --card: var(--c-white);
+    --shadow: 0 1.6px 3.6px rgba(9,31,46,0.08), 0 0.3px 0.9px rgba(9,31,46,0.06);
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    font-family: "Segoe UI", -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
+    color: var(--ink);
+    background: var(--bg);
+    line-height: 1.55;
+    font-size: 16px;
+  }
+  a { color: var(--ms-blue-dark); }
+  h1, h2, h3, h4 { color: var(--ink); margin-top: 0; line-height: 1.25; }
+  h1 { font-size: 2.2rem; font-weight: 600; letter-spacing: -0.5px; }
+  h2 { font-size: 1.4rem; font-weight: 600; margin-bottom: 0.4rem; }
+  h3 { font-size: 1.05rem; font-weight: 600; margin-bottom: 0.3rem; }
+  h4 { font-size: 0.7rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; color: var(--ink-soft); margin-bottom: 0.25rem; }
+  p { margin: 0.4rem 0; }
+
+  /* Top nav */
+  .nav {
+    position: sticky; top: 0; z-index: 100;
+    background: rgba(255,255,255,0.96);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line);
+    padding: 0 1.5rem;
+    height: 56px;
+    display: flex; align-items: center; gap: 1.25rem;
+  }
+  .nav .brand { font-weight: 600; color: var(--ms-blue-dark); margin-right: auto; flex-shrink: 0; font-size: 0.95rem; }
+  .nav a {
+    color: var(--ink-soft); text-decoration: none;
+    font-size: 0.85rem; padding: 0.25rem 0.5rem;
+    border-radius: 4px; flex-shrink: 0;
+  }
+  .nav a:hover { background: var(--ms-blue-light); color: var(--ms-blue-dark); }
+
+  /* Page header */
+  .page-header {
+    background: linear-gradient(135deg, var(--c-dark-blue) 0%, var(--c-med-blue) 100%);
+    color: white;
+    padding: 3rem 1.5rem;
+    border-bottom: 4px solid var(--c-lavender);
+  }
+  .page-header .container { max-width: 1200px; margin: 0 auto; }
+  .page-header h1 { color: white; }
+  .page-header .meta {
+    font-size: 0.75rem; letter-spacing: 1.5px; text-transform: uppercase;
+    opacity: 0.85; margin-bottom: 0.75rem;
+  }
+  .page-header p { opacity: 0.95; max-width: 760px; font-size: 1.05rem; }
+
+  main {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem 1.5rem 4rem;
+  }
+
+  section.block {
+    background: var(--c-white);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 1.5rem 1.5rem 1.75rem;
+    margin-bottom: 1.5rem;
+    box-shadow: var(--shadow);
+  }
+  section.block h2 {
+    border-bottom: 1px solid var(--line);
+    padding-bottom: 0.6rem;
+    margin-bottom: 1rem;
+  }
+  .lede { color: var(--ink-soft); font-size: 0.95rem; max-width: 780px; }
+
+  /* Partnership KPI grid */
+  .grid-wrap { overflow-x: auto; }
+  table.partnership-grid {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.88rem;
+    min-width: 760px;
+  }
+  table.partnership-grid th,
+  table.partnership-grid td {
+    padding: 0.6rem 0.7rem;
+    border-bottom: 1px solid var(--line);
+    text-align: center;
+    vertical-align: middle;
+  }
+  table.partnership-grid thead th {
+    background: var(--ms-blue-light);
+    color: var(--ms-blue-dark);
+    font-weight: 600;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    border-bottom: 2px solid var(--ms-blue);
+    position: sticky; top: 0;
+  }
+  table.partnership-grid th:first-child,
+  table.partnership-grid td:first-child {
+    text-align: left;
+    font-weight: 600;
+  }
+  table.partnership-grid tbody tr:hover { background: var(--bg); }
+  table.partnership-grid .filled {
+    background: var(--c-aqua);
+    color: var(--c-dark-blue);
+    font-weight: 600;
+  }
+  table.partnership-grid .partial {
+    background: #FFF4D1;
+    color: var(--c-dark-blue);
+    font-weight: 600;
+  }
+  table.partnership-grid .blank { color: var(--c-n25); }
+  table.partnership-grid .region {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--ink-soft);
+    font-weight: 600;
+  }
+
+  .legend {
+    display: flex; flex-wrap: wrap; gap: 1rem;
+    margin-top: 1rem; font-size: 0.8rem; color: var(--ink-soft);
+  }
+  .legend .swatch {
+    display: inline-block; width: 14px; height: 14px;
+    border-radius: 3px; vertical-align: middle; margin-right: 0.4rem;
+    border: 1px solid var(--line);
+  }
+  .legend .sw-filled { background: var(--c-aqua); }
+  .legend .sw-partial { background: #FFF4D1; }
+  .legend .sw-blank { background: var(--c-white); }
+
+  /* Ideas board */
+  .ideas-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1rem;
+  }
+  .idea-card {
+    background: #FFFDF5;
+    border: 1px solid #F0E6C2;
+    border-radius: 8px;
+    padding: 1rem 1.1rem;
+    box-shadow: 0 1px 2px rgba(9,31,46,0.04);
+    position: relative;
+  }
+  .idea-card h3 { margin-bottom: 0.4rem; font-size: 1rem; }
+  .idea-card p { font-size: 0.9rem; margin: 0.25rem 0; }
+  .idea-card .tag {
+    display: inline-block;
+    background: var(--ms-blue-light);
+    color: var(--ms-blue-dark);
+    font-size: 0.7rem;
+    padding: 0.1rem 0.5rem;
+    border-radius: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+  }
+  .idea-card.placeholder {
+    background: var(--c-white);
+    border: 2px dashed var(--c-n25);
+    color: var(--ink-soft);
+    text-align: center;
+    display: flex; align-items: center; justify-content: center;
+    min-height: 120px;
+    font-size: 0.9rem;
+    font-style: italic;
+  }
+
+  .footer-note {
+    margin-top: 2rem; padding-top: 1rem;
+    border-top: 1px solid var(--line);
+    color: var(--ink-soft); font-size: 0.85rem;
+  }
+</style>
+</head>
+<body>
+
+<nav class="nav" aria-label="Primary navigation">
+  <span class="brand">Marketing Effectiveness Solution</span>
+  <a href="index.html">← Brief</a>
+  <a href="reports.html">Reports inventory</a>
+  <a href="partnership-ideas.html" style="color: var(--ms-blue-dark); font-weight: 600;">Partnership ideas</a>
+</nav>
+
+<header class="page-header">
+  <div class="container">
+    <div class="meta">DDS Marketing · Working Document · Draft</div>
+    <h1>Partnership Marketing Ideas</h1>
+    <p>A scratch-pad for how we solve the partnership comparability problem — getting to one cross-region view of partnership performance that leadership can act on. Add, edit, and tear apart freely.</p>
+  </div>
+</header>
+
+<main>
+
+  <!-- ============== -->
+  <!-- THE GRID       -->
+  <!-- ============== -->
+  <section class="block" id="grid">
+    <h2>Partnership KPI comparability grid</h2>
+    <p class="lede">Rows = partnerships. Columns = the KPIs we'd want to compare on. Cells reflect what each partnership reports today. The gaps are the work — every partial or blank cell is either a measurement gap, a definition gap, or both.</p>
+
+    <div class="grid-wrap">
+      <table class="partnership-grid">
+        <thead>
+          <tr>
+            <th>Partnership</th>
+            <th>Region</th>
+            <th>Reach / Impressions</th>
+            <th>Traffic</th>
+            <th>Engagement</th>
+            <th>Conversions</th>
+            <th>Revenue / Pipeline</th>
+            <th>ROI</th>
+            <th>Brand Lift</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>NFL</td>
+            <td><span class="region">Americas</span></td>
+            <td class="filled">Yes</td>
+            <td class="filled">Yes</td>
+            <td class="filled">Yes</td>
+            <td class="partial">Partial</td>
+            <td class="partial">Partial</td>
+            <td class="blank">—</td>
+            <td class="blank">—</td>
+          </tr>
+          <tr>
+            <td>AMEX (EMEA)</td>
+            <td><span class="region">EMEA</span></td>
+            <td class="filled">Yes</td>
+            <td class="filled">Yes</td>
+            <td class="partial">Partial</td>
+            <td class="filled">Yes</td>
+            <td class="partial">Partial</td>
+            <td class="blank">—</td>
+            <td class="blank">—</td>
+          </tr>
+          <tr>
+            <td>AMEX (Asia)</td>
+            <td><span class="region">Asia</span></td>
+            <td class="filled">Yes</td>
+            <td class="partial">Partial</td>
+            <td class="partial">Partial</td>
+            <td class="filled">Yes</td>
+            <td class="partial">Partial</td>
+            <td class="blank">—</td>
+            <td class="blank">—</td>
+          </tr>
+          <tr>
+            <td>Add partnership…</td>
+            <td><span class="region">—</span></td>
+            <td class="blank">—</td>
+            <td class="blank">—</td>
+            <td class="blank">—</td>
+            <td class="blank">—</td>
+            <td class="blank">—</td>
+            <td class="blank">—</td>
+            <td class="blank">—</td>
+          </tr>
+          <tr>
+            <td>Add partnership…</td>
+            <td><span class="region">—</span></td>
+            <td class="blank">—</td>
+            <td class="blank">—</td>
+            <td class="blank">—</td>
+            <td class="blank">—</td>
+            <td class="blank">—</td>
+            <td class="blank">—</td>
+            <td class="blank">—</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="legend">
+      <span><span class="swatch sw-filled"></span>Reported consistently</span>
+      <span><span class="swatch sw-partial"></span>Reported inconsistently / not standardized</span>
+      <span><span class="swatch sw-blank"></span>Not reported</span>
+    </div>
+  </section>
+
+  <!-- ============== -->
+  <!-- IDEAS BOARD    -->
+  <!-- ============== -->
+  <section class="block" id="ideas">
+    <h2>Ideas board</h2>
+    <p class="lede">Drop ideas here as they come up — measurement, ownership, tooling, anything. We'll cluster and prioritize later.</p>
+
+    <div class="ideas-grid">
+      <article class="idea-card">
+        <span class="tag">Measurement</span>
+        <h3>Define a shared partnership KPI dictionary</h3>
+        <p>Lock the definitions of Reach, Conversions, ROI, etc., so a number from EMEA means the same as a number from Asia.</p>
+      </article>
+      <article class="idea-card">
+        <span class="tag">Ownership</span>
+        <h3>Single accountable owner for portfolio view</h3>
+        <p>Today no one owns the cross-partnership rollup. Without an owner, the grid above never gets filled in.</p>
+      </article>
+      <article class="idea-card">
+        <span class="tag">Tooling</span>
+        <h3>One Power BI page that pulls every region's tracker</h3>
+        <p>Could sit alongside the DDS Web Direct Report. Pulls EMEA/Asia AMEX trackers + NFL Adobe data into a single comparability view.</p>
+      </article>
+      <article class="idea-card placeholder">+ Add an idea</article>
+      <article class="idea-card placeholder">+ Add an idea</article>
+      <article class="idea-card placeholder">+ Add an idea</article>
+    </div>
+  </section>
+
+  <p class="footer-note">This is a working scratch-pad. Edit the HTML directly to add partnerships, KPIs, or ideas — or send notes to Cam.</p>
+
+</main>
+
+</body>
+</html>
