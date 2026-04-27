@@ -4,6 +4,3 @@ Thumbs.db
 *.log
 .vscode/
 node_modules/
-
-# Local-only chat transcripts (do not push to public repo)
-vscode-conversation*.jsonl
