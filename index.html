@@ -275,6 +275,34 @@
     font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px;
     color: var(--ink-soft); margin-bottom: 0.25rem;
   }
+  .phase h3 { margin-bottom: 0.4rem; }
+  .phase .duration {
+    display: inline-block;
+    background: var(--ms-blue-light);
+    color: var(--ms-blue-dark);
+    font-size: 0.72rem;
+    font-weight: 600;
+    padding: 0.1rem 0.55rem;
+    border-radius: 10px;
+    margin-bottom: 0.5rem;
+  }
+  .phase .goal {
+    font-size: 0.85rem;
+    color: var(--ink-soft);
+    font-style: italic;
+    margin-bottom: 0.6rem;
+  }
+  .phase ul { margin-top: 0.2rem; padding-left: 1.1rem; }
+  .phase ul li { font-size: 0.9rem; margin: 0.3rem 0; }
+  .phase ul li strong { color: var(--ink); font-weight: 600; }
+  .phase .exit {
+    margin-top: 0.8rem;
+    padding-top: 0.6rem;
+    border-top: 1px dashed var(--c-n25);
+    font-size: 0.82rem;
+    color: var(--ink);
+  }
+  .phase .exit strong { color: var(--ms-blue-dark); display: block; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 0.2rem; }
 
   /* Lists */
   ul, ol { margin: 0.4rem 0 0.6rem; padding-left: 1.3rem; }
@@ -824,37 +852,50 @@
 <section id="roadmap">
   <span class="section-num">08 · Phased Roadmap</span>
   <h2>Crawl, walk, run.</h2>
+  <p style="color:var(--ink-soft); max-width: 780px;">
+    Three phases, roughly 10–12 months end to end. Each phase delivers usable value on its own — we don't wait until "Run" to put something in leadership's hands.
+    See the full sequencing on the <a href="timeline.html">workstream timeline</a>.
+  </p>
 
   <div class="roadmap">
     <div class="phase crawl">
       <div class="phase-name">Phase 1 · Crawl</div>
       <h3>Define &amp; align</h3>
+      <span class="duration">~6–8 weeks</span>
+      <p class="goal">Get to a shared baseline leadership can reference, even if it's manually assembled.</p>
       <ul>
-        <li>Inventory existing reports across all four pillars.</li>
-        <li>Build a shared metrics dictionary (definitions, owners, sources).</li>
-        <li>Standardize the partnership KPI grid template across regions.</li>
-        <li>Manual v1 of the unified view (curated, not automated).</li>
+        <li><strong>Reports inventory</strong> across all four pillars — owners, cadence, gaps.</li>
+        <li><strong>Metrics dictionary</strong> — define each KPI once: name, calculation, owner, source.</li>
+        <li><strong>Partnership grid template</strong> standardized across regions.</li>
+        <li><strong>Manual v1</strong> of the unified view — curated, not automated.</li>
       </ul>
+      <div class="exit"><strong>Phase exit</strong>One curated view referenced in MBR, plus an agreed dictionary and grid template.</div>
     </div>
     <div class="phase walk">
       <div class="phase-name">Phase 2 · Walk</div>
       <h3>Centralize &amp; standardize</h3>
+      <span class="duration">~3–4 months</span>
+      <p class="goal">Move from a curated artifact to an operational rhythm leadership relies on.</p>
       <ul>
-        <li>Pilot a landing experience that links to existing reports.</li>
-        <li>Operationalize the partnership grid with regional contributors.</li>
-        <li>Establish a cross-pillar review cadence to test the workflow.</li>
-        <li>Begin attributing campaigns to GTM moments.</li>
+        <li><strong>Landing experience pilot</strong> — single page linking existing reports.</li>
+        <li><strong>Operationalize the partnership grid</strong> with regional contributors on cadence.</li>
+        <li><strong>Cross-pillar review cadence</strong> that drives a real decision each cycle.</li>
+        <li><strong>Campaign-to-moment attribution v1</strong> — tag outbound activity to GTM moments.</li>
       </ul>
+      <div class="exit"><strong>Phase exit</strong>Live landing experience used in a recurring leadership rhythm, with the grid maintained regionally.</div>
     </div>
     <div class="phase run">
       <div class="phase-name">Phase 3 · Run</div>
       <h3>Integrate &amp; automate</h3>
+      <span class="duration">~4–6 months</span>
+      <p class="goal">Make the solution leadership's first stop and the named source of truth.</p>
       <ul>
-        <li>Integrated solution with drill-downs across all four pillars.</li>
-        <li>Automate where ROI of automation is justified — leave manual where it's not.</li>
-        <li>Continuous "headline" trend view replaces MBR-only cadence.</li>
-        <li>Embedded into leadership decision rituals.</li>
+        <li><strong>Integrated solution</strong> with drill-downs across all four pillars.</li>
+        <li><strong>Automate moment attribution</strong> where data supports it; keep human review for ambiguity.</li>
+        <li><strong>Continuous trend view</strong> replaces MBR-only cadence.</li>
+        <li><strong>Embedded</strong> in leadership decision rituals — adoption is the success metric.</li>
       </ul>
+      <div class="exit"><strong>Phase exit</strong>Solution named as the source of truth in MBR, planning, and investment conversations.</div>
     </div>
   </div>
 </section>
