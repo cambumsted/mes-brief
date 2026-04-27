@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Workstream Timeline — Marketing Effectiveness Solution</title>
+<link rel="stylesheet" href="notes-widget.css" />
+<style>
+  :root {
+    --c-dark-blue: #091F2E;
+    --c-med-blue: #0078D4;
+    --c-teal: #49C5B1;
+    --c-white: #FFFFFF;
+    --c-n05: #F2F2F2;
+    --c-n15: #D9D9D9;
+    --c-n25: #BFBFBF;
+    --c-n35: #A6A6A6;
+    --c-n50: #7F7F7F;
+    --c-light-blue: #8DC8E8;
+    --c-aqua: #B9DCD2;
+    --c-lavender: #C5B4E3;
+
+    --ms-blue: var(--c-med-blue);
+    --ms-blue-dark: var(--c-dark-blue);
+    --ms-blue-light: #E6F2FB;
+    --ink: var(--c-dark-blue);
+    --ink-soft: var(--c-n50);
+    --line: var(--c-n15);
+    --bg: var(--c-n05);
+    --card: var(--c-white);
+    --shadow: 0 1.6px 3.6px rgba(9,31,46,0.08), 0 0.3px 0.9px rgba(9,31,46,0.06);
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    font-family: "Segoe UI", -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
+    color: var(--ink);
+    background: var(--bg);
+    line-height: 1.55;
+    font-size: 16px;
+  }
+  a { color: var(--ms-blue-dark); }
+  h1, h2, h3, h4 { color: var(--ink); margin-top: 0; line-height: 1.25; }
+  h1 { font-size: 2.2rem; font-weight: 600; letter-spacing: -0.5px; }
+  h2 { font-size: 1.4rem; font-weight: 600; margin-bottom: 0.4rem; }
+  h3 { font-size: 1.05rem; font-weight: 600; margin-bottom: 0.3rem; }
+  h4 { font-size: 0.7rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; color: var(--ink-soft); margin-bottom: 0.25rem; }
+  p { margin: 0.4rem 0; }
+
+  /* Top nav */
+  .nav {
+    position: sticky; top: 0; z-index: 100;
+    background: rgba(255,255,255,0.96);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line);
+    padding: 0 1.5rem;
+    height: 56px;
+    display: flex; align-items: center; gap: 1.25rem;
+  }
+  .nav .brand { font-weight: 600; color: var(--ms-blue-dark); margin-right: auto; flex-shrink: 0; font-size: 0.95rem; }
+  .nav a {
+    color: var(--ink-soft); text-decoration: none;
+    font-size: 0.85rem; padding: 0.25rem 0.5rem;
+    border-radius: 4px; flex-shrink: 0;
+  }
+  .nav a:hover { background: var(--ms-blue-light); color: var(--ms-blue-dark); }
+
+  /* Page header */
+  .page-header {
+    background: linear-gradient(135deg, var(--c-dark-blue) 0%, var(--c-med-blue) 100%);
+    color: white;
+    padding: 3rem 1.5rem;
+    border-bottom: 4px solid var(--c-teal);
+  }
+  .page-header .container { max-width: 1200px; margin: 0 auto; }
+  .page-header h1 { color: white; }
+  .page-header .meta {
+    font-size: 0.75rem; letter-spacing: 1.5px; text-transform: uppercase;
+    opacity: 0.85; margin-bottom: 0.75rem;
+  }
+  .page-header p { opacity: 0.95; max-width: 760px; font-size: 1.05rem; }
+
+  main {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem 1.5rem 4rem;
+  }
+
+  section.block {
+    background: var(--c-white);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 1.5rem 1.75rem 1.75rem;
+    margin-bottom: 1.5rem;
+    box-shadow: var(--shadow);
+  }
+  section.block h2 {
+    border-bottom: 1px solid var(--line);
+    padding-bottom: 0.6rem;
+    margin-bottom: 1rem;
+  }
+  .lede { color: var(--ink-soft); font-size: 0.95rem; max-width: 820px; }
+
+  /* Phase summary cards */
+  .phase-summary {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    margin-top: 1rem;
+  }
+  .phase-summary .card {
+    background: var(--c-white);
+    border: 1px solid var(--line);
+    border-top: 4px solid var(--c-n35);
+    border-radius: 6px;
+    padding: 1rem 1.1rem;
+  }
+  .phase-summary .card.crawl { border-top-color: var(--c-n35); }
+  .phase-summary .card.walk { border-top-color: var(--c-med-blue); }
+  .phase-summary .card.run { border-top-color: var(--c-teal); }
+  .phase-summary .card .phase-tag {
+    font-size: 0.7rem; text-transform: uppercase; letter-spacing: 1px;
+    color: var(--ink-soft); font-weight: 600;
+  }
+  .phase-summary .card h3 { margin: 0.3rem 0 0.5rem; font-size: 1.05rem; }
+  .phase-summary .card .duration {
+    display: inline-block;
+    background: var(--ms-blue-light);
+    color: var(--ms-blue-dark);
+    font-size: 0.75rem;
+    font-weight: 600;
+    padding: 0.15rem 0.55rem;
+    border-radius: 10px;
+    margin-bottom: 0.5rem;
+  }
+  .phase-summary .card p { font-size: 0.88rem; color: var(--ink); margin: 0; }
+  @media (max-width: 800px) {
+    .phase-summary { grid-template-columns: 1fr; }
+  }
+
+  /* Gantt-style timeline */
+  .gantt {
+    margin-top: 1rem;
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    overflow: hidden;
+    background: var(--c-white);
+  }
+  .gantt-header, .gantt-row {
+    display: grid;
+    grid-template-columns: 220px repeat(12, 1fr);
+    align-items: stretch;
+  }
+  .gantt-header {
+    background: var(--bg);
+    border-bottom: 1px solid var(--line);
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--ink-soft);
+    font-weight: 600;
+  }
+  .gantt-header > div {
+    padding: 0.5rem 0.4rem;
+    text-align: center;
+    border-left: 1px solid var(--line);
+  }
+  .gantt-header > div:first-child {
+    text-align: left;
+    border-left: none;
+    padding-left: 0.9rem;
+  }
+  .gantt-row {
+    border-bottom: 1px solid var(--line);
+    min-height: 44px;
+  }
+  .gantt-row:last-child { border-bottom: none; }
+  .gantt-row .label {
+    padding: 0.6rem 0.9rem;
+    font-size: 0.85rem;
+    font-weight: 600;
+    border-right: 1px solid var(--line);
+    background: #FAFBFC;
+    display: flex; align-items: center;
+  }
+  .gantt-cells {
+    grid-column: 2 / -1;
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    position: relative;
+  }
+  .gantt-cells > .col {
+    border-left: 1px solid var(--line);
+  }
+  .bar {
+    position: absolute;
+    top: 8px; bottom: 8px;
+    border-radius: 4px;
+    color: var(--c-white);
+    font-size: 0.72rem;
+    font-weight: 600;
+    padding: 0 0.6rem;
+    display: flex; align-items: center;
+    box-shadow: 0 1px 2px rgba(9,31,46,0.15);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .bar.crawl { background: var(--c-n50); }
+  .bar.walk { background: var(--c-med-blue); }
+  .bar.run { background: var(--c-teal); color: var(--c-dark-blue); }
+
+  /* Detailed phase blocks */
+  .phase-block {
+    border-left: 4px solid var(--c-n35);
+    padding: 0.5rem 0 0.25rem 1.25rem;
+    margin-bottom: 1.5rem;
+  }
+  .phase-block.crawl { border-left-color: var(--c-n35); }
+  .phase-block.walk { border-left-color: var(--c-med-blue); }
+  .phase-block.run { border-left-color: var(--c-teal); }
+
+  .phase-block .phase-head {
+    display: flex; align-items: baseline; flex-wrap: wrap;
+    gap: 0.6rem; margin-bottom: 0.6rem;
+  }
+  .phase-block .phase-head h3 { margin: 0; font-size: 1.15rem; }
+  .phase-block .phase-head .duration {
+    background: var(--ms-blue-light); color: var(--ms-blue-dark);
+    font-size: 0.75rem; font-weight: 600;
+    padding: 0.15rem 0.55rem; border-radius: 10px;
+  }
+  .phase-block .phase-head .goal {
+    color: var(--ink-soft); font-size: 0.88rem; font-style: italic;
+  }
+  .workstream-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.88rem;
+    margin-top: 0.3rem;
+  }
+  .workstream-table th, .workstream-table td {
+    padding: 0.55rem 0.7rem;
+    border-bottom: 1px solid var(--line);
+    vertical-align: top;
+    text-align: left;
+  }
+  .workstream-table thead th {
+    background: var(--bg);
+    color: var(--ink-soft);
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-weight: 600;
+    border-bottom: 2px solid var(--line);
+  }
+  .workstream-table td.workstream { font-weight: 600; width: 28%; }
+  .workstream-table td.duration {
+    width: 12%;
+    color: var(--ms-blue-dark);
+    font-weight: 600;
+    white-space: nowrap;
+  }
+  .workstream-table td.activities { color: var(--ink); }
+  .workstream-table tbody tr:hover { background: #FAFBFC; }
+
+  .milestone {
+    background: #FFF9E6;
+    border: 1px solid #F0DEA0;
+    border-radius: 6px;
+    padding: 0.6rem 0.9rem;
+    margin-top: 0.8rem;
+    font-size: 0.88rem;
+  }
+  .milestone strong { color: #8A6D00; }
+
+  .assumptions {
+    background: var(--bg);
+    border-radius: 6px;
+    padding: 1rem 1.2rem;
+    font-size: 0.88rem;
+  }
+  .assumptions ul { margin: 0.4rem 0 0; padding-left: 1.2rem; }
+  .assumptions li { margin-bottom: 0.3rem; }
+
+  .footer-note {
+    margin-top: 2rem; padding-top: 1rem;
+    border-top: 1px solid var(--line);
+    color: var(--ink-soft); font-size: 0.85rem;
+  }
+</style>
+</head>
+<body>
+
+<nav class="nav" aria-label="Primary navigation">
+  <span class="brand">Marketing Effectiveness Solution</span>
+  <a href="index.html">Brief</a>
+  <a href="reports.html">Reports inventory</a>
+  <a href="partnership-ideas.html">Partnership ideas</a>
+  <a href="timeline.html" style="color: var(--ms-blue-dark); font-weight: 600;">Timeline</a>
+</nav>
+
+<header class="page-header">
+  <div class="container">
+    <div class="meta">DDS Marketing · Working Document · Draft</div>
+    <h1>Workstream Timeline</h1>
+    <p>A reasonable path from where we are today to an integrated marketing effectiveness solution — sequenced through the Crawl, Walk, Run framework with rough time estimates per workstream. Dates are illustrative; actual sequencing depends on resourcing and stakeholder alignment.</p>
+  </div>
+</header>
+
+<main>
+
+  <!-- PHASE SUMMARY -->
+  <section class="block">
+    <h2>At a glance</h2>
+    <p class="lede">Three phases, roughly 10–12 months end to end. Each phase delivers usable value on its own — we don't wait until "Run" to put something in leadership's hands.</p>
+    <div class="phase-summary">
+      <div class="card crawl">
+        <div class="phase-tag">Phase 1</div>
+        <h3>Crawl — Define &amp; Align</h3>
+        <span class="duration">~6–8 weeks</span>
+        <p>Inventory what exists, agree on definitions, stand up a manual v1 of the unified view.</p>
+      </div>
+      <div class="card walk">
+        <div class="phase-tag">Phase 2</div>
+        <h3>Walk — Centralize &amp; Standardize</h3>
+        <span class="duration">~3–4 months</span>
+        <p>Pilot a landing experience, operationalize the partnership grid, begin moment-level attribution.</p>
+      </div>
+      <div class="card run">
+        <div class="phase-tag">Phase 3</div>
+        <h3>Run — Integrate &amp; Automate</h3>
+        <span class="duration">~4–6 months</span>
+        <p>Integrated solution with drill-downs, automation where ROI justifies it, embedded in leadership rituals.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- GANTT -->
+  <section class="block">
+    <h2>Timeline view</h2>
+    <p class="lede">Approximate cadence across ~12 months. Workstreams overlap intentionally — definition work in Crawl carries forward, and the partnership grid evolves through every phase.</p>
+    <div class="gantt">
+      <div class="gantt-header">
+        <div>Workstream</div>
+        <div>M1</div><div>M2</div><div>M3</div><div>M4</div><div>M5</div><div>M6</div>
+        <div>M7</div><div>M8</div><div>M9</div><div>M10</div><div>M11</div><div>M12</div>
+      </div>
+
+      <div class="gantt-row">
+        <div class="label">Reports inventory &amp; metrics dictionary</div>
+        <div class="gantt-cells">
+          <div class="col"></div><div class="col"></div><div class="col"></div><div class="col"></div>
+          <div class="col"></div><div class="col"></div><div class="col"></div><div class="col"></div>
+          <div class="col"></div><div class="col"></div><div class="col"></div><div class="col"></div>
+          <div class="bar crawl" style="left: 0%; right: 75%;">Crawl</div>
+        </div>
+      </div>
+
+      <div class="gantt-row">
+        <div class="label">Partnership KPI grid template</div>
+        <div class="gantt-cells">
+          <div class="col"></div><div class="col"></div><div class="col"></div><div class="col"></div>
+          <div class="col"></div><div class="col"></div><div class="col"></div><div class="col"></div>
+          <div class="col"></div><div class="col"></div><div class="col"></div><div class="col"></div>
+          <div class="bar crawl" style="left: 8%; right: 67%;">Crawl</div>
+          <div class="bar walk" style="left: 25%; right: 42%;">Walk · operationalize</div>
+        </div>
+      </div>
+
+      <div class="gantt-row">
+        <div class="label">Manual v1 unified view</div>
+        <div class="gantt-cells">
+          <div class="col"></div><div class="col"></div><div class="col"></div><div class="col"></div>
+          <div class="col"></div><div class="col"></div><div class="col"></div><div class="col"></div>
+          <div class="col"></div><div class="col"></div><div class="col"></div><div class="col"></div>
+          <div class="bar crawl" style="left: 17%; right: 67%;">Crawl</div>
+        </div>
+      </div>
+
+      <div class="gantt-row">
+        <div class="label">Landing experience pilot</div>
+        <div class="gantt-cells">
+          <div class="col"></div><div class="col"></div><div class="col"></div><div class="col"></div>
+          <div class="col"></div><div class="col"></div><div class="col"></div><div class="col"></div>
+          <div class="col"></div><div class="col"></div><div class="col"></div><div class="col"></div>
+          <div class="bar walk" style="left: 25%; right: 42%;">Walk</div>
+        </div>
+      </div>
+
+      <div class="gantt-row">
+        <div class="label">Campaign-to-moment attribution</div>
+        <div class="gantt-cells">
+          <div class="col"></div><div class="col"></div><div class="col"></div><div class="col"></div>
+          <div class="col"></div><div class="col"></div><div class="col"></div><div class="col"></div>
+          <div class="col"></div><div class="col"></div><div class="col"></div><div class="col"></div>
+          <div class="bar walk" style="left: 33%; right: 33%;">Walk</div>
+          <div class="bar run" style="left: 58%; right: 17%;">Run · automate</div>
+        </div>
+      </div>
+
+      <div class="gantt-row">
+        <div class="label">Cross-pillar review cadence</div>
+        <div class="gantt-cells">
+          <div class="col"></div><div class="col"></div><div class="col"></div><div class="col"></div>
+          <div class="col"></div><div class="col"></div><div class="col"></div><div class="col"></div>
+          <div class="col"></div><div class="col"></div><div class="col"></div><div class="col"></div>
+          <div class="bar walk" style="left: 33%; right: 25%;">Walk · pilot rhythm</div>
+        </div>
+      </div>
+
+      <div class="gantt-row">
+        <div class="label">Integrated solution build</div>
+        <div class="gantt-cells">
+          <div class="col"></div><div class="col"></div><div class="col"></div><div class="col"></div>
+          <div class="col"></div><div class="col"></div><div class="col"></div><div class="col"></div>
+          <div class="col"></div><div class="col"></div><div class="col"></div><div class="col"></div>
+          <div class="bar run" style="left: 50%; right: 8%;">Run</div>
+        </div>
+      </div>
+
+      <div class="gantt-row">
+        <div class="label">Embed into leadership rituals</div>
+        <div class="gantt-cells">
+          <div class="col"></div><div class="col"></div><div class="col"></div><div class="col"></div>
+          <div class="col"></div><div class="col"></div><div class="col"></div><div class="col"></div>
+          <div class="col"></div><div class="col"></div><div class="col"></div><div class="col"></div>
+          <div class="bar run" style="left: 75%; right: 0%;">Run</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PHASE 1 DETAIL -->
+  <section class="block">
+    <h2>Phase 1 · Crawl — Define &amp; Align</h2>
+    <div class="phase-block crawl">
+      <div class="phase-head">
+        <h3>Get to a shared baseline</h3>
+        <span class="duration">~6–8 weeks</span>
+        <span class="goal">Goal: leadership can see one curated view of marketing performance, even if it's manually assembled.</span>
+      </div>
+      <table class="workstream-table">
+        <thead>
+          <tr><th>Workstream</th><th>Duration</th><th>Key activities</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="workstream">Reports inventory</td>
+            <td class="duration">2–3 weeks</td>
+            <td class="activities">Catalog existing reports across all four pillars. Identify owners, refresh cadence, and audience. Flag duplicates and gaps.</td>
+          </tr>
+          <tr>
+            <td class="workstream">Metrics dictionary</td>
+            <td class="duration">3–4 weeks</td>
+            <td class="activities">Define each KPI once: name, calculation, owner, source system. Resolve conflicts between channel-specific definitions.</td>
+          </tr>
+          <tr>
+            <td class="workstream">Partnership grid template (v1)</td>
+            <td class="duration">2–3 weeks</td>
+            <td class="activities">Standardize the cross-region partnership KPI grid. Agree on minimum comparable fields. Pressure-test with 2–3 partnerships.</td>
+          </tr>
+          <tr>
+            <td class="workstream">Manual v1 unified view</td>
+            <td class="duration">3–4 weeks</td>
+            <td class="activities">Curated deck or page that pulls headlines from each pillar. Refreshed monthly by hand. Proves the format before any tooling investment.</td>
+          </tr>
+          <tr>
+            <td class="workstream">Stakeholder &amp; RACI</td>
+            <td class="duration">Ongoing</td>
+            <td class="activities">Confirm working group, owners per pillar, and decision rights. Lock the RACI before Walk starts.</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="milestone"><strong>Phase 1 exit:</strong> leadership has a single curated view they can reference in MBR, plus an agreed metrics dictionary and partnership grid template.</div>
+    </div>
+  </section>
+
+  <!-- PHASE 2 DETAIL -->
+  <section class="block">
+    <h2>Phase 2 · Walk — Centralize &amp; Standardize</h2>
+    <div class="phase-block walk">
+      <div class="phase-head">
+        <h3>Move from curated artifact to operational rhythm</h3>
+        <span class="duration">~3–4 months</span>
+        <span class="goal">Goal: a real landing surface, regional contributors filling the grid on cadence, first moment-level attribution.</span>
+      </div>
+      <table class="workstream-table">
+        <thead>
+          <tr><th>Workstream</th><th>Duration</th><th>Key activities</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="workstream">Landing experience pilot</td>
+            <td class="duration">6–8 weeks</td>
+            <td class="activities">Stand up a single page (SharePoint, hub, or lightweight site) that links to existing reports. No data integration yet — just the connective tissue.</td>
+          </tr>
+          <tr>
+            <td class="workstream">Operationalize partnership grid</td>
+            <td class="duration">8–10 weeks</td>
+            <td class="activities">Regional contributors (Asia, Americas, EMEA) update the grid on a defined cadence. Establish QA loop. First fully comparable cross-region view.</td>
+          </tr>
+          <tr>
+            <td class="workstream">Cross-pillar review cadence</td>
+            <td class="duration">Ongoing (start ~M4)</td>
+            <td class="activities">Recurring working session that uses the unified view to drive a real decision each month. Tests whether the surface is actually decision-ready.</td>
+          </tr>
+          <tr>
+            <td class="workstream">Campaign-to-moment attribution (v1)</td>
+            <td class="duration">8–12 weeks</td>
+            <td class="activities">Tag outbound activities (email, paid, partnerships, GTM) to the moments they support — Back-to-School, Cyber Week, etc. Manual tagging is fine in v1.</td>
+          </tr>
+          <tr>
+            <td class="workstream">ROI visibility gap-fix</td>
+            <td class="duration">4–6 weeks</td>
+            <td class="activities">Identify channels with weak/missing ROI signal. Define the minimum proxy metric for each before Run-phase automation.</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="milestone"><strong>Phase 2 exit:</strong> a live landing experience used in a recurring leadership rhythm, with the partnership grid maintained by regional teams and a first pass at moment-level attribution.</div>
+    </div>
+  </section>
+
+  <!-- PHASE 3 DETAIL -->
+  <section class="block">
+    <h2>Phase 3 · Run — Integrate &amp; Automate</h2>
+    <div class="phase-block run">
+      <div class="phase-head">
+        <h3>Make it the source of truth</h3>
+        <span class="duration">~4–6 months</span>
+        <span class="goal">Goal: integrated solution with drill-downs, selective automation, and a permanent place in leadership decision rituals.</span>
+      </div>
+      <table class="workstream-table">
+        <thead>
+          <tr><th>Workstream</th><th>Duration</th><th>Key activities</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="workstream">Integrated solution build</td>
+            <td class="duration">3–5 months</td>
+            <td class="activities">Move from links-and-curation to integrated drill-downs across the four pillars. Form follows requirements — dashboard, hub, or hybrid.</td>
+          </tr>
+          <tr>
+            <td class="workstream">Automate moment attribution</td>
+            <td class="duration">6–8 weeks</td>
+            <td class="activities">Replace manual tagging with system-side rules where the data supports it. Keep human review for ambiguous attribution.</td>
+          </tr>
+          <tr>
+            <td class="workstream">Continuous trend view</td>
+            <td class="duration">4–6 weeks</td>
+            <td class="activities">Replace MBR-only cadence with always-on headline trends. Alerting on directional shifts before they become surprises.</td>
+          </tr>
+          <tr>
+            <td class="workstream">Embed in leadership rituals</td>
+            <td class="duration">Ongoing</td>
+            <td class="activities">Solution is referenced by name in MBR, planning, and investment decisions. Adoption — not output — becomes the success metric.</td>
+          </tr>
+          <tr>
+            <td class="workstream">Selective automation</td>
+            <td class="duration">Continuous</td>
+            <td class="activities">Automate where the ROI of automation is justified. Leave manual processes manual where they're cheaper than the integration cost.</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="milestone"><strong>Phase 3 exit:</strong> the solution is leadership's first stop for marketing performance questions and is named as the source of truth in decision conversations.</div>
+    </div>
+  </section>
+
+  <!-- ASSUMPTIONS -->
+  <section class="block">
+    <h2>Assumptions &amp; caveats</h2>
+    <div class="assumptions">
+      <ul>
+        <li>Time estimates assume a small dedicated working group (not a full project team) with leadership air cover.</li>
+        <li>Phases overlap: Walk-phase work on the partnership grid begins while Crawl-phase definition work is still finalizing.</li>
+        <li>Run-phase build duration depends heavily on the technology choice — kept intentionally rough until that decision is made.</li>
+        <li>Dates assume no major reorg, no competing executive initiative pulling the same stakeholders, and access to existing reporting owners.</li>
+        <li>Each phase is designed to deliver standalone value — if priorities shift, we don't lose what's been built.</li>
+      </ul>
+    </div>
+  </section>
+
+  <p class="footer-note">Draft timeline · Marketing Effectiveness Solution · Sequencing and durations are starting points for the working group conversation.</p>
+
+</main>
+
+</body>
+</html>
