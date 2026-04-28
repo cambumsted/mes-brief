@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Archive — Marketing Effectiveness Solution</title>
+<style>
+  :root {
+    --c-dark-blue: #091F2E;
+    --c-med-blue: #0078D4;
+    --c-teal: #49C5B1;
+    --c-white: #FFFFFF;
+    --c-n05: #F2F2F2;
+    --c-n15: #D9D9D9;
+    --c-n50: #7F7F7F;
+    --ms-blue: var(--c-med-blue);
+    --ms-blue-dark: var(--c-dark-blue);
+    --ms-blue-light: #E6F2FB;
+    --ink: var(--c-dark-blue);
+    --ink-soft: var(--c-n50);
+    --line: var(--c-n15);
+    --bg: var(--c-n05);
+    --shadow: 0 1.6px 3.6px rgba(9,31,46,0.08), 0 0.3px 0.9px rgba(9,31,46,0.06);
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; font-family: "Segoe UI", -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif; color: var(--ink); background: var(--bg); line-height: 1.55; font-size: 16px; }
+  a { color: var(--ms-blue-dark); }
+  h1 { font-size: 2rem; font-weight: 600; letter-spacing: -0.5px; margin: 0 0 0.4rem; }
+  h2 { font-size: 1.2rem; font-weight: 600; margin: 0 0 0.4rem; }
+
+  .nav {
+    position: sticky; top: 0; z-index: 100;
+    background: rgba(255,255,255,0.96);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line);
+    padding: 0 1.5rem;
+    height: 56px;
+    display: flex; align-items: center; gap: 1.25rem;
+  }
+  .nav .brand { font-weight: 600; color: var(--ms-blue-dark); margin-right: auto; flex-shrink: 0; font-size: 0.95rem; }
+  .nav a { color: var(--ink-soft); text-decoration: none; font-size: 0.85rem; padding: 0.25rem 0.5rem; border-radius: 4px; flex-shrink: 0; }
+  .nav a:hover { background: var(--ms-blue-light); color: var(--ms-blue-dark); }
+
+  .page-header {
+    background: linear-gradient(135deg, var(--c-dark-blue) 0%, var(--c-med-blue) 100%);
+    color: white;
+    padding: 2.5rem 1.5rem;
+    border-bottom: 4px solid var(--c-teal);
+  }
+  .page-header .container { max-width: 1100px; margin: 0 auto; }
+  .page-header h1 { color: white; }
+  .page-header .meta { font-size: 0.75rem; letter-spacing: 1.5px; text-transform: uppercase; opacity: 0.85; margin-bottom: 0.5rem; }
+  .page-header p { opacity: 0.95; max-width: 720px; }
+
+  main { max-width: 1100px; margin: 0 auto; padding: 2rem 1.5rem 4rem; }
+
+  .version-card {
+    background: var(--c-white);
+    border: 1px solid var(--line);
+    border-left: 4px solid var(--c-n15);
+    border-radius: 6px;
+    padding: 1.1rem 1.4rem;
+    margin-bottom: 1rem;
+    box-shadow: var(--shadow);
+    display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+    flex-wrap: wrap;
+  }
+  .version-card.current { border-left-color: var(--c-teal); }
+  .version-card .meta { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; color: var(--ink-soft); margin-bottom: 0.25rem; }
+  .version-card .desc { font-size: 0.9rem; color: var(--ink-soft); margin-top: 0.3rem; }
+  .version-card .pill { display: inline-block; background: var(--ms-blue-light); color: var(--ms-blue-dark); font-size: 0.7rem; font-weight: 600; padding: 0.1rem 0.55rem; border-radius: 10px; margin-left: 0.5rem; vertical-align: middle; }
+  .version-card .pill.current { background: #E4F5DC; color: #2C7A4B; }
+  .version-card .open-btn {
+    display: inline-block;
+    background: var(--c-dark-blue); color: white; text-decoration: none;
+    padding: 0.5rem 1rem; border-radius: 6px; font-size: 0.85rem; font-weight: 600;
+    flex-shrink: 0;
+  }
+  .version-card .open-btn:hover { background: var(--c-med-blue); }
+</style>
+</head>
+<body>
+
+<nav class="nav" aria-label="Primary navigation">
+  <span class="brand">Marketing Effectiveness Solution</span>
+  <a href="index.html">Brief</a>
+  <a href="reports.html">Reports inventory</a>
+  <a href="partnership-ideas.html">Partnership ideas</a>
+  <a href="timeline.html">Timeline</a>
+  <a href="archive.html" style="color: var(--ms-blue-dark); font-weight: 600;">Archive</a>
+</nav>
+
+<header class="page-header">
+  <div class="container">
+    <div class="meta">DDS Marketing · Working Document</div>
+    <h1>Brief Archive</h1>
+    <p>Earlier iterations of the Marketing Effectiveness Solution brief, kept for reference as the framing evolves.</p>
+  </div>
+</header>
+
+<main>
+
+  <div class="version-card current">
+    <div>
+      <div class="meta">Current</div>
+      <h2>Brief v0.2 <span class="pill current">Live</span></h2>
+      <div class="desc">Reframed around problem, deliverables, and timeline. Tighter scope, focused on the destination we're building toward.</div>
+    </div>
+    <a class="open-btn" href="index.html">Open current brief →</a>
+  </div>
+
+  <div class="version-card">
+    <div>
+      <div class="meta">Snapshot · April 2026</div>
+      <h2>Brief v0.1 <span class="pill">Archived</span></h2>
+      <div class="desc">Original full-scope brief: problem, principles, four pillars, current state, stakeholders, phased roadmap. Kept for reference.</div>
+    </div>
+    <a class="open-btn" href="archive-brief-v0-1.html">Open v0.1 →</a>
+  </div>
+
+</main>
+
+</body>
+</html>
