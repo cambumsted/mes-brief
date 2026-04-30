@@ -193,6 +193,81 @@
   }
   .questions-strip li { margin-bottom: 0.25rem; break-inside: avoid; }
 
+  /* MBR-format LOB KPI tables */
+  .lob-block { margin-bottom: 1.1rem; }
+  .lob-block .lob-header {
+    display: flex; align-items: baseline; gap: 0.6rem;
+    background: var(--c-dark-blue);
+    color: var(--c-white);
+    padding: 0.5rem 0.8rem;
+    border-radius: 5px 5px 0 0;
+  }
+  .lob-block .lob-header .lob-name { font-weight: 700; font-size: 0.95rem; }
+  .lob-block .lob-header .lob-tag {
+    margin-left: auto;
+    font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.5px;
+    opacity: 0.75; font-weight: 600;
+  }
+  .mbr-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.82rem;
+    background: var(--c-white);
+    border: 1px solid var(--line);
+    border-top: none;
+    border-radius: 0 0 5px 5px;
+    overflow: hidden;
+  }
+  .mbr-table th, .mbr-table td {
+    padding: 0.4rem 0.7rem;
+    border-bottom: 1px solid var(--line);
+    text-align: right;
+  }
+  .mbr-table th:first-child, .mbr-table td:first-child {
+    text-align: left; font-weight: 600;
+  }
+  .mbr-table thead th {
+    background: var(--ms-blue-light);
+    color: var(--ms-blue-dark);
+    font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.5px;
+    font-weight: 700;
+    border-bottom: 2px solid var(--line);
+  }
+  .mbr-table tbody tr:last-child td { border-bottom: none; }
+  .mbr-table tbody tr:nth-child(even) { background: #FAFBFC; }
+  .mbr-table .pos { color: #107C10; font-weight: 600; }
+  .mbr-table .neg { color: #A4262C; font-weight: 600; }
+  .mbr-table .flat { color: var(--ink-soft); font-weight: 600; }
+  .mbr-table td.metric-name { color: var(--ink); }
+
+  /* Stacked-area + target chart */
+  .trend-chart {
+    background: var(--c-white);
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    padding: 0.9rem 1rem 0.6rem;
+  }
+  .trend-chart .chart-head {
+    display: flex; justify-content: space-between; align-items: baseline;
+    margin-bottom: 0.5rem;
+  }
+  .trend-chart .chart-title { font-size: 0.92rem; font-weight: 700; }
+  .trend-chart .chart-legend {
+    display: flex; gap: 0.9rem;
+    font-size: 0.74rem; color: var(--ink-soft);
+  }
+  .trend-chart .chart-legend .sw {
+    display: inline-block; width: 11px; height: 11px;
+    border-radius: 2px; margin-right: 0.3rem; vertical-align: middle;
+  }
+  .trend-chart .chart-legend .sw.nonpaid { background: var(--c-med-blue); }
+  .trend-chart .chart-legend .sw.paid { background: var(--c-light-blue); }
+  .trend-chart .chart-legend .sw.target {
+    width: 18px; height: 0; border-top: 2px dashed var(--c-amber);
+    border-radius: 0;
+  }
+  .trend-chart svg { display: block; width: 100%; height: 220px; }
+
   /* Headline KPI tiles */
   .kpi-grid {
     display: grid;
@@ -335,38 +410,59 @@
   }
   .channel .commentary strong { display: block; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.5px; color: var(--ink-soft); margin-bottom: 0.15rem; }
 
-  /* Partnership grid */
+  /* Partnership KPI comparability grid (mirrors partnership-ideas.html) */
+  .partner-grid-wrap { overflow-x: auto; }
   .partner-grid {
     width: 100%;
     border-collapse: collapse;
-    font-size: 0.82rem;
+    font-size: 0.8rem;
     background: var(--c-white);
     border: 1px solid var(--line);
     border-radius: 6px;
     overflow: hidden;
+    min-width: 760px;
   }
   .partner-grid th, .partner-grid td {
-    padding: 0.5rem 0.7rem;
+    padding: 0.5rem 0.65rem;
     border-bottom: 1px solid var(--line);
-    text-align: left;
+    text-align: center;
+    vertical-align: middle;
   }
   .partner-grid thead th {
-    background: var(--bg);
-    color: var(--ink-soft);
+    background: var(--ms-blue-light);
+    color: var(--ms-blue-dark);
     font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.5px;
     font-weight: 700;
+    border-bottom: 2px solid var(--ms-blue);
+  }
+  .partner-grid th:first-child, .partner-grid td:first-child {
+    text-align: left; font-weight: 600;
   }
   .partner-grid tbody tr:last-child td { border-bottom: none; }
-  .partner-grid td.region { font-weight: 700; color: var(--ms-blue-dark); }
-  .qa-status {
-    display: inline-block;
-    border-radius: 10px;
-    padding: 0.1rem 0.55rem;
-    font-size: 0.7rem; font-weight: 600;
+  .partner-grid tbody tr:hover { background: var(--bg); }
+  .partner-grid .region {
+    font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.5px;
+    color: var(--ink-soft); font-weight: 600;
   }
-  .qa-status.ok { background: #DFF6DD; color: #107C10; }
-  .qa-status.partial { background: #FFF4CE; color: #835500; }
-  .qa-status.missing { background: #FDE7E9; color: #A4262C; }
+  .partner-grid .filled {
+    background: var(--c-aqua); color: var(--c-dark-blue); font-weight: 600;
+  }
+  .partner-grid .partial {
+    background: #FFF4D1; color: var(--c-dark-blue); font-weight: 600;
+  }
+  .partner-grid .blank { color: var(--c-n25); }
+  .partner-legend {
+    display: flex; flex-wrap: wrap; gap: 1rem;
+    margin-top: 0.6rem; font-size: 0.74rem; color: var(--ink-soft);
+  }
+  .partner-legend .lsw {
+    display: inline-block; width: 12px; height: 12px;
+    border-radius: 2px; margin-right: 0.35rem; vertical-align: middle;
+    border: 1px solid var(--line);
+  }
+  .partner-legend .lsw-filled { background: var(--c-aqua); }
+  .partner-legend .lsw-partial { background: #FFF4D1; }
+  .partner-legend .lsw-blank { background: var(--c-white); }
 
   /* Open questions */
   .open-q {
@@ -604,50 +700,97 @@
         <!-- PARTNERSHIPS -->
         <div class="channel" style="grid-column: 1 / -1;">
           <div class="head">
-            <h3 data-tip="Partnerships pillar — uses the standardized v1 grid template so regional partnerships are finally comparable." data-tip-source="Timeline · Phase 1 · Partnership grid template (v1)">🤝 Partnerships</h3>
+            <h3 data-tip="Partnerships pillar — the v1 comparability grid: same partnership, same KPI columns, same definitions across regions. Lifted directly from the Partnership Ideas working doc." data-tip-source="Partnership ideas · Partnership KPI comparability grid">🤝 Partnerships</h3>
             <span class="ocid-badge" data-tip="OCID prefix family for partnerships. Walk phase will formalize partnerships as a top-level channel classification." data-tip-source="Timeline · Phase 2 · Update OCID classifications">OCID: AID-PT-*</span>
           </div>
-          <table class="partner-grid" data-tip="Cross-region partnership grid — same fields, same definitions, comparable across Asia, Americas, EMEA. The single biggest unlock leadership has been asking for." data-tip-source="Brief · Section 01 Problem · Regional partnerships not comparable">
+          <div class="partner-grid-wrap" data-tip="Cross-region partnership KPI comparability grid — the canonical structure from the Partnership Ideas doc, populated for the V1 read-out. Same partnership, same KPI columns, comparable across Americas, EMEA, Asia." data-tip-source="Partnership ideas · Partnership KPI comparability grid">
+          <table class="partner-grid">
             <thead>
               <tr>
+                <th>Partnership</th>
                 <th>Region</th>
-                <th>Active partnerships</th>
-                <th>New this period</th>
-                <th>Partnership-driven traffic</th>
-                <th>QA status</th>
-                <th>Notes</th>
+                <th>Goal</th>
+                <th data-tip="Standardized KPI column. Cell color shows whether the partnership reports it consistently (green), inconsistently (amber), or not at all (blank)." data-tip-source="Partnership ideas · grid legend">Reach / Impressions</th>
+                <th>Traffic</th>
+                <th>Engagement</th>
+                <th>Conversions</th>
+                <th>Revenue / Pipeline</th>
+                <th data-tip="ROI is intentionally optional in V1. Some partnership goals (e.g., reach, brand) won’t have ROI — expected outcome is defined in Walk." data-tip-source="Timeline · Phase 2 · ROI visibility gap-fix">ROI</th>
+                <th>Brand Lift</th>
               </tr>
             </thead>
             <tbody>
               <tr>
-                <td class="region">Americas</td>
-                <td>14</td>
-                <td>+1</td>
-                <td>620K sessions</td>
-                <td><span class="qa-status ok" data-tip="QA loop is operating cleanly — all required fields populated and reviewed by regional contributor." data-tip-source="Timeline · Phase 2 · Operationalize partnership grid">complete</span></td>
-                <td>Net-new retail co-marketing live.</td>
+                <td>NFL</td>
+                <td><span class="region">Americas</span></td>
+                <td>Traffic</td>
+                <td class="filled">182M</td>
+                <td class="filled">340K</td>
+                <td class="filled">4.2%</td>
+                <td class="partial">~1.1K</td>
+                <td class="blank">—</td>
+                <td class="blank">—</td>
+                <td class="partial">+3 pts</td>
               </tr>
               <tr>
-                <td class="region">EMEA</td>
-                <td>11</td>
-                <td>+2</td>
-                <td>410K sessions</td>
-                <td><span class="qa-status ok">complete</span></td>
-                <td>2 new activations on Win launch.</td>
+                <td>AMEX (EMEA)</td>
+                <td><span class="region">EMEA</span></td>
+                <td>Conversions</td>
+                <td class="filled">42M</td>
+                <td class="filled">210K</td>
+                <td class="partial">3.1%</td>
+                <td class="filled">2.4K</td>
+                <td class="filled">$1.8M</td>
+                <td class="filled">2.6x</td>
+                <td class="blank">—</td>
               </tr>
               <tr>
-                <td class="region">Asia</td>
-                <td>12</td>
-                <td>0</td>
-                <td>—</td>
-                <td><span class="qa-status partial" data-tip="Partial submission — required fields missing. Quarterly cadence and QA loop are still firming up; a known V1 gap that Walk addresses." data-tip-source="Timeline · Phase 2 · Operationalize partnership grid">partial</span></td>
-                <td>Awaiting traffic numbers for last 2 partnerships.</td>
+                <td>AMEX (Asia)</td>
+                <td><span class="region">Asia</span></td>
+                <td>Conversions</td>
+                <td class="partial">~28M</td>
+                <td class="partial">~95K</td>
+                <td class="blank">—</td>
+                <td class="partial">~0.9K</td>
+                <td class="blank">—</td>
+                <td class="blank">—</td>
+                <td class="blank">—</td>
+              </tr>
+              <tr>
+                <td>Retail co-marketing (Americas)</td>
+                <td><span class="region">Americas</span></td>
+                <td>Traffic</td>
+                <td class="filled">12M</td>
+                <td class="filled">85K</td>
+                <td class="filled">5.6%</td>
+                <td class="filled">620</td>
+                <td class="partial">~$240K</td>
+                <td class="blank">—</td>
+                <td class="blank">—</td>
+              </tr>
+              <tr>
+                <td>Bundled OEM launch (EMEA)</td>
+                <td><span class="region">EMEA</span></td>
+                <td>Conversions</td>
+                <td class="filled">18M</td>
+                <td class="filled">66K</td>
+                <td class="partial">2.4%</td>
+                <td class="filled">980</td>
+                <td class="filled">$420K</td>
+                <td class="filled">3.1x</td>
+                <td class="blank">—</td>
               </tr>
             </tbody>
           </table>
+          </div>
+          <div class="partner-legend">
+            <span><span class="lsw lsw-filled"></span>Reported consistently</span>
+            <span><span class="lsw lsw-partial"></span>Reported inconsistently / not standardized</span>
+            <span><span class="lsw lsw-blank"></span>Not reported</span>
+          </div>
           <div class="commentary">
             <strong>What changed</strong>
-            First week with all three regions reporting against the same template. Asia QA gap is the obvious next thing to close.
+            First week pulling the partnership grid from the working template into the unified view. Asia AMEX is the obvious gap; Walk-phase QA loop closes it. <a href="partnership-ideas.html" style="color: var(--ms-blue-dark); font-weight: 600;">Source grid →</a>
           </div>
         </div>
 
