@@ -591,37 +591,173 @@
         </ol>
       </div>
 
-      <!-- Headline KPIs by pillar -->
-      <div class="section-title">Headlines by pillar</div>
-      <div class="kpi-grid">
-        <div class="kpi email" data-tip="Email pillar headline — sourced from existing email reporting (cataloged in the Reports Inventory). In V1, value is pulled in by hand each week." data-tip-source="Timeline · Phase 1 · Compile reports inventory">
-          <div class="label">Email</div>
-          <div class="number">12.4M</div>
-          <div class="delta up">▲ 6.2% WoW · sends</div>
-          <div class="spark"></div>
-          <div class="note">Open rate steady; click-through up on Win-launch nurture stream.</div>
+      <!-- MBR-format headline by Line of Business -->
+      <div class="section-title">Overview · MBR format by line of business</div>
+      <div data-tip="Mirrors the MBR read-out: same five core metrics for each line of business so leadership can scan across LOBs in one glance. The Manual Unified View MVP is the surface where this rollup lives in V1." data-tip-source="Timeline · Phase 1 · Manual Unified View MVP">
+
+        <!-- SURFACE CONSUMER -->
+        <div class="lob-block">
+          <div class="lob-header" data-tip="Surface Consumer line of business — primary DDS focus. Numbers pulled by hand from existing Surface Consumer reports cataloged in the Reports Inventory." data-tip-source="Timeline · Phase 1 · Compile reports inventory">
+            <span class="lob-name">Surface Consumer</span>
+            <span class="lob-tag">KPI · Surface Consume</span>
+          </div>
+          <table class="mbr-table">
+            <thead>
+              <tr><th>KPI</th><th>LM</th><th>VTT</th><th>MoM</th><th>YoY</th></tr>
+            </thead>
+            <tbody>
+              <tr><td class="metric-name" data-tip="Total visits to the Surface Consumer buying page in the last month. Headline funnel-top metric." data-tip-source="Brief · Section 02 Deliverable · across the funnel">Buying Page Visits</td><td>1.5M</td><td class="neg">-18.4%</td><td class="pos">4%</td><td class="neg">-15%</td></tr>
+              <tr><td class="metric-name" data-tip="End-to-end conversion rate from buying page entry to purchase. Definition normalized in the Discovery Period output." data-tip-source="Timeline · Phase 1 · Discovery period">Buying Page E2E CVR</td><td>0.41%</td><td class="neg">-19.5%</td><td class="neg">-0.11</td><td class="neg">-0.09</td></tr>
+              <tr><td class="metric-name">Unique Visitors</td><td>1.3M</td><td></td><td class="pos">3%</td><td class="neg">-14%</td></tr>
+              <tr><td class="metric-name">% New Visitors</td><td>69%</td><td></td><td class="pos">0.5</td><td class="neg">-3.0</td></tr>
+              <tr><td class="metric-name">Bounce Rate</td><td>36.6%</td><td></td><td class="pos">-3.6</td><td class="pos">-4.2</td></tr>
+            </tbody>
+          </table>
         </div>
-        <div class="kpi paid" data-tip="Paid media headline — combined view across SEM, Display, Social, PMAX. Note: in V1 the OCID hierarchy still rolls PMAX up under SEM. Reclassification is a Phase 2 (Walk) workstream." data-tip-source="Timeline · Phase 2 · Update OCID classifications">
-          <div class="label">Paid media</div>
-          <div class="number">$2.8M</div>
-          <div class="delta down">▼ 3.1% WoW · spend</div>
-          <div class="spark"></div>
-          <div class="note">CAC stable; PMAX still rolled up under SEM (will split in Walk).</div>
+
+        <!-- SURFACE SMALL BUSINESS -->
+        <div class="lob-block">
+          <div class="lob-header">
+            <span class="lob-name">Surface Small Business</span>
+            <span class="lob-tag">KPI · Surface SMB</span>
+          </div>
+          <table class="mbr-table">
+            <thead>
+              <tr><th>KPI</th><th>LM</th><th>VTT</th><th>MoM</th><th>YoY</th></tr>
+            </thead>
+            <tbody>
+              <tr><td class="metric-name">Buying Page Visits</td><td>0.42M</td><td class="neg">-12.1%</td><td class="pos">2%</td><td class="neg">-8%</td></tr>
+              <tr><td class="metric-name">Buying Page E2E CVR</td><td>0.78%</td><td class="neg">-9.4%</td><td class="neg">-0.05</td><td class="pos">0.04</td></tr>
+              <tr><td class="metric-name">Unique Visitors</td><td>0.36M</td><td></td><td class="pos">1%</td><td class="neg">-6%</td></tr>
+              <tr><td class="metric-name">% New Visitors</td><td>72%</td><td></td><td class="pos">0.8</td><td class="neg">-1.2</td></tr>
+              <tr><td class="metric-name">Bounce Rate</td><td>34.2%</td><td></td><td class="pos">-2.1</td><td class="pos">-3.0</td></tr>
+            </tbody>
+          </table>
         </div>
-        <div class="kpi partnerships" data-tip="Partnership headline — pulled from the v1 standardized grid. First time leadership sees a comparable number across regions." data-tip-source="Timeline · Phase 1 · Partnership grid template (v1)">
-          <div class="label">Partnerships</div>
-          <div class="number">37</div>
-          <div class="delta up">▲ 4 active vs. last week</div>
-          <div class="spark"></div>
-          <div class="note">2 new EMEA activations live; Asia QA still partial.</div>
+
+        <!-- GAMING HARDWARE -->
+        <div class="lob-block">
+          <div class="lob-header">
+            <span class="lob-name">Gaming Hardware</span>
+            <span class="lob-tag">KPI · Xbox HW</span>
+          </div>
+          <table class="mbr-table">
+            <thead>
+              <tr><th>KPI</th><th>LM</th><th>VTT</th><th>MoM</th><th>YoY</th></tr>
+            </thead>
+            <tbody>
+              <tr><td class="metric-name">Buying Page Visits</td><td>2.1M</td><td class="pos">6.8%</td><td class="pos">9%</td><td class="pos">11%</td></tr>
+              <tr><td class="metric-name">Buying Page E2E CVR</td><td>0.62%</td><td class="pos">3.2%</td><td class="pos">0.04</td><td class="pos">0.07</td></tr>
+              <tr><td class="metric-name">Unique Visitors</td><td>1.8M</td><td></td><td class="pos">7%</td><td class="pos">9%</td></tr>
+              <tr><td class="metric-name">% New Visitors</td><td>64%</td><td></td><td class="neg">-1.1</td><td class="pos">2.4</td></tr>
+              <tr><td class="metric-name">Bounce Rate</td><td>32.8%</td><td></td><td class="pos">-1.4</td><td class="pos">-2.6</td></tr>
+            </tbody>
+          </table>
         </div>
-        <div class="kpi seo" data-tip="SEO headline — non-paid acquisition. Defining 'expected outcome' for upper-funnel channels like SEO is a Walk-phase workstream (ROI Visibility Gap-Fix)." data-tip-source="Timeline · Phase 2 · ROI visibility gap-fix">
-          <div class="label">SEO</div>
-          <div class="number">4.1M</div>
-          <div class="delta up">▲ 2.3% WoW · sessions</div>
-          <div class="spark"></div>
-          <div class="note">Organic share holding; refreshed product pages indexed cleanly.</div>
+
+        <!-- M365 -->
+        <div class="lob-block">
+          <div class="lob-header">
+            <span class="lob-name">M365</span>
+            <span class="lob-tag">KPI · Microsoft 365</span>
+          </div>
+          <table class="mbr-table">
+            <thead>
+              <tr><th>KPI</th><th>LM</th><th>VTT</th><th>MoM</th><th>YoY</th></tr>
+            </thead>
+            <tbody>
+              <tr><td class="metric-name">Buying Page Visits</td><td>3.4M</td><td class="neg">-4.1%</td><td class="neg">-2%</td><td class="pos">5%</td></tr>
+              <tr><td class="metric-name">Buying Page E2E CVR</td><td>1.12%</td><td class="pos">2.6%</td><td class="pos">0.08</td><td class="pos">0.14</td></tr>
+              <tr><td class="metric-name">Unique Visitors</td><td>2.9M</td><td></td><td class="neg">-3%</td><td class="pos">4%</td></tr>
+              <tr><td class="metric-name">% New Visitors</td><td>58%</td><td></td><td class="neg">-0.6</td><td class="pos">1.8</td></tr>
+              <tr><td class="metric-name">Bounce Rate</td><td>29.4%</td><td></td><td class="pos">-1.0</td><td class="pos">-1.9</td></tr>
+            </tbody>
+          </table>
         </div>
+
+      </div>
+
+      <!-- Trend chart: Paid + Non-Paid stacked vs. Target -->
+      <div class="section-title">Trend · Buying page visits vs. target</div>
+      <div class="trend-chart" data-tip="Stacked Paid + Non-Paid buying page visits with a target line overlay. Lets leadership see at a glance whether total traffic is hitting the plan, and which side (paid vs. non-paid) is driving the gap." data-tip-source="Brief · Section 02 Deliverable · How it's performing">
+        <div class="chart-head">
+          <div class="chart-title">Surface Consumer · Buying Page Visits (Paid + Non-Paid) vs. Target</div>
+          <div class="chart-legend">
+            <span><span class="sw nonpaid"></span>Non-Paid</span>
+            <span><span class="sw paid"></span>Paid</span>
+            <span><span class="sw target"></span>Target</span>
+          </div>
+        </div>
+        <svg viewBox="0 0 820 240" preserveAspectRatio="none" role="img" aria-label="Stacked area chart of paid and non-paid buying page visits with a dashed target line">
+          <!-- Y gridlines & labels -->
+          <g stroke="#E8E8E8" stroke-width="1">
+            <line x1="30" x2="800" y1="210" y2="210"/>
+            <line x1="30" x2="800" y1="136" y2="136"/>
+            <line x1="30" x2="800" y1="62"  y2="62"/>
+            <line x1="30" x2="800" y1="10"  y2="10"/>
+          </g>
+          <g fill="#7F7F7F" font-size="9" font-family="Segoe UI">
+            <text x="4" y="213">0</text>
+            <text x="4" y="139">1M</text>
+            <text x="4" y="65">2M</text>
+            <text x="4" y="13">2.7M</text>
+          </g>
+
+          <!-- Non-Paid stacked area (bottom) -->
+          <polygon fill="#0078D4" fill-opacity="0.85"
+            points="30,61.9 80.7,46.3 131.3,78.1 182,125.6 232.7,137.4 283.3,130.7 334,138.9 384.7,73.7 435.3,89.3 486,99.6 536.7,94.4 587.3,112.2 638,113.7 688.7,105.6 739.3,93.7 790,123.3 790,210 30,210"/>
+
+          <!-- Paid stacked area (top of NP, up to Total) -->
+          <polygon fill="#8DC8E8" fill-opacity="0.9"
+            points="30,54.4 80.7,37.4 131.3,72.2 182,121.9 232.7,128.5 283.3,110.7 334,121.9 384.7,47.8 435.3,64.1 486,75.9 536.7,67.8 587.3,88.5 638,85.6 688.7,67.8 739.3,56.7 790,97.4 790,123.3 739.3,93.7 688.7,105.6 638,113.7 587.3,112.2 536.7,94.4 486,99.6 435.3,89.3 384.7,73.7 334,138.9 283.3,130.7 232.7,137.4 182,125.6 131.3,78.1 80.7,46.3 30,61.9"/>
+
+          <!-- Target line (dashed) -->
+          <polyline fill="none" stroke="#FFB900" stroke-width="2" stroke-dasharray="6,4"
+            points="30,48.5 80.7,18.2 131.3,24.8 182,131.5 232.7,135.9 283.3,127.8 334,138.9 384.7,110.7 435.3,115.9 486,69.3 536.7,82.6 587.3,71.5 638,58.1 688.7,38.1 739.3,81.1 790,80.4"/>
+
+          <!-- Target dots -->
+          <g fill="#FFB900">
+            <circle cx="30"   cy="48.5"  r="2.5"/>
+            <circle cx="80.7" cy="18.2"  r="2.5"/>
+            <circle cx="131.3" cy="24.8" r="2.5"/>
+            <circle cx="182"   cy="131.5" r="2.5"/>
+            <circle cx="232.7" cy="135.9" r="2.5"/>
+            <circle cx="283.3" cy="127.8" r="2.5"/>
+            <circle cx="334"   cy="138.9" r="2.5"/>
+            <circle cx="384.7" cy="110.7" r="2.5"/>
+            <circle cx="435.3" cy="115.9" r="2.5"/>
+            <circle cx="486"   cy="69.3"  r="2.5"/>
+            <circle cx="536.7" cy="82.6"  r="2.5"/>
+            <circle cx="587.3" cy="71.5"  r="2.5"/>
+            <circle cx="638"   cy="58.1"  r="2.5"/>
+            <circle cx="688.7" cy="38.1"  r="2.5"/>
+            <circle cx="739.3" cy="81.1"  r="2.5"/>
+            <circle cx="790"   cy="80.4"  r="2.5"/>
+          </g>
+
+          <!-- X-axis baseline -->
+          <line x1="30" x2="800" y1="210" y2="210" stroke="#A6A6A6" stroke-width="1"/>
+
+          <!-- Month labels -->
+          <g fill="#7F7F7F" font-size="9" font-family="Segoe UI" text-anchor="middle">
+            <text x="30"   y="228">Oct-24</text>
+            <text x="80.7" y="228">Nov-24</text>
+            <text x="131.3" y="228">Dec-24</text>
+            <text x="182"   y="228">Jan-25</text>
+            <text x="232.7" y="228">Feb-25</text>
+            <text x="283.3" y="228">Mar-25</text>
+            <text x="334"   y="228">Apr-25</text>
+            <text x="384.7" y="228">May-25</text>
+            <text x="435.3" y="228">Jun-25</text>
+            <text x="486"   y="228">Jul-25</text>
+            <text x="536.7" y="228">Aug-25</text>
+            <text x="587.3" y="228">Sep-25</text>
+            <text x="638"   y="228">Oct-25</text>
+            <text x="688.7" y="228">Nov-25</text>
+            <text x="739.3" y="228">Dec-25</text>
+            <text x="790"   y="228">Jan-26</text>
+          </g>
+        </svg>
       </div>
 
       <!-- Moments band -->
