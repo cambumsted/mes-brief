@@ -252,6 +252,36 @@
     color: var(--ink);
     font-size: 0.83rem;
   }
+  .gantt-row .label a.ws-link {
+    color: inherit;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    cursor: pointer;
+  }
+  .gantt-row .label a.ws-link:hover {
+    color: var(--ms-blue);
+    text-decoration: underline;
+  }
+  .gantt-row .label a.ws-link::after {
+    content: "↓";
+    font-size: 0.7rem;
+    opacity: 0;
+    transition: opacity 0.15s ease;
+    color: var(--ms-blue);
+  }
+  .gantt-row .label a.ws-link:hover::after { opacity: 1; }
+  /* Detail-table row jump targets (offset for sticky nav, brief highlight) */
+  .workstream-table tbody tr[id] { scroll-margin-top: 72px; }
+  .workstream-table tbody tr[id]:target {
+    background: #FFF7D6;
+    animation: rowflash 1.6s ease-out 1;
+  }
+  @keyframes rowflash {
+    0%   { background: #FFE89A; }
+    100% { background: #FFF7D6; }
+  }
 
   /* Detailed phase blocks */
   .phase-block {
@@ -404,7 +434,7 @@
         </summary>
 
         <div class="gantt-row">
-          <div class="label">Discovery period</div>
+          <div class="label"><a class="ws-link" href="#ws-discovery">Discovery period</a></div>
           <div class="gantt-cells">
             <div class="col"></div><div class="col"></div><div class="col"></div><div class="col"></div>
             <div class="col"></div><div class="col"></div><div class="col"></div><div class="col"></div>
@@ -413,7 +443,7 @@
           </div>
         </div>
         <div class="gantt-row">
-          <div class="label">Compile reports inventory</div>
+          <div class="label"><a class="ws-link" href="#ws-reports-inventory">Compile reports inventory</a></div>
           <div class="gantt-cells">
             <div class="col"></div><div class="col"></div><div class="col"></div><div class="col"></div>
             <div class="col"></div><div class="col"></div><div class="col"></div><div class="col"></div>
@@ -422,7 +452,7 @@
           </div>
         </div>
         <div class="gantt-row">
-          <div class="label">Tracking education (OCID &amp; CMM)</div>
+          <div class="label"><a class="ws-link" href="#ws-tracking-education">Tracking education (OCID &amp; CMM)</a></div>
           <div class="gantt-cells">
             <div class="col"></div><div class="col"></div><div class="col"></div><div class="col"></div>
             <div class="col"></div><div class="col"></div><div class="col"></div><div class="col"></div>
@@ -431,7 +461,7 @@
           </div>
         </div>
         <div class="gantt-row">
-          <div class="label">Partnership grid template (v1)</div>
+          <div class="label"><a class="ws-link" href="#ws-partnership-template">Partnership grid template (v1)</a></div>
           <div class="gantt-cells">
             <div class="col"></div><div class="col"></div><div class="col"></div><div class="col"></div>
             <div class="col"></div><div class="col"></div><div class="col"></div><div class="col"></div>
@@ -440,7 +470,7 @@
           </div>
         </div>
         <div class="gantt-row">
-          <div class="label">Manual Unified View MVP</div>
+          <div class="label"><a class="ws-link" href="#ws-manual-mvp">Manual Unified View MVP</a></div>
           <div class="gantt-cells">
             <div class="col"></div><div class="col"></div><div class="col"></div><div class="col"></div>
             <div class="col"></div><div class="col"></div><div class="col"></div><div class="col"></div>
@@ -449,7 +479,7 @@
           </div>
         </div>
         <div class="gantt-row">
-          <div class="label">Stakeholder &amp; RACI</div>
+          <div class="label"><a class="ws-link" href="#ws-stakeholder-raci">Stakeholder &amp; RACI</a></div>
           <div class="gantt-cells">
             <div class="col"></div><div class="col"></div><div class="col"></div><div class="col"></div>
             <div class="col"></div><div class="col"></div><div class="col"></div><div class="col"></div>
@@ -472,7 +502,7 @@
         </summary>
 
         <div class="gantt-row">
-          <div class="label">Update OCID classifications</div>
+          <div class="label"><a class="ws-link" href="#ws-ocid-classifications">Update OCID classifications</a></div>
           <div class="gantt-cells">
             <div class="col"></div><div class="col"></div><div class="col"></div><div class="col"></div>
             <div class="col"></div><div class="col"></div><div class="col"></div><div class="col"></div>
@@ -481,7 +511,7 @@
           </div>
         </div>
         <div class="gantt-row">
-          <div class="label">Operationalize partnership grid</div>
+          <div class="label"><a class="ws-link" href="#ws-operationalize-grid">Operationalize partnership grid</a></div>
           <div class="gantt-cells">
             <div class="col"></div><div class="col"></div><div class="col"></div><div class="col"></div>
             <div class="col"></div><div class="col"></div><div class="col"></div><div class="col"></div>
@@ -490,7 +520,7 @@
           </div>
         </div>
         <div class="gantt-row">
-          <div class="label">Cross-pillar review cadence</div>
+          <div class="label"><a class="ws-link" href="#ws-review-cadence">Cross-pillar review cadence</a></div>
           <div class="gantt-cells">
             <div class="col"></div><div class="col"></div><div class="col"></div><div class="col"></div>
             <div class="col"></div><div class="col"></div><div class="col"></div><div class="col"></div>
@@ -499,7 +529,7 @@
           </div>
         </div>
         <div class="gantt-row">
-          <div class="label">Campaign-to-moment attribution (v1)</div>
+          <div class="label"><a class="ws-link" href="#ws-attribution-v1">Campaign-to-moment attribution (v1)</a></div>
           <div class="gantt-cells">
             <div class="col"></div><div class="col"></div><div class="col"></div><div class="col"></div>
             <div class="col"></div><div class="col"></div><div class="col"></div><div class="col"></div>
@@ -508,7 +538,7 @@
           </div>
         </div>
         <div class="gantt-row">
-          <div class="label">ROI visibility gap-fix</div>
+          <div class="label"><a class="ws-link" href="#ws-roi-gapfix">ROI visibility gap-fix</a></div>
           <div class="gantt-cells">
             <div class="col"></div><div class="col"></div><div class="col"></div><div class="col"></div>
             <div class="col"></div><div class="col"></div><div class="col"></div><div class="col"></div>
@@ -531,7 +561,7 @@
         </summary>
 
         <div class="gantt-row">
-          <div class="label">Integrated solution build</div>
+          <div class="label"><a class="ws-link" href="#ws-integrated-build">Integrated solution build</a></div>
           <div class="gantt-cells">
             <div class="col"></div><div class="col"></div><div class="col"></div><div class="col"></div>
             <div class="col"></div><div class="col"></div><div class="col"></div><div class="col"></div>
@@ -540,7 +570,7 @@
           </div>
         </div>
         <div class="gantt-row">
-          <div class="label">Automate moment attribution</div>
+          <div class="label"><a class="ws-link" href="#ws-automate-attribution">Automate moment attribution</a></div>
           <div class="gantt-cells">
             <div class="col"></div><div class="col"></div><div class="col"></div><div class="col"></div>
             <div class="col"></div><div class="col"></div><div class="col"></div><div class="col"></div>
@@ -549,7 +579,7 @@
           </div>
         </div>
         <div class="gantt-row">
-          <div class="label">Continuous trend view</div>
+          <div class="label"><a class="ws-link" href="#ws-trend-view">Continuous trend view</a></div>
           <div class="gantt-cells">
             <div class="col"></div><div class="col"></div><div class="col"></div><div class="col"></div>
             <div class="col"></div><div class="col"></div><div class="col"></div><div class="col"></div>
@@ -558,7 +588,7 @@
           </div>
         </div>
         <div class="gantt-row">
-          <div class="label">Embed in leadership rituals</div>
+          <div class="label"><a class="ws-link" href="#ws-embed-rituals">Embed in leadership rituals</a></div>
           <div class="gantt-cells">
             <div class="col"></div><div class="col"></div><div class="col"></div><div class="col"></div>
             <div class="col"></div><div class="col"></div><div class="col"></div><div class="col"></div>
@@ -567,7 +597,7 @@
           </div>
         </div>
         <div class="gantt-row">
-          <div class="label">Selective automation</div>
+          <div class="label"><a class="ws-link" href="#ws-selective-automation">Selective automation</a></div>
           <div class="gantt-cells">
             <div class="col"></div><div class="col"></div><div class="col"></div><div class="col"></div>
             <div class="col"></div><div class="col"></div><div class="col"></div><div class="col"></div>
@@ -594,32 +624,32 @@
           <tr><th>Workstream</th><th>Duration</th><th>Key activities</th></tr>
         </thead>
         <tbody>
-          <tr>
+          <tr id="ws-discovery">
             <td class="workstream">Discovery period</td>
             <td class="duration">May – Jul</td>
             <td class="activities">Reach out to stakeholders across DDS Marketing, channel leads, GTM, and finance partners. Align on wish-list items, understand what each audience wants out of a unified marketing destination, and surface the questions they're trying to answer today. Output is a synthesized requirements list that anchors everything that follows.</td>
           </tr>
-          <tr>
+          <tr id="ws-reports-inventory">
             <td class="workstream">Compile reports inventory</td>
             <td class="duration">2–3 weeks</td>
             <td class="activities">Catalog existing reports across all channels and pillars. Identify owners, refresh cadence, and audience. Flag duplicates and gaps so we know what we're working with before building anything new.</td>
           </tr>
-          <tr>
+          <tr id="ws-tracking-education">
             <td class="workstream">Tracking education (OCID &amp; CMM)</td>
             <td class="duration">3–4 weeks</td>
             <td class="activities">Understand how OCIDs are created and tracked at Microsoft today — who owns the request process, how the CMM hierarchy is structured, and which parameters (channel, campaign, source, sub-channel, etc.) are available to leverage. Document the existing taxonomy, where it has drifted from how we actually market (e.g., PMAX still rolling up under SEM), and what should change in Walk. This becomes the input for the Walk-phase reclassification.</td>
           </tr>
-          <tr>
+          <tr id="ws-partnership-template">
             <td class="workstream">Partnership grid template (v1)</td>
             <td class="duration">2–3 weeks</td>
             <td class="activities">Standardize the cross-region partnership KPI grid. Agree on minimum comparable fields. Pressure-test with 2–3 partnerships before rolling regionally.</td>
           </tr>
-          <tr>
+          <tr id="ws-manual-mvp">
             <td class="workstream">Manual Unified View MVP</td>
             <td class="duration">Jul – Sep</td>
             <td class="activities">Curated deck or page that pulls headlines from each pillar. Refreshed by hand. Proves the format and the read-out before any tooling investment, and gives leadership something to react to early.</td>
           </tr>
-          <tr>
+          <tr id="ws-stakeholder-raci">
             <td class="workstream">Stakeholder &amp; RACI</td>
             <td class="duration">Ongoing</td>
             <td class="activities">Confirm working group, owners per pillar, and decision rights. Lock the RACI before Walk starts.</td>
@@ -644,27 +674,27 @@
           <tr><th>Workstream</th><th>Duration</th><th>Key activities</th></tr>
         </thead>
         <tbody>
-          <tr>
+          <tr id="ws-ocid-classifications">
             <td class="workstream">Update OCID classifications</td>
             <td class="duration">8–10 weeks</td>
             <td class="activities">Apply what we learned in the Crawl-phase deep dive: reclassify channels and sub-channels in the CMM hierarchy so reporting reflects how we actually market. Examples: split PMAX out from SEM as its own channel, formalize partnerships as a top-level classification, and align email/paid media taxonomies. Coordinate with the OCID request owners so all new requests follow the updated structure.</td>
           </tr>
-          <tr>
+          <tr id="ws-operationalize-grid">
             <td class="workstream">Operationalize partnership grid</td>
             <td class="duration">Quarterly cadence</td>
             <td class="activities">Regional contributors (Asia, Americas, EMEA) update the grid each quarter. Establish a QA loop. First fully comparable cross-region partnership view that leadership can rely on.</td>
           </tr>
-          <tr>
+          <tr id="ws-review-cadence">
             <td class="workstream">Cross-pillar review cadence</td>
             <td class="duration">Ongoing (start ~Sep)</td>
             <td class="activities">Recurring working session that uses the Manual Unified View to drive a real decision each cycle. Tests whether the surface is actually decision-ready before investing in build.</td>
           </tr>
-          <tr>
+          <tr id="ws-attribution-v1">
             <td class="workstream">Campaign-to-moment attribution (v1)</td>
             <td class="duration">8–12 weeks</td>
             <td class="activities">Tag outbound activities (email, paid, partnerships, GTM) to the moments they support — Back-to-School, Holiday, Cyber Week, etc. Manual tagging is fine in v1; the goal is proving the roll-up works before automating.</td>
           </tr>
-          <tr>
+          <tr id="ws-roi-gapfix">
             <td class="workstream">ROI visibility gap-fix</td>
             <td class="duration">4–6 weeks</td>
             <td class="activities">Identify channels with weak or missing ROI signal. For upper- and mid-funnel channels where ROI isn't the goal, define the expected outcome (e.g., qualified traffic, engaged sessions) so every channel has something to be measured against.</td>
@@ -689,27 +719,27 @@
           <tr><th>Workstream</th><th>Duration</th><th>Key activities</th></tr>
         </thead>
         <tbody>
-          <tr>
+          <tr id="ws-integrated-build">
             <td class="workstream">Integrated solution build</td>
             <td class="duration">3–5 months</td>
             <td class="activities">Move from links-and-curation to integrated drill-downs across the four pillars. Form follows requirements — dashboard, hub, or hybrid.</td>
           </tr>
-          <tr>
+          <tr id="ws-automate-attribution">
             <td class="workstream">Automate moment attribution</td>
             <td class="duration">6–8 weeks</td>
             <td class="activities">Replace manual tagging with system-side rules where the data supports it. Keep human review for ambiguous attribution.</td>
           </tr>
-          <tr>
+          <tr id="ws-trend-view">
             <td class="workstream">Continuous trend view</td>
             <td class="duration">4–6 weeks</td>
             <td class="activities">Replace MBR-only cadence with always-on headline trends. Alerting on directional shifts before they become surprises.</td>
           </tr>
-          <tr>
+          <tr id="ws-embed-rituals">
             <td class="workstream">Embed in leadership rituals</td>
             <td class="duration">Ongoing</td>
             <td class="activities">Solution is referenced by name in MBR, planning, and investment decisions. Adoption — not output — becomes the success metric.</td>
           </tr>
-          <tr>
+          <tr id="ws-selective-automation">
             <td class="workstream">Selective automation</td>
             <td class="duration">Continuous</td>
             <td class="activities">Automate where the ROI of automation is justified. Leave manual processes manual where they're cheaper than the integration cost.</td>
