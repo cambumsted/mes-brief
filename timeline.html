@@ -135,6 +135,24 @@
     margin-bottom: 0.5rem;
   }
   .phase-summary .card p { font-size: 0.88rem; color: var(--ink); margin: 0; }
+  a.phase-card-link {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+    border-radius: 8px;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+  }
+  a.phase-card-link:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(9,31,46,0.12);
+  }
+  a.phase-card-link:hover .card h3 { color: var(--ms-blue); }
+  /* Phase section jump targets */
+  section.block[id^="phase-"] { scroll-margin-top: 72px; }
+  section.block[id^="phase-"]:target h2 {
+    background: linear-gradient(transparent 60%, #FFE89A 60%);
+    transition: background 1.6s ease-out;
+  }
   @media (max-width: 800px) {
     .phase-summary { grid-template-columns: 1fr; }
   }
@@ -389,24 +407,30 @@
     <h2>At a glance</h2>
     <p class="lede">Three phases, roughly 10–12 months end to end. Each phase delivers usable value on its own — we don't wait until "Run" to put something in leadership's hands.</p>
     <div class="phase-summary">
-      <div class="card crawl">
-        <div class="phase-tag">Phase 1</div>
-        <h3>Crawl — Define &amp; Align</h3>
-        <span class="duration">~6–8 weeks</span>
-        <p>Discover what stakeholders need, inventory what exists, and stand up a manual MVP of the unified view.</p>
-      </div>
-      <div class="card walk">
-        <div class="phase-tag">Phase 2</div>
-        <h3>Walk — Centralize &amp; Standardize</h3>
-        <span class="duration">~3–4 months</span>
-        <p>Update OCID classifications, operationalize the partnership grid, and begin moment-level attribution.</p>
-      </div>
-      <div class="card run">
-        <div class="phase-tag">Phase 3</div>
-        <h3>Run — Integrate &amp; Automate</h3>
-        <span class="duration">~4–6 months</span>
-        <p>Integrated solution with drill-downs, automation where ROI justifies it, embedded in leadership rituals.</p>
-      </div>
+      <a class="phase-card-link" href="#phase-1">
+        <div class="card crawl">
+          <div class="phase-tag">Phase 1</div>
+          <h3>Crawl — Define &amp; Align</h3>
+          <span class="duration">~6–8 weeks</span>
+          <p>Discover what stakeholders need, inventory what exists, and stand up a manual MVP of the unified view.</p>
+        </div>
+      </a>
+      <a class="phase-card-link" href="#phase-2">
+        <div class="card walk">
+          <div class="phase-tag">Phase 2</div>
+          <h3>Walk — Centralize &amp; Standardize</h3>
+          <span class="duration">~3–4 months</span>
+          <p>Update OCID classifications, operationalize the partnership grid, and begin moment-level attribution.</p>
+        </div>
+      </a>
+      <a class="phase-card-link" href="#phase-3">
+        <div class="card run">
+          <div class="phase-tag">Phase 3</div>
+          <h3>Run — Integrate &amp; Automate</h3>
+          <span class="duration">~4–6 months</span>
+          <p>Integrated solution with drill-downs, automation where ROI justifies it, embedded in leadership rituals.</p>
+        </div>
+      </a>
     </div>
   </section>
 
@@ -611,7 +635,7 @@
   </section>
 
   <!-- PHASE 1 DETAIL -->
-  <section class="block">
+  <section class="block" id="phase-1">
     <h2>Phase 1 · Crawl — Define &amp; Align</h2>
     <div class="phase-block crawl">
       <div class="phase-head">
@@ -661,7 +685,7 @@
   </section>
 
   <!-- PHASE 2 DETAIL -->
-  <section class="block">
+  <section class="block" id="phase-2">
     <h2>Phase 2 · Walk — Centralize &amp; Standardize</h2>
     <div class="phase-block walk">
       <div class="phase-head">
@@ -706,7 +730,7 @@
   </section>
 
   <!-- PHASE 3 DETAIL -->
-  <section class="block">
+  <section class="block" id="phase-3">
     <h2>Phase 3 · Run — Integrate &amp; Automate</h2>
     <div class="phase-block run">
       <div class="phase-head">
