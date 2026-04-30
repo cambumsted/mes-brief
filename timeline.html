@@ -149,7 +149,7 @@
   }
   .gantt-header, .gantt-row {
     display: grid;
-    grid-template-columns: 220px repeat(12, 1fr);
+    grid-template-columns: 260px repeat(12, 1fr);
     align-items: stretch;
   }
   .gantt-header {
@@ -177,7 +177,7 @@
   }
   .gantt-row:last-child { border-bottom: none; }
   .gantt-row .label {
-    padding: 0.6rem 0.9rem;
+    padding: 0.6rem 0.9rem 0.6rem 1.7rem;
     font-size: 0.85rem;
     font-weight: 600;
     border-right: 1px solid var(--line);
@@ -190,9 +190,7 @@
     grid-template-columns: repeat(12, 1fr);
     position: relative;
   }
-  .gantt-cells > .col {
-    border-left: 1px solid var(--line);
-  }
+  .gantt-cells > .col { border-left: 1px solid var(--line); }
   .bar {
     position: absolute;
     top: 8px; bottom: 8px;
@@ -203,13 +201,57 @@
     padding: 0 0.6rem;
     display: flex; align-items: center;
     box-shadow: 0 1px 2px rgba(9,31,46,0.15);
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
   }
   .bar.crawl { background: var(--c-n50); }
   .bar.walk { background: var(--c-med-blue); }
   .bar.run { background: var(--c-teal); color: var(--c-dark-blue); }
+
+  /* Collapsible phase groups in the gantt */
+  .phase-group { border-bottom: 1px solid var(--line); }
+  .phase-group:last-of-type { border-bottom: none; }
+  .phase-group > summary {
+    list-style: none;
+    cursor: pointer;
+    display: grid;
+    grid-template-columns: 260px repeat(12, 1fr);
+    align-items: stretch;
+    background: var(--bg);
+    border-bottom: 1px solid var(--line);
+    min-height: 44px;
+    user-select: none;
+  }
+  .phase-group > summary::-webkit-details-marker { display: none; }
+  .phase-group > summary::marker { content: ''; }
+  .phase-group > summary .group-label {
+    padding: 0.7rem 0.9rem;
+    font-size: 0.82rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+    color: var(--ink);
+    border-right: 1px solid var(--line);
+    display: flex; align-items: center; gap: 0.5rem;
+  }
+  .phase-group > summary .group-label .caret {
+    display: inline-block;
+    width: 0.65rem; height: 0.65rem;
+    border-right: 2px solid var(--ink-soft);
+    border-bottom: 2px solid var(--ink-soft);
+    transform: rotate(-45deg);
+    transition: transform 0.15s ease;
+  }
+  .phase-group[open] > summary .group-label .caret { transform: rotate(45deg); }
+  .phase-group.crawl > summary { background: #F4F4F4; }
+  .phase-group.walk > summary { background: #EAF4FB; }
+  .phase-group.run > summary { background: #ECF7F3; }
+  .phase-group > summary .gantt-cells > .col { border-left: 1px solid rgba(255,255,255,0.5); }
+  .phase-group .gantt-row .label {
+    background: var(--c-white);
+    font-weight: 500;
+    color: var(--ink);
+    font-size: 0.83rem;
+  }
 
   /* Detailed phase blocks */
   .phase-block {
@@ -321,13 +363,13 @@
         <div class="phase-tag">Phase 1</div>
         <h3>Crawl — Define &amp; Align</h3>
         <span class="duration">~6–8 weeks</span>
-        <p>Inventory what exists, agree on definitions, stand up a manual v1 of the unified view.</p>
+        <p>Discover what stakeholders need, inventory what exists, and stand up a manual MVP of the unified view.</p>
       </div>
       <div class="card walk">
         <div class="phase-tag">Phase 2</div>
         <h3>Walk — Centralize &amp; Standardize</h3>
         <span class="duration">~3–4 months</span>
-        <p>Pilot a landing experience, operationalize the partnership grid, begin moment-level attribution.</p>
+        <p>Update OCID classifications, operationalize the partnership grid, and begin moment-level attribution.</p>
       </div>
       <div class="card run">
         <div class="phase-tag">Phase 3</div>
@@ -341,7 +383,7 @@
   <!-- GANTT -->
   <section class="block">
     <h2>Timeline view</h2>
-    <p class="lede">Approximate cadence across ~12 months. Workstreams overlap intentionally — definition work in Crawl carries forward, and the partnership grid evolves through every phase.</p>
+    <p class="lede">Workstreams are grouped by phase. Click a phase to expand or collapse its workstreams.</p>
     <div class="gantt">
       <div class="gantt-header">
         <div>Workstream</div>
@@ -349,87 +391,192 @@
         <div>Nov</div><div>Dec</div><div>Jan</div><div>Feb</div><div>Mar</div><div>Apr</div>
       </div>
 
-      <div class="gantt-row">
-        <div class="label">Reports inventory &amp; metrics dictionary</div>
-        <div class="gantt-cells">
-          <div class="col"></div><div class="col"></div><div class="col"></div><div class="col"></div>
-          <div class="col"></div><div class="col"></div><div class="col"></div><div class="col"></div>
-          <div class="col"></div><div class="col"></div><div class="col"></div><div class="col"></div>
-          <div class="bar crawl" style="left: 0%; right: 75%;">Crawl</div>
-        </div>
-      </div>
+      <!-- CRAWL GROUP -->
+      <details class="phase-group crawl" open>
+        <summary>
+          <div class="group-label"><span class="caret"></span>Phase 1 · Crawl</div>
+          <div class="gantt-cells">
+            <div class="col"></div><div class="col"></div><div class="col"></div><div class="col"></div>
+            <div class="col"></div><div class="col"></div><div class="col"></div><div class="col"></div>
+            <div class="col"></div><div class="col"></div><div class="col"></div><div class="col"></div>
+            <div class="bar crawl" style="left: 0%; right: 50%;">Crawl · May–Oct</div>
+          </div>
+        </summary>
 
-      <div class="gantt-row">
-        <div class="label">Partnership KPI grid template</div>
-        <div class="gantt-cells">
-          <div class="col"></div><div class="col"></div><div class="col"></div><div class="col"></div>
-          <div class="col"></div><div class="col"></div><div class="col"></div><div class="col"></div>
-          <div class="col"></div><div class="col"></div><div class="col"></div><div class="col"></div>
-          <div class="bar crawl" style="left: 8%; right: 67%;">Crawl</div>
-          <div class="bar walk" style="left: 25%; right: 42%;">Walk · operationalize</div>
+        <div class="gantt-row">
+          <div class="label">Discovery period</div>
+          <div class="gantt-cells">
+            <div class="col"></div><div class="col"></div><div class="col"></div><div class="col"></div>
+            <div class="col"></div><div class="col"></div><div class="col"></div><div class="col"></div>
+            <div class="col"></div><div class="col"></div><div class="col"></div><div class="col"></div>
+            <div class="bar crawl" style="left: 0%; right: 75%;">Discovery</div>
+          </div>
         </div>
-      </div>
+        <div class="gantt-row">
+          <div class="label">Compile reports inventory</div>
+          <div class="gantt-cells">
+            <div class="col"></div><div class="col"></div><div class="col"></div><div class="col"></div>
+            <div class="col"></div><div class="col"></div><div class="col"></div><div class="col"></div>
+            <div class="col"></div><div class="col"></div><div class="col"></div><div class="col"></div>
+            <div class="bar crawl" style="left: 8%; right: 75%;">Inventory</div>
+          </div>
+        </div>
+        <div class="gantt-row">
+          <div class="label">Tracking education (OCID &amp; CMM)</div>
+          <div class="gantt-cells">
+            <div class="col"></div><div class="col"></div><div class="col"></div><div class="col"></div>
+            <div class="col"></div><div class="col"></div><div class="col"></div><div class="col"></div>
+            <div class="col"></div><div class="col"></div><div class="col"></div><div class="col"></div>
+            <div class="bar crawl" style="left: 8%; right: 67%;">Deep dive</div>
+          </div>
+        </div>
+        <div class="gantt-row">
+          <div class="label">Partnership grid template (v1)</div>
+          <div class="gantt-cells">
+            <div class="col"></div><div class="col"></div><div class="col"></div><div class="col"></div>
+            <div class="col"></div><div class="col"></div><div class="col"></div><div class="col"></div>
+            <div class="col"></div><div class="col"></div><div class="col"></div><div class="col"></div>
+            <div class="bar crawl" style="left: 17%; right: 67%;">Template v1</div>
+          </div>
+        </div>
+        <div class="gantt-row">
+          <div class="label">Manual Unified View MVP</div>
+          <div class="gantt-cells">
+            <div class="col"></div><div class="col"></div><div class="col"></div><div class="col"></div>
+            <div class="col"></div><div class="col"></div><div class="col"></div><div class="col"></div>
+            <div class="col"></div><div class="col"></div><div class="col"></div><div class="col"></div>
+            <div class="bar crawl" style="left: 17%; right: 58%;">MVP build</div>
+          </div>
+        </div>
+        <div class="gantt-row">
+          <div class="label">Stakeholder &amp; RACI</div>
+          <div class="gantt-cells">
+            <div class="col"></div><div class="col"></div><div class="col"></div><div class="col"></div>
+            <div class="col"></div><div class="col"></div><div class="col"></div><div class="col"></div>
+            <div class="col"></div><div class="col"></div><div class="col"></div><div class="col"></div>
+            <div class="bar crawl" style="left: 0%; right: 83%;">Lock RACI</div>
+          </div>
+        </div>
+      </details>
 
-      <div class="gantt-row">
-        <div class="label">Manual v1 unified view</div>
-        <div class="gantt-cells">
-          <div class="col"></div><div class="col"></div><div class="col"></div><div class="col"></div>
-          <div class="col"></div><div class="col"></div><div class="col"></div><div class="col"></div>
-          <div class="col"></div><div class="col"></div><div class="col"></div><div class="col"></div>
-          <div class="bar crawl" style="left: 17%; right: 67%;">Crawl</div>
-        </div>
-      </div>
+      <!-- WALK GROUP -->
+      <details class="phase-group walk" open>
+        <summary>
+          <div class="group-label"><span class="caret"></span>Phase 2 · Walk</div>
+          <div class="gantt-cells">
+            <div class="col"></div><div class="col"></div><div class="col"></div><div class="col"></div>
+            <div class="col"></div><div class="col"></div><div class="col"></div><div class="col"></div>
+            <div class="col"></div><div class="col"></div><div class="col"></div><div class="col"></div>
+            <div class="bar walk" style="left: 25%; right: 25%;">Walk · Aug–Jan</div>
+          </div>
+        </summary>
 
-      <div class="gantt-row">
-        <div class="label">Landing experience pilot</div>
-        <div class="gantt-cells">
-          <div class="col"></div><div class="col"></div><div class="col"></div><div class="col"></div>
-          <div class="col"></div><div class="col"></div><div class="col"></div><div class="col"></div>
-          <div class="col"></div><div class="col"></div><div class="col"></div><div class="col"></div>
-          <div class="bar walk" style="left: 25%; right: 42%;">Walk</div>
+        <div class="gantt-row">
+          <div class="label">Update OCID classifications</div>
+          <div class="gantt-cells">
+            <div class="col"></div><div class="col"></div><div class="col"></div><div class="col"></div>
+            <div class="col"></div><div class="col"></div><div class="col"></div><div class="col"></div>
+            <div class="col"></div><div class="col"></div><div class="col"></div><div class="col"></div>
+            <div class="bar walk" style="left: 25%; right: 50%;">Reclassify (e.g., split PMAX)</div>
+          </div>
         </div>
-      </div>
+        <div class="gantt-row">
+          <div class="label">Operationalize partnership grid</div>
+          <div class="gantt-cells">
+            <div class="col"></div><div class="col"></div><div class="col"></div><div class="col"></div>
+            <div class="col"></div><div class="col"></div><div class="col"></div><div class="col"></div>
+            <div class="col"></div><div class="col"></div><div class="col"></div><div class="col"></div>
+            <div class="bar walk" style="left: 25%; right: 25%;">Quarterly cadence</div>
+          </div>
+        </div>
+        <div class="gantt-row">
+          <div class="label">Cross-pillar review cadence</div>
+          <div class="gantt-cells">
+            <div class="col"></div><div class="col"></div><div class="col"></div><div class="col"></div>
+            <div class="col"></div><div class="col"></div><div class="col"></div><div class="col"></div>
+            <div class="col"></div><div class="col"></div><div class="col"></div><div class="col"></div>
+            <div class="bar walk" style="left: 33%; right: 25%;">Pilot rhythm</div>
+          </div>
+        </div>
+        <div class="gantt-row">
+          <div class="label">Campaign-to-moment attribution (v1)</div>
+          <div class="gantt-cells">
+            <div class="col"></div><div class="col"></div><div class="col"></div><div class="col"></div>
+            <div class="col"></div><div class="col"></div><div class="col"></div><div class="col"></div>
+            <div class="col"></div><div class="col"></div><div class="col"></div><div class="col"></div>
+            <div class="bar walk" style="left: 33%; right: 33%;">Manual tagging</div>
+          </div>
+        </div>
+        <div class="gantt-row">
+          <div class="label">ROI visibility gap-fix</div>
+          <div class="gantt-cells">
+            <div class="col"></div><div class="col"></div><div class="col"></div><div class="col"></div>
+            <div class="col"></div><div class="col"></div><div class="col"></div><div class="col"></div>
+            <div class="col"></div><div class="col"></div><div class="col"></div><div class="col"></div>
+            <div class="bar walk" style="left: 42%; right: 42%;">Define proxies</div>
+          </div>
+        </div>
+      </details>
 
-      <div class="gantt-row">
-        <div class="label">Campaign-to-moment attribution</div>
-        <div class="gantt-cells">
-          <div class="col"></div><div class="col"></div><div class="col"></div><div class="col"></div>
-          <div class="col"></div><div class="col"></div><div class="col"></div><div class="col"></div>
-          <div class="col"></div><div class="col"></div><div class="col"></div><div class="col"></div>
-          <div class="bar walk" style="left: 33%; right: 33%;">Walk</div>
-          <div class="bar run" style="left: 58%; right: 17%;">Run · automate</div>
-        </div>
-      </div>
+      <!-- RUN GROUP -->
+      <details class="phase-group run" open>
+        <summary>
+          <div class="group-label"><span class="caret"></span>Phase 3 · Run</div>
+          <div class="gantt-cells">
+            <div class="col"></div><div class="col"></div><div class="col"></div><div class="col"></div>
+            <div class="col"></div><div class="col"></div><div class="col"></div><div class="col"></div>
+            <div class="col"></div><div class="col"></div><div class="col"></div><div class="col"></div>
+            <div class="bar run" style="left: 50%; right: 0%;">Run · Nov–Apr</div>
+          </div>
+        </summary>
 
-      <div class="gantt-row">
-        <div class="label">Cross-pillar review cadence</div>
-        <div class="gantt-cells">
-          <div class="col"></div><div class="col"></div><div class="col"></div><div class="col"></div>
-          <div class="col"></div><div class="col"></div><div class="col"></div><div class="col"></div>
-          <div class="col"></div><div class="col"></div><div class="col"></div><div class="col"></div>
-          <div class="bar walk" style="left: 33%; right: 25%;">Walk · pilot rhythm</div>
+        <div class="gantt-row">
+          <div class="label">Integrated solution build</div>
+          <div class="gantt-cells">
+            <div class="col"></div><div class="col"></div><div class="col"></div><div class="col"></div>
+            <div class="col"></div><div class="col"></div><div class="col"></div><div class="col"></div>
+            <div class="col"></div><div class="col"></div><div class="col"></div><div class="col"></div>
+            <div class="bar run" style="left: 50%; right: 8%;">Build</div>
+          </div>
         </div>
-      </div>
+        <div class="gantt-row">
+          <div class="label">Automate moment attribution</div>
+          <div class="gantt-cells">
+            <div class="col"></div><div class="col"></div><div class="col"></div><div class="col"></div>
+            <div class="col"></div><div class="col"></div><div class="col"></div><div class="col"></div>
+            <div class="col"></div><div class="col"></div><div class="col"></div><div class="col"></div>
+            <div class="bar run" style="left: 67%; right: 17%;">Rules</div>
+          </div>
+        </div>
+        <div class="gantt-row">
+          <div class="label">Continuous trend view</div>
+          <div class="gantt-cells">
+            <div class="col"></div><div class="col"></div><div class="col"></div><div class="col"></div>
+            <div class="col"></div><div class="col"></div><div class="col"></div><div class="col"></div>
+            <div class="col"></div><div class="col"></div><div class="col"></div><div class="col"></div>
+            <div class="bar run" style="left: 75%; right: 17%;">Always-on</div>
+          </div>
+        </div>
+        <div class="gantt-row">
+          <div class="label">Embed in leadership rituals</div>
+          <div class="gantt-cells">
+            <div class="col"></div><div class="col"></div><div class="col"></div><div class="col"></div>
+            <div class="col"></div><div class="col"></div><div class="col"></div><div class="col"></div>
+            <div class="col"></div><div class="col"></div><div class="col"></div><div class="col"></div>
+            <div class="bar run" style="left: 75%; right: 0%;">Adoption</div>
+          </div>
+        </div>
+        <div class="gantt-row">
+          <div class="label">Selective automation</div>
+          <div class="gantt-cells">
+            <div class="col"></div><div class="col"></div><div class="col"></div><div class="col"></div>
+            <div class="col"></div><div class="col"></div><div class="col"></div><div class="col"></div>
+            <div class="col"></div><div class="col"></div><div class="col"></div><div class="col"></div>
+            <div class="bar run" style="left: 58%; right: 0%;">Continuous</div>
+          </div>
+        </div>
+      </details>
 
-      <div class="gantt-row">
-        <div class="label">Integrated solution build</div>
-        <div class="gantt-cells">
-          <div class="col"></div><div class="col"></div><div class="col"></div><div class="col"></div>
-          <div class="col"></div><div class="col"></div><div class="col"></div><div class="col"></div>
-          <div class="col"></div><div class="col"></div><div class="col"></div><div class="col"></div>
-          <div class="bar run" style="left: 50%; right: 8%;">Run</div>
-        </div>
-      </div>
-
-      <div class="gantt-row">
-        <div class="label">Embed into leadership rituals</div>
-        <div class="gantt-cells">
-          <div class="col"></div><div class="col"></div><div class="col"></div><div class="col"></div>
-          <div class="col"></div><div class="col"></div><div class="col"></div><div class="col"></div>
-          <div class="col"></div><div class="col"></div><div class="col"></div><div class="col"></div>
-          <div class="bar run" style="left: 75%; right: 0%;">Run</div>
-        </div>
-      </div>
     </div>
   </section>
 
@@ -448,29 +595,29 @@
         </thead>
         <tbody>
           <tr>
-            <td class="workstream">Reports inventory</td>
-            <td class="duration">2–3 weeks</td>
-            <td class="activities">Catalog existing reports across all four pillars. Identify owners, refresh cadence, and audience. Flag duplicates and gaps.</td>
+            <td class="workstream">Discovery period</td>
+            <td class="duration">May – Jul</td>
+            <td class="activities">Reach out to stakeholders across DDS Marketing, channel leads, GTM, and finance partners. Align on wish-list items, understand what each audience wants out of a unified marketing destination, and surface the questions they're trying to answer today. Output is a synthesized requirements list that anchors everything that follows.</td>
           </tr>
           <tr>
-            <td class="workstream">Metrics dictionary</td>
+            <td class="workstream">Compile reports inventory</td>
+            <td class="duration">2–3 weeks</td>
+            <td class="activities">Catalog existing reports across all channels and pillars. Identify owners, refresh cadence, and audience. Flag duplicates and gaps so we know what we're working with before building anything new.</td>
+          </tr>
+          <tr>
+            <td class="workstream">Tracking education (OCID &amp; CMM)</td>
             <td class="duration">3–4 weeks</td>
-            <td class="activities">Define each KPI once: name, calculation, owner, source system. Resolve conflicts between channel-specific definitions.</td>
+            <td class="activities">Understand how OCIDs are created and tracked at Microsoft today — who owns the request process, how the CMM hierarchy is structured, and which parameters (channel, campaign, source, sub-channel, etc.) are available to leverage. Document the existing taxonomy, where it has drifted from how we actually market (e.g., PMAX still rolling up under SEM), and what should change in Walk. This becomes the input for the Walk-phase reclassification.</td>
           </tr>
           <tr>
             <td class="workstream">Partnership grid template (v1)</td>
             <td class="duration">2–3 weeks</td>
-            <td class="activities">Standardize the cross-region partnership KPI grid. Agree on minimum comparable fields. Pressure-test with 2–3 partnerships.</td>
+            <td class="activities">Standardize the cross-region partnership KPI grid. Agree on minimum comparable fields. Pressure-test with 2–3 partnerships before rolling regionally.</td>
           </tr>
           <tr>
-            <td class="workstream">Manual v1 unified view</td>
-            <td class="duration">3–4 weeks</td>
-            <td class="activities">Curated deck or page that pulls headlines from each pillar. Refreshed monthly by hand. Proves the format before any tooling investment.</td>
-          </tr>
-          <tr>
-            <td class="workstream">OCID &amp; web-tracking deep dive</td>
-            <td class="duration">3–4 weeks</td>
-            <td class="activities">Learn how OCIDs are generated today, who owns the request process, and how the current CMM structure maps to channels (email, paid media, partnerships). Document the existing taxonomy, the gaps, and where the model has drifted from how we actually market — the input for the Walk-phase taxonomy update.</td>
+            <td class="workstream">Manual Unified View MVP</td>
+            <td class="duration">Jul – Sep</td>
+            <td class="activities">Curated deck or page that pulls headlines from each pillar. Refreshed by hand. Proves the format and the read-out before any tooling investment, and gives leadership something to react to early.</td>
           </tr>
           <tr>
             <td class="workstream">Stakeholder &amp; RACI</td>
@@ -479,7 +626,7 @@
           </tr>
         </tbody>
       </table>
-      <div class="milestone"><strong>Phase 1 exit:</strong> leadership has a single curated view they can reference in MBR, plus an agreed metrics dictionary and partnership grid template.</div>
+      <div class="milestone"><strong>Phase 1 exit:</strong> leadership has a Manual Unified View MVP they can reference, a documented OCID/CMM landscape ready to be reclassified, and an agreed partnership grid template.</div>
     </div>
   </section>
 
@@ -498,33 +645,33 @@
         </thead>
         <tbody>
           <tr>
-            <td class="workstream">Landing experience pilot</td>
-            <td class="duration">6–8 weeks</td>
-            <td class="activities">Stand up a single page (SharePoint, hub, or lightweight site) that links to existing reports. No data integration yet — just the connective tissue.</td>
+            <td class="workstream">Update OCID classifications</td>
+            <td class="duration">8–10 weeks</td>
+            <td class="activities">Apply what we learned in the Crawl-phase deep dive: reclassify channels and sub-channels in the CMM hierarchy so reporting reflects how we actually market. Examples: split PMAX out from SEM as its own channel, formalize partnerships as a top-level classification, and align email/paid media taxonomies. Coordinate with the OCID request owners so all new requests follow the updated structure.</td>
           </tr>
           <tr>
             <td class="workstream">Operationalize partnership grid</td>
-            <td class="duration">8–10 weeks</td>
-            <td class="activities">Regional contributors (Asia, Americas, EMEA) update the grid on a defined cadence. Establish QA loop. First fully comparable cross-region view.</td>
+            <td class="duration">Quarterly cadence</td>
+            <td class="activities">Regional contributors (Asia, Americas, EMEA) update the grid each quarter. Establish a QA loop. First fully comparable cross-region partnership view that leadership can rely on.</td>
           </tr>
           <tr>
             <td class="workstream">Cross-pillar review cadence</td>
-            <td class="duration">Ongoing (start ~M4)</td>
-            <td class="activities">Recurring working session that uses the unified view to drive a real decision each month. Tests whether the surface is actually decision-ready.</td>
+            <td class="duration">Ongoing (start ~Sep)</td>
+            <td class="activities">Recurring working session that uses the Manual Unified View to drive a real decision each cycle. Tests whether the surface is actually decision-ready before investing in build.</td>
           </tr>
           <tr>
             <td class="workstream">Campaign-to-moment attribution (v1)</td>
             <td class="duration">8–12 weeks</td>
-            <td class="activities">Tag outbound activities (email, paid, partnerships, GTM) to the moments they support — Back-to-School, Cyber Week, etc. Manual tagging is fine in v1.</td>
+            <td class="activities">Tag outbound activities (email, paid, partnerships, GTM) to the moments they support — Back-to-School, Holiday, Cyber Week, etc. Manual tagging is fine in v1; the goal is proving the roll-up works before automating.</td>
           </tr>
           <tr>
             <td class="workstream">ROI visibility gap-fix</td>
             <td class="duration">4–6 weeks</td>
-            <td class="activities">Identify channels with weak/missing ROI signal. Define the minimum proxy metric for each before Run-phase automation.</td>
+            <td class="activities">Identify channels with weak or missing ROI signal. For upper- and mid-funnel channels where ROI isn't the goal, define the expected outcome (e.g., qualified traffic, engaged sessions) so every channel has something to be measured against.</td>
           </tr>
         </tbody>
       </table>
-      <div class="milestone"><strong>Phase 2 exit:</strong> a live landing experience used in a recurring leadership rhythm, with the partnership grid maintained by regional teams and a first pass at moment-level attribution.</div>
+      <div class="milestone"><strong>Phase 2 exit:</strong> updated OCID classifications live in CMM, the partnership grid is on a quarterly cadence with regional contributors, and a first pass at moment-level attribution is rolled up in the Manual Unified View.</div>
     </div>
   </section>
 
