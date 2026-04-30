@@ -1,0 +1,775 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>V1 Crawl Wireframe — Marketing Effectiveness Solution</title>
+<link rel="stylesheet" href="notes-widget.css" />
+<style>
+  :root {
+    --c-dark-blue: #091F2E;
+    --c-med-blue: #0078D4;
+    --c-teal: #49C5B1;
+    --c-white: #FFFFFF;
+    --c-n05: #F2F2F2;
+    --c-n10: #E8E8E8;
+    --c-n15: #D9D9D9;
+    --c-n25: #BFBFBF;
+    --c-n35: #A6A6A6;
+    --c-n50: #7F7F7F;
+    --c-light-blue: #8DC8E8;
+    --c-aqua: #B9DCD2;
+    --c-lavender: #C5B4E3;
+    --c-amber: #FFB900;
+    --c-amber-soft: #FFF4CE;
+
+    --ms-blue: var(--c-med-blue);
+    --ms-blue-dark: var(--c-dark-blue);
+    --ms-blue-light: #E6F2FB;
+    --ink: var(--c-dark-blue);
+    --ink-soft: var(--c-n50);
+    --line: var(--c-n15);
+    --bg: var(--c-n05);
+    --card: var(--c-white);
+    --shadow: 0 1.6px 3.6px rgba(9,31,46,0.08), 0 0.3px 0.9px rgba(9,31,46,0.06);
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    font-family: "Segoe UI", -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
+    color: var(--ink);
+    background: var(--bg);
+    line-height: 1.55;
+    font-size: 16px;
+  }
+  a { color: var(--ms-blue-dark); }
+  h1 { font-size: 2.2rem; font-weight: 600; margin: 0 0 0.4rem; letter-spacing: -0.5px; }
+  h2 { font-size: 1.4rem; font-weight: 600; margin: 0 0 0.4rem; }
+
+  /* Nav */
+  .nav {
+    position: sticky; top: 0; z-index: 100;
+    background: rgba(255,255,255,0.96);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line);
+    padding: 0 1.5rem;
+    height: 56px;
+    display: flex; align-items: center; gap: 1.25rem;
+  }
+  .nav .brand {
+    font-weight: 600; font-size: 0.92rem; color: var(--ms-blue-dark);
+    margin-right: auto;
+    text-decoration: none;
+  }
+  .nav a:not(.brand) {
+    color: var(--ink-soft);
+    font-size: 0.85rem;
+    font-weight: 500;
+    text-decoration: none;
+    padding: 0.4rem 0.6rem;
+    border-radius: 4px;
+  }
+  .nav a:not(.brand):hover { background: var(--bg); color: var(--ms-blue-dark); }
+
+  /* Page intro */
+  .intro {
+    max-width: 1180px;
+    margin: 1.5rem auto 0.5rem;
+    padding: 0 1.5rem;
+  }
+  .intro .meta {
+    display: inline-block;
+    background: var(--c-amber-soft);
+    color: var(--c-dark-blue);
+    border-left: 3px solid var(--c-amber);
+    font-size: 0.78rem;
+    font-weight: 600;
+    padding: 0.35rem 0.7rem;
+    margin-bottom: 0.6rem;
+    border-radius: 3px;
+  }
+  .intro p { color: var(--ink-soft); max-width: 780px; }
+  .intro .hint {
+    margin-top: 0.6rem;
+    font-size: 0.82rem;
+    color: var(--ms-blue-dark);
+    background: var(--ms-blue-light);
+    padding: 0.5rem 0.8rem;
+    border-radius: 4px;
+    display: inline-block;
+  }
+
+  /* Wireframe canvas — looks like a browser frame */
+  .canvas {
+    max-width: 1180px;
+    margin: 1.25rem auto 3rem;
+    padding: 0 1.5rem;
+  }
+  .browser {
+    background: var(--c-white);
+    border: 1px solid var(--c-n25);
+    border-radius: 10px;
+    box-shadow: 0 8px 24px rgba(9,31,46,0.10);
+    overflow: hidden;
+  }
+  .browser-bar {
+    background: #ECECEC;
+    border-bottom: 1px solid var(--c-n15);
+    padding: 0.55rem 0.9rem;
+    display: flex; align-items: center; gap: 0.6rem;
+  }
+  .browser-bar .dot {
+    width: 11px; height: 11px; border-radius: 50%;
+    background: var(--c-n25);
+  }
+  .browser-bar .url {
+    flex: 1;
+    background: var(--c-white);
+    border: 1px solid var(--c-n15);
+    border-radius: 4px;
+    padding: 0.25rem 0.7rem;
+    font-size: 0.78rem;
+    color: var(--ink-soft);
+    font-family: Consolas, monospace;
+  }
+  .page {
+    padding: 1.4rem 1.6rem 1.8rem;
+    background:
+      linear-gradient(var(--c-n05) 1px, transparent 1px) 0 0 / 100% 16px,
+      var(--c-white);
+  }
+
+  /* Page header inside wireframe */
+  .ph-header {
+    display: flex; justify-content: space-between; align-items: flex-start;
+    border-bottom: 1px solid var(--line);
+    padding-bottom: 1rem; margin-bottom: 1.2rem;
+    gap: 1rem;
+  }
+  .ph-header .title-block h1 {
+    font-size: 1.45rem; font-weight: 700; margin: 0 0 0.2rem;
+  }
+  .ph-header .title-block .sub {
+    font-size: 0.82rem; color: var(--ink-soft);
+  }
+  .ph-header .controls {
+    display: flex; gap: 0.5rem; align-items: center;
+    font-size: 0.78rem; color: var(--ink-soft);
+  }
+  .pill {
+    border: 1px solid var(--c-n15);
+    background: var(--c-white);
+    border-radius: 14px;
+    padding: 0.2rem 0.65rem;
+    font-size: 0.74rem;
+    color: var(--ink);
+    font-weight: 500;
+  }
+  .pill.refresh { background: var(--ms-blue-light); border-color: var(--ms-blue-light); color: var(--ms-blue-dark); }
+  .pill.owner { background: var(--c-aqua); border-color: var(--c-aqua); color: var(--c-dark-blue); }
+  .pill.phase { background: var(--c-n10); color: var(--ink-soft); }
+
+  /* Sections */
+  .section-title {
+    font-size: 0.72rem; text-transform: uppercase; letter-spacing: 1px;
+    color: var(--ink-soft); font-weight: 700;
+    margin: 1.4rem 0 0.6rem;
+  }
+
+  /* Top: leadership questions strip */
+  .questions-strip {
+    background: var(--c-amber-soft);
+    border: 1px dashed var(--c-amber);
+    border-radius: 6px;
+    padding: 0.85rem 1rem;
+  }
+  .questions-strip h3 {
+    margin: 0 0 0.4rem; font-size: 0.92rem;
+  }
+  .questions-strip ol {
+    margin: 0; padding-left: 1.1rem;
+    font-size: 0.85rem; columns: 2; column-gap: 1.5rem;
+  }
+  .questions-strip li { margin-bottom: 0.25rem; break-inside: avoid; }
+
+  /* Headline KPI tiles */
+  .kpi-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0.9rem;
+  }
+  .kpi {
+    background: var(--c-white);
+    border: 1px solid var(--line);
+    border-top: 3px solid var(--c-n35);
+    border-radius: 6px;
+    padding: 0.85rem 0.95rem;
+  }
+  .kpi.email { border-top-color: var(--c-light-blue); }
+  .kpi.paid { border-top-color: var(--c-med-blue); }
+  .kpi.partnerships { border-top-color: var(--c-lavender); }
+  .kpi.seo { border-top-color: var(--c-teal); }
+  .kpi .label {
+    font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.5px;
+    color: var(--ink-soft); font-weight: 600;
+  }
+  .kpi .number {
+    font-size: 1.6rem; font-weight: 700; margin: 0.2rem 0 0.1rem;
+    color: var(--ink);
+  }
+  .kpi .delta {
+    font-size: 0.78rem; font-weight: 600;
+  }
+  .kpi .delta.up { color: #107C10; }
+  .kpi .delta.down { color: #A4262C; }
+  .kpi .spark {
+    margin-top: 0.5rem;
+    height: 28px;
+    background:
+      repeating-linear-gradient(90deg, var(--c-n10) 0 1px, transparent 1px 16px);
+    border-radius: 3px;
+    position: relative;
+  }
+  .kpi .spark::after {
+    content: '';
+    position: absolute; left: 0; right: 0; top: 14px;
+    height: 2px; background: var(--ms-blue);
+    clip-path: polygon(0 60%, 12% 50%, 25% 70%, 38% 40%, 50% 55%, 62% 30%, 75% 45%, 88% 25%, 100% 35%, 100% 100%, 0 100%);
+  }
+  .kpi .note {
+    font-size: 0.76rem; color: var(--ink-soft); margin-top: 0.4rem;
+    line-height: 1.35;
+  }
+
+  /* Moments band */
+  .moments {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 0;
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    overflow: hidden;
+    font-size: 0.78rem;
+  }
+  .moment {
+    padding: 0.65rem 0.7rem;
+    border-right: 1px solid var(--line);
+    background: var(--c-white);
+    text-align: center;
+  }
+  .moment:last-child { border-right: none; }
+  .moment .name { font-weight: 700; font-size: 0.82rem; }
+  .moment .window { color: var(--ink-soft); font-size: 0.7rem; margin-top: 0.15rem; }
+  .moment .tag-count {
+    margin-top: 0.4rem;
+    display: inline-block;
+    background: var(--ms-blue-light);
+    color: var(--ms-blue-dark);
+    border-radius: 10px;
+    padding: 0.1rem 0.5rem;
+    font-size: 0.7rem; font-weight: 600;
+  }
+  .moment.live { background: #ECF7F3; }
+  .moment.live .name::before {
+    content: '● ';
+    color: #107C10;
+  }
+
+  /* Channel cards */
+  .channel-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.9rem;
+    margin-top: 0.6rem;
+  }
+  .channel {
+    background: var(--c-white);
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    padding: 0.95rem 1rem 0.85rem;
+  }
+  .channel .head {
+    display: flex; justify-content: space-between; align-items: baseline;
+    border-bottom: 1px solid var(--line);
+    padding-bottom: 0.5rem; margin-bottom: 0.6rem;
+  }
+  .channel .head h3 {
+    margin: 0; font-size: 1rem; font-weight: 700;
+  }
+  .channel .head .ocid-badge {
+    font-size: 0.7rem; font-weight: 600;
+    color: var(--ink-soft);
+    background: var(--bg);
+    padding: 0.15rem 0.5rem; border-radius: 3px;
+    font-family: Consolas, monospace;
+  }
+  .channel .row {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 0.5rem;
+    margin-bottom: 0.55rem;
+  }
+  .channel .metric {
+    background: var(--bg);
+    border-radius: 4px;
+    padding: 0.45rem 0.55rem;
+  }
+  .channel .metric .m-label {
+    font-size: 0.66rem; text-transform: uppercase; letter-spacing: 0.4px;
+    color: var(--ink-soft); font-weight: 600;
+  }
+  .channel .metric .m-value {
+    font-size: 0.95rem; font-weight: 700; margin-top: 0.1rem;
+  }
+  .channel .metric .m-delta {
+    font-size: 0.7rem; font-weight: 600; color: var(--ink-soft);
+  }
+  .channel .commentary {
+    background: var(--c-amber-soft);
+    border-left: 3px solid var(--c-amber);
+    padding: 0.5rem 0.65rem;
+    font-size: 0.8rem;
+    border-radius: 0 4px 4px 0;
+    margin-top: 0.4rem;
+  }
+  .channel .commentary strong { display: block; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.5px; color: var(--ink-soft); margin-bottom: 0.15rem; }
+
+  /* Partnership grid */
+  .partner-grid {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.82rem;
+    background: var(--c-white);
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    overflow: hidden;
+  }
+  .partner-grid th, .partner-grid td {
+    padding: 0.5rem 0.7rem;
+    border-bottom: 1px solid var(--line);
+    text-align: left;
+  }
+  .partner-grid thead th {
+    background: var(--bg);
+    color: var(--ink-soft);
+    font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.5px;
+    font-weight: 700;
+  }
+  .partner-grid tbody tr:last-child td { border-bottom: none; }
+  .partner-grid td.region { font-weight: 700; color: var(--ms-blue-dark); }
+  .qa-status {
+    display: inline-block;
+    border-radius: 10px;
+    padding: 0.1rem 0.55rem;
+    font-size: 0.7rem; font-weight: 600;
+  }
+  .qa-status.ok { background: #DFF6DD; color: #107C10; }
+  .qa-status.partial { background: #FFF4CE; color: #835500; }
+  .qa-status.missing { background: #FDE7E9; color: #A4262C; }
+
+  /* Open questions */
+  .open-q {
+    background: #FDF7E2;
+    border: 1px dashed var(--c-amber);
+    border-radius: 6px;
+    padding: 0.85rem 1rem;
+  }
+  .open-q h3 { margin: 0 0 0.4rem; font-size: 0.9rem; }
+  .open-q ul { margin: 0; padding-left: 1.1rem; font-size: 0.82rem; }
+  .open-q li { margin-bottom: 0.3rem; }
+
+  /* Hoverable wireframe pieces */
+  [data-tip] {
+    cursor: help;
+    position: relative;
+    transition: outline 0.12s ease, background-color 0.12s ease;
+  }
+  [data-tip]:hover {
+    outline: 2px dashed var(--ms-blue);
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+  /* Custom floating tooltip */
+  #wf-tooltip {
+    position: fixed;
+    z-index: 1000;
+    background: var(--c-dark-blue);
+    color: var(--c-white);
+    padding: 0.7rem 0.85rem;
+    border-radius: 6px;
+    box-shadow: 0 6px 18px rgba(9,31,46,0.25);
+    font-size: 0.82rem;
+    line-height: 1.45;
+    max-width: 320px;
+    pointer-events: none;
+    opacity: 0;
+    transform: translateY(4px);
+    transition: opacity 0.12s ease, transform 0.12s ease;
+  }
+  #wf-tooltip.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  #wf-tooltip .tip-source {
+    display: block;
+    font-size: 0.66rem;
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+    color: var(--c-light-blue);
+    margin-top: 0.4rem;
+    font-weight: 600;
+  }
+  #wf-tooltip a {
+    color: var(--c-light-blue);
+    text-decoration: underline;
+    pointer-events: auto;
+  }
+
+  .footer-note {
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 0 1.5rem 2rem;
+    font-size: 0.78rem; color: var(--ink-soft); font-style: italic;
+  }
+
+  @media (max-width: 900px) {
+    .kpi-grid { grid-template-columns: repeat(2, 1fr); }
+    .channel-grid { grid-template-columns: 1fr; }
+    .moments { grid-template-columns: repeat(3, 1fr); }
+    .questions-strip ol { columns: 1; }
+  }
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <a href="index.html" class="brand">Performance Marketing Hub <span style="color: var(--ink-soft); font-weight: 400;">(working title)</span></a>
+  <a href="index.html">Brief</a>
+  <a href="reports.html">Reports inventory</a>
+  <a href="partnership-ideas.html">Partnership ideas</a>
+  <a href="timeline.html">Timeline</a>
+  <a href="wireframe-v1.html" style="color: var(--ms-blue-dark); font-weight: 600;">V1 wireframe</a>
+  <a href="archive.html">Archive</a>
+</nav>
+
+<section class="intro">
+  <span class="meta">Wireframe · Phase 1 (Crawl) · Manual Unified View MVP</span>
+  <h1>What V1 might look like</h1>
+  <p>A first-pass concept for the Manual Unified View MVP — the curated leadership surface we're targeting in Phase 1. Numbers, channels, and structure are illustrative; the goal is to show <em>shape</em>, not final design.</p>
+  <p class="hint">💡 Hover any boxed element to see what it represents and how it ties back to the brief.</p>
+</section>
+
+<div class="canvas">
+  <div class="browser">
+    <div class="browser-bar">
+      <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+      <div class="url">https://aka.ms/performance-marketing-hub  ·  Week of Apr 27 – May 3</div>
+    </div>
+
+    <div class="page">
+
+      <!-- Page header -->
+      <div class="ph-header">
+        <div class="title-block">
+          <h1 data-tip="Single curated leadership surface — the Manual Unified View MVP. Refreshed by hand in Phase 1 to prove the format before any tooling investment." data-tip-source="Timeline · Phase 1 · Manual Unified View MVP">Performance Marketing — Weekly Read-Out</h1>
+          <div class="sub" data-tip="Microsoft DDS Marketing rollup — combines Email, Paid Media, Partnerships, and SEO into one view across the funnel." data-tip-source="Brief · Section 02 Deliverable">Microsoft Devices &amp; Digital Stores · DDS Marketing</div>
+        </div>
+        <div class="controls">
+          <span class="pill refresh" data-tip="Curated weekly by hand in V1. Automation only enters in Phase 3 (Run) when the format is proven and ROI of automation is clear." data-tip-source="Timeline · Phase 3 · Selective automation">Refreshed manually · Apr 30</span>
+          <span class="pill owner" data-tip="Single accountable owner per pillar — locked in the Stakeholder &amp; RACI workstream before Walk starts." data-tip-source="Timeline · Phase 1 · Stakeholder &amp; RACI">Owner: DDS Marketing</span>
+          <span class="pill phase" data-tip="Tag is intentional — leadership should know they're seeing a V1. Sets expectation that integrated, automated views come later." data-tip-source="Brief · Section 03 Timeline">V1 · Crawl</span>
+        </div>
+      </div>
+
+      <!-- Top 5 questions -->
+      <div class="section-title">What leadership is asking this cycle</div>
+      <div class="questions-strip" data-tip="Direct output of the Discovery Period — synthesized list of questions stakeholders most want answered. Drives what shows up at the top of the page each week." data-tip-source="Timeline · Phase 1 · Discovery period">
+        <h3>Top 5 questions this week</h3>
+        <ol>
+          <li>How is the Win launch moment performing across paid + email?</li>
+          <li>Are partnerships in EMEA still under-indexing vs. plan?</li>
+          <li>Did the SEM reorg (PMAX split) move efficiency?</li>
+          <li>Is SEO traffic on track post-content refresh?</li>
+          <li>Which channel saw the biggest surprise this week?</li>
+        </ol>
+      </div>
+
+      <!-- Headline KPIs by pillar -->
+      <div class="section-title">Headlines by pillar</div>
+      <div class="kpi-grid">
+        <div class="kpi email" data-tip="Email pillar headline — sourced from existing email reporting (cataloged in the Reports Inventory). In V1, value is pulled in by hand each week." data-tip-source="Timeline · Phase 1 · Compile reports inventory">
+          <div class="label">Email</div>
+          <div class="number">12.4M</div>
+          <div class="delta up">▲ 6.2% WoW · sends</div>
+          <div class="spark"></div>
+          <div class="note">Open rate steady; click-through up on Win-launch nurture stream.</div>
+        </div>
+        <div class="kpi paid" data-tip="Paid media headline — combined view across SEM, Display, Social, PMAX. Note: in V1 the OCID hierarchy still rolls PMAX up under SEM. Reclassification is a Phase 2 (Walk) workstream." data-tip-source="Timeline · Phase 2 · Update OCID classifications">
+          <div class="label">Paid media</div>
+          <div class="number">$2.8M</div>
+          <div class="delta down">▼ 3.1% WoW · spend</div>
+          <div class="spark"></div>
+          <div class="note">CAC stable; PMAX still rolled up under SEM (will split in Walk).</div>
+        </div>
+        <div class="kpi partnerships" data-tip="Partnership headline — pulled from the v1 standardized grid. First time leadership sees a comparable number across regions." data-tip-source="Timeline · Phase 1 · Partnership grid template (v1)">
+          <div class="label">Partnerships</div>
+          <div class="number">37</div>
+          <div class="delta up">▲ 4 active vs. last week</div>
+          <div class="spark"></div>
+          <div class="note">2 new EMEA activations live; Asia QA still partial.</div>
+        </div>
+        <div class="kpi seo" data-tip="SEO headline — non-paid acquisition. Defining 'expected outcome' for upper-funnel channels like SEO is a Walk-phase workstream (ROI Visibility Gap-Fix)." data-tip-source="Timeline · Phase 2 · ROI visibility gap-fix">
+          <div class="label">SEO</div>
+          <div class="number">4.1M</div>
+          <div class="delta up">▲ 2.3% WoW · sessions</div>
+          <div class="spark"></div>
+          <div class="note">Organic share holding; refreshed product pages indexed cleanly.</div>
+        </div>
+      </div>
+
+      <!-- Moments band -->
+      <div class="section-title">Moments — what's tagged to what</div>
+      <div class="moments" data-tip="Tags outbound activity (email, paid, partnerships, GTM) to GTM moments — Back-to-School, Holiday, Cyber Week, etc. V1 is manual tagging; automation is a Run-phase workstream once the roll-up is proven." data-tip-source="Timeline · Phase 2 · Campaign-to-moment attribution (v1)">
+        <div class="moment live">
+          <div class="name">Win launch</div>
+          <div class="window">Apr 14 – May 12</div>
+          <div class="tag-count">28 activities</div>
+        </div>
+        <div class="moment">
+          <div class="name">Surface refresh</div>
+          <div class="window">May 20 – Jun 30</div>
+          <div class="tag-count">9 activities</div>
+        </div>
+        <div class="moment">
+          <div class="name">Back-to-School</div>
+          <div class="window">Jul – Sep</div>
+          <div class="tag-count">— planning</div>
+        </div>
+        <div class="moment">
+          <div class="name">Holiday</div>
+          <div class="window">Oct – Dec</div>
+          <div class="tag-count">— planning</div>
+        </div>
+        <div class="moment">
+          <div class="name">Cyber Week</div>
+          <div class="window">Nov 24 – Dec 1</div>
+          <div class="tag-count">— planning</div>
+        </div>
+        <div class="moment">
+          <div class="name">Always-on</div>
+          <div class="window">Continuous</div>
+          <div class="tag-count">62 activities</div>
+        </div>
+      </div>
+
+      <!-- Channel breakdowns -->
+      <div class="section-title">Channel breakdowns</div>
+      <div class="channel-grid">
+
+        <!-- EMAIL -->
+        <div class="channel">
+          <div class="head">
+            <h3 data-tip="Email pillar detail — owned by Email lead. Activities tagged to moments via shared moment-tagging spreadsheet in V1." data-tip-source="Timeline · Phase 2 · Campaign-to-moment attribution (v1)">📧 Email</h3>
+            <span class="ocid-badge" data-tip="OCID prefix used today for email channel. Will be confirmed and possibly normalized in the Walk-phase OCID reclassification." data-tip-source="Timeline · Phase 2 · Update OCID classifications">OCID: AID-EM-*</span>
+          </div>
+          <div class="row">
+            <div class="metric" data-tip="Total sends across all email programs in the period. Source: existing email platform reporting." data-tip-source="Timeline · Phase 1 · Compile reports inventory"><div class="m-label">Sends</div><div class="m-value">12.4M</div><div class="m-delta">▲ 6.2%</div></div>
+            <div class="metric" data-tip="Average open rate. Definition aligns with how the Email team currently calculates it — definitions normalized across pillars in the Discovery Period output." data-tip-source="Timeline · Phase 1 · Discovery period"><div class="m-label">Open rate</div><div class="m-value">28.4%</div><div class="m-delta">flat</div></div>
+            <div class="metric" data-tip="Click-through rate on primary CTA. Up because of the Win-launch nurture stream — see commentary." data-tip-source=""><div class="m-label">CTR</div><div class="m-value">3.1%</div><div class="m-delta">▲ 0.4 pp</div></div>
+          </div>
+          <div class="commentary" data-tip="Human-written context. In V1 the channel owner writes 1–2 sentences each week — this is the connective tissue that turns numbers into a story." data-tip-source="Brief · Section 01 Problem · Story not just metrics">
+            <strong>What changed</strong>
+            Win-launch nurture sequence drove the CTR lift. Holiday list-build seeding starts next week.
+          </div>
+        </div>
+
+        <!-- PAID MEDIA -->
+        <div class="channel">
+          <div class="head">
+            <h3 data-tip="Paid Media pillar — combines SEM, Display, Social, and (currently) PMAX. PMAX rolling up under SEM is a known V1 limitation; reclassification is a Walk-phase workstream." data-tip-source="Timeline · Phase 2 · Update OCID classifications">💰 Paid media</h3>
+            <span class="ocid-badge" data-tip="OCID prefix family for paid. Walk phase will split PMAX out of the SEM bucket and treat it as its own channel." data-tip-source="Timeline · Phase 2 · Update OCID classifications">OCID: AID-PD-*</span>
+          </div>
+          <div class="row">
+            <div class="metric" data-tip="Total paid media spend across SEM + Display + Social + PMAX. Currency-normalized." data-tip-source="Timeline · Phase 1 · Compile reports inventory"><div class="m-label">Spend</div><div class="m-value">$2.8M</div><div class="m-delta">▼ 3.1%</div></div>
+            <div class="metric" data-tip="Customer acquisition cost. Calculation method documented in the Tracking Education output so the number is reproducible across pillars." data-tip-source="Timeline · Phase 1 · Tracking education (OCID &amp; CMM)"><div class="m-label">CAC</div><div class="m-value">$54</div><div class="m-delta">flat</div></div>
+            <div class="metric" data-tip="Return on ad spend. Tied to the moments band above when the activity has a moment tag." data-tip-source="Timeline · Phase 2 · Campaign-to-moment attribution (v1)"><div class="m-label">ROAS</div><div class="m-value">3.4x</div><div class="m-delta">▼ 0.2x</div></div>
+          </div>
+          <div class="commentary">
+            <strong>What changed</strong>
+            Spend pullback was intentional ahead of Win launch peak. PMAX split into its own line item is the next big visibility unlock.
+          </div>
+        </div>
+
+        <!-- PARTNERSHIPS -->
+        <div class="channel" style="grid-column: 1 / -1;">
+          <div class="head">
+            <h3 data-tip="Partnerships pillar — uses the standardized v1 grid template so regional partnerships are finally comparable." data-tip-source="Timeline · Phase 1 · Partnership grid template (v1)">🤝 Partnerships</h3>
+            <span class="ocid-badge" data-tip="OCID prefix family for partnerships. Walk phase will formalize partnerships as a top-level channel classification." data-tip-source="Timeline · Phase 2 · Update OCID classifications">OCID: AID-PT-*</span>
+          </div>
+          <table class="partner-grid" data-tip="Cross-region partnership grid — same fields, same definitions, comparable across Asia, Americas, EMEA. The single biggest unlock leadership has been asking for." data-tip-source="Brief · Section 01 Problem · Regional partnerships not comparable">
+            <thead>
+              <tr>
+                <th>Region</th>
+                <th>Active partnerships</th>
+                <th>New this period</th>
+                <th>Partnership-driven traffic</th>
+                <th>QA status</th>
+                <th>Notes</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="region">Americas</td>
+                <td>14</td>
+                <td>+1</td>
+                <td>620K sessions</td>
+                <td><span class="qa-status ok" data-tip="QA loop is operating cleanly — all required fields populated and reviewed by regional contributor." data-tip-source="Timeline · Phase 2 · Operationalize partnership grid">complete</span></td>
+                <td>Net-new retail co-marketing live.</td>
+              </tr>
+              <tr>
+                <td class="region">EMEA</td>
+                <td>11</td>
+                <td>+2</td>
+                <td>410K sessions</td>
+                <td><span class="qa-status ok">complete</span></td>
+                <td>2 new activations on Win launch.</td>
+              </tr>
+              <tr>
+                <td class="region">Asia</td>
+                <td>12</td>
+                <td>0</td>
+                <td>—</td>
+                <td><span class="qa-status partial" data-tip="Partial submission — required fields missing. Quarterly cadence and QA loop are still firming up; a known V1 gap that Walk addresses." data-tip-source="Timeline · Phase 2 · Operationalize partnership grid">partial</span></td>
+                <td>Awaiting traffic numbers for last 2 partnerships.</td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="commentary">
+            <strong>What changed</strong>
+            First week with all three regions reporting against the same template. Asia QA gap is the obvious next thing to close.
+          </div>
+        </div>
+
+        <!-- SEO -->
+        <div class="channel">
+          <div class="head">
+            <h3 data-tip="SEO pillar — non-paid acquisition. Currently reported on; expected-outcome definition (vs. ROI) lands in Walk." data-tip-source="Timeline · Phase 2 · ROI visibility gap-fix">🔎 SEO</h3>
+            <span class="ocid-badge" data-tip="OCID prefix for organic acquisition. Tracking-education workstream documents how organic flows are currently identified." data-tip-source="Timeline · Phase 1 · Tracking education (OCID &amp; CMM)">OCID: AID-OR-*</span>
+          </div>
+          <div class="row">
+            <div class="metric"><div class="m-label">Sessions</div><div class="m-value">4.1M</div><div class="m-delta">▲ 2.3%</div></div>
+            <div class="metric" data-tip="Indexed pages from product/marketing surfaces. Catches indexing regressions early." data-tip-source=""><div class="m-label">Indexed pages</div><div class="m-value">12.8K</div><div class="m-delta">▲ 180</div></div>
+            <div class="metric" data-tip="Top non-brand keywords ranking in positions 1–3. Proxy metric for organic share-of-voice." data-tip-source="Timeline · Phase 2 · ROI visibility gap-fix"><div class="m-label">Top-3 KWs</div><div class="m-value">340</div><div class="m-delta">▲ 12</div></div>
+          </div>
+          <div class="commentary">
+            <strong>What changed</strong>
+            Refreshed product detail pages indexed cleanly. No quality drops detected.
+          </div>
+        </div>
+
+        <!-- CROSS-CHANNEL VIEW -->
+        <div class="channel">
+          <div class="head">
+            <h3 data-tip="Cross-pillar roll-up — proves the integrated read can be told from the four pillars together. The whole point of the unified view." data-tip-source="Brief · Section 02 Deliverable · One destination, full funnel reporting">📊 Cross-channel</h3>
+            <span class="ocid-badge">all OCIDs</span>
+          </div>
+          <div class="row">
+            <div class="metric" data-tip="Total marketing-attributed sessions across all four pillars in the period." data-tip-source=""><div class="m-label">Total sessions</div><div class="m-value">9.6M</div><div class="m-delta">▲ 3.5%</div></div>
+            <div class="metric" data-tip="Share of activity tagged to a named GTM moment vs. always-on. Climbs as moment tagging matures." data-tip-source="Timeline · Phase 2 · Campaign-to-moment attribution (v1)"><div class="m-label">% on-moment</div><div class="m-value">42%</div><div class="m-delta">▲ 6 pp</div></div>
+            <div class="metric" data-tip="Net-new vs. returning audience split. One of the leadership questions surfaced in Discovery." data-tip-source="Timeline · Phase 1 · Discovery period"><div class="m-label">New / Return</div><div class="m-value">38 / 62</div><div class="m-delta">flat</div></div>
+          </div>
+          <div class="commentary">
+            <strong>What changed</strong>
+            % on-moment up materially as Win-launch tagging caught up. First time we can roll this up in one number.
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Open questions -->
+      <div class="section-title">Known V1 gaps &amp; open questions</div>
+      <div class="open-q" data-tip="Calling out V1's known limits up front protects credibility. Each item here maps to a Walk- or Run-phase workstream on the timeline." data-tip-source="Timeline · Phase 2 &amp; 3">
+        <h3>What V1 doesn't yet do</h3>
+        <ul>
+          <li data-tip="Reclassifying PMAX out of SEM is the marquee Walk workstream for paid visibility." data-tip-source="Timeline · Phase 2 · Update OCID classifications">Paid media still has PMAX rolled up under SEM — split in Walk.</li>
+          <li data-tip="Asia partial submission is a regional cadence problem, not a data problem. Walk operationalizes the cadence." data-tip-source="Timeline · Phase 2 · Operationalize partnership grid">Asia partnership QA is partial — fixed by quarterly cadence in Walk.</li>
+          <li data-tip="Upper-/mid-funnel channels need a defined expected outcome before any ROI conversation lands." data-tip-source="Timeline · Phase 2 · ROI visibility gap-fix">No formal ROI proxy on SEO &amp; brand display yet — defined in Walk.</li>
+          <li data-tip="Manual tagging works for V1 but doesn't scale. Run automates it once the rules are stable." data-tip-source="Timeline · Phase 3 · Automate moment attribution">Moment tagging is manual — automated in Run.</li>
+          <li data-tip="V1 is a refreshed-by-hand surface. Continuous trend view replaces MBR-only cadence in Run." data-tip-source="Timeline · Phase 3 · Continuous trend view">Refresh is weekly &amp; manual — always-on in Run.</li>
+        </ul>
+      </div>
+
+    </div><!-- /page -->
+  </div><!-- /browser -->
+</div><!-- /canvas -->
+
+<p class="footer-note">Wireframe · Phase 1 (Crawl) · Manual Unified View MVP · Numbers are illustrative. See the <a href="timeline.html">workstream timeline</a> for sequencing and the <a href="index.html">brief</a> for problem framing.</p>
+
+<!-- Tooltip element -->
+<div id="wf-tooltip" role="tooltip" aria-hidden="true"></div>
+
+<script>
+(function () {
+  const tip = document.getElementById('wf-tooltip');
+  let activeEl = null;
+
+  function position(e) {
+    if (!activeEl) return;
+    const pad = 14;
+    const tr = tip.getBoundingClientRect();
+    let x = e.clientX + pad;
+    let y = e.clientY + pad;
+    if (x + tr.width + 8 > window.innerWidth) x = e.clientX - tr.width - pad;
+    if (y + tr.height + 8 > window.innerHeight) y = e.clientY - tr.height - pad;
+    tip.style.left = Math.max(8, x) + 'px';
+    tip.style.top = Math.max(8, y) + 'px';
+  }
+
+  function show(el, e) {
+    const text = el.getAttribute('data-tip');
+    const source = el.getAttribute('data-tip-source');
+    if (!text) return;
+    activeEl = el;
+    let html = text;
+    if (source) html += '<span class="tip-source">↳ ' + source + '</span>';
+    tip.innerHTML = html;
+    tip.classList.add('visible');
+    tip.setAttribute('aria-hidden', 'false');
+    position(e);
+  }
+
+  function hide() {
+    activeEl = null;
+    tip.classList.remove('visible');
+    tip.setAttribute('aria-hidden', 'true');
+  }
+
+  document.addEventListener('mouseover', function (e) {
+    const el = e.target.closest('[data-tip]');
+    if (el && el !== activeEl) show(el, e);
+  });
+  document.addEventListener('mousemove', function (e) {
+    if (activeEl) position(e);
+  });
+  document.addEventListener('mouseout', function (e) {
+    if (!activeEl) return;
+    const to = e.relatedTarget;
+    if (!to || !activeEl.contains(to)) hide();
+  });
+  document.addEventListener('focusin', function (e) {
+    const el = e.target.closest('[data-tip]');
+    if (el) {
+      const r = el.getBoundingClientRect();
+      show(el, { clientX: r.left + 12, clientY: r.bottom + 6 });
+    }
+  });
+  document.addEventListener('focusout', hide);
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape') hide();
+  });
+})();
+</script>
+
+</body>
+</html>
