@@ -156,31 +156,30 @@
   }
 
   /* Three-layer deliverable visual */
-  .layer-stack { display: grid; grid-template-columns: 1fr; gap: 0.6rem; margin-top: 1rem; }
+  .layer-stack { display: grid; grid-template-columns: 1fr; gap: 0.75rem; margin-top: 1rem; }
   .layer {
     border-radius: 6px;
-    padding: 0.9rem 1.1rem;
+    padding: 1rem 1.2rem 1.1rem;
     border: 1px solid var(--line);
+    border-left: 4px solid var(--c-n35);
     background: var(--c-white);
-    display: grid;
-    grid-template-columns: 150px 1fr;
-    gap: 1rem;
-    align-items: center;
   }
-  @media (max-width: 700px) { .layer { grid-template-columns: 1fr; } }
-  .layer .layer-label {
-    font-size: 0.72rem;
-    text-transform: uppercase;
-    letter-spacing: 0.8px;
+  .layer .layer-headline {
+    font-size: 1rem;
     font-weight: 600;
-    padding: 0.45rem 0.6rem;
-    border-radius: 4px;
-    text-align: center;
+    color: var(--ink);
+    margin-bottom: 0.4rem;
+    line-height: 1.35;
   }
-  .layer .layer-body { font-size: 0.92rem; color: var(--ink); }
-  .layer.l1 .layer-label { background: #E4F1FB; color: var(--c-dark-blue); }
-  .layer.l2 .layer-label { background: #ECF7F3; color: #1E6B5C; }
-  .layer.l3 .layer-label { background: #FFF4CE; color: #8A6D00; }
+  .layer .layer-body {
+    font-size: 0.92rem;
+    color: var(--ink-soft);
+    margin: 0;
+  }
+  .layer .layer-body strong { color: var(--ink); font-weight: 600; }
+  .layer.l1 { border-left-color: var(--c-med-blue); }
+  .layer.l2 { border-left-color: var(--c-teal); }
+  .layer.l3 { border-left-color: #C9A227; }
 
   /* Phase summary */
   .phase-summary { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-top: 1rem; }
@@ -363,45 +362,20 @@
   <!-- 2. DELIVERABLE -->
   <section id="deliverable">
     <span class="section-num">02 · The Deliverable</span>
-    <h2>One destination, three layers.</h2>
-
-    <div class="deliverable-card">
-      <h3>What we're building toward</h3>
-      <p>A destination that shows:</p>
-      <ul style="margin: 0.5rem 0 0.4rem; padding-left: 1.3rem; font-size: 0.95rem;">
-        <li><strong>What we're doing</strong> across the funnel.</li>
-        <li><strong>How it's performing</strong> at both leadership and channel-lead depth.</li>
-        <li><strong>What business impact</strong> it's delivering.</li>
-      </ul>
-      <div class="pill-row">
-        <span class="pill">Funnel-aligned</span>
-        <span class="pill">Two audiences, one source</span>
-        <span class="pill">GTM-moment aware</span>
-        <span class="pill">ROI where we have it, proxy where we don't</span>
-      </div>
-    </div>
+    <h2>One destination, full funnel reporting.</h2>
 
     <div class="layer-stack">
       <div class="layer l1">
-        <div class="layer-label">Layer 1 · What we're doing</div>
-        <div class="layer-body">
-          Activity at each funnel stage — tied to goals, outbound channels, and GTM campaigns.
-          Answers: <strong>what's running, for whom, and toward what moment?</strong>
-        </div>
+        <div class="layer-headline">What we're doing across the funnel.</div>
+        <p class="layer-body">Activity at each funnel stage — tied to goals, outbound channels, and GTM campaigns. Answers: <strong>what's running, for whom, and toward what moment?</strong></p>
       </div>
       <div class="layer l2">
-        <div class="layer-label">Layer 2 · How it's performing</div>
-        <div class="layer-body">
-          Two reading depths from the same data: <strong>headline KPIs for leadership</strong>
-          and <strong>deeper channel KPIs for channel leads</strong>.
-        </div>
+        <div class="layer-headline">How it's performing at both leadership and channel-lead depth.</div>
+        <p class="layer-body">Two reading depths from the same data: <strong>headline KPIs for leadership</strong> and <strong>deeper channel KPIs for channel leads</strong>.</p>
       </div>
       <div class="layer l3">
-        <div class="layer-label">Layer 3 · Business impact</div>
-        <div class="layer-body">
-          ROI roll-up by channel &amp; activation.
-          Where ROI isn't the goal (e.g., upper &amp; mid funnel), expected outcomes are clearly defined (e.g., traffic).
-        </div>
+        <div class="layer-headline">What business impact it's delivering.</div>
+        <p class="layer-body">ROI roll-up by channel &amp; activation. Where ROI isn't the goal (e.g., upper &amp; mid funnel), expected outcomes are clearly defined (e.g., traffic).</p>
       </div>
     </div>
   </section>
