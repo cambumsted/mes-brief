@@ -169,11 +169,23 @@
   }
   @media (max-width: 700px) { .layer { grid-template-columns: 1fr; gap: 0.4rem; } }
   .layer .layer-headline {
-    font-size: 1rem;
-    font-weight: 600;
-    line-height: 1.35;
-    padding: 0.7rem 0.9rem;
+    padding: 0.75rem 0.95rem;
     border-radius: 4px;
+  }
+  .layer .layer-headline .title {
+    display: block;
+    font-size: 1.15rem;
+    font-weight: 700;
+    line-height: 1.25;
+    letter-spacing: -0.2px;
+  }
+  .layer .layer-headline .sub {
+    display: block;
+    margin-top: 0.25rem;
+    font-size: 0.85rem;
+    font-weight: 500;
+    opacity: 0.85;
+    line-height: 1.35;
   }
   .layer .layer-body {
     font-size: 0.92rem;
@@ -370,15 +382,24 @@
 
     <div class="layer-stack">
       <div class="layer l1">
-        <div class="layer-headline">What we're doing across the funnel.</div>
+        <div class="layer-headline">
+          <span class="title">What we're doing</span>
+          <span class="sub">across the funnel</span>
+        </div>
         <p class="layer-body">Activity at each funnel stage — tied to goals, outbound channels, and GTM campaigns. Answers: <strong>what's running, for whom, and toward what moment?</strong></p>
       </div>
       <div class="layer l2">
-        <div class="layer-headline">How it's performing at both leadership and channel-lead depth.</div>
+        <div class="layer-headline">
+          <span class="title">How it's performing</span>
+          <span class="sub">at both leadership and channel-lead depth</span>
+        </div>
         <p class="layer-body">Two reading depths from the same data: <strong>headline KPIs for leadership</strong> and <strong>deeper channel KPIs for channel leads</strong>.</p>
       </div>
       <div class="layer l3">
-        <div class="layer-headline">What business impact it's delivering.</div>
+        <div class="layer-headline">
+          <span class="title">The business impact</span>
+          <span class="sub">it's delivering</span>
+        </div>
         <p class="layer-body">ROI roll-up by channel &amp; activation. Where ROI isn't the goal (e.g., upper &amp; mid funnel), expected outcomes are clearly defined (e.g., traffic).</p>
       </div>
     </div>
