@@ -273,23 +273,14 @@
   .gantt-row .label a.ws-link {
     color: inherit;
     text-decoration: none;
-    display: inline-flex;
-    align-items: center;
-    gap: 0.35rem;
+    display: inline-block;
     cursor: pointer;
+    transition: transform 0.15s ease, color 0.15s ease;
   }
   .gantt-row .label a.ws-link:hover {
     color: var(--ms-blue);
-    text-decoration: underline;
+    transform: translateX(2px);
   }
-  .gantt-row .label a.ws-link::after {
-    content: "↓";
-    font-size: 0.7rem;
-    opacity: 0;
-    transition: opacity 0.15s ease;
-    color: var(--ms-blue);
-  }
-  .gantt-row .label a.ws-link:hover::after { opacity: 1; }
   /* Detail-table row jump targets (offset for sticky nav, brief highlight) */
   .workstream-table tbody tr[id] { scroll-margin-top: 72px; }
   .workstream-table tbody tr[id]:target {
