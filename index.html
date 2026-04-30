@@ -123,14 +123,38 @@
     background: var(--bg);
     border: 1px solid var(--line);
     border-radius: 6px;
-    padding: 1rem 1.2rem;
+    padding: 1.1rem 1.25rem 1.2rem;
   }
   .card .label {
     font-size: 0.7rem; text-transform: uppercase; letter-spacing: 1px;
-    color: var(--ink-soft); font-weight: 600; margin-bottom: 0.4rem;
+    color: var(--ink-soft); font-weight: 600; margin-bottom: 0.6rem;
   }
   .card ul { margin: 0.4rem 0 0; padding-left: 1.2rem; }
   .card li { margin: 0.3rem 0; font-size: 0.92rem; }
+
+  /* Problem item list — scannable bold lead + supporting line */
+  .issue-list {
+    list-style: none; margin: 0; padding: 0;
+    display: flex; flex-direction: column; gap: 0.7rem;
+  }
+  .issue-list li {
+    background: var(--c-white);
+    border: 1px solid var(--line);
+    border-radius: 5px;
+    padding: 0.65rem 0.85rem;
+    font-size: 0.9rem;
+    line-height: 1.45;
+  }
+  .issue-list li strong {
+    display: block;
+    color: var(--ink);
+    font-weight: 600;
+    font-size: 0.95rem;
+    margin-bottom: 0.15rem;
+  }
+  .issue-list li span { color: var(--ink-soft); }
+  .card.problem-gaps { border-left: 3px solid var(--c-med-blue); }
+  .card.problem-cost { border-left: 3px solid #C9A227; }
 
   /* Deliverable highlight */
   .deliverable-card {
@@ -352,24 +376,24 @@
     <h2>We can't see marketing as one connected story.</h2>
 
     <div class="grid-2" style="margin-top:1rem;">
-      <div class="card">
+      <div class="card problem-gaps">
         <div class="label">What we don't have today</div>
-        <ul>
-          <li>A single destination that ties together what we're doing across the funnel.</li>
-          <li>A consolidated view of regional partnership performance — Asia, Americas, EMEA report in silos.</li>
-          <li>A way to tie outbound marketing activity to the GTM moments it supports (Back-to-School, Holiday, Cyber Week).</li>
-          <li>Modern, agreed web-tracking categories — OCID generation rules and channel taxonomies haven't kept pace with how we actually market.</li>
-          <li>A clear inventory of the questions each channel <em>can't</em> currently answer about itself.</li>
-          <li>ROI signal for several channels where we currently rely on proxy or anecdotal evidence.</li>
+        <ul class="issue-list">
+          <li><strong>No single destination</strong><span>One place that ties together what we're doing across the funnel.</span></li>
+          <li><strong>Partnership performance lives in silos</strong><span>Asia, Americas, and EMEA report regionally with no consolidated view.</span></li>
+          <li><strong>Outbound activity isn't tied to GTM moments</strong><span>Back-to-School, Holiday, Cyber Week — we can't roll up the marketing push behind each one.</span></li>
+          <li><strong>Web tracking hasn't kept pace</strong><span>OCID generation and channel taxonomies don't reflect how we actually market today.</span></li>
+          <li><strong>Unknown unknowns by channel</strong><span>No inventory of the questions each channel <em>can't</em> currently answer about itself.</span></li>
+          <li><strong>ROI is patchy</strong><span>Several channels still rely on proxy or anecdotal evidence for impact.</span></li>
         </ul>
       </div>
-      <div class="card">
+      <div class="card problem-cost">
         <div class="label">What this costs us</div>
-        <ul>
-          <li>Investment decisions get made reactively, channel-by-channel, instead of as a portfolio.</li>
-          <li>Partnership dollars are allocated by inertia — we can't compare across regions on a shared baseline.</li>
-          <li>Marketing's contribution to GTM moments is undersold internally because we can't roll it up.</li>
-          <li>Leadership often feels in the dark about what we're doing across marketing channels, how it is performing, and where to invest dollars when budget is available.</li>
+        <ul class="issue-list">
+          <li><strong>Reactive investment decisions</strong><span>Made channel-by-channel, not as a portfolio.</span></li>
+          <li><strong>Partnership dollars allocated by inertia</strong><span>No shared baseline to compare across regions.</span></li>
+          <li><strong>Marketing's contribution gets undersold</strong><span>We can't roll up impact against the GTM moments we support.</span></li>
+          <li><strong>Leadership feels in the dark</strong><span>Limited visibility into what's running, how it's performing, and where to invest when budget opens up.</span></li>
         </ul>
       </div>
     </div>
