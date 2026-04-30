@@ -175,7 +175,47 @@
     font-size: 0.72rem; text-transform: uppercase; letter-spacing: 1px;
     color: var(--ink-soft); font-weight: 700;
     margin: 1.4rem 0 0.6rem;
+    display: flex; align-items: baseline; gap: 0.6rem;
+    flex-wrap: wrap;
   }
+  .section-title .tf {
+    text-transform: none;
+    letter-spacing: 0;
+    background: var(--ms-blue-light);
+    color: var(--ms-blue-dark);
+    font-size: 0.7rem;
+    font-weight: 600;
+    padding: 0.12rem 0.55rem;
+    border-radius: 10px;
+  }
+
+  /* LOB tabs */
+  .lob-tabs {
+    display: flex; gap: 0.35rem;
+    border-bottom: 2px solid var(--line);
+    margin-bottom: 0.8rem;
+    flex-wrap: wrap;
+  }
+  .lob-tab {
+    border: none;
+    background: transparent;
+    color: var(--ink-soft);
+    font-family: inherit;
+    font-size: 0.85rem;
+    font-weight: 600;
+    padding: 0.55rem 0.95rem;
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    margin-bottom: -2px;
+    transition: color 0.12s ease, border-color 0.12s ease;
+  }
+  .lob-tab:hover { color: var(--ms-blue-dark); }
+  .lob-tab.active {
+    color: var(--ms-blue-dark);
+    border-bottom-color: var(--ms-blue);
+  }
+  .lob-panel { display: none; }
+  .lob-panel.active { display: block; }
 
   /* Top: leadership questions strip */
   .questions-strip {
@@ -579,7 +619,7 @@
       </div>
 
       <!-- Top 5 questions -->
-      <div class="section-title">What leadership is asking this cycle</div>
+      <div class="section-title">What leadership is asking this cycle <span class="tf">Week of Apr 27 – May 3, 2026</span></div>
       <div class="questions-strip" data-tip="Direct output of the Discovery Period — synthesized list of questions stakeholders most want answered. Drives what shows up at the top of the page each week." data-tip-source="Timeline · Phase 1 · Discovery period">
         <h3>Top 5 questions this week</h3>
         <ol>
@@ -592,14 +632,22 @@
       </div>
 
       <!-- MBR-format headline by Line of Business -->
-      <div class="section-title">Overview · MBR format by line of business</div>
-      <div data-tip="Mirrors the MBR read-out: same five core metrics for each line of business so leadership can scan across LOBs in one glance. The Manual Unified View MVP is the surface where this rollup lives in V1." data-tip-source="Timeline · Phase 1 · Manual Unified View MVP">
+      <div class="section-title">Overview · MBR format by line of business <span class="tf">April 2026 · LM</span></div>
+      <div data-tip="Mirrors the MBR read-out: same five core metrics for each line of business so leadership can scan across LOBs in one glance. Click a tab to switch LOB. The Manual Unified View MVP is the surface where this rollup lives in V1." data-tip-source="Timeline · Phase 1 · Manual Unified View MVP">
+
+        <div class="lob-tabs" role="tablist" aria-label="Line of business">
+          <button class="lob-tab active" role="tab" aria-selected="true" data-lob="surface-consumer">Surface Consumer</button>
+          <button class="lob-tab" role="tab" aria-selected="false" data-lob="surface-smb">Surface Small Business</button>
+          <button class="lob-tab" role="tab" aria-selected="false" data-lob="gaming">Gaming Hardware</button>
+          <button class="lob-tab" role="tab" aria-selected="false" data-lob="m365">M365</button>
+        </div>
 
         <!-- SURFACE CONSUMER -->
+        <div class="lob-panel active" data-lob-panel="surface-consumer" role="tabpanel">
         <div class="lob-block">
           <div class="lob-header" data-tip="Surface Consumer line of business — primary DDS focus. Numbers pulled by hand from existing Surface Consumer reports cataloged in the Reports Inventory." data-tip-source="Timeline · Phase 1 · Compile reports inventory">
             <span class="lob-name">Surface Consumer</span>
-            <span class="lob-tag">KPI · Surface Consume</span>
+            <span class="lob-tag">April 2026</span>
           </div>
           <table class="mbr-table">
             <thead>
@@ -614,12 +662,14 @@
             </tbody>
           </table>
         </div>
+        </div>
 
         <!-- SURFACE SMALL BUSINESS -->
+        <div class="lob-panel" data-lob-panel="surface-smb" role="tabpanel">
         <div class="lob-block">
           <div class="lob-header">
             <span class="lob-name">Surface Small Business</span>
-            <span class="lob-tag">KPI · Surface SMB</span>
+            <span class="lob-tag">April 2026</span>
           </div>
           <table class="mbr-table">
             <thead>
@@ -634,12 +684,14 @@
             </tbody>
           </table>
         </div>
+        </div>
 
         <!-- GAMING HARDWARE -->
+        <div class="lob-panel" data-lob-panel="gaming" role="tabpanel">
         <div class="lob-block">
           <div class="lob-header">
             <span class="lob-name">Gaming Hardware</span>
-            <span class="lob-tag">KPI · Xbox HW</span>
+            <span class="lob-tag">April 2026</span>
           </div>
           <table class="mbr-table">
             <thead>
@@ -654,12 +706,14 @@
             </tbody>
           </table>
         </div>
+        </div>
 
         <!-- M365 -->
+        <div class="lob-panel" data-lob-panel="m365" role="tabpanel">
         <div class="lob-block">
           <div class="lob-header">
             <span class="lob-name">M365</span>
-            <span class="lob-tag">KPI · Microsoft 365</span>
+            <span class="lob-tag">April 2026</span>
           </div>
           <table class="mbr-table">
             <thead>
@@ -674,11 +728,12 @@
             </tbody>
           </table>
         </div>
+        </div>
 
       </div>
 
       <!-- Trend chart: Paid + Non-Paid stacked vs. Target -->
-      <div class="section-title">Trend · Buying page visits vs. target</div>
+      <div class="section-title">Trend · Buying page visits vs. target <span class="tf">Last 16 months · Oct 2024 – Jan 2026</span></div>
       <div class="trend-chart" data-tip="Stacked Paid + Non-Paid buying page visits with a target line overlay. Lets leadership see at a glance whether total traffic is hitting the plan, and which side (paid vs. non-paid) is driving the gap." data-tip-source="Brief · Section 02 Deliverable · How it's performing">
         <div class="chart-head">
           <div class="chart-title">Surface Consumer · Buying Page Visits (Paid + Non-Paid) vs. Target</div>
@@ -761,7 +816,7 @@
       </div>
 
       <!-- Moments band -->
-      <div class="section-title">Moments — what's tagged to what</div>
+      <div class="section-title">Moments — what's tagged to what <span class="tf">Active Apr–Dec 2026</span></div>
       <div class="moments" data-tip="Tags outbound activity (email, paid, partnerships, GTM) to GTM moments — Back-to-School, Holiday, Cyber Week, etc. V1 is manual tagging; automation is a Run-phase workstream once the roll-up is proven." data-tip-source="Timeline · Phase 2 · Campaign-to-moment attribution (v1)">
         <div class="moment live">
           <div class="name">Win launch</div>
@@ -796,7 +851,7 @@
       </div>
 
       <!-- Channel breakdowns -->
-      <div class="section-title">Channel breakdowns</div>
+      <div class="section-title">Channel breakdowns <span class="tf">Week of Apr 27 – May 3, 2026</span></div>
       <div class="channel-grid">
 
         <!-- EMAIL -->
@@ -967,7 +1022,7 @@
       </div>
 
       <!-- Open questions -->
-      <div class="section-title">Known V1 gaps &amp; open questions</div>
+      <div class="section-title">Known V1 gaps &amp; open questions <span class="tf">As of Apr 30, 2026</span></div>
       <div class="open-q" data-tip="Calling out V1's known limits up front protects credibility. Each item here maps to a Walk- or Run-phase workstream on the timeline." data-tip-source="Timeline · Phase 2 &amp; 3">
         <h3>What V1 doesn't yet do</h3>
         <ul>
@@ -1046,6 +1101,23 @@
   document.addEventListener('focusout', hide);
   document.addEventListener('keydown', function (e) {
     if (e.key === 'Escape') hide();
+  });
+
+  // LOB tab toggling
+  const tabs = document.querySelectorAll('.lob-tab');
+  const panels = document.querySelectorAll('.lob-panel');
+  tabs.forEach(function (tab) {
+    tab.addEventListener('click', function () {
+      const target = tab.getAttribute('data-lob');
+      tabs.forEach(function (t) {
+        const active = t === tab;
+        t.classList.toggle('active', active);
+        t.setAttribute('aria-selected', active ? 'true' : 'false');
+      });
+      panels.forEach(function (p) {
+        p.classList.toggle('active', p.getAttribute('data-lob-panel') === target);
+      });
+    });
   });
 })();
 </script>
