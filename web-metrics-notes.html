@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Web Metrics Notes — Marketing Effectiveness Solution</title>
+<link rel="stylesheet" href="notes-widget.css" />
+<style>
+  :root {
+    --c-dark-blue: #091F2E;
+    --c-med-blue: #0078D4;
+    --c-teal: #49C5B1;
+    --c-white: #FFFFFF;
+    --c-n05: #F2F2F2;
+    --c-n15: #D9D9D9;
+    --c-n25: #BFBFBF;
+    --c-n50: #7F7F7F;
+    --c-light-blue: #8DC8E8;
+    --c-aqua: #B9DCD2;
+    --c-lavender: #C5B4E3;
+    --c-amber: #F2C94C;
+
+    --ms-blue: var(--c-med-blue);
+    --ms-blue-dark: var(--c-dark-blue);
+    --ms-blue-light: #E6F2FB;
+    --ink: var(--c-dark-blue);
+    --ink-soft: var(--c-n50);
+    --line: var(--c-n15);
+    --bg: var(--c-n05);
+    --card: var(--c-white);
+    --shadow: 0 1.6px 3.6px rgba(9,31,46,0.08), 0 0.3px 0.9px rgba(9,31,46,0.06);
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    font-family: "Segoe UI", -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
+    color: var(--ink);
+    background: var(--bg);
+    line-height: 1.55;
+    font-size: 16px;
+  }
+  a { color: var(--ms-blue-dark); }
+  h1, h2, h3, h4 { color: var(--ink); margin-top: 0; line-height: 1.25; }
+  h1 { font-size: 2.2rem; font-weight: 600; letter-spacing: -0.5px; }
+  h2 { font-size: 1.4rem; font-weight: 600; margin-bottom: 0.4rem; }
+  h3 { font-size: 1.05rem; font-weight: 600; margin-bottom: 0.3rem; }
+  h4 { font-size: 0.7rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; color: var(--ink-soft); margin-bottom: 0.25rem; }
+  p { margin: 0.4rem 0; }
+
+  .nav {
+    position: sticky; top: 0; z-index: 100;
+    background: rgba(255,255,255,0.96);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line);
+    padding: 0 1.5rem;
+    height: 56px;
+    display: flex; align-items: center; gap: 1.25rem;
+  }
+  .nav .brand { font-weight: 600; color: var(--ms-blue-dark); margin-right: auto; flex-shrink: 0; font-size: 0.95rem; }
+  .nav a {
+    color: var(--ink-soft); text-decoration: none;
+    font-size: 0.85rem; padding: 0.25rem 0.5rem;
+    border-radius: 4px; flex-shrink: 0;
+  }
+  .nav a:hover { background: var(--ms-blue-light); color: var(--ms-blue-dark); }
+
+  .page-header {
+    background: linear-gradient(135deg, var(--c-dark-blue) 0%, var(--c-med-blue) 100%);
+    color: white;
+    padding: 3rem 1.5rem;
+    border-bottom: 4px solid var(--c-teal);
+  }
+  .page-header .container { max-width: 1200px; margin: 0 auto; }
+  .page-header h1 { color: white; }
+  .page-header .meta {
+    font-size: 0.75rem; letter-spacing: 1.5px; text-transform: uppercase;
+    opacity: 0.85; margin-bottom: 0.75rem;
+  }
+  .page-header p { opacity: 0.95; max-width: 760px; font-size: 1.05rem; }
+
+  main {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem 1.5rem 4rem;
+  }
+
+  section.block {
+    background: var(--c-white);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 1.5rem 1.5rem 1.75rem;
+    margin-bottom: 1.5rem;
+    box-shadow: var(--shadow);
+  }
+  section.block > h2 {
+    border-bottom: 1px solid var(--line);
+    padding-bottom: 0.6rem;
+    margin-bottom: 1rem;
+  }
+  .lede { color: var(--ink-soft); font-size: 0.95rem; max-width: 780px; }
+
+  /* Topic / sub-section */
+  .topic {
+    border-left: 3px solid var(--c-med-blue);
+    background: var(--c-n05);
+    padding: 0.9rem 1.1rem;
+    border-radius: 0 6px 6px 0;
+    margin: 1rem 0;
+  }
+  .topic h3 { margin-bottom: 0.35rem; }
+  .topic .topic-meta {
+    font-size: 0.72rem; text-transform: uppercase; letter-spacing: 1px;
+    color: var(--ink-soft); margin-bottom: 0.4rem;
+  }
+
+  /* Q & A */
+  .qa { margin: 1rem 0 0.5rem; }
+  .qa .q, .qa .a {
+    padding: 0.75rem 1rem;
+    border-radius: 6px;
+    margin-bottom: 0.6rem;
+  }
+  .qa .q {
+    background: var(--ms-blue-light);
+    border-left: 3px solid var(--c-med-blue);
+  }
+  .qa .a {
+    background: #FFF8E1;
+    border-left: 3px solid var(--c-amber);
+  }
+  .qa .label {
+    display: inline-block;
+    font-size: 0.7rem; font-weight: 600; text-transform: uppercase;
+    letter-spacing: 1px; color: var(--ink-soft); margin-right: 0.5rem;
+  }
+
+  /* Channel summary table */
+  .channel-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 0.75rem 0;
+    font-size: 0.9rem;
+  }
+  .channel-table th, .channel-table td {
+    text-align: left;
+    padding: 0.6rem 0.75rem;
+    border-bottom: 1px solid var(--line);
+    vertical-align: top;
+  }
+  .channel-table thead th {
+    background: var(--c-dark-blue);
+    color: white;
+    font-weight: 600;
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  .channel-table tbody tr:hover { background: var(--c-n05); }
+  .pill {
+    display: inline-block; padding: 0.15rem 0.55rem;
+    border-radius: 999px; font-size: 0.72rem; font-weight: 600;
+    background: var(--ms-blue-light); color: var(--ms-blue-dark);
+  }
+  .pill.warn { background: #FDECC8; color: #8A5A00; }
+
+  .callout {
+    background: #FDECC8;
+    border-left: 3px solid var(--c-amber);
+    padding: 0.75rem 1rem;
+    border-radius: 0 6px 6px 0;
+    margin: 0.75rem 0;
+    font-size: 0.92rem;
+  }
+  .callout strong { color: #8A5A00; }
+
+  details.raw {
+    margin-top: 1rem;
+    background: var(--c-n05);
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    padding: 0.5rem 0.9rem;
+  }
+  details.raw summary {
+    cursor: pointer;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--ink-soft);
+    padding: 0.3rem 0;
+  }
+  details.raw[open] summary { margin-bottom: 0.5rem; }
+  details.raw .raw-body {
+    font-size: 0.88rem;
+    color: var(--ink);
+    white-space: pre-wrap;
+    background: white;
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    padding: 0.75rem 0.9rem;
+  }
+
+  .next-steps {
+    background: #E6F2FB;
+    border-left: 3px solid var(--c-med-blue);
+    padding: 0.75rem 1rem;
+    border-radius: 0 6px 6px 0;
+    margin-top: 1rem;
+  }
+  .next-steps h4 { color: var(--ms-blue-dark); margin-bottom: 0.3rem; }
+  .next-steps ul { margin: 0.3rem 0 0; padding-left: 1.2rem; }
+  .next-steps li { margin-bottom: 0.2rem; font-size: 0.92rem; }
+
+  .footer-note {
+    margin-top: 2rem; padding-top: 1rem;
+    border-top: 1px solid var(--line);
+    color: var(--ink-soft); font-size: 0.85rem;
+  }
+
+  /* Section TOC */
+  .toc {
+    display: flex; flex-wrap: wrap; gap: 0.5rem;
+    margin: 0.75rem 0 0;
+  }
+  .toc a {
+    font-size: 0.82rem;
+    padding: 0.3rem 0.7rem;
+    background: var(--ms-blue-light);
+    color: var(--ms-blue-dark);
+    text-decoration: none;
+    border-radius: 999px;
+    font-weight: 500;
+  }
+  .toc a:hover { background: var(--c-med-blue); color: white; }
+</style>
+</head>
+<body>
+
+<nav class="nav" aria-label="Primary navigation">
+  <span class="brand">Performance Marketing Hub <span style="font-weight:400; color:var(--ink-soft); font-size:0.78rem; margin-left:0.35rem;">(working title)</span></span>
+  <a href="index.html">Brief</a>
+  <a href="reports.html">Reports inventory</a>
+  <a href="partnership-ideas.html">Partnership ideas</a>
+  <a href="web-metrics-notes.html" style="color: var(--ms-blue-dark); font-weight: 600;">Web metrics notes</a>
+  <a href="timeline.html">Timeline</a>
+  <a href="wireframe-v1.html">V1 wireframe</a>
+  <a href="archive.html">Archive</a>
+</nav>
+
+<header class="page-header">
+  <div class="container">
+    <div class="meta">DDS Marketing · Working Document · Draft</div>
+    <h1>Web Metrics Notes</h1>
+    <p>Running notes from conversations with channel and analytics partners — questions asked, what came back, and what it means for the unified view. Add freely.</p>
+  </div>
+</header>
+
+<main>
+
+  <section class="block">
+    <h2>Sections</h2>
+    <div class="toc">
+      <a href="#partnerships">Partnerships</a>
+      <a href="#paid-media">Paid Media</a>
+    </div>
+  </section>
+
+  <!-- ============== -->
+  <!-- PARTNERSHIPS   -->
+  <!-- ============== -->
+  <section class="block" id="partnerships">
+    <h2>Partnerships</h2>
+    <p class="lede">Notes from partnership conversations on measurement, comparability, and reporting cadence.</p>
+
+    <div class="callout">
+      <strong>Pending:</strong> Cam to add notes here.
+    </div>
+  </section>
+
+  <!-- ============== -->
+  <!-- PAID MEDIA     -->
+  <!-- ============== -->
+  <section class="block" id="paid-media">
+    <h2>Paid Media</h2>
+    <p class="lede">Notes from paid media conversations on tracking, attribution, and channel taxonomy.</p>
+
+    <!-- TOPIC 1: GTM moment → creative → OCID -->
+    <div class="topic" id="gtm-moment-creative">
+      <div class="topic-meta">Topic · Creative ↔ GTM moment ↔ OCID</div>
+      <h3>Can we connect GTM moments (Back to School, Holiday, etc.) to OCIDs so we can see what creative is running where without manual pulls?</h3>
+
+      <div class="qa">
+        <div class="q">
+          <span class="label">Question (to Jordan)</span>
+          Asked about capabilities to track creative placements by GTM Moment (e.g. Back to School, Holiday) — essentially, is there a way to connect GTM moments to OCIDs so we don't need manual data pulls to understand what's running where.
+        </div>
+        <div class="a">
+          <span class="label">Response (Jordan) — TL;DR</span>
+          It's not possible to get to creative messaging via OCID strings in today's (Q4) set-up. The primary reason is how dynamic our creative rotation is across SEM/PMAX, Display, Social, and OLV. OCID strings are generated once per quarter after all new channels and tactics have run — they don't continuously generate.
+        </div>
+      </div>
+
+      <h4 style="margin-top:1rem;">Channel-by-channel breakdown</h4>
+      <table class="channel-table">
+        <thead>
+          <tr>
+            <th style="width:18%;">Channel</th>
+            <th style="width:42%;">Why OCID-by-creative doesn't work today</th>
+            <th style="width:40%;">Alternative source for creative-level read</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>SEM / PMAX</strong><br><span style="font-size:0.78rem; color:var(--ink-soft);">Google &amp; MSA</span></td>
+            <td>We don't traffic by SEM copy. Copy is dynamically served and auto-optimized across evergreen, promos, and other variants.</td>
+            <td>Back-end performance by creative <em>type</em> as a proxy, pulled directly from the platforms.</td>
+          </tr>
+          <tr>
+            <td><strong>Display</strong><br><span style="font-size:0.78rem; color:var(--ink-soft);">The Trade Desk + Adobe rotations</span></td>
+            <td>Creative ID is just "Adobe." All creative / banners are dynamically rotated by Adobe (24–48 hr swap window — Mylan and Priscilla know this well).</td>
+            <td>Back-end performance through Adobe — the taxonomy lets us map which creative performed best.</td>
+          </tr>
+          <tr>
+            <td><strong>OLV</strong><br><span style="font-size:0.78rem; color:var(--ink-soft);">Sunday Sky</span></td>
+            <td>Same dynamic-serve pattern — no OCIDs are generated by message.</td>
+            <td>Back-end metrics through Sunday Sky.</td>
+          </tr>
+          <tr>
+            <td><strong>Social</strong></td>
+            <td>Same — copy and message are swapped in/out dynamically on the platform.</td>
+            <td>Platform back-end by creative variant.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="callout">
+        <strong>Path forward:</strong> A solve <em>may</em> be possible going forward, but we'll likely have to get creative with proxies. OCID strings are not inherently dynamic — generation is a manual quarterly process, so they can't be the primary join key for creative-level reporting.
+      </div>
+
+      <div class="next-steps">
+        <h4>Implications for the unified view</h4>
+        <ul>
+          <li>Don't promise creative-level cuts in V1 via OCID. Use platform back-ends as the source of truth for creative performance.</li>
+          <li>For GTM moment views, lean on tactic / campaign-level aggregations + manual moment tagging until a dynamic taxonomy exists.</li>
+          <li>Open question: what would a proxy-based "moment → creative" join look like, and who owns it?</li>
+        </ul>
+      </div>
+
+      <details class="raw">
+        <summary>Show raw response from Jordan</summary>
+        <div class="raw-body">TL;DR: it's not possible to get to the creative messaging via OCID strings today's (in Q4) set-up for the primary reason being how dynamic our creative rotation is for SEM/PMAX, Display, Social. The OCID strings are generated 1x per quarter after all new channels + tactics have run. It does not continuously generate.
+
+See More details below:
+
+1) SEM/PMAX (Google &amp; MSA) - we do not 'traffic' by SEM copy; it's dynamically served based on evergreen, promos and other copy that gets auto-optimized.
+
+Alt: we can give you the back-end performance by creative 'type' for proxies that we can pull directly from the platforms
+
+2) Display (The Trade Desk &amp; creative rotations through Adobe) - the creative ID is just 'Adobe' and all creative / banners are dynamically rotated in by Adobe which allows us to change creative within 24-48 hours which Mylan and Priscilla know very well.
+
+Alt: we can give you back-end performance through Adobe where the taxonomy allows us to map which creative worked the best
+
+3) OLV (Sunday Sky) - same thing, it's dynamically served so no OCIDs are generated by message
+
+Alt: we can provide back-end metrics through SS
+
+4) Social - same thing it's dynamically served on the platform where we swap in &amp; out the copy &amp; message
+
+We can look to see if there's a solve going forward, but we may have to get creative with proxies as OCIDs strings are not inherently dynamic and is a manual process.</div>
+      </details>
+    </div>
+
+    <!-- TOPIC 2: PMAX as its own traffic channel -->
+    <div class="topic" id="pmax-traffic-channel">
+      <div class="topic-meta">Topic · Traffic channel taxonomy</div>
+      <h3>Splitting PMAX into its own traffic channel in web data</h3>
+
+      <p>Today PMAX rolls up into a broader paid-search bucket when looking at web data, which makes it hard to see PMAX's discrete contribution to traffic and conversions vs. traditional SEM. Want to understand whether PMAX can be split out as its own channel in CJA / web reporting.</p>
+
+      <div class="callout">
+        <strong>Status:</strong> No deep-dive yet — this is an open thread, not a finding.
+      </div>
+
+      <div class="next-steps">
+        <h4>Next step</h4>
+        <ul>
+          <li>Reach out to <strong>Priyanka</strong> — best person to talk to about CJA channel definitions and whether PMAX can be carved out as its own traffic channel.</li>
+        </ul>
+      </div>
+    </div>
+
+  </section>
+
+  <p class="footer-note">Working notes · Marketing Effectiveness Solution · Add new topics by copying a <code>.topic</code> block.</p>
+
+</main>
+
+</body>
+</html>
