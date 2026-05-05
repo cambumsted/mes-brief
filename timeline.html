@@ -225,6 +225,56 @@
   .bar.walk { background: var(--c-med-blue); }
   .bar.run { background: var(--c-teal); color: var(--c-dark-blue); }
 
+  /* Milestones row */
+  .gantt-row.milestones-row { min-height: 38px; background: #FFFCF1; }
+  .gantt-row.milestones-row .label {
+    background: #FFF6D8;
+    color: #6B5800;
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 700;
+  }
+  .milestone-mark {
+    position: absolute;
+    top: 50%;
+    transform: translate(-50%, -50%) rotate(45deg);
+    width: 14px; height: 14px;
+    background: #FFB900;
+    border: 2px solid #6B5800;
+    box-shadow: 0 1px 3px rgba(9,31,46,0.25);
+    z-index: 2;
+    cursor: help;
+  }
+  .milestone-mark::after {
+    content: attr(data-label);
+    position: absolute;
+    transform: rotate(-45deg) translate(-50%, -130%);
+    top: 50%; left: 50%;
+    background: var(--c-dark-blue);
+    color: white;
+    padding: 0.4rem 0.65rem;
+    border-radius: 5px;
+    font-size: 0.74rem;
+    font-weight: 600;
+    letter-spacing: 0;
+    text-transform: none;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.15s ease;
+    box-shadow: 0 2px 6px rgba(9,31,46,0.25);
+  }
+  .milestone-mark:hover::after,
+  .milestone-mark:focus::after { opacity: 1; }
+  .ms-legend-swatch {
+    display: inline-block; width: 12px; height: 12px;
+    background: #FFB900; border: 1.5px solid #6B5800;
+    transform: rotate(45deg);
+    margin-right: 0.35rem;
+    vertical-align: middle;
+  }
+
   /* Collapsible phase groups in the gantt */
   .phase-group { border-bottom: 1px solid var(--line); }
   .phase-group:last-of-type { border-bottom: none; }
@@ -436,6 +486,20 @@
         <div>Workstream</div>
         <div>May</div><div>Jun</div><div>Jul</div><div>Aug</div><div>Sep</div><div>Oct</div>
         <div>Nov</div><div>Dec</div><div>Jan</div><div>Feb</div><div>Mar</div><div>Apr</div>
+      </div>
+
+      <div class="gantt-row milestones-row">
+        <div class="label">Milestones</div>
+        <div class="gantt-cells">
+          <div class="col"></div><div class="col"></div><div class="col"></div><div class="col"></div>
+          <div class="col"></div><div class="col"></div><div class="col"></div><div class="col"></div>
+          <div class="col"></div><div class="col"></div><div class="col"></div><div class="col"></div>
+          <span class="milestone-mark" tabindex="0" style="left: 6%;"  data-label="Late May 2026 · Project kickoff"></span>
+          <span class="milestone-mark" tabindex="0" style="left: 33%;" data-label="End Aug 2026 · Manual MVP live"></span>
+          <span class="milestone-mark" tabindex="0" style="left: 58%;" data-label="End Nov 2026 · Walk-phase readout"></span>
+          <span class="milestone-mark" tabindex="0" style="left: 83%;" data-label="End Feb 2027 · V1 integrated build"></span>
+          <span class="milestone-mark" tabindex="0" style="left: 98%;" data-label="End Apr 2027 · Embedded in leadership rituals"></span>
+        </div>
       </div>
 
       <!-- CRAWL GROUP -->

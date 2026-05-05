@@ -1081,6 +1081,48 @@
   .bar.walk { background: var(--c-med-blue); }
   .bar.run { background: var(--c-teal); color: var(--c-dark-blue); }
 
+  /* Milestones row */
+  .gantt-row.milestones-row { min-height: 38px; background: #FFFCF1; }
+  .gantt-row.milestones-row .label {
+    background: #FFF6D8;
+    color: #6B5800;
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+  .milestone-mark {
+    position: absolute;
+    top: 50%;
+    transform: translate(-50%, -50%) rotate(45deg);
+    width: 14px; height: 14px;
+    background: var(--c-amber, #FFB900);
+    border: 2px solid #6B5800;
+    box-shadow: 0 1px 3px rgba(9,31,46,0.25);
+    z-index: 2;
+    cursor: help;
+  }
+  .milestone-mark::after {
+    content: attr(data-label);
+    position: absolute;
+    transform: rotate(-45deg) translate(-50%, -130%);
+    top: 50%; left: 50%;
+    background: var(--c-dark-blue);
+    color: white;
+    padding: 0.4rem 0.65rem;
+    border-radius: 5px;
+    font-size: 0.74rem;
+    font-weight: 600;
+    letter-spacing: 0;
+    text-transform: none;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.15s ease;
+    box-shadow: 0 2px 6px rgba(9,31,46,0.25);
+  }
+  .milestone-mark:hover::after,
+  .milestone-mark:focus::after { opacity: 1; }
+
   .gantt-legend {
     display: flex; flex-wrap: wrap; gap: 1rem;
     margin-top: 0.8rem; font-size: 0.78rem; color: var(--ink-soft);
@@ -1092,6 +1134,12 @@
   .gantt-legend .sw-crawl { background: var(--c-n50); }
   .gantt-legend .sw-walk { background: var(--c-med-blue); }
   .gantt-legend .sw-run { background: var(--c-teal); }
+  .gantt-legend .sw-milestone {
+    background: var(--c-amber, #FFB900);
+    border: 1.5px solid #6B5800;
+    transform: rotate(45deg);
+    border-radius: 0;
+  }
 
   ul, ol { margin: 0.4rem 0 0.6rem; padding-left: 1.3rem; }
   li { margin: 0.3rem 0; }
@@ -1358,6 +1406,20 @@
         <div>Nov</div><div>Dec</div><div>Jan</div><div>Feb</div><div>Mar</div><div>Apr</div>
       </div>
 
+      <div class="gantt-row milestones-row">
+        <div class="label">Milestones</div>
+        <div class="gantt-cells">
+          <div class="col"></div><div class="col"></div><div class="col"></div><div class="col"></div>
+          <div class="col"></div><div class="col"></div><div class="col"></div><div class="col"></div>
+          <div class="col"></div><div class="col"></div><div class="col"></div><div class="col"></div>
+          <span class="milestone-mark" style="left: 6%;"  data-label="Late May · Kickoff"></span>
+          <span class="milestone-mark" style="left: 33%;" data-label="End Aug · MVP live"></span>
+          <span class="milestone-mark" style="left: 58%;" data-label="End Nov · Walk readout"></span>
+          <span class="milestone-mark" style="left: 83%;" data-label="End Feb · V1 build"></span>
+          <span class="milestone-mark" style="left: 98%;" data-label="End Apr · Embedded"></span>
+        </div>
+      </div>
+
       <div class="gantt-row">
         <div class="label">Discovery period</div>
         <div class="gantt-cells">
@@ -1497,6 +1559,7 @@
       <span><span class="swatch sw-crawl"></span>Crawl · define &amp; align</span>
       <span><span class="swatch sw-walk"></span>Walk · centralize &amp; standardize</span>
       <span><span class="swatch sw-run"></span>Run · integrate &amp; automate</span>
+      <span><span class="swatch sw-milestone"></span>Milestone (hover for label)</span>
     </div>
   </section>
 
