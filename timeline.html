@@ -249,11 +249,11 @@
   .milestone-mark::after {
     content: attr(data-label);
     position: absolute;
-    transform: rotate(-45deg) translate(-50%, -130%);
-    top: 50%; left: 50%;
+    transform: rotate(-45deg) translate(-50%, -100%);
+    top: -16px; left: 50%;
     background: var(--c-dark-blue);
     color: white;
-    padding: 0.4rem 0.65rem;
+    padding: 0.45rem 0.7rem;
     border-radius: 5px;
     font-size: 0.74rem;
     font-weight: 600;
@@ -263,7 +263,8 @@
     opacity: 0;
     pointer-events: none;
     transition: opacity 0.15s ease;
-    box-shadow: 0 2px 6px rgba(9,31,46,0.25);
+    box-shadow: 0 2px 8px rgba(9,31,46,0.3);
+    z-index: 10;
   }
   .milestone-mark:hover::after,
   .milestone-mark:focus::after { opacity: 1; }
