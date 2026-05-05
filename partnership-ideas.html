@@ -263,6 +263,28 @@
     color: var(--ink);
     line-height: 1.4;
   }
+  .flow-step ul {
+    margin: 0.2rem 0 0;
+    padding: 0;
+    list-style: none;
+  }
+  .flow-step li {
+    font-size: 0.82rem;
+    color: var(--ink);
+    line-height: 1.4;
+    position: relative;
+    padding-left: 0.85rem;
+    margin: 0.3rem 0;
+  }
+  .flow-step li::before {
+    content: "";
+    position: absolute;
+    left: 0; top: 0.5rem;
+    width: 5px; height: 5px;
+    border-radius: 50%;
+    background: var(--c-med-blue);
+  }
+  .flow-step.suggest li::before { background: #C9A227; }
   .flow-step.suggest {
     border-top-color: var(--c-amber, #FFB900);
     background: #FFFCF1;
@@ -348,6 +370,139 @@
 </header>
 
 <main>
+
+  <!-- ============== -->
+  <!-- AMEX V1 MVP    -->
+  <!-- ============== -->
+  <section class="block" id="amex">
+    <h2>AMEX V1 MVP</h2>
+    <p class="lede">A focused build for AMEX across Americas, Asia, and EMEA — the path we'll walk and the grid we'll fill.</p>
+
+    <h3 style="margin-top:1.2rem;">The path</h3>
+    <div class="flow">
+
+      <div class="flow-step">
+        <span class="step-num">1</span>
+        <span class="role">Define</span>
+        <h4>Set the AMEX KPI list per region</h4>
+        <ul>
+          <li>Lock the KPIs we'll report on for AMEX in Americas, Asia, and EMEA.</li>
+          <li>Mark each as primary or secondary based on the region's goal.</li>
+        </ul>
+      </div>
+
+      <div class="flow-step suggest">
+        <span class="step-num">2</span>
+        <span class="added-tag">Suggested add</span>
+        <span class="role">Align</span>
+        <h4>Confirm definitions are comparable</h4>
+        <ul>
+          <li>Pressure-test that ROI / Conversions / Traffic mean the same thing in every region.</li>
+          <li>Align on currency, attribution window, and what counts as a conversion.</li>
+          <li>Catch this before locating cells — saves rework downstream.</li>
+        </ul>
+      </div>
+
+      <div class="flow-step">
+        <span class="step-num">3</span>
+        <span class="role">Locate</span>
+        <h4>Find each KPI in regional reports</h4>
+        <ul>
+          <li>For every KPI × region cell, pinpoint the exact source.</li>
+          <li>Example: "EMEA AMEX ROI → EMEA Partnership Monthly, tab 3, cell D14."</li>
+          <li>Cross-reference against the <a href="reports.html">Reports inventory</a>.</li>
+        </ul>
+      </div>
+
+      <div class="flow-step">
+        <span class="step-num">4</span>
+        <span class="role">Socialize</span>
+        <h4>Share with RDS Partnerships teams</h4>
+        <ul>
+          <li>Walk RDS through the AMEX MVP.</li>
+          <li>Frame it as the model for every partnership going forward.</li>
+          <li>Gather feedback on definitions, feasibility, and ownership.</li>
+        </ul>
+      </div>
+
+      <div class="flow-step">
+        <span class="step-num">5</span>
+        <span class="role">Standardize</span>
+        <h4>Template for all partnerships</h4>
+        <ul>
+          <li>Bake learnings into one template every RDS Partnerships team fills out.</li>
+          <li>Include KPI definitions, source-of-truth pointers, and refresh cadence.</li>
+        </ul>
+      </div>
+
+    </div>
+
+    <h3 style="margin-top:2rem;">AMEX comparability grid</h3>
+    <p class="lede">Same KPI columns, AMEX rows only — for a focused side-by-side across regions.</p>
+
+    <div class="grid-wrap">
+      <table class="partnership-grid">
+        <thead>
+          <tr>
+            <th>Partnership</th>
+            <th>Region</th>
+            <th>Goal</th>
+            <th>Reach / Impressions</th>
+            <th>Traffic</th>
+            <th>Engagement</th>
+            <th>Conversions</th>
+            <th>Revenue / Pipeline</th>
+            <th>ROI</th>
+            <th>Brand Lift</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>AMEX (Americas)</td>
+            <td><span class="region">Americas</span></td>
+            <td>Conversions</td>
+            <td class="blank">—</td>
+            <td class="partial">42K sessions</td>
+            <td class="blank">—</td>
+            <td class="filled">3,150 purchases</td>
+            <td class="filled">$2.1M revenue</td>
+            <td class="filled">4.8x</td>
+            <td class="blank">—</td>
+          </tr>
+          <tr>
+            <td>AMEX (Asia)</td>
+            <td><span class="region">Asia</span></td>
+            <td>Conversions</td>
+            <td class="blank">—</td>
+            <td class="partial">18K sessions</td>
+            <td class="blank">—</td>
+            <td class="filled">1,240 purchases</td>
+            <td class="filled">$0.9M revenue</td>
+            <td class="partial">3.2x</td>
+            <td class="blank">—</td>
+          </tr>
+          <tr>
+            <td>AMEX (EMEA)</td>
+            <td><span class="region">EMEA</span></td>
+            <td>Conversions</td>
+            <td class="blank">—</td>
+            <td class="partial">27K sessions</td>
+            <td class="blank">—</td>
+            <td class="filled">1,980 purchases</td>
+            <td class="filled">$1.4M revenue</td>
+            <td class="filled">4.1x</td>
+            <td class="blank">—</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="legend">
+      <span><span class="swatch sw-filled"></span>Reported consistently</span>
+      <span><span class="swatch sw-partial"></span>Reported inconsistently / not standardized</span>
+      <span><span class="swatch sw-blank"></span>Not reported</span>
+    </div>
+  </section>
 
   <!-- ============== -->
   <!-- THE GRID       -->
@@ -443,137 +598,11 @@
     </div>
   </section>
 
-  <!-- AMEX-only grid -->
-  <section class="block" id="grid-amex">
-    <h2>AMEX comparability grid</h2>
-    <p class="lede">Same KPI columns, AMEX rows only — for a focused side-by-side across regions.</p>
-
-    <div class="grid-wrap">
-      <table class="partnership-grid">
-        <thead>
-          <tr>
-            <th>Partnership</th>
-            <th>Region</th>
-            <th>Goal</th>
-            <th>Reach / Impressions</th>
-            <th>Traffic</th>
-            <th>Engagement</th>
-            <th>Conversions</th>
-            <th>Revenue / Pipeline</th>
-            <th>ROI</th>
-            <th>Brand Lift</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>AMEX (Americas)</td>
-            <td><span class="region">Americas</span></td>
-            <td>Conversions</td>
-            <td class="blank">—</td>
-            <td class="partial">42K sessions</td>
-            <td class="blank">—</td>
-            <td class="filled">3,150 purchases</td>
-            <td class="filled">$2.1M revenue</td>
-            <td class="filled">4.8x</td>
-            <td class="blank">—</td>
-          </tr>
-          <tr>
-            <td>AMEX (Asia)</td>
-            <td><span class="region">Asia</span></td>
-            <td>Conversions</td>
-            <td class="blank">—</td>
-            <td class="partial">18K sessions</td>
-            <td class="blank">—</td>
-            <td class="filled">1,240 purchases</td>
-            <td class="filled">$0.9M revenue</td>
-            <td class="partial">3.2x</td>
-            <td class="blank">—</td>
-          </tr>
-          <tr>
-            <td>AMEX (EMEA)</td>
-            <td><span class="region">EMEA</span></td>
-            <td>Conversions</td>
-            <td class="blank">—</td>
-            <td class="partial">27K sessions</td>
-            <td class="blank">—</td>
-            <td class="filled">1,980 purchases</td>
-            <td class="filled">$1.4M revenue</td>
-            <td class="filled">4.1x</td>
-            <td class="blank">—</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-
     <div class="legend">
       <span><span class="swatch sw-filled"></span>Reported consistently</span>
       <span><span class="swatch sw-partial"></span>Reported inconsistently / not standardized</span>
       <span><span class="swatch sw-blank"></span>Not reported</span>
     </div>
-  </section>
-
-  <!-- AMEX V1 MVP path -->
-  <section class="block" id="amex-mvp">
-    <h2>Path to AMEX V1 MVP</h2>
-    <p class="lede">How we get from "AMEX is reported differently in every region" to one comparable view that becomes the template for every other partnership. Yellow steps are ones I think are worth adding to the four you sketched out.</p>
-
-    <div class="flow">
-
-      <div class="flow-step">
-        <span class="step-num">1</span>
-        <span class="role">Define</span>
-        <h4>Set the AMEX KPI list per region</h4>
-        <p>Lock the KPIs we'll report on for AMEX in Americas, Asia, and EMEA — including which one is the primary read for each region's goal (e.g., ROI for conversion regions, Traffic for traffic regions).</p>
-      </div>
-
-      <div class="flow-step suggest">
-        <span class="step-num">2</span>
-        <span class="added-tag">Suggested add</span>
-        <span class="role">Align</span>
-        <h4>Confirm definitions are comparable</h4>
-        <p>Before we go hunting in reports — pressure-test that "ROI", "Conversions", "Traffic" mean the same thing in EMEA as they do in Americas (currency, attribution window, what counts as a conversion).</p>
-      </div>
-
-      <div class="flow-step">
-        <span class="step-num">3</span>
-        <span class="role">Locate</span>
-        <h4>Find each KPI in regional reports</h4>
-        <p>For every KPI × region cell in the AMEX grid, pinpoint the exact source — e.g., "EMEA AMEX ROI lives in the EMEA Partnership Monthly, tab 3, cell D14." Cross-reference against the <a href="reports.html">Reports inventory</a>.</p>
-      </div>
-
-      <div class="flow-step suggest">
-        <span class="step-num">4</span>
-        <span class="added-tag">Suggested add</span>
-        <span class="role">Pilot</span>
-        <h4>Manually fill the AMEX V1 MVP</h4>
-        <p>Populate the grid with one full cycle of real numbers ourselves — proves the workflow end to end and gives us a working artifact (not just a template) to show RDS before asking them to adopt it.</p>
-      </div>
-
-      <div class="flow-step">
-        <span class="step-num">5</span>
-        <span class="role">Socialize</span>
-        <h4>Share with RDS Partnerships teams</h4>
-        <p>Walk RDS through the AMEX MVP. Frame it as the model for every partnership going forward, gather feedback on KPI definitions and feasibility, and set expectations on cadence + ownership.</p>
-      </div>
-
-      <div class="flow-step">
-        <span class="step-num">6</span>
-        <span class="role">Standardize</span>
-        <h4>Standardized template for all partnerships</h4>
-        <p>Bake the learnings into a single template that every RDS Partnerships team fills out for their partnerships, with clear KPI definitions, source-of-truth pointers, and a fixed refresh cadence.</p>
-      </div>
-
-    </div>
-
-    <div class="flow-meta">
-      <span class="pill">Owner: Cam + DDS</span>
-      <span class="pill">Goal: AMEX MVP first cycle</span>
-      <span class="pill warn">Open: who from RDS leads adoption?</span>
-    </div>
-
-    <p style="margin-top: 1rem; font-size: 0.88rem; color: var(--ink-soft);">
-      Yellow-bordered steps (2 &amp; 4) are additions worth considering. Step 2 saves a lot of pain later — without it we risk cataloging metrics that aren't actually comparable. Step 4 turns the template into a real artifact before we ask anyone to adopt it.
-    </p>
   </section>
 
   <p class="footer-note">This is a working scratch-pad. Edit the HTML directly to add partnerships, KPIs, or ideas — or send notes to Cam.</p>
