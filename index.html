@@ -358,8 +358,184 @@
   }
   .scope.in .scope-label { color: #1E6B5C; }
   .scope.out .scope-label { color: var(--ink-soft); }
-  .scope ul { margin: 0; padding-left: 1.1rem; }
-  .scope li { margin: 0.2rem 0; }
+  .scope ul { margin: 0; padding-left: 0; list-style: none; }
+  .scope li { margin: 0.3rem 0; padding-left: 1.4rem; position: relative; }
+  .scope.in li::before {
+    content: "\2713";
+    position: absolute; left: 0; top: 0;
+    color: #2C7A4B; font-weight: 700;
+  }
+  .scope.out li::before {
+    content: "\2715";
+    position: absolute; left: 0; top: 0;
+    color: var(--c-n50); font-weight: 700;
+  }
+
+  /* v0.3 visual — small section eyebrow */
+  .hint-head {
+    font-size: 0.74rem !important;
+    text-transform: uppercase;
+    letter-spacing: 1.4px;
+    color: var(--ink-soft);
+    font-weight: 700;
+    margin: 1.4rem 0 0.5rem;
+  }
+
+  /* v0.3 visual — question tiles */
+  .qtiles {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.9rem;
+    margin: 0.4rem 0 0.4rem;
+  }
+  @media (max-width: 800px) { .qtiles { grid-template-columns: 1fr; } }
+  .qtile {
+    background: var(--c-white);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 1.1rem 1.15rem 1.2rem;
+    display: flex; flex-direction: column;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 1px 2px rgba(9,31,46,0.05);
+  }
+  .qtile::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--c-med-blue), var(--c-teal));
+  }
+  .qtile .qnum {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--c-med-blue);
+    line-height: 1;
+    letter-spacing: -1px;
+    margin: 0.2rem 0 0.6rem;
+  }
+  .qtile .qtext {
+    font-weight: 600;
+    font-size: 1rem;
+    color: var(--ink);
+    line-height: 1.35;
+    margin-bottom: 0.5rem;
+  }
+  .qtile .qcap {
+    font-size: 0.82rem;
+    color: var(--ink-soft);
+    margin-top: auto;
+    line-height: 1.4;
+  }
+
+  /* v0.3 visual — today flow */
+  .today-flow {
+    display: flex;
+    align-items: stretch;
+    gap: 0.35rem;
+    margin: 0.4rem 0 0;
+  }
+  .today-flow .step {
+    flex: 1 1 0;
+    min-width: 0;
+    background: var(--c-white);
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    padding: 0.7rem 0.7rem;
+    font-size: 0.85rem;
+    line-height: 1.35;
+    color: var(--ink);
+    text-align: center;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .today-flow .step.warn {
+    background: #FFF4CE;
+    border-color: #F0DEA0;
+    color: #6B5800;
+    font-weight: 600;
+  }
+  .today-flow .arrow {
+    display: flex; align-items: center; justify-content: center;
+    color: var(--c-med-blue);
+    font-size: 1.4rem;
+    font-weight: 700;
+    flex: 0 0 auto;
+    width: 18px;
+  }
+  @media (max-width: 800px) {
+    .today-flow { flex-direction: column; }
+    .today-flow .arrow { transform: rotate(90deg); width: 100%; height: 18px; }
+  }
+
+  /* v0.3 visual — hub diagram */
+  .hub-diagram {
+    margin: 1rem 0 0;
+    background: linear-gradient(180deg, #F4FBFF 0%, #ECF7F3 100%);
+    border: 1px solid var(--c-aqua);
+    border-radius: 10px;
+    padding: 1.6rem 1.5rem 1.8rem;
+    display: flex; flex-direction: column; align-items: center;
+    gap: 0.55rem;
+  }
+  .hub-tier {
+    display: flex; flex-wrap: wrap; gap: 0.55rem;
+    justify-content: center;
+    width: 100%;
+  }
+  .hub-pill {
+    background: var(--c-white);
+    border: 1px solid var(--line);
+    padding: 0.6rem 1rem;
+    border-radius: 6px;
+    font-size: 0.88rem;
+    font-weight: 600;
+    color: var(--ink);
+    box-shadow: 0 1px 2px rgba(9,31,46,0.08);
+    text-align: center;
+    flex: 0 1 auto;
+  }
+  .hub-pill.q { border-left: 3px solid var(--c-med-blue); }
+  .hub-pill.c { border-left: 3px solid var(--c-teal); }
+  .hub-down {
+    width: 2px; height: 22px;
+    background: var(--c-med-blue);
+    position: relative;
+  }
+  .hub-down::after {
+    content: "";
+    position: absolute;
+    bottom: -1px; left: 50%;
+    transform: translateX(-50%);
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 7px solid var(--c-med-blue);
+  }
+  .hub-down.teal { background: var(--c-teal); }
+  .hub-down.teal::after { border-top-color: var(--c-teal); }
+  .hub-core {
+    background: var(--c-dark-blue);
+    color: white;
+    padding: 1rem 2rem;
+    border-radius: 8px;
+    text-align: center;
+    box-shadow: 0 2px 8px rgba(9,31,46,0.22);
+    border: 1px solid var(--c-dark-blue);
+  }
+  .hub-core .hub-title {
+    font-size: 1.2rem;
+    font-weight: 700;
+    letter-spacing: -0.2px;
+  }
+  .hub-core .hub-sub {
+    font-size: 0.8rem;
+    opacity: 0.85;
+    margin-top: 0.2rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+
+  /* v0.3 visual — tighter qcard meta */
+  .qcard .q-meta .lab { display: block; }
 
   /* Phase summary */
   .phase-summary { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-top: 1rem; }
@@ -515,142 +691,134 @@
   <!-- 1. PROBLEM -->
   <section id="problem">
     <span class="section-num">01 · The Problem</span>
-    <h2>Leadership doesn't have a single place to answer the questions they're paid to answer.</h2>
+    <h2>Leadership doesn't have one place to answer the questions they're paid to answer.</h2>
 
-    <p class="story-lede">
-      Every cycle, DDS leaders get the same handful of questions from their leaders, their peers,
-      and their own teams — questions that sit at the core of how they invest, prioritize, and
-      defend marketing dollars. Today there is <strong>no single destination</strong> they can open
-      to answer them.
-    </p>
+    <h3 class="hint-head">Asked every cycle</h3>
+    <div class="qtiles">
+      <div class="qtile">
+        <div class="qnum">01</div>
+        <div class="qtext">How should I invest incremental marketing dollars?</div>
+        <div class="qcap">When budget opens up — or gets pulled.</div>
+      </div>
+      <div class="qtile">
+        <div class="qnum">02</div>
+        <div class="qtext">What channel is driving this trend?</div>
+        <div class="qcap">Traffic, conversion, revenue — which lever moved it?</div>
+      </div>
+      <div class="qtile">
+        <div class="qnum">03</div>
+        <div class="qtext">What's the ROI of this partnership?</div>
+        <div class="qcap">NFL, AMEX (Americas / Asia / EMEA), and others.</div>
+      </div>
+    </div>
 
-    <h3 style="margin-top:0.5rem;">The questions that come up every cycle</h3>
-    <ul class="qlist">
-      <li>
-        <div>
-          <strong>How should I invest incremental marketing dollars?</strong>
-          <em>When budget opens up — or gets pulled — where does it go and why?</em>
-        </div>
-      </li>
-      <li>
-        <div>
-          <strong>What channel is driving this traffic / conversion / revenue trend?</strong>
-          <em>The number moved. Which lever was responsible?</em>
-        </div>
-      </li>
-      <li>
-        <div>
-          <strong>What is the return on investment for this partnership?</strong>
-          <em>NFL, AMEX (Americas / Asia / EMEA), and others — is the spend earning its keep?</em>
-        </div>
-      </li>
-    </ul>
-
-    <div class="today-line">
-      <strong>Today, answering any one of these means:</strong> chasing channel and region owners,
-      pulling reports manually, reconciling different definitions, and hoping the numbers are
-      comparable enough to make a call. Most of the time the answer arrives late — or doesn't arrive at all.
+    <h3 class="hint-head">Today, answering any one means</h3>
+    <div class="today-flow">
+      <div class="step">Chase channel &amp; region owners</div>
+      <span class="arrow">→</span>
+      <div class="step">Pull reports manually</div>
+      <span class="arrow">→</span>
+      <div class="step">Reconcile definitions</div>
+      <span class="arrow">→</span>
+      <div class="step warn">Answer arrives late — or not at all</div>
     </div>
   </section>
 
   <!-- 2. DELIVERABLE -->
   <section id="deliverable">
     <span class="section-num">02 · The Deliverable</span>
-    <h2>A self-service hub built around the questions, not the channels.</h2>
+    <h2>A self-service hub built around the questions — not the channels.</h2>
 
-    <p class="story-lede">
-      One internal site, organized by leadership question. Each question has a dedicated
-      answer surface that combines <strong>manually curated reports</strong> (the cross-channel
-      reads only humans can stitch today) with <strong>pre-segmented dashboard links</strong>
-      (live tools, scoped to the LOB, region, channel, or moment that question requires).
-      Open the hub, click the question, get the answer.
-    </p>
+    <div class="hub-diagram">
+      <div class="hub-tier">
+        <div class="hub-pill q">Q1 · Where do I invest?</div>
+        <div class="hub-pill q">Q2 · What moved the trend?</div>
+        <div class="hub-pill q">Q3 · ROI by partnership?</div>
+      </div>
+      <div class="hub-down"></div>
+      <div class="hub-core">
+        <div class="hub-title">Self-service Hub</div>
+        <div class="hub-sub">one destination · organized by question</div>
+      </div>
+      <div class="hub-down teal"></div>
+      <div class="hub-tier">
+        <div class="hub-pill c">Manually curated reports</div>
+        <div class="hub-pill c">Pre-segmented dashboard links</div>
+      </div>
+    </div>
 
-    <h3 style="margin-top:0.5rem;">Three answer surfaces in V1</h3>
-    <div class="grid-3" style="margin-top:0.5rem;">
+    <h3 class="hint-head">Three answer surfaces in V1</h3>
+    <div class="grid-3" style="margin-top:0.4rem;">
 
       <div class="qcard q1">
-        <span class="q-tag">Question 1</span>
-        <div class="q-q">How should I invest incremental marketing dollars?</div>
-        <div class="q-answer">
-          A <strong>cross-channel efficiency view</strong>: cost-per-outcome and ROI ranked across
-          channels and LOBs, with a clear callout for where ROI isn't the goal (upper-funnel, brand)
-          and proxy outcomes are used instead.
-        </div>
+        <span class="q-tag">Q1 · Investment</span>
+        <div class="q-q">Where do I put incremental dollars?</div>
+        <div class="q-answer">Cross-channel <strong>cost-per-outcome &amp; ROI</strong> ranked across channels and LOBs, with proxies where ROI isn't the goal.</div>
         <div class="q-meta">
-          <span class="lab">Curated · Dashboard</span>
-          Pulls from the Triweekly, Exec Monthly Scorecard, and partnership grid; links out to the channel-specific Power BI / CJA views for drill.
+          <span class="lab">Sources</span>
+          Triweekly · Exec Monthly · Partnership grid · CJA / Power BI links
         </div>
       </div>
 
       <div class="qcard q2">
-        <span class="q-tag">Question 2</span>
-        <div class="q-q">What channel is driving this traffic / conversion / revenue trend?</div>
-        <div class="q-answer">
-          A <strong>trend view by channel × LOB</strong> with month-over-month and year-over-year
-          deltas pre-flagged. Click any channel to jump to a pre-filtered Adobe / CJA dashboard
-          for the same window.
-        </div>
+        <span class="q-tag">Q2 · Trend driver</span>
+        <div class="q-q">What moved the number?</div>
+        <div class="q-answer"><strong>Trend by channel × LOB</strong>, MoM &amp; YoY pre-flagged. Click a channel → pre-filtered Adobe / CJA workspace.</div>
         <div class="q-meta">
-          <span class="lab">Curated · Dashboard</span>
-          Manual chart refreshed monthly + saved CJA / Adobe Analytics workspaces filtered by LOB and channel.
+          <span class="lab">Sources</span>
+          Manual chart · Saved CJA / Adobe Analytics workspaces
         </div>
       </div>
 
       <div class="qcard q3">
-        <span class="q-tag">Question 3</span>
-        <div class="q-q">What is the ROI of this partnership?</div>
-        <div class="q-answer">
-          The <strong>partnership comparability grid</strong> as the front door — same KPIs across
-          regions, side by side. Each row links to that partnership's dashboard or back-end source.
-        </div>
+        <span class="q-tag">Q3 · Partnership ROI</span>
+        <div class="q-q">Is the spend earning its keep?</div>
+        <div class="q-answer">The <strong>partnership comparability grid</strong> as the front door — same KPIs across regions, side by side.</div>
         <div class="q-meta">
-          <span class="lab">Curated · Dashboard</span>
-          Curated from regional partnership reports; links out to partnership-specific dashboards (where they exist) and back-end platforms (where they don't).
+          <span class="lab">Sources</span>
+          Regional reports · Partner dashboards · Back-end platforms
         </div>
       </div>
 
     </div>
 
-    <h3 style="margin-top:1.75rem;">What's behind every answer</h3>
+    <h3 class="hint-head">What's behind every answer</h3>
     <div class="blocks">
       <div class="bblock curated">
-        <span class="bblock-tag">Component A</span>
+        <span class="bblock-tag">A · Curated</span>
         <h4 class="bblock-title">Manually curated reports</h4>
-        <p>Cross-channel reads that no single tool produces today. Compiled by the DDS team on a known cadence and dropped into the hub as living pages.</p>
+        <p>Cross-channel reads no single tool produces. Compiled by DDS on a known cadence, dropped in as living pages.</p>
         <ul>
-          <li>Examples: cross-channel efficiency snapshot, partnership grid, GTM moment rollup</li>
-          <li>Cadence: monthly for most, quarterly for the partnership grid</li>
-          <li>Sources: Reports inventory (Paid Media, Partnership, Cross-channel)</li>
+          <li>Efficiency snapshot · Partnership grid · GTM moment rollup</li>
+          <li>Cadence: monthly headline · quarterly partnership</li>
         </ul>
       </div>
       <div class="bblock dash">
-        <span class="bblock-tag">Component B</span>
-        <h4 class="bblock-title">Pre-segmented dashboard links</h4>
-        <p>Direct links to live tools, pre-filtered to the slice that matches the question — so leaders don't land on a generic dashboard and have to reconfigure it.</p>
+        <span class="bblock-tag">B · Direct links</span>
+        <h4 class="bblock-title">Pre-segmented dashboards</h4>
+        <p>Live tools, pre-filtered to the slice that matches the question — no reconfiguring on landing.</p>
         <ul>
-          <li>Tools: Adobe Analytics, CJA, Power BI</li>
-          <li>Pre-applied filters: LOB, region, channel, time window, GTM moment</li>
-          <li>Each link labeled with what it answers and what it doesn't</li>
+          <li>Tools: Adobe Analytics · CJA · Power BI</li>
+          <li>Filters: LOB · region · channel · window · GTM moment</li>
         </ul>
       </div>
     </div>
 
     <div class="scope-row">
       <div class="scope in">
-        <span class="scope-label">In scope for V1</span>
+        <span class="scope-label">In scope · V1</span>
         <ul>
-          <li>The three questions above, with curated answer surfaces and pre-filtered dashboard links</li>
-          <li>Surface Consumer first, with a clear path to add SMB, Gaming, M365</li>
-          <li>Manual refresh cadence — monthly headline, quarterly partnership</li>
+          <li>The three questions, with curated answer surfaces + pre-filtered dashboard links</li>
+          <li>Surface Consumer first — clear path to add SMB · Gaming · M365</li>
+          <li>Manual refresh — monthly headline, quarterly partnership</li>
         </ul>
       </div>
       <div class="scope out">
-        <span class="scope-label">Not in scope for V1</span>
+        <span class="scope-label">Not in scope · V1</span>
         <ul>
           <li>A new BI tool or replacement for channel-specific reports</li>
-          <li>Real-time data — refresh follows source-system cadence and known data lags</li>
-          <li>Automated cross-channel attribution (covered in the Run phase)</li>
+          <li>Real-time data — follows source-system cadence</li>
+          <li>Automated cross-channel attribution (Run phase)</li>
         </ul>
       </div>
     </div>
