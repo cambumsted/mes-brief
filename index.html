@@ -552,6 +552,216 @@
   details.bblock-detail .body ul { margin: 0.3rem 0 0; padding-left: 1.2rem; }
   details.bblock-detail .body li { margin: 0.2rem 0; font-size: 0.88rem; }
 
+  /* Inline "also hearing" strip */
+  .hearing-line {
+    margin: 1.1rem 0 0;
+    display: flex; align-items: center; gap: 0.6rem;
+    flex-wrap: wrap;
+    font-size: 0.85rem;
+  }
+  .hearing-eyebrow {
+    font-size: 0.7rem; text-transform: uppercase; letter-spacing: 1.4px;
+    color: var(--ink-soft); font-weight: 700;
+  }
+  .hearing-tag {
+    background: white;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    padding: 0.3rem 0.8rem;
+    font-size: 0.82rem;
+    color: var(--ink);
+    font-weight: 500;
+  }
+  .hearing-tag.placeholder { color: var(--ink-soft); border-style: dashed; }
+
+  /* Q-card answer as bullets */
+  .qcard .q-answer ul {
+    margin: 0.2rem 0 0; padding-left: 1.05rem;
+    list-style: none;
+  }
+  .qcard .q-answer li {
+    position: relative;
+    padding-left: 1rem;
+    margin: 0.25rem 0;
+    font-size: 0.9rem;
+    line-height: 1.4;
+  }
+  .qcard .q-answer li::before {
+    content: ""; position: absolute; left: 0; top: 0.55rem;
+    width: 5px; height: 5px; border-radius: 50%;
+    background: var(--c-med-blue);
+  }
+  .qcard.q2 .q-answer li::before { background: var(--c-teal); }
+  .qcard.q3 .q-answer li::before { background: #C9A227; }
+  .qcard.q4 .q-answer li::before { background: #B58CDA; }
+
+  /* Modal lightbox for examples */
+  .modal-backdrop {
+    position: fixed; inset: 0;
+    background: rgba(9, 31, 46, 0.55);
+    backdrop-filter: blur(3px);
+    z-index: 999;
+    display: none;
+    align-items: flex-start; justify-content: center;
+    padding: 4vh 1rem 6vh;
+    overflow-y: auto;
+    animation: fade-in 0.18s ease;
+  }
+  .modal-backdrop.open { display: flex; }
+  @keyframes fade-in { from { opacity: 0; } to { opacity: 1; } }
+  @keyframes pop-in {
+    from { transform: translateY(8px) scale(0.98); opacity: 0; }
+    to { transform: translateY(0) scale(1); opacity: 1; }
+  }
+  .modal {
+    background: white;
+    border-radius: 12px;
+    max-width: 880px;
+    width: 100%;
+    box-shadow: 0 20px 60px rgba(9,31,46,0.35), 0 4px 12px rgba(9,31,46,0.18);
+    border: 1px solid rgba(255,255,255,0.4);
+    overflow: hidden;
+    animation: pop-in 0.22s cubic-bezier(0.2, 0.7, 0.3, 1);
+  }
+  .modal-head {
+    padding: 1.1rem 1.4rem 1rem;
+    background: linear-gradient(135deg, var(--c-dark-blue) 0%, var(--c-med-blue) 100%);
+    color: white;
+    display: flex; justify-content: space-between; align-items: flex-start;
+    gap: 1rem;
+  }
+  .modal-head .mh-eyebrow {
+    font-size: 0.7rem; text-transform: uppercase; letter-spacing: 1.4px;
+    opacity: 0.85; margin-bottom: 0.25rem;
+  }
+  .modal-head .mh-title { font-size: 1.1rem; font-weight: 700; line-height: 1.3; }
+  .modal-close {
+    background: rgba(255,255,255,0.16);
+    border: 1px solid rgba(255,255,255,0.28);
+    color: white;
+    border-radius: 50%;
+    width: 32px; height: 32px;
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer;
+    font-size: 1.1rem;
+    line-height: 1;
+    flex-shrink: 0;
+    font-family: inherit;
+  }
+  .modal-close:hover { background: rgba(255,255,255,0.3); }
+  .modal-body {
+    padding: 1.5rem 1.5rem 0.9rem;
+    max-height: 70vh;
+    overflow-y: auto;
+  }
+  .modal-foot {
+    padding: 0.85rem 1.5rem 1.2rem;
+    font-size: 0.78rem;
+    color: var(--ink-soft);
+    border-top: 1px solid var(--line);
+  }
+  .modal-foot a { font-weight: 600; }
+  body.modal-open { overflow: hidden; }
+
+  /* Click affordance on cards */
+  .qcard.clickable {
+    cursor: pointer;
+    transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
+  }
+  .qcard.clickable:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 18px rgba(9,31,46,0.10);
+  }
+  .qcard .preview-cta {
+    margin-top: 0.6rem;
+    display: inline-flex; align-items: center; gap: 0.35rem;
+    font-size: 0.78rem;
+    color: var(--ms-blue-dark);
+    font-weight: 600;
+    align-self: flex-start;
+  }
+  .qcard .preview-cta::after {
+    content: "↗";
+    font-size: 0.95rem;
+    transition: transform 0.15s ease;
+  }
+  .qcard.clickable:hover .preview-cta::after {
+    transform: translate(2px, -2px);
+  }
+
+  /* Q3 mini-grid: key vs secondary highlighting */
+  .mini-grid td.key {
+    background: var(--c-aqua);
+    color: var(--c-dark-blue);
+    font-weight: 700;
+    box-shadow: inset 0 0 0 2px var(--c-teal);
+  }
+  .mini-grid td.sec {
+    background: #F4FBFF;
+    color: var(--ink);
+    font-weight: 500;
+  }
+  .mini-grid td.muted { color: var(--ink-soft); }
+  .grid-legend {
+    display: flex; gap: 0.9rem; flex-wrap: wrap;
+    margin-top: 0.6rem;
+    font-size: 0.76rem; color: var(--ink-soft);
+  }
+  .grid-legend .sw {
+    display: inline-block; width: 12px; height: 12px;
+    border-radius: 3px; margin-right: 0.3rem; vertical-align: middle;
+  }
+  .grid-legend .sw.key { background: var(--c-aqua); box-shadow: inset 0 0 0 2px var(--c-teal); }
+  .grid-legend .sw.sec { background: #F4FBFF; border: 1px solid var(--line); }
+  .grid-legend .sw.muted { background: white; border: 1px solid var(--c-n25); }
+
+  /* Q1 totals row for LTV:CAC vs goal */
+  .ltv-summary {
+    background: var(--c-dark-blue);
+    color: white;
+    padding: 0.8rem 1rem;
+    border-radius: 6px;
+    margin-top: 0.7rem;
+    display: flex; justify-content: space-between; align-items: center;
+    flex-wrap: wrap; gap: 0.6rem;
+  }
+  .ltv-summary .ltv-label {
+    font-size: 0.72rem; text-transform: uppercase; letter-spacing: 1px;
+    opacity: 0.85;
+  }
+  .ltv-summary .ltv-value {
+    font-size: 1.4rem; font-weight: 700; letter-spacing: -0.5px;
+  }
+  .ltv-summary .ltv-vs {
+    font-size: 0.85rem; opacity: 0.92;
+  }
+  .ltv-summary .ltv-pill {
+    background: #DCEEDD; color: #1E6B5C;
+    padding: 0.25rem 0.65rem;
+    border-radius: 999px;
+    font-size: 0.78rem;
+    font-weight: 700;
+  }
+
+  /* Q4 moment card with split rows */
+  .moment-mock .mcard .channel-block {
+    margin-top: 0.55rem;
+    padding-top: 0.45rem;
+    border-top: 1px solid var(--line);
+  }
+  .moment-mock .mcard .channel-block:first-of-type {
+    border-top: none;
+    padding-top: 0;
+    margin-top: 0;
+  }
+  .moment-mock .mcard .channel-name {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--ink-soft);
+    font-weight: 700;
+    margin-bottom: 0.25rem;
+  }
   /* v0.3 — Building blocks */
   .blocks { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 1rem; }
   @media (max-width: 800px) { .blocks { grid-template-columns: 1fr; } }
@@ -941,22 +1151,18 @@
     <h3 class="hint-head">Asked every cycle</h3>
     <div class="qtiles">
       <div class="qtile">
-        <div class="qnum">01</div>
         <div class="qtext">Where do I invest incremental dollars?</div>
         <div class="qcap">Budget opens up — or gets pulled. Where does it go?</div>
       </div>
       <div class="qtile">
-        <div class="qnum">02</div>
         <div class="qtext">What channel is driving this trend?</div>
         <div class="qcap">Traffic, conversion, revenue — which lever moved it?</div>
       </div>
       <div class="qtile">
-        <div class="qnum">03</div>
         <div class="qtext">What's the ROI of this partnership?</div>
         <div class="qcap">NFL, AMEX (Americas / Asia / EMEA), and others.</div>
       </div>
       <div class="qtile">
-        <div class="qnum">04</div>
         <div class="qtext">How is marketing contributing to a campaign moment?</div>
         <div class="qcap">Back to School, product launches, Holiday — the rollup story.</div>
       </div>
@@ -973,16 +1179,10 @@
       <div class="step warn">Answer arrives late — or not at all</div>
     </div>
 
-    <div class="parking-lot">
-      <div class="pl-head">
-        <span class="pl-title">What other questions are we hearing?</span>
-        <a class="pl-cta" href="mailto:cambumsted@microsoft.com?subject=Hub%20question%20to%20add">+ Add a question</a>
-      </div>
-      <ul>
-        <li class="placeholder">Add new questions here as they come up — they'll be triaged into the build.</li>
-        <li class="placeholder">Send to Cam to add to this list.</li>
-      </ul>
-    </div>
+    <p class="hearing-line">
+      <span class="hearing-eyebrow">Also hearing</span>
+      <span class="hearing-tag placeholder">New questions get added here as they come up</span>
+    </p>
   </section>
 
   <!-- 2. DELIVERABLE -->
@@ -1009,163 +1209,78 @@
       </div>
     </div>
 
-    <h3 class="hint-head">Four answer surfaces in V1 · click any card to preview</h3>
-    <div class="grid-4-2" style="margin-top:0.4rem;">
+    <div class="grid-4-2" style="margin-top:1.2rem;">
 
       <!-- Q1: Investment -->
-      <div class="qcard q1" id="card-q1">
-        <span class="q-tag">Q1 · Investment</span>
+      <div class="qcard q1 clickable" data-modal="modal-q1" tabindex="0" role="button" aria-haspopup="dialog" aria-controls="modal-q1">
+        <span class="q-tag">Investment</span>
         <div class="q-q">If we had $1M to spend tomorrow, where does it go?</div>
-        <div class="q-answer">A <strong>where-to-invest view</strong>: LTV:CAC and efficiency by paid-media channel, side by side with partnership conversion strength. Surfaces the channels and partnerships that earn more incremental dollars and the ones that don't.</div>
+        <div class="q-answer">
+          <ul>
+            <li>LTV:CAC and efficiency by paid-media channel</li>
+            <li>Partnership conversion strength, side by side</li>
+            <li>Surfaces where to lean in vs. pull back</li>
+          </ul>
+        </div>
         <div class="q-meta">
           <span class="lab">Sources</span>
           Triweekly · Exec Monthly · Partnership grid · Power BI / CJA links
         </div>
-        <button class="show-example" type="button" onclick="document.getElementById('card-q1').classList.toggle('open')">
-          Show example <span class="arrow">▾</span>
-        </button>
-        <div class="example">
-          <div class="example-cap">Example · "If Kelly had $1M…" view <span class="src-pill">Curated · refreshed monthly</span></div>
-          <div class="example-frame" style="padding: 0.85rem 0.95rem;">
-            <div class="invest-mock">
-              <div class="mock-card">
-                <h5>Paid media · LTV:CAC</h5>
-                <table>
-                  <tr><th>Channel</th><th>LTV:CAC</th><th></th></tr>
-                  <tr><td>Search</td><td>5.4</td><td><span class="verdict go">Lean in</span></td></tr>
-                  <tr><td>PMAX</td><td>3.8</td><td><span class="verdict go">Lean in</span></td></tr>
-                  <tr><td>Display</td><td>2.1</td><td><span class="verdict hold">Hold</span></td></tr>
-                  <tr><td>Social</td><td>1.4</td><td><span class="verdict cut">Pull back</span></td></tr>
-                </table>
-              </div>
-              <div class="mock-card">
-                <h5>Partnerships · conv strength</h5>
-                <table>
-                  <tr><th>Partnership</th><th>ROI</th><th></th></tr>
-                  <tr><td>AMEX (Americas)</td><td>4.8x</td><td><span class="verdict go">Lean in</span></td></tr>
-                  <tr><td>AMEX (EMEA)</td><td>4.1x</td><td><span class="verdict go">Lean in</span></td></tr>
-                  <tr><td>AMEX (Asia)</td><td>3.2x</td><td><span class="verdict hold">Hold</span></td></tr>
-                  <tr><td>NFL</td><td>—</td><td><span class="verdict hold">No data</span></td></tr>
-                </table>
-              </div>
-              <div class="total-line">Recommended split of $1M → <strong>~$650K Search + PMAX</strong> · <strong>~$300K AMEX Americas + EMEA</strong> · <strong>~$50K test</strong></div>
-            </div>
-          </div>
-          <div class="example-foot">Illustrative. Real numbers come from the Triweekly + Exec Monthly + Partnership grid each cycle.</div>
-        </div>
+        <span class="preview-cta">See example</span>
       </div>
 
       <!-- Q2: Trend driver -->
-      <div class="qcard q2" id="card-q2">
-        <span class="q-tag">Q2 · Trend driver</span>
+      <div class="qcard q2 clickable" data-modal="modal-q2" tabindex="0" role="button" aria-haspopup="dialog" aria-controls="modal-q2">
+        <span class="q-tag">Trend driver</span>
         <div class="q-q">What moved the number?</div>
-        <div class="q-answer"><strong>Trend by channel × LOB</strong>, MoM &amp; YoY pre-flagged. Click a channel → pre-filtered Adobe / CJA workspace with the right segments &amp; filters already applied.</div>
+        <div class="q-answer">
+          <ul>
+            <li>Trend by channel × LOB</li>
+            <li>MoM &amp; YoY deltas pre-flagged</li>
+            <li>Click a channel → CJA workspace with segments &amp; filters already on</li>
+          </ul>
+        </div>
         <div class="q-meta">
           <span class="lab">Sources</span>
           Manual chart · Saved CJA / Adobe Analytics workspaces
         </div>
-        <button class="show-example" type="button" onclick="document.getElementById('card-q2').classList.toggle('open')">
-          Show example <span class="arrow">▾</span>
-        </button>
-        <div class="example">
-          <div class="example-cap">Example · CJA saved workspace <span class="src-pill">Segments &amp; filters pre-applied</span></div>
-          <div class="example-frame">
-            <img src="images/cja-workspace.png" alt="CJA saved workspace example showing USA all-up traffic and channel breakdown" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
-            <div style="display:none; align-items:center; justify-content:center; min-height: 220px; padding: 1.2rem; background: var(--c-n05); color: var(--ink-soft); font-size: 0.85rem; text-align: center;">
-              Save the attached screenshot to <code style="background:white; padding: 0.1rem 0.35rem; border-radius:3px;">images/cja-workspace.png</code> to display it here.
-            </div>
-          </div>
-          <div class="example-foot">From the Hub, this opens directly in CJA with USA · Surface Consumer · Buying Page Visits filters already on.</div>
-        </div>
+        <span class="preview-cta">See example</span>
       </div>
 
       <!-- Q3: Partnership ROI -->
-      <div class="qcard q3" id="card-q3">
-        <span class="q-tag">Q3 · Partnership ROI</span>
+      <div class="qcard q3 clickable" data-modal="modal-q3" tabindex="0" role="button" aria-haspopup="dialog" aria-controls="modal-q3">
+        <span class="q-tag">Partnership ROI</span>
         <div class="q-q">Is the spend earning its keep?</div>
-        <div class="q-answer">The <strong>partnership comparability grid</strong> as the front door — same KPIs across regions, side by side. Each row links to that partnership's dashboard or back-end source.</div>
+        <div class="q-answer">
+          <ul>
+            <li>Comparability grid as the front door</li>
+            <li>Same KPIs across regions, side by side</li>
+            <li>Each row links to that partnership's source</li>
+          </ul>
+        </div>
         <div class="q-meta">
           <span class="lab">Sources</span>
           Regional reports · Partner dashboards · Back-end platforms
         </div>
-        <button class="show-example" type="button" onclick="document.getElementById('card-q3').classList.toggle('open')">
-          Show example <span class="arrow">▾</span>
-        </button>
-        <div class="example">
-          <div class="example-cap">Example · Partnership comparability grid <span class="src-pill">Same KPIs, every region</span></div>
-          <div class="example-frame" style="padding: 0.65rem; overflow-x: auto;">
-            <table class="mini-grid">
-              <thead>
-                <tr>
-                  <th>Partnership</th><th>Region</th><th>Goal</th>
-                  <th>Reach</th><th>Traffic</th><th>Conv.</th><th>Revenue</th><th>ROI</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>AMEX</td><td>Americas</td><td>Conv.</td>
-                  <td class="blank">—</td><td class="partial">42K</td><td class="filled">3,150</td><td class="filled">$2.1M</td><td class="filled">4.8x</td>
-                </tr>
-                <tr>
-                  <td>AMEX</td><td>Asia</td><td>Conv.</td>
-                  <td class="blank">—</td><td class="partial">18K</td><td class="filled">1,240</td><td class="filled">$0.9M</td><td class="partial">3.2x</td>
-                </tr>
-                <tr>
-                  <td>AMEX</td><td>EMEA</td><td>Conv.</td>
-                  <td class="blank">—</td><td class="partial">27K</td><td class="filled">1,980</td><td class="filled">$1.4M</td><td class="filled">4.1x</td>
-                </tr>
-                <tr>
-                  <td>NFL</td><td>Americas</td><td>Traffic</td>
-                  <td class="blank">—</td><td class="blank">—</td><td class="blank">—</td><td class="blank">—</td><td class="blank">—</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-          <div class="example-foot">Living version on the <a href="partnership-ideas.html#grid">Partnership ideas page</a> — this is a snapshot.</div>
-        </div>
+        <span class="preview-cta">See example</span>
       </div>
 
       <!-- Q4: Campaign moments -->
-      <div class="qcard q4" id="card-q4">
-        <span class="q-tag">Q4 · Campaign moments</span>
+      <div class="qcard q4 clickable" data-modal="modal-q4" tabindex="0" role="button" aria-haspopup="dialog" aria-controls="modal-q4">
+        <span class="q-tag">Campaign moments</span>
         <div class="q-q">How is marketing showing up for this moment?</div>
-        <div class="q-answer">A <strong>moment rollup</strong>: the marketing push behind Back to School, a product launch, or Holiday — channels that fired, dollars deployed, performance vs. baseline. Today this requires manual stitching.</div>
+        <div class="q-answer">
+          <ul>
+            <li>Email + Paid Media combined into one rollup</li>
+            <li>Traffic driven and conversion on that traffic</li>
+            <li>One card per GTM moment — Back to School, launches, Holiday</li>
+          </ul>
+        </div>
         <div class="q-meta">
           <span class="lab">Sources</span>
           Campaign tags · Channel reports · GTM moment calendar
         </div>
-        <button class="show-example" type="button" onclick="document.getElementById('card-q4').classList.toggle('open')">
-          Show example <span class="arrow">▾</span>
-        </button>
-        <div class="example">
-          <div class="example-cap">Example · Moment rollup card <span class="src-pill">One per GTM moment</span></div>
-          <div class="example-frame" style="padding: 0.85rem 0.95rem;">
-            <div class="moment-mock">
-              <div class="mcard">
-                <h5>Back to School</h5>
-                <div class="moment-date">Jul 15 – Sep 5</div>
-                <div class="row"><span>Spend</span><span class="v">$1.8M</span></div>
-                <div class="row"><span>Conversions</span><span class="v up">+18%</span></div>
-                <div class="row"><span>vs. baseline</span><span class="v up">+12%</span></div>
-              </div>
-              <div class="mcard">
-                <h5>Surface Pro launch</h5>
-                <div class="moment-date">Sep 22 – Oct 20</div>
-                <div class="row"><span>Spend</span><span class="v">$2.4M</span></div>
-                <div class="row"><span>Conversions</span><span class="v up">+24%</span></div>
-                <div class="row"><span>vs. baseline</span><span class="v up">+19%</span></div>
-              </div>
-              <div class="mcard">
-                <h5>Holiday / Cyber</h5>
-                <div class="moment-date">Nov 10 – Dec 31</div>
-                <div class="row"><span>Spend</span><span class="v">$3.6M</span></div>
-                <div class="row"><span>Conversions</span><span class="v up">+34%</span></div>
-                <div class="row"><span>vs. baseline</span><span class="v down">−4%</span></div>
-              </div>
-            </div>
-          </div>
-          <div class="example-foot">Each card opens to a deeper view: channel mix, creative, audience cuts, and what we'd change next time.</div>
-        </div>
+        <span class="preview-cta">See example</span>
       </div>
 
     </div>
@@ -1181,7 +1296,6 @@
         <span class="chev">▾</span>
       </summary>
       <div class="body">
-        <p>Cross-channel reads no single tool produces today. Compiled by the DDS team on a known cadence and dropped into the hub as living pages.</p>
         <ul>
           <li>Examples: cross-channel efficiency snapshot, partnership grid, GTM moment rollup</li>
           <li>Cadence: monthly headline · quarterly partnership</li>
@@ -1207,33 +1321,12 @@
         </ul>
       </div>
     </details>
-
-    <div class="scope-row">
-      <div class="scope in">
-        <span class="scope-label">In scope · V1</span>
-        <ul>
-          <li>The four questions above, with curated answer surfaces + pre-filtered dashboard links</li>
-          <li>Surface Consumer first — clear path to add SMB · Gaming · M365</li>
-          <li>Manual refresh — monthly headline, quarterly partnership</li>
-        </ul>
-      </div>
-      <div class="scope out">
-        <span class="scope-label">Not in scope · V1</span>
-        <ul>
-          <li>A new BI tool or replacement for channel-specific reports</li>
-          <li>Real-time data — follows source-system cadence</li>
-          <li>Automated cross-channel attribution (Run phase)</li>
-        </ul>
-      </div>
-    </div>
   </section>
 
   <!-- 3. TIMELINE -->
   <section id="timeline">
     <span class="section-num">03 · The Timeline</span>
     <h2>Crawl, walk, run — roughly 10–12 months.</h2>
-
-    <p style="margin: 0.5rem 0 1rem; font-size: 0.9rem; color: var(--ink-soft);">Reach out to <strong>Priyanka</strong> on OCID taxonomy and segmentation in CJA.</p>
 
     <div class="phase-summary">
       <div class="pcard crawl">
@@ -1412,6 +1505,227 @@
 <footer>
   Performance Marketing Hub (working title) · Marketing Effectiveness Solution · Draft v0.3 · For internal DDS leadership review · Earlier versions in the <a href="archive.html">archive</a>
 </footer>
+
+<!-- ============= MODALS · Answer-surface examples ============= -->
+<div class="modal-backdrop" id="modal-backdrop" role="dialog" aria-modal="true">
+
+  <!-- Q1 modal -->
+  <div class="modal" id="modal-q1" data-modal-content hidden>
+    <div class="modal-head">
+      <div>
+        <div class="mh-eyebrow">Investment · Example</div>
+        <div class="mh-title">If we had $1M to spend tomorrow, where does it go?</div>
+      </div>
+      <button class="modal-close" type="button" aria-label="Close">×</button>
+    </div>
+    <div class="modal-body">
+      <div class="invest-mock">
+        <div class="mock-card">
+          <h5>Paid media · LTV:CAC</h5>
+          <table>
+            <tr><th>Channel</th><th>LTV:CAC</th><th></th></tr>
+            <tr><td>Search</td><td>5.4</td><td><span class="verdict go">Lean in</span></td></tr>
+            <tr><td>PMAX</td><td>3.8</td><td><span class="verdict go">Lean in</span></td></tr>
+            <tr><td>Display</td><td>2.1</td><td><span class="verdict hold">Hold</span></td></tr>
+            <tr><td>Social</td><td>1.4</td><td><span class="verdict cut">Pull back</span></td></tr>
+          </table>
+        </div>
+        <div class="mock-card">
+          <h5>Partnerships · conv strength</h5>
+          <table>
+            <tr><th>Partnership</th><th>ROI</th><th></th></tr>
+            <tr><td>AMEX (Americas)</td><td>4.8x</td><td><span class="verdict go">Lean in</span></td></tr>
+            <tr><td>AMEX (EMEA)</td><td>4.1x</td><td><span class="verdict go">Lean in</span></td></tr>
+            <tr><td>AMEX (Asia)</td><td>3.2x</td><td><span class="verdict hold">Hold</span></td></tr>
+            <tr><td>NFL</td><td>—</td><td><span class="verdict hold">No data</span></td></tr>
+          </table>
+        </div>
+      </div>
+      <div class="ltv-summary">
+        <div>
+          <div class="ltv-label">Paid Media — overall LTV:CAC</div>
+          <div class="ltv-value">3.6 <span class="ltv-vs">vs. <strong>2.53</strong> goal</span></div>
+        </div>
+        <span class="ltv-pill">Above goal · room to invest</span>
+      </div>
+    </div>
+    <div class="modal-foot">
+      Illustrative. Real numbers come from the Triweekly + Exec Monthly + Partnership grid each cycle.
+    </div>
+  </div>
+
+  <!-- Q2 modal -->
+  <div class="modal" id="modal-q2" data-modal-content hidden>
+    <div class="modal-head">
+      <div>
+        <div class="mh-eyebrow">Trend driver · Example</div>
+        <div class="mh-title">CJA saved workspace · segments &amp; filters pre-applied</div>
+      </div>
+      <button class="modal-close" type="button" aria-label="Close">×</button>
+    </div>
+    <div class="modal-body" style="padding: 0;">
+      <img src="images/cja-workspace.png" alt="CJA saved workspace example showing USA all-up traffic and channel breakdown" style="display:block; width:100%; height:auto;" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
+      <div style="display:none; align-items:center; justify-content:center; min-height: 220px; padding: 1.5rem; background: var(--c-n05); color: var(--ink-soft); font-size: 0.9rem; text-align: center;">
+        Save the screenshot to <code style="background:white; padding: 0.1rem 0.35rem; border-radius:3px;">images/cja-workspace.png</code> to display it here.
+      </div>
+    </div>
+    <div class="modal-foot">
+      From the Hub, this opens directly in CJA with USA · Surface Consumer · Buying Page Visits filters already on.
+    </div>
+  </div>
+
+  <!-- Q3 modal -->
+  <div class="modal" id="modal-q3" data-modal-content hidden>
+    <div class="modal-head">
+      <div>
+        <div class="mh-eyebrow">Partnership ROI · Example</div>
+        <div class="mh-title">Comparability grid — same KPIs, every region</div>
+      </div>
+      <button class="modal-close" type="button" aria-label="Close">×</button>
+    </div>
+    <div class="modal-body">
+      <div style="overflow-x: auto;">
+        <table class="mini-grid">
+          <thead>
+            <tr>
+              <th>Partnership</th><th>Region</th><th>Goal</th>
+              <th>Reach</th><th>Traffic</th><th>Conv.</th><th>Revenue</th><th>ROI</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>AMEX</td><td>Americas</td><td>Conv.</td>
+              <td class="muted">—</td><td class="sec">42K</td><td class="sec">3,150</td><td class="sec">$2.1M</td><td class="key">4.8x</td>
+            </tr>
+            <tr>
+              <td>AMEX</td><td>Asia</td><td>Conv.</td>
+              <td class="muted">—</td><td class="sec">18K</td><td class="sec">1,240</td><td class="sec">$0.9M</td><td class="key">3.2x</td>
+            </tr>
+            <tr>
+              <td>AMEX</td><td>EMEA</td><td>Conv.</td>
+              <td class="muted">—</td><td class="sec">27K</td><td class="sec">1,980</td><td class="sec">$1.4M</td><td class="key">4.1x</td>
+            </tr>
+            <tr>
+              <td>NFL</td><td>Americas</td><td>Traffic</td>
+              <td class="sec">8.4M</td><td class="key">186K</td><td class="sec">2,140</td><td class="sec">$0.6M</td><td class="muted">—</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="grid-legend">
+        <span><span class="sw key"></span>Key KPI for that goal</span>
+        <span><span class="sw sec"></span>Secondary read</span>
+        <span><span class="sw muted"></span>Not reported / not the focus</span>
+      </div>
+    </div>
+    <div class="modal-foot">
+      Conversion partnerships are read on <strong>ROI</strong>; traffic partnerships are read on <strong>Traffic</strong>. Living version on the <a href="partnership-ideas.html#grid">Partnership ideas page</a>.
+    </div>
+  </div>
+
+  <!-- Q4 modal -->
+  <div class="modal" id="modal-q4" data-modal-content hidden>
+    <div class="modal-head">
+      <div>
+        <div class="mh-eyebrow">Campaign moments · Example</div>
+        <div class="mh-title">Moment rollup — Email + Paid Media combined</div>
+      </div>
+      <button class="modal-close" type="button" aria-label="Close">×</button>
+    </div>
+    <div class="modal-body">
+      <div class="moment-mock">
+        <div class="mcard">
+          <h5>Back to School</h5>
+          <div class="moment-date">Jul 15 – Sep 5</div>
+          <div class="channel-block">
+            <div class="channel-name">Email</div>
+            <div class="row"><span>Traffic driven</span><span class="v">182K</span></div>
+            <div class="row"><span>Conv. on traffic</span><span class="v up">3.4%</span></div>
+          </div>
+          <div class="channel-block">
+            <div class="channel-name">Paid Media</div>
+            <div class="row"><span>Traffic driven</span><span class="v">1.1M</span></div>
+            <div class="row"><span>Conv. on traffic</span><span class="v up">2.1%</span></div>
+          </div>
+        </div>
+        <div class="mcard">
+          <h5>Surface Pro launch</h5>
+          <div class="moment-date">Sep 22 – Oct 20</div>
+          <div class="channel-block">
+            <div class="channel-name">Email</div>
+            <div class="row"><span>Traffic driven</span><span class="v">241K</span></div>
+            <div class="row"><span>Conv. on traffic</span><span class="v up">4.2%</span></div>
+          </div>
+          <div class="channel-block">
+            <div class="channel-name">Paid Media</div>
+            <div class="row"><span>Traffic driven</span><span class="v">1.6M</span></div>
+            <div class="row"><span>Conv. on traffic</span><span class="v up">2.8%</span></div>
+          </div>
+        </div>
+        <div class="mcard">
+          <h5>Holiday / Cyber</h5>
+          <div class="moment-date">Nov 10 – Dec 31</div>
+          <div class="channel-block">
+            <div class="channel-name">Email</div>
+            <div class="row"><span>Traffic driven</span><span class="v">410K</span></div>
+            <div class="row"><span>Conv. on traffic</span><span class="v up">3.9%</span></div>
+          </div>
+          <div class="channel-block">
+            <div class="channel-name">Paid Media</div>
+            <div class="row"><span>Traffic driven</span><span class="v">2.4M</span></div>
+            <div class="row"><span>Conv. on traffic</span><span class="v down">1.6%</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal-foot">
+      Each moment card combines Email + Paid Media into one view, focused on traffic driven and conversion on that traffic.
+    </div>
+  </div>
+
+</div>
+
+<script>
+(function() {
+  const backdrop = document.getElementById('modal-backdrop');
+  const modals = backdrop.querySelectorAll('[data-modal-content]');
+
+  function openModal(id) {
+    modals.forEach(m => m.hidden = (m.id !== id));
+    backdrop.classList.add('open');
+    document.body.classList.add('modal-open');
+  }
+  function closeModal() {
+    backdrop.classList.remove('open');
+    modals.forEach(m => m.hidden = true);
+    document.body.classList.remove('modal-open');
+  }
+
+  document.querySelectorAll('[data-modal]').forEach(trigger => {
+    const id = trigger.getAttribute('data-modal');
+    trigger.addEventListener('click', e => {
+      if (e.target.closest('a')) return;
+      openModal(id);
+    });
+    trigger.addEventListener('keydown', e => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        openModal(id);
+      }
+    });
+  });
+
+  backdrop.addEventListener('click', e => {
+    if (e.target === backdrop) closeModal();
+  });
+  backdrop.querySelectorAll('.modal-close').forEach(btn => {
+    btn.addEventListener('click', closeModal);
+  });
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape' && backdrop.classList.contains('open')) closeModal();
+  });
+})();
+</script>
 
 </body>
 </html>
