@@ -162,7 +162,7 @@
     margin-top: 1rem;
     border: 1px solid var(--line);
     border-radius: 6px;
-    overflow: hidden;
+    overflow: visible;
     background: var(--c-white);
   }
   .gantt-header, .gantt-row {
@@ -275,6 +275,10 @@
   }
   .milestone-mark:hover::after,
   .milestone-mark:focus::after { opacity: 1; }
+
+  /* Edge-aware tooltip alignment */
+  .milestone-mark.tip-left::after { left: auto; right: -6px; transform: none; }
+  .milestone-mark.tip-right::after { left: -6px; right: auto; transform: none; }
   .ms-legend-swatch {
     display: inline-block; width: 12px; height: 12px;
     background: #FFB900; border: 1.5px solid #6B5800;
@@ -502,11 +506,11 @@
           <div class="col"></div><div class="col"></div><div class="col"></div><div class="col"></div>
           <div class="col"></div><div class="col"></div><div class="col"></div><div class="col"></div>
           <div class="col"></div><div class="col"></div><div class="col"></div><div class="col"></div>
-          <span class="milestone-mark" tabindex="0" style="left: 6%;"  data-label="Late May 2026 · Project kickoff"></span>
+          <span class="milestone-mark tip-right" tabindex="0" style="left: 6%;"  data-label="Late May 2026 · Project kickoff"></span>
           <span class="milestone-mark" tabindex="0" style="left: 33%;" data-label="End Aug 2026 · Manual MVP live"></span>
           <span class="milestone-mark" tabindex="0" style="left: 58%;" data-label="End Nov 2026 · Walk-phase readout"></span>
           <span class="milestone-mark" tabindex="0" style="left: 83%;" data-label="End Feb 2027 · V1 integrated build"></span>
-          <span class="milestone-mark" tabindex="0" style="left: 98%;" data-label="End Apr 2027 · Embedded in leadership rituals"></span>
+          <span class="milestone-mark tip-left"  tabindex="0" style="left: 98%;" data-label="End Apr 2027 · Embedded in leadership rituals"></span>
         </div>
       </div>
 
