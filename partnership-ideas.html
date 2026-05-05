@@ -209,6 +209,121 @@
     border-top: 1px solid var(--line);
     color: var(--ink-soft); font-size: 0.85rem;
   }
+
+  /* AMEX V1 MVP flow chart */
+  .flow {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 0.6rem;
+    align-items: stretch;
+    margin: 1rem 0 0.5rem;
+  }
+  @media (max-width: 1100px) { .flow { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 600px)  { .flow { grid-template-columns: 1fr; } }
+  .flow-step {
+    background: white;
+    border: 1px solid var(--line);
+    border-top: 4px solid var(--c-med-blue);
+    border-radius: 8px;
+    padding: 0.95rem 0.95rem 1rem;
+    display: flex; flex-direction: column; gap: 0.4rem;
+    position: relative;
+    box-shadow: 0 1px 2px rgba(9,31,46,0.05);
+  }
+  .flow-step .step-num {
+    position: absolute;
+    top: -14px; left: 14px;
+    width: 28px; height: 28px;
+    border-radius: 50%;
+    background: var(--c-med-blue);
+    color: white;
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 700; font-size: 0.85rem;
+    box-shadow: 0 1px 3px rgba(9,31,46,0.2);
+  }
+  .flow-step h4 {
+    margin: 0.6rem 0 0.1rem;
+    font-size: 0.92rem;
+    font-weight: 600;
+    color: var(--ink);
+    line-height: 1.3;
+    text-transform: none;
+    letter-spacing: 0;
+  }
+  .flow-step .role {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--ink-soft);
+    font-weight: 700;
+  }
+  .flow-step p {
+    font-size: 0.82rem;
+    margin: 0;
+    color: var(--ink);
+    line-height: 1.4;
+  }
+  .flow-step.suggest {
+    border-top-color: var(--c-amber, #FFB900);
+    background: #FFFCF1;
+  }
+  .flow-step.suggest .step-num { background: #C9A227; }
+  .flow-step.suggest .role { color: #8A6D00; }
+  .flow-step .added-tag {
+    display: inline-block;
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    background: #FFF4CE;
+    color: #8A6D00;
+    padding: 0.1rem 0.45rem;
+    border-radius: 10px;
+    font-weight: 700;
+    margin-bottom: 0.25rem;
+    align-self: flex-start;
+  }
+  .flow-arrow {
+    display: flex; align-items: center; justify-content: center;
+    color: var(--c-med-blue);
+    font-size: 1.2rem;
+    font-weight: 700;
+    flex: 0 0 auto;
+  }
+  /* On wider screens, draw arrows between cards using ::after on each step except the last */
+  @media (min-width: 1101px) {
+    .flow-step:not(:last-child)::after {
+      content: "→";
+      position: absolute;
+      right: -0.55rem;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--c-med-blue);
+      font-size: 1.1rem;
+      font-weight: 700;
+      z-index: 2;
+      background: var(--c-white);
+      padding: 0 0.1rem;
+    }
+  }
+
+  .flow-meta {
+    display: flex; flex-wrap: wrap; gap: 0.6rem 1.2rem;
+    margin-top: 0.85rem;
+    font-size: 0.78rem;
+    color: var(--ink-soft);
+  }
+  .flow-meta .pill {
+    background: var(--ms-blue-light);
+    color: var(--ms-blue-dark);
+    border-radius: 999px;
+    padding: 0.2rem 0.65rem;
+    font-weight: 600;
+    font-size: 0.75rem;
+  }
+  .flow-meta .pill.warn {
+    background: #FFF4CE;
+    color: #8A6D00;
+  }
 </style>
 </head>
 <body>
@@ -395,6 +510,70 @@
       <span><span class="swatch sw-partial"></span>Reported inconsistently / not standardized</span>
       <span><span class="swatch sw-blank"></span>Not reported</span>
     </div>
+  </section>
+
+  <!-- AMEX V1 MVP path -->
+  <section class="block" id="amex-mvp">
+    <h2>Path to AMEX V1 MVP</h2>
+    <p class="lede">How we get from "AMEX is reported differently in every region" to one comparable view that becomes the template for every other partnership. Yellow steps are ones I think are worth adding to the four you sketched out.</p>
+
+    <div class="flow">
+
+      <div class="flow-step">
+        <span class="step-num">1</span>
+        <span class="role">Define</span>
+        <h4>Set the AMEX KPI list per region</h4>
+        <p>Lock the KPIs we'll report on for AMEX in Americas, Asia, and EMEA — including which one is the primary read for each region's goal (e.g., ROI for conversion regions, Traffic for traffic regions).</p>
+      </div>
+
+      <div class="flow-step suggest">
+        <span class="step-num">2</span>
+        <span class="added-tag">Suggested add</span>
+        <span class="role">Align</span>
+        <h4>Confirm definitions are comparable</h4>
+        <p>Before we go hunting in reports — pressure-test that "ROI", "Conversions", "Traffic" mean the same thing in EMEA as they do in Americas (currency, attribution window, what counts as a conversion).</p>
+      </div>
+
+      <div class="flow-step">
+        <span class="step-num">3</span>
+        <span class="role">Locate</span>
+        <h4>Find each KPI in regional reports</h4>
+        <p>For every KPI × region cell in the AMEX grid, pinpoint the exact source — e.g., "EMEA AMEX ROI lives in the EMEA Partnership Monthly, tab 3, cell D14." Cross-reference against the <a href="reports.html">Reports inventory</a>.</p>
+      </div>
+
+      <div class="flow-step suggest">
+        <span class="step-num">4</span>
+        <span class="added-tag">Suggested add</span>
+        <span class="role">Pilot</span>
+        <h4>Manually fill the AMEX V1 MVP</h4>
+        <p>Populate the grid with one full cycle of real numbers ourselves — proves the workflow end to end and gives us a working artifact (not just a template) to show RDS before asking them to adopt it.</p>
+      </div>
+
+      <div class="flow-step">
+        <span class="step-num">5</span>
+        <span class="role">Socialize</span>
+        <h4>Share with RDS Partnerships teams</h4>
+        <p>Walk RDS through the AMEX MVP. Frame it as the model for every partnership going forward, gather feedback on KPI definitions and feasibility, and set expectations on cadence + ownership.</p>
+      </div>
+
+      <div class="flow-step">
+        <span class="step-num">6</span>
+        <span class="role">Standardize</span>
+        <h4>Standardized template for all partnerships</h4>
+        <p>Bake the learnings into a single template that every RDS Partnerships team fills out for their partnerships, with clear KPI definitions, source-of-truth pointers, and a fixed refresh cadence.</p>
+      </div>
+
+    </div>
+
+    <div class="flow-meta">
+      <span class="pill">Owner: Cam + DDS</span>
+      <span class="pill">Goal: AMEX MVP first cycle</span>
+      <span class="pill warn">Open: who from RDS leads adoption?</span>
+    </div>
+
+    <p style="margin-top: 1rem; font-size: 0.88rem; color: var(--ink-soft);">
+      Yellow-bordered steps (2 &amp; 4) are additions worth considering. Step 2 saves a lot of pain later — without it we risk cataloging metrics that aren't actually comparable. Step 4 turns the template into a real artifact before we ask anyone to adopt it.
+    </p>
   </section>
 
   <p class="footer-note">This is a working scratch-pad. Edit the HTML directly to add partnerships, KPIs, or ideas — or send notes to Cam.</p>
