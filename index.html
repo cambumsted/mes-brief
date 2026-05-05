@@ -1093,19 +1093,26 @@
   .milestone-mark {
     position: absolute;
     top: 50%;
-    transform: translate(-50%, -50%) rotate(45deg);
+    transform: translate(-50%, -50%);
     width: 14px; height: 14px;
+    z-index: 2;
+    cursor: help;
+  }
+  .milestone-mark::before {
+    content: "";
+    position: absolute;
+    inset: 0;
     background: var(--c-amber, #FFB900);
     border: 2px solid #6B5800;
     box-shadow: 0 1px 3px rgba(9,31,46,0.25);
-    z-index: 2;
-    cursor: help;
+    transform: rotate(45deg);
   }
   .milestone-mark::after {
     content: attr(data-label);
     position: absolute;
-    transform: rotate(-45deg) translate(-50%, -100%);
-    top: -16px; left: 50%;
+    bottom: calc(100% + 14px);
+    left: 50%;
+    transform: translateX(-50%);
     background: var(--c-dark-blue);
     color: white;
     padding: 0.45rem 0.7rem;
