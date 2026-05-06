@@ -1080,6 +1080,12 @@
 
     // Collapse / expand channel groups
     document.querySelectorAll('.channel-header').forEach(function (h) {
+      // Start collapsed by default
+      h.classList.add('collapsed');
+      var startGroup = h.parentElement;
+      var startBody = startGroup.querySelector('.reports-body');
+      if (startBody) startBody.style.display = 'none';
+
       h.addEventListener('click', function () {
         var group = h.parentElement;
         var body = group.querySelector('.reports-body');
