@@ -250,6 +250,28 @@
     text-transform: none;
     letter-spacing: 0;
   }
+  .flow-step .step-icon {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: var(--ms-blue-light);
+    display: flex; align-items: center; justify-content: center;
+    margin: 0.4rem 0 0.2rem;
+    color: var(--c-med-blue);
+    align-self: center;
+  }
+  .flow-step .step-icon svg {
+    width: 30px; height: 30px;
+    stroke: currentColor;
+    fill: none;
+    stroke-width: 1.8;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+  .flow-step.suggest .step-icon {
+    background: #FFF4CE;
+    color: #C9A227;
+  }
   .flow-step .role {
     font-size: 0.7rem;
     text-transform: uppercase;
@@ -383,6 +405,9 @@
 
       <div class="flow-step">
         <span class="step-num">1</span>
+        <span class="step-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><path d="M5 4h11l3 3v13H5z"/><path d="M16 4v3h3"/><path d="M8 11h8M8 14h8M8 17h5"/></svg>
+        </span>
         <span class="role">Define</span>
         <h4>Set the AMEX KPI list per region</h4>
         <ul>
@@ -393,6 +418,9 @@
 
       <div class="flow-step">
         <span class="step-num">2</span>
+        <span class="step-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><path d="M12 4v16"/><path d="M5 7h14"/><path d="M5 7l-2 5h4z"/><path d="M19 7l-2 5h4z"/><path d="M8 20h8"/></svg>
+        </span>
         <span class="role">Align</span>
         <h4>Confirm definitions are comparable</h4>
         <ul>
@@ -404,6 +432,9 @@
 
       <div class="flow-step">
         <span class="step-num">3</span>
+        <span class="step-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="6"/><path d="M16 16l5 5"/><path d="M8 11h6M11 8v6"/></svg>
+        </span>
         <span class="role">Locate</span>
         <h4>Find each KPI in regional reports</h4>
         <ul>
@@ -415,6 +446,9 @@
 
       <div class="flow-step">
         <span class="step-num">4</span>
+        <span class="step-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><circle cx="9" cy="9" r="3"/><path d="M3 19c0-3 3-5 6-5s6 2 6 5"/><circle cx="17" cy="7" r="2.5"/><path d="M14 14c2-1 4-1 6 0s2 3 2 5"/></svg>
+        </span>
         <span class="role">Socialize</span>
         <h4>Share with RDS Partnerships teams</h4>
         <ul>
@@ -426,6 +460,9 @@
 
       <div class="flow-step">
         <span class="step-num">5</span>
+        <span class="step-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M8 9h8M8 13h8M8 17h5"/><path d="M16 17l2 2 4-4"/></svg>
+        </span>
         <span class="role">Standardize</span>
         <h4>Template for all partnerships</h4>
         <ul>
