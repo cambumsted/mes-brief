@@ -498,13 +498,33 @@
   .moment-mock .mcard .row .v.up { color: #2C7A4B; }
   .moment-mock .mcard .row .v.down { color: #993333; }
 
-  /* answer-surfaces grid: 2x2 for 4 cards */
+  /* answer-surfaces grid: 3 cols (5 cards = 3+2 layout) */
   .grid-4-2 {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: repeat(3, 1fr);
     gap: 1rem;
   }
-  @media (max-width: 800px) { .grid-4-2 { grid-template-columns: 1fr; } }
+  @media (max-width: 1000px) { .grid-4-2 { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 600px)  { .grid-4-2 { grid-template-columns: 1fr; } }
+
+  .qcard.q5 { border-top-color: #2C7A4B; }
+  .qcard.q5 .q-answer li::before { background: #2C7A4B; }
+  .qcard .pending-pill {
+    margin-top: 0.6rem;
+    align-self: flex-start;
+    background: #FFF4CE;
+    color: #8A6D00;
+    border: 1px solid #F0DEA0;
+    font-size: 0.78rem;
+    font-weight: 600;
+    padding: 0.3rem 0.7rem;
+    border-radius: 999px;
+    display: inline-flex; align-items: center; gap: 0.4rem;
+  }
+  .qcard .pending-pill::before {
+    content: "⏳";
+    font-size: 0.85rem;
+  }
 
   /* Behind-every-answer dropdowns */
   details.bblock-detail {
@@ -838,12 +858,13 @@
   /* v0.3 visual — question tiles */
   .qtiles {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(5, 1fr);
     gap: 0.7rem;
     margin: 0.4rem 0 0.4rem;
   }
-  @media (max-width: 1000px) { .qtiles { grid-template-columns: repeat(2, 1fr); } }
-  @media (max-width: 600px) { .qtiles { grid-template-columns: 1fr; } }
+  @media (max-width: 1100px) { .qtiles { grid-template-columns: repeat(3, 1fr); } }
+  @media (max-width: 800px)  { .qtiles { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 600px)  { .qtiles { grid-template-columns: 1fr; } }
   .qtile {
     background: var(--c-white);
     border: 1px solid var(--line);
@@ -1226,6 +1247,10 @@
         <div class="qtext">How is marketing contributing to a campaign moment?</div>
         <div class="qcap">Back to School, product launches, Holiday — the rollup story.</div>
       </div>
+      <div class="qtile">
+        <div class="qtext">What is the incremental impact of paid media?</div>
+        <div class="qcap">How much business would have happened without the spend?</div>
+      </div>
     </div>
 
     <h3 class="hint-head">Today, answering any one means</h3>
@@ -1256,6 +1281,7 @@
         <div class="hub-pill q">Q2 · What moved the trend?</div>
         <div class="hub-pill q">Q3 · ROI by partnership?</div>
         <div class="hub-pill q">Q4 · Campaign moment rollup?</div>
+        <div class="hub-pill q">Q5 · Paid media incrementality?</div>
       </div>
       <div class="hub-down"></div>
       <div class="hub-core">
@@ -1341,6 +1367,24 @@
           Campaign tags · Channel reports · GTM moment calendar
         </div>
         <span class="preview-cta">See example</span>
+      </div>
+
+      <!-- Q5: Paid media incrementality -->
+      <div class="qcard q5">
+        <span class="q-tag">Paid media incrementality</span>
+        <div class="q-q">What's the incremental impact of paid media?</div>
+        <div class="q-answer">
+          <ul>
+            <li>Quarterly incrementality tests run with our agency</li>
+            <li>Measures the lift paid media is actually causing for Surface</li>
+            <li>Frames whether incremental dollars compound or get absorbed</li>
+          </ul>
+        </div>
+        <div class="q-meta">
+          <span class="lab">Sources</span>
+          Curated report from Global Media · Quarterly cadence
+        </div>
+        <span class="pending-pill">First report in progress</span>
       </div>
 
     </div>
