@@ -1104,6 +1104,7 @@
 
     function applyFilters() {
       var q = (search.value || '').trim().toLowerCase();
+      var filtersActive = q !== '' || activeFreq !== 'all';
       var visibleGroups = 0, visibleCards = 0;
 
       groups.forEach(function (g) {
@@ -1130,6 +1131,20 @@
 
         g.classList.toggle('hidden', !anyMatch);
         if (anyMatch) visibleGroups++;
+
+        // Auto-expand sections with matches when filters are active;
+        // restore collapsed-by-default when filters are cleared.
+        var header = g.querySelector('.channel-header');
+        var body = g.querySelector('.reports-body');
+        if (header && body) {
+          if (filtersActive && anyMatch) {
+            header.classList.remove('collapsed');
+            body.style.display = '';
+          } else if (!filtersActive) {
+            header.classList.add('collapsed');
+            body.style.display = 'none';
+          }
+        }
       });
 
       emptyState.style.display = visibleGroups === 0 ? '' : 'none';
