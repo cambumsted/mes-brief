@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Workstream Timeline — Marketing Effectiveness Solution</title>
+<title>Workstream Timeline â€” Marketing Effectiveness Solution</title>
 <link rel="stylesheet" href="notes-widget.css" />
 <style>
   :root {
@@ -214,7 +214,7 @@
   }
   .gantt-cells > .col { border-left: 1px solid var(--line); }
 
-  /* Weekly sub-header (W1–W4 under each month) */
+  /* Weekly sub-header (W1â€“W4 under each month) */
   .gantt-week-header {
     display: grid;
     grid-template-columns: 300px repeat(6, 1fr);
@@ -461,99 +461,6 @@
     color: var(--ink-soft); font-size: 0.85rem;
   }
 
-  /* ========================== */
-  /* Weekly task board          */
-  /* ========================== */
-  .week-board {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 1rem;
-    margin-top: 1rem;
-  }
-  @media (max-width: 900px) { .week-board { grid-template-columns: 1fr; } }
-
-  .month-block {
-    background: var(--c-white);
-    border: 1px solid var(--line);
-    border-radius: 8px;
-    overflow: hidden;
-  }
-  .month-block .month-head {
-    padding: 0.7rem 1rem;
-    background: linear-gradient(135deg, var(--c-dark-blue) 0%, var(--c-med-blue) 100%);
-    color: var(--c-white);
-    font-weight: 700;
-    font-size: 0.95rem;
-    letter-spacing: 0.4px;
-    text-transform: uppercase;
-    display: flex; align-items: center; justify-content: space-between;
-  }
-  .month-block .month-head .month-tag {
-    font-size: 0.68rem;
-    background: rgba(255,255,255,0.18);
-    padding: 0.15rem 0.5rem;
-    border-radius: 10px;
-    text-transform: none; letter-spacing: 0;
-    font-weight: 500;
-  }
-  .week-row {
-    display: grid;
-    grid-template-columns: 70px 1fr;
-    gap: 0;
-    border-top: 1px solid var(--line);
-  }
-  .week-row:first-of-type { border-top: none; }
-  .week-row .week-tag {
-    background: var(--bg);
-    padding: 0.7rem 0.7rem;
-    font-size: 0.78rem;
-    font-weight: 700;
-    color: var(--ink-soft);
-    text-align: center;
-    border-right: 1px solid var(--line);
-    display: flex; flex-direction: column; align-items: center; justify-content: center;
-    line-height: 1.2;
-  }
-  .week-row .week-tag .wk-date {
-    font-size: 0.66rem;
-    font-weight: 500;
-    color: var(--ink-soft);
-    margin-top: 2px;
-  }
-  .week-row .week-content {
-    padding: 0.7rem 0.9rem;
-    font-size: 0.84rem;
-  }
-  .week-row .ws-chips {
-    display: flex; flex-wrap: wrap; gap: 4px;
-    margin-bottom: 0.4rem;
-  }
-  .ws-chip {
-    display: inline-flex; align-items: center;
-    font-size: 0.72rem;
-    font-weight: 600;
-    padding: 2px 8px;
-    border-radius: 10px;
-    border: 1px solid var(--line);
-    background: var(--c-white);
-    color: var(--ink);
-    line-height: 1.4;
-  }
-  .ws-chip.crawl { background: #F4F4F4; border-color: #BFBFBF; color: #3a3a3a; }
-  .ws-chip.walk { background: #E6F2FB; border-color: #B3D7F0; color: #00477A; }
-  .ws-chip.run { background: #DEF5EF; border-color: #A8DDD0; color: #1E6657; }
-  .ws-chip.milestone { background: #FFF4CE; border-color: #F6D679; color: #6B5800; }
-  .ws-chip.meeting { background: #EFE9F8; border-color: #C5B4E3; color: #5A4585; }
-  .week-row .task-slot {
-    margin-top: 0.3rem;
-    border-top: 1px dashed var(--line);
-    padding-top: 0.4rem;
-    color: var(--ink-soft);
-    font-size: 0.78rem;
-    font-style: italic;
-  }
-  .week-row.current { background: #FFFCF1; }
-  .week-row.current .week-tag { background: #FFF6D8; color: #6B5800; }
 </style>
 </head>
 <body>
@@ -571,9 +478,9 @@
 
 <header class="page-header">
   <div class="container">
-    <div class="meta">DDS Marketing · Working Document · Draft</div>
+    <div class="meta">DDS Marketing Â· Working Document Â· Draft</div>
     <h1>Workstream Timeline</h1>
-    <p>A reasonable path from where we are today to an integrated marketing effectiveness solution — sequenced through the Crawl, Walk, Run framework with rough time estimates per workstream. Dates are illustrative; actual sequencing depends on resourcing and stakeholder alignment.</p>
+    <p>A reasonable path from where we are today to an integrated marketing effectiveness solution â€” sequenced through the Crawl, Walk, Run framework with rough time estimates per workstream. Dates are illustrative; actual sequencing depends on resourcing and stakeholder alignment.</p>
   </div>
 </header>
 
@@ -582,29 +489,29 @@
   <!-- PHASE SUMMARY -->
   <section class="block">
     <h2>At a glance</h2>
-    <p class="lede">Active 6-month working window: <strong>May – Oct 2026</strong>. Phase 1 fully scoped; Phase 2 starts in August; Phase 3 ramps at the end of the window and continues beyond. Each phase delivers usable value on its own — we don't wait until "Run" to put something in leadership's hands.</p>
+    <p class="lede">Active 6-month working window: <strong>May â€“ Oct 2026</strong>. Phase 1 fully scoped; Phase 2 starts in August; Phase 3 ramps at the end of the window and continues beyond. Each phase delivers usable value on its own â€” we don't wait until "Run" to put something in leadership's hands.</p>
     <div class="phase-summary">
       <a class="phase-card-link" href="#phase-1">
         <div class="card crawl">
           <div class="phase-tag">Phase 1</div>
-          <h3>Crawl — Define &amp; Align</h3>
-          <span class="duration">~6–8 weeks</span>
+          <h3>Crawl â€” Define &amp; Align</h3>
+          <span class="duration">~6â€“8 weeks</span>
           <p>Discover what stakeholders need, inventory what exists, and stand up a manual MVP of the unified view.</p>
         </div>
       </a>
       <a class="phase-card-link" href="#phase-2">
         <div class="card walk">
           <div class="phase-tag">Phase 2</div>
-          <h3>Walk — Centralize &amp; Standardize</h3>
-          <span class="duration">~3–4 months</span>
+          <h3>Walk â€” Centralize &amp; Standardize</h3>
+          <span class="duration">~3â€“4 months</span>
           <p>Update OCID classifications, operationalize the partnership grid, and begin moment-level attribution.</p>
         </div>
       </a>
       <a class="phase-card-link" href="#phase-3">
         <div class="card run">
           <div class="phase-tag">Phase 3</div>
-          <h3>Run — Integrate &amp; Automate</h3>
-          <span class="duration">~4–6 months</span>
+          <h3>Run â€” Integrate &amp; Automate</h3>
+          <span class="duration">~4â€“6 months</span>
           <p>Integrated solution with drill-downs, automation where ROI justifies it, embedded in leadership rituals.</p>
         </div>
       </a>
@@ -613,8 +520,8 @@
 
   <!-- GANTT -->
   <section class="block">
-    <h2>Timeline view · 6-month working window (May – Oct 2026)</h2>
-    <p class="lede">Phase 1 fully scoped. Phase 2 starts mid-window. Phase 3 begins to ramp at the end of the window and continues beyond — see the phase detail sections below for full plan.</p>
+    <h2>Timeline view Â· 6-month working window (May â€“ Oct 2026)</h2>
+    <p class="lede">Phase 1 fully scoped. Phase 2 starts mid-window. Phase 3 begins to ramp at the end of the window and continues beyond â€” see the phase detail sections below for full plan.</p>
     <div class="gantt">
       <div class="gantt-header">
         <div>Workstream</div>
@@ -636,20 +543,20 @@
         <div class="gantt-cells">
           <div class="col"></div><div class="col"></div><div class="col"></div>
           <div class="col"></div><div class="col"></div><div class="col"></div>
-          <span class="milestone-mark tip-right" tabindex="0" style="left: 6.25%;"  data-label="May Wk2 · Discovery meetings (Paid Media 5/11, Email 5/12)"></span>
-          <span class="milestone-mark" tabindex="0" style="left: 22.92%;" data-label="Jun Wk2 · Manual Unified View MVP (incl. partnerships grid) live"></span>
-          <span class="milestone-mark" tabindex="0" style="left: 50%;"    data-label="End Jul · Phase 1 exit"></span>
-          <span class="milestone-mark tip-left" tabindex="0" style="left: 95.83%;" data-label="End Oct · Phase 2 mid-point readout"></span>
+          <span class="milestone-mark tip-right" tabindex="0" style="left: 6.25%;"  data-label="May Wk2 Â· Discovery meetings (Paid Media 5/11, Email 5/12)"></span>
+          <span class="milestone-mark" tabindex="0" style="left: 22.92%;" data-label="Jun Wk2 Â· Manual Unified View MVP (incl. partnerships grid) live"></span>
+          <span class="milestone-mark" tabindex="0" style="left: 50%;"    data-label="End Jul Â· Phase 1 exit"></span>
+          <span class="milestone-mark tip-left" tabindex="0" style="left: 95.83%;" data-label="End Oct Â· Phase 2 mid-point readout"></span>
         </div>
       </div>
 
-      <!-- PHASE 1 · CRAWL -->
+      <!-- PHASE 1 Â· CRAWL -->
       <div class="gantt-row" style="background:#F4F4F4;">
-        <div class="label" style="font-weight:700; text-transform:uppercase; letter-spacing:0.5px; font-size:0.78rem;">Phase 1 · Crawl</div>
+        <div class="label" style="font-weight:700; text-transform:uppercase; letter-spacing:0.5px; font-size:0.78rem;">Phase 1 Â· Crawl</div>
         <div class="gantt-cells">
           <div class="col"></div><div class="col"></div><div class="col"></div>
           <div class="col"></div><div class="col"></div><div class="col"></div>
-          <div class="bar crawl" style="left: 0%; right: 50%;">May – Jul</div>
+          <div class="bar crawl" style="left: 0%; right: 50%;">May â€“ Jul</div>
         </div>
       </div>
       <div class="gantt-row">
@@ -661,27 +568,27 @@
         </div>
       </div>
       <div class="gantt-row">
-        <div class="label" style="padding-left:2.4rem; font-weight:500;"><a class="ws-link" href="#ws-discovery">↳ Paid Media discovery (Rissa)</a></div>
+        <div class="label" style="padding-left:2.4rem; font-weight:500;"><a class="ws-link" href="#ws-discovery">â†³ Paid Media discovery (Rissa)</a></div>
         <div class="gantt-cells">
           <div class="col"></div><div class="col"></div><div class="col"></div>
           <div class="col"></div><div class="col"></div><div class="col"></div>
-          <div class="bar crawl" style="left: 4.17%; right: 91.67%; background:#5A4585;" title="5/11 · Paid Media discovery meeting">5/11</div>
+          <div class="bar crawl" style="left: 4.17%; right: 91.67%; background:#5A4585;" title="5/11 Â· Paid Media discovery meeting">5/11</div>
         </div>
       </div>
       <div class="gantt-row">
-        <div class="label" style="padding-left:2.4rem; font-weight:500;"><a class="ws-link" href="#ws-discovery">↳ Email discovery (Courtney &amp; Emma)</a></div>
+        <div class="label" style="padding-left:2.4rem; font-weight:500;"><a class="ws-link" href="#ws-discovery">â†³ Email discovery (Courtney &amp; Emma)</a></div>
         <div class="gantt-cells">
           <div class="col"></div><div class="col"></div><div class="col"></div>
           <div class="col"></div><div class="col"></div><div class="col"></div>
-          <div class="bar crawl" style="left: 4.17%; right: 91.67%; background:#5A4585;" title="5/12 · Email discovery meeting">5/12</div>
+          <div class="bar crawl" style="left: 4.17%; right: 91.67%; background:#5A4585;" title="5/12 Â· Email discovery meeting">5/12</div>
         </div>
       </div>
       <div class="gantt-row">
-        <div class="label" style="padding-left:2.4rem; font-weight:500;"><a class="ws-link" href="#ws-discovery">↳ SEO discovery (TBD)</a></div>
+        <div class="label" style="padding-left:2.4rem; font-weight:500;"><a class="ws-link" href="#ws-discovery">â†³ SEO discovery (TBD)</a></div>
         <div class="gantt-cells">
           <div class="col"></div><div class="col"></div><div class="col"></div>
           <div class="col"></div><div class="col"></div><div class="col"></div>
-          <div class="bar crawl" style="left: 12.5%; right: 83.33%; background:#7F7F7F;" title="Target: late May · SEO discovery meeting">TBD</div>
+          <div class="bar crawl" style="left: 12.5%; right: 83.33%; background:#7F7F7F;" title="Target: late May Â· SEO discovery meeting">TBD</div>
         </div>
       </div>
       <div class="gantt-row">
@@ -697,7 +604,7 @@
         <div class="gantt-cells">
           <div class="col"></div><div class="col"></div><div class="col"></div>
           <div class="col"></div><div class="col"></div><div class="col"></div>
-          <div class="bar crawl" style="left: 0%; right: 75%;">May – Jun Wk2</div>
+          <div class="bar crawl" style="left: 0%; right: 75%;">May â€“ Jun Wk2</div>
         </div>
       </div>
       <div class="gantt-row">
@@ -705,7 +612,7 @@
         <div class="gantt-cells">
           <div class="col"></div><div class="col"></div><div class="col"></div>
           <div class="col"></div><div class="col"></div><div class="col"></div>
-          <div class="bar crawl" style="left: 0%; right: 75%;">May – Jun Wk2</div>
+          <div class="bar crawl" style="left: 0%; right: 75%;">May â€“ Jun Wk2</div>
         </div>
       </div>
       <div class="gantt-row">
@@ -713,7 +620,7 @@
         <div class="gantt-cells">
           <div class="col"></div><div class="col"></div><div class="col"></div>
           <div class="col"></div><div class="col"></div><div class="col"></div>
-          <span class="milestone-mark" tabindex="0" style="left: 22.92%;" data-label="Jun Wk2 · Manual Unified View MVP (incl. partnerships grid)"></span>
+          <span class="milestone-mark" tabindex="0" style="left: 22.92%;" data-label="Jun Wk2 Â· Manual Unified View MVP (incl. partnerships grid)"></span>
         </div>
       </div>
       <div class="gantt-row">
@@ -725,13 +632,13 @@
         </div>
       </div>
 
-      <!-- PHASE 2 · WALK -->
+      <!-- PHASE 2 Â· WALK -->
       <div class="gantt-row" style="background:#EAF4FB;">
-        <div class="label" style="font-weight:700; text-transform:uppercase; letter-spacing:0.5px; font-size:0.78rem; color:#00477A;">Phase 2 · Walk</div>
+        <div class="label" style="font-weight:700; text-transform:uppercase; letter-spacing:0.5px; font-size:0.78rem; color:#00477A;">Phase 2 Â· Walk</div>
         <div class="gantt-cells">
           <div class="col"></div><div class="col"></div><div class="col"></div>
           <div class="col"></div><div class="col"></div><div class="col"></div>
-          <div class="bar walk" style="left: 50%; right: 0%;">Aug – Oct (continues)</div>
+          <div class="bar walk" style="left: 50%; right: 0%;">Aug â€“ Oct (continues)</div>
         </div>
       </div>
       <div class="gantt-row">
@@ -775,13 +682,13 @@
         </div>
       </div>
 
-      <!-- PHASE 3 · RUN (start indicator only — continues beyond window) -->
+      <!-- PHASE 3 Â· RUN (start indicator only â€” continues beyond window) -->
       <div class="gantt-row" style="background:#ECF7F3;">
-        <div class="label" style="font-weight:700; text-transform:uppercase; letter-spacing:0.5px; font-size:0.78rem; color:#1E6657;">Phase 3 · Run <span style="font-weight:500; text-transform:none; letter-spacing:0; font-size:0.72rem;">(begins post-window)</span></div>
+        <div class="label" style="font-weight:700; text-transform:uppercase; letter-spacing:0.5px; font-size:0.78rem; color:#1E6657;">Phase 3 Â· Run <span style="font-weight:500; text-transform:none; letter-spacing:0; font-size:0.72rem;">(begins post-window)</span></div>
         <div class="gantt-cells">
           <div class="col"></div><div class="col"></div><div class="col"></div>
           <div class="col"></div><div class="col"></div><div class="col"></div>
-          <div class="bar run" style="left: 91.67%; right: 0%;">Starts Oct Wk3 →</div>
+          <div class="bar run" style="left: 91.67%; right: 0%;">Starts Oct Wk3 â†’</div>
         </div>
       </div>
     </div>
@@ -795,351 +702,13 @@
     </div>
   </section>
 
-  <!-- ========================== -->
-  <!-- WEEKLY TASK BOARD          -->
-  <!-- ========================== -->
-  <section class="block" id="weekly-task-board">
-    <h2>Weekly task board</h2>
-    <p class="lede">Each week shows the workstreams active that week. Use the <em>Tasks / Owner</em> slot under each week to assign specific deliverables.</p>
-
-    <div class="week-board">
-
-      <!-- MAY -->
-      <div class="month-block">
-        <div class="month-head">May 2026 <span class="month-tag">Phase 1 · Crawl kickoff</span></div>
-
-        <div class="week-row current">
-          <div class="week-tag">W1<span class="wk-date">May 4–10</span></div>
-          <div class="week-content">
-            <div class="ws-chips">
-              <span class="ws-chip crawl">Discovery</span>
-              <span class="ws-chip crawl">Reports inventory</span>
-              <span class="ws-chip crawl">Tracking education</span>
-              <span class="ws-chip crawl">Partnership grid v1</span>
-              <span class="ws-chip crawl">Stakeholder &amp; RACI</span>
-            </div>
-            <div class="task-slot">Tasks / Owner: <span style="color:#A6A6A6;">— add here —</span></div>
-          </div>
-        </div>
-
-        <div class="week-row current">
-          <div class="week-tag">W2<span class="wk-date">May 11–17</span></div>
-          <div class="week-content">
-            <div class="ws-chips">
-              <span class="ws-chip meeting">Paid Media discovery · 5/11 (Rissa)</span>
-              <span class="ws-chip meeting">Email discovery · 5/12 (Courtney/Emma)</span>
-              <span class="ws-chip crawl">Reports inventory</span>
-              <span class="ws-chip crawl">Tracking education</span>
-              <span class="ws-chip crawl">Partnership grid v1</span>
-            </div>
-            <div class="task-slot">Tasks / Owner: <span style="color:#A6A6A6;">— add here —</span></div>
-          </div>
-        </div>
-
-        <div class="week-row">
-          <div class="week-tag">W3<span class="wk-date">May 18–24</span></div>
-          <div class="week-content">
-            <div class="ws-chips">
-              <span class="ws-chip crawl">Discovery</span>
-              <span class="ws-chip crawl">Reports inventory</span>
-              <span class="ws-chip crawl">Tracking education</span>
-              <span class="ws-chip crawl">Partnership grid v1</span>
-            </div>
-            <div class="task-slot">Tasks / Owner: <span style="color:#A6A6A6;">— add here —</span></div>
-          </div>
-        </div>
-
-        <div class="week-row">
-          <div class="week-tag">W4<span class="wk-date">May 25–31</span></div>
-          <div class="week-content">
-            <div class="ws-chips">
-              <span class="ws-chip meeting">SEO discovery · TBD</span>
-              <span class="ws-chip crawl">Reports inventory (wrap)</span>
-              <span class="ws-chip crawl">Tracking education</span>
-              <span class="ws-chip crawl">Partnership grid v1</span>
-              <span class="ws-chip milestone">Project kickoff</span>
-            </div>
-            <div class="task-slot">Tasks / Owner: <span style="color:#A6A6A6;">— add here —</span></div>
-          </div>
-        </div>
-      </div>
-
-      <!-- JUNE -->
-      <div class="month-block">
-        <div class="month-head">June 2026 <span class="month-tag">Manual MVP milestone</span></div>
-
-        <div class="week-row">
-          <div class="week-tag">W1<span class="wk-date">Jun 1–7</span></div>
-          <div class="week-content">
-            <div class="ws-chips">
-              <span class="ws-chip crawl">Discovery</span>
-              <span class="ws-chip crawl">Tracking education</span>
-              <span class="ws-chip crawl">Partnership grid v1 (wrap)</span>
-              <span class="ws-chip crawl">Manual MVP build</span>
-            </div>
-            <div class="task-slot">Tasks / Owner: <span style="color:#A6A6A6;">— add here —</span></div>
-          </div>
-        </div>
-
-        <div class="week-row">
-          <div class="week-tag">W2<span class="wk-date">Jun 8–14</span></div>
-          <div class="week-content">
-            <div class="ws-chips">
-              <span class="ws-chip milestone">Manual Unified View MVP live (incl. partnerships grid)</span>
-              <span class="ws-chip crawl">Discovery</span>
-              <span class="ws-chip crawl">Tracking education (wrap)</span>
-            </div>
-            <div class="task-slot">Tasks / Owner: <span style="color:#A6A6A6;">— add here —</span></div>
-          </div>
-        </div>
-
-        <div class="week-row">
-          <div class="week-tag">W3<span class="wk-date">Jun 15–21</span></div>
-          <div class="week-content">
-            <div class="ws-chips">
-              <span class="ws-chip crawl">Discovery</span>
-              <span class="ws-chip crawl">Manual MVP iterate</span>
-              <span class="ws-chip crawl">Stakeholder &amp; RACI</span>
-            </div>
-            <div class="task-slot">Tasks / Owner: <span style="color:#A6A6A6;">— add here —</span></div>
-          </div>
-        </div>
-
-        <div class="week-row">
-          <div class="week-tag">W4<span class="wk-date">Jun 22–28</span></div>
-          <div class="week-content">
-            <div class="ws-chips">
-              <span class="ws-chip crawl">Discovery</span>
-              <span class="ws-chip crawl">Manual MVP iterate</span>
-            </div>
-            <div class="task-slot">Tasks / Owner: <span style="color:#A6A6A6;">— add here —</span></div>
-          </div>
-        </div>
-      </div>
-
-      <!-- JULY -->
-      <div class="month-block">
-        <div class="month-head">July 2026 <span class="month-tag">Phase 1 wind-down</span></div>
-
-        <div class="week-row">
-          <div class="week-tag">W1<span class="wk-date">Jun 29 – Jul 5</span></div>
-          <div class="week-content">
-            <div class="ws-chips">
-              <span class="ws-chip crawl">Discovery (wrap)</span>
-              <span class="ws-chip crawl">Manual MVP cycle 2</span>
-            </div>
-            <div class="task-slot">Tasks / Owner: <span style="color:#A6A6A6;">— add here —</span></div>
-          </div>
-        </div>
-
-        <div class="week-row">
-          <div class="week-tag">W2<span class="wk-date">Jul 6–12</span></div>
-          <div class="week-content">
-            <div class="ws-chips">
-              <span class="ws-chip crawl">Manual MVP cycle 2</span>
-              <span class="ws-chip walk">OCID classifications · prep</span>
-            </div>
-            <div class="task-slot">Tasks / Owner: <span style="color:#A6A6A6;">— add here —</span></div>
-          </div>
-        </div>
-
-        <div class="week-row">
-          <div class="week-tag">W3<span class="wk-date">Jul 13–19</span></div>
-          <div class="week-content">
-            <div class="ws-chips">
-              <span class="ws-chip crawl">Manual MVP cycle 3</span>
-              <span class="ws-chip walk">OCID classifications · prep</span>
-            </div>
-            <div class="task-slot">Tasks / Owner: <span style="color:#A6A6A6;">— add here —</span></div>
-          </div>
-        </div>
-
-        <div class="week-row">
-          <div class="week-tag">W4<span class="wk-date">Jul 20–26</span></div>
-          <div class="week-content">
-            <div class="ws-chips">
-              <span class="ws-chip milestone">Phase 1 exit readout</span>
-              <span class="ws-chip walk">OCID classifications · prep</span>
-            </div>
-            <div class="task-slot">Tasks / Owner: <span style="color:#A6A6A6;">— add here —</span></div>
-          </div>
-        </div>
-      </div>
-
-      <!-- AUGUST -->
-      <div class="month-block">
-        <div class="month-head">August 2026 <span class="month-tag">Phase 2 · Walk start</span></div>
-
-        <div class="week-row">
-          <div class="week-tag">W1<span class="wk-date">Jul 27 – Aug 2</span></div>
-          <div class="week-content">
-            <div class="ws-chips">
-              <span class="ws-chip walk">OCID classifications</span>
-              <span class="ws-chip walk">Operationalize partnership grid</span>
-              <span class="ws-chip walk">Attribution v1</span>
-            </div>
-            <div class="task-slot">Tasks / Owner: <span style="color:#A6A6A6;">— add here —</span></div>
-          </div>
-        </div>
-
-        <div class="week-row">
-          <div class="week-tag">W2<span class="wk-date">Aug 3–9</span></div>
-          <div class="week-content">
-            <div class="ws-chips">
-              <span class="ws-chip walk">OCID classifications</span>
-              <span class="ws-chip walk">Operationalize partnership grid</span>
-              <span class="ws-chip walk">Attribution v1</span>
-            </div>
-            <div class="task-slot">Tasks / Owner: <span style="color:#A6A6A6;">— add here —</span></div>
-          </div>
-        </div>
-
-        <div class="week-row">
-          <div class="week-tag">W3<span class="wk-date">Aug 10–16</span></div>
-          <div class="week-content">
-            <div class="ws-chips">
-              <span class="ws-chip walk">OCID classifications</span>
-              <span class="ws-chip walk">Partnership grid · Q cadence</span>
-              <span class="ws-chip walk">Attribution v1</span>
-            </div>
-            <div class="task-slot">Tasks / Owner: <span style="color:#A6A6A6;">— add here —</span></div>
-          </div>
-        </div>
-
-        <div class="week-row">
-          <div class="week-tag">W4<span class="wk-date">Aug 17–23</span></div>
-          <div class="week-content">
-            <div class="ws-chips">
-              <span class="ws-chip walk">OCID classifications</span>
-              <span class="ws-chip walk">Partnership grid · Q cadence</span>
-              <span class="ws-chip walk">Attribution v1</span>
-            </div>
-            <div class="task-slot">Tasks / Owner: <span style="color:#A6A6A6;">— add here —</span></div>
-          </div>
-        </div>
-      </div>
-
-      <!-- SEPTEMBER -->
-      <div class="month-block">
-        <div class="month-head">September 2026 <span class="month-tag">Walk · operationalize</span></div>
-
-        <div class="week-row">
-          <div class="week-tag">W1<span class="wk-date">Aug 24–30</span></div>
-          <div class="week-content">
-            <div class="ws-chips">
-              <span class="ws-chip walk">OCID classifications</span>
-              <span class="ws-chip walk">Cross-pillar review · pilot</span>
-              <span class="ws-chip walk">ROI gap-fix · proxies</span>
-              <span class="ws-chip walk">Attribution v1</span>
-            </div>
-            <div class="task-slot">Tasks / Owner: <span style="color:#A6A6A6;">— add here —</span></div>
-          </div>
-        </div>
-
-        <div class="week-row">
-          <div class="week-tag">W2<span class="wk-date">Aug 31 – Sep 6</span></div>
-          <div class="week-content">
-            <div class="ws-chips">
-              <span class="ws-chip walk">OCID classifications</span>
-              <span class="ws-chip walk">Cross-pillar review · pilot</span>
-              <span class="ws-chip walk">ROI gap-fix · proxies</span>
-              <span class="ws-chip walk">Attribution v1</span>
-            </div>
-            <div class="task-slot">Tasks / Owner: <span style="color:#A6A6A6;">— add here —</span></div>
-          </div>
-        </div>
-
-        <div class="week-row">
-          <div class="week-tag">W3<span class="wk-date">Sep 7–13</span></div>
-          <div class="week-content">
-            <div class="ws-chips">
-              <span class="ws-chip walk">OCID classifications</span>
-              <span class="ws-chip walk">Cross-pillar review</span>
-              <span class="ws-chip walk">ROI gap-fix</span>
-              <span class="ws-chip walk">Attribution v1</span>
-            </div>
-            <div class="task-slot">Tasks / Owner: <span style="color:#A6A6A6;">— add here —</span></div>
-          </div>
-        </div>
-
-        <div class="week-row">
-          <div class="week-tag">W4<span class="wk-date">Sep 14–20</span></div>
-          <div class="week-content">
-            <div class="ws-chips">
-              <span class="ws-chip walk">OCID classifications (wrap)</span>
-              <span class="ws-chip walk">Cross-pillar review</span>
-              <span class="ws-chip walk">ROI gap-fix</span>
-              <span class="ws-chip walk">Attribution v1</span>
-            </div>
-            <div class="task-slot">Tasks / Owner: <span style="color:#A6A6A6;">— add here —</span></div>
-          </div>
-        </div>
-      </div>
-
-      <!-- OCTOBER -->
-      <div class="month-block">
-        <div class="month-head">October 2026 <span class="month-tag">Walk readout · Run begins</span></div>
-
-        <div class="week-row">
-          <div class="week-tag">W1<span class="wk-date">Sep 21–27</span></div>
-          <div class="week-content">
-            <div class="ws-chips">
-              <span class="ws-chip walk">Operationalize partnership grid</span>
-              <span class="ws-chip walk">Cross-pillar review</span>
-              <span class="ws-chip walk">Attribution v1</span>
-              <span class="ws-chip walk">ROI gap-fix</span>
-            </div>
-            <div class="task-slot">Tasks / Owner: <span style="color:#A6A6A6;">— add here —</span></div>
-          </div>
-        </div>
-
-        <div class="week-row">
-          <div class="week-tag">W2<span class="wk-date">Sep 28 – Oct 4</span></div>
-          <div class="week-content">
-            <div class="ws-chips">
-              <span class="ws-chip walk">Operationalize partnership grid</span>
-              <span class="ws-chip walk">Cross-pillar review</span>
-              <span class="ws-chip walk">Attribution v1</span>
-              <span class="ws-chip walk">ROI gap-fix</span>
-            </div>
-            <div class="task-slot">Tasks / Owner: <span style="color:#A6A6A6;">— add here —</span></div>
-          </div>
-        </div>
-
-        <div class="week-row">
-          <div class="week-tag">W3<span class="wk-date">Oct 5–11</span></div>
-          <div class="week-content">
-            <div class="ws-chips">
-              <span class="ws-chip run">Phase 3 prep · integrated build kickoff</span>
-              <span class="ws-chip walk">Operationalize partnership grid</span>
-              <span class="ws-chip walk">Cross-pillar review</span>
-            </div>
-            <div class="task-slot">Tasks / Owner: <span style="color:#A6A6A6;">— add here —</span></div>
-          </div>
-        </div>
-
-        <div class="week-row">
-          <div class="week-tag">W4<span class="wk-date">Oct 12–18</span></div>
-          <div class="week-content">
-            <div class="ws-chips">
-              <span class="ws-chip milestone">Phase 2 mid-point readout</span>
-              <span class="ws-chip run">Integrated build · scoping</span>
-            </div>
-            <div class="task-slot">Tasks / Owner: <span style="color:#A6A6A6;">— add here —</span></div>
-          </div>
-        </div>
-      </div>
-
-    </div>
-  </section>
-
   <!-- PHASE 1 DETAIL -->
   <section class="block" id="phase-1">
-    <h2>Phase 1 · Crawl — Define &amp; Align</h2>
+    <h2>Phase 1 Â· Crawl â€” Define &amp; Align</h2>
     <div class="phase-block crawl">
       <div class="phase-head">
         <h3>Get to a shared baseline</h3>
-        <span class="duration">~6–8 weeks</span>
+        <span class="duration">~6â€“8 weeks</span>
         <span class="goal">Goal: leadership can see one curated view of marketing performance, even if it's manually assembled.</span>
       </div>
       <table class="workstream-table">
@@ -1149,8 +718,8 @@
         <tbody>
           <tr id="ws-discovery">
             <td class="workstream">Discovery period</td>
-            <td class="duration">May – Jul</td>
-            <td class="activities">Reach out to stakeholders across DDS Marketing, channel leads, GTM, and finance partners. Align on wish-list items, understand what each audience wants out of a unified marketing destination, and surface the questions they're trying to answer today. Output is a synthesized requirements list that anchors everything that follows.<br><br><strong>Channel-specific discovery sessions:</strong><ul style="margin:0.4rem 0 0 1rem;"><li><strong>Paid Media discovery (Rissa)</strong> — 5/11 · covers PMAX/SEM split and creative→web tie-out (see <a href="web-metrics-notes.html#paid-media">Web metrics notes</a>).</li><li><strong>Email discovery (Courtney &amp; Emma)</strong> — 5/12 · transactional email tracking &amp; attribution (see <a href="web-metrics-notes.html#email">Web metrics notes</a>).</li><li><strong>SEO discovery</strong> — TBD · target late May.</li></ul></td>
+            <td class="duration">May â€“ Jul</td>
+            <td class="activities">Reach out to stakeholders across DDS Marketing, channel leads, GTM, and finance partners. Align on wish-list items, understand what each audience wants out of a unified marketing destination, and surface the questions they're trying to answer today. Output is a synthesized requirements list that anchors everything that follows.<br><br><strong>Channel-specific discovery sessions:</strong><ul style="margin:0.4rem 0 0 1rem;"><li><strong>Paid Media discovery (Rissa)</strong> â€” 5/11 Â· covers PMAX/SEM split and creativeâ†’web tie-out (see <a href="web-metrics-notes.html#paid-media">Web metrics notes</a>).</li><li><strong>Email discovery (Courtney &amp; Emma)</strong> â€” 5/12 Â· transactional email tracking &amp; attribution (see <a href="web-metrics-notes.html#email">Web metrics notes</a>).</li><li><strong>SEO discovery</strong> â€” TBD Â· target late May.</li></ul></td>
           </tr>
           <tr id="ws-reports-inventory">
             <td class="workstream">Compile reports inventory</td>
@@ -1159,17 +728,17 @@
           </tr>
           <tr id="ws-tracking-education">
             <td class="workstream">Tracking education (OCID &amp; CMM)</td>
-            <td class="duration">May – Jun Wk2</td>
-            <td class="activities">Understand how OCIDs are created and tracked at Microsoft today — who owns the request process, how the CMM hierarchy is structured, and which parameters (channel, campaign, source, sub-channel, etc.) are available to leverage. Document the existing taxonomy, where it has drifted from how we actually market (e.g., PMAX still rolling up under SEM), and what should change in Walk. This becomes the input for the Walk-phase reclassification.</td>
+            <td class="duration">May â€“ Jun Wk2</td>
+            <td class="activities">Understand how OCIDs are created and tracked at Microsoft today â€” who owns the request process, how the CMM hierarchy is structured, and which parameters (channel, campaign, source, sub-channel, etc.) are available to leverage. Document the existing taxonomy, where it has drifted from how we actually market (e.g., PMAX still rolling up under SEM), and what should change in Walk. This becomes the input for the Walk-phase reclassification.</td>
           </tr>
           <tr id="ws-partnership-template">
             <td class="workstream">Partnership grid template (v1)</td>
-            <td class="duration">May – Jun Wk2</td>
-            <td class="activities">Standardize the cross-region partnership KPI grid. Agree on minimum comparable fields. Pressure-test with 2–3 partnerships before rolling regionally.</td>
+            <td class="duration">May â€“ Jun Wk2</td>
+            <td class="activities">Standardize the cross-region partnership KPI grid. Agree on minimum comparable fields. Pressure-test with 2â€“3 partnerships before rolling regionally.</td>
           </tr>
           <tr id="ws-manual-mvp">
             <td class="workstream">Manual Unified View MVP (incl. partnerships grid)</td>
-            <td class="duration">Milestone · Jun Wk2</td>
+            <td class="duration">Milestone Â· Jun Wk2</td>
             <td class="activities">Curated deck or page that pulls headlines from each pillar, including the partnerships grid view. Refreshed by hand. Proves the format and the read-out before any tooling investment, and gives leadership something to react to early.</td>
           </tr>
           <tr id="ws-stakeholder-raci">
@@ -1179,17 +748,24 @@
           </tr>
         </tbody>
       </table>
-      <div class="milestone"><strong>Phase 1 exit:</strong> leadership has a Manual Unified View MVP (incl. partnerships grid) they can reference, a documented OCID/CMM landscape ready to be reclassified, and an agreed partnership grid template.</div>
+      <div class="milestone"><strong>Phase 1 exit:</strong>
+        <ul style="margin:0.5rem 0 0; padding-left:1.2rem;">
+          <li>Problem, goal, and direction vocalized and agreed upon with leadership / end users.</li>
+          <li>Partnership grid MVP (AMEX) created and shared with regional partnerships leads.</li>
+          <li>Tracking capabilities outlined and path forward defined for answering wish-list questions.</li>
+          <li>Stakeholders / RACI established.</li>
+        </ul>
+      </div>
     </div>
   </section>
 
   <!-- PHASE 2 DETAIL -->
   <section class="block" id="phase-2">
-    <h2>Phase 2 · Walk — Centralize &amp; Standardize</h2>
+    <h2>Phase 2 Â· Walk â€” Centralize &amp; Standardize</h2>
     <div class="phase-block walk">
       <div class="phase-head">
         <h3>Move from curated artifact to operational rhythm</h3>
-        <span class="duration">~3–4 months</span>
+        <span class="duration">~3â€“4 months</span>
         <span class="goal">Goal: a real landing surface, regional contributors filling the grid on cadence, first moment-level attribution.</span>
       </div>
       <table class="workstream-table">
@@ -1199,7 +775,7 @@
         <tbody>
           <tr id="ws-ocid-classifications">
             <td class="workstream">Update OCID classifications</td>
-            <td class="duration">8–10 weeks</td>
+            <td class="duration">8â€“10 weeks</td>
             <td class="activities">Apply what we learned in the Crawl-phase deep dive: reclassify channels and sub-channels in the CMM hierarchy so reporting reflects how we actually market. Examples: split PMAX out from SEM as its own channel, formalize partnerships as a top-level classification, and align email/paid media taxonomies. Coordinate with the OCID request owners so all new requests follow the updated structure.</td>
           </tr>
           <tr id="ws-operationalize-grid">
@@ -1214,12 +790,12 @@
           </tr>
           <tr id="ws-attribution-v1">
             <td class="workstream">Campaign-to-moment attribution (v1)</td>
-            <td class="duration">8–12 weeks</td>
-            <td class="activities">Tag outbound activities (email, paid, partnerships, GTM) to the moments they support — Back-to-School, Holiday, Cyber Week, etc. Manual tagging is fine in v1; the goal is proving the roll-up works before automating.</td>
+            <td class="duration">8â€“12 weeks</td>
+            <td class="activities">Tag outbound activities (email, paid, partnerships, GTM) to the moments they support â€” Back-to-School, Holiday, Cyber Week, etc. Manual tagging is fine in v1; the goal is proving the roll-up works before automating.</td>
           </tr>
           <tr id="ws-roi-gapfix">
             <td class="workstream">ROI visibility gap-fix</td>
-            <td class="duration">4–6 weeks</td>
+            <td class="duration">4â€“6 weeks</td>
             <td class="activities">Identify channels with weak or missing ROI signal. For upper- and mid-funnel channels where ROI isn't the goal, define the expected outcome (e.g., qualified traffic, engaged sessions) so every channel has something to be measured against.</td>
           </tr>
         </tbody>
@@ -1230,11 +806,11 @@
 
   <!-- PHASE 3 DETAIL -->
   <section class="block" id="phase-3">
-    <h2>Phase 3 · Run — Integrate &amp; Automate</h2>
+    <h2>Phase 3 Â· Run â€” Integrate &amp; Automate</h2>
     <div class="phase-block run">
       <div class="phase-head">
         <h3>Make it the source of truth</h3>
-        <span class="duration">~4–6 months</span>
+        <span class="duration">~4â€“6 months</span>
         <span class="goal">Goal: integrated solution with drill-downs, selective automation, and a permanent place in leadership decision rituals.</span>
       </div>
       <table class="workstream-table">
@@ -1244,23 +820,23 @@
         <tbody>
           <tr id="ws-integrated-build">
             <td class="workstream">Integrated solution build</td>
-            <td class="duration">3–5 months</td>
-            <td class="activities">Move from links-and-curation to integrated drill-downs across the four pillars. Form follows requirements — dashboard, hub, or hybrid.</td>
+            <td class="duration">3â€“5 months</td>
+            <td class="activities">Move from links-and-curation to integrated drill-downs across the four pillars. Form follows requirements â€” dashboard, hub, or hybrid.</td>
           </tr>
           <tr id="ws-automate-attribution">
             <td class="workstream">Automate moment attribution</td>
-            <td class="duration">6–8 weeks</td>
+            <td class="duration">6â€“8 weeks</td>
             <td class="activities">Replace manual tagging with system-side rules where the data supports it. Keep human review for ambiguous attribution.</td>
           </tr>
           <tr id="ws-trend-view">
             <td class="workstream">Continuous trend view</td>
-            <td class="duration">4–6 weeks</td>
+            <td class="duration">4â€“6 weeks</td>
             <td class="activities">Replace MBR-only cadence with always-on headline trends. Alerting on directional shifts before they become surprises.</td>
           </tr>
           <tr id="ws-embed-rituals">
             <td class="workstream">Embed in leadership rituals</td>
             <td class="duration">Ongoing</td>
-            <td class="activities">Solution is referenced by name in MBR, planning, and investment decisions. Adoption — not output — becomes the success metric.</td>
+            <td class="activities">Solution is referenced by name in MBR, planning, and investment decisions. Adoption â€” not output â€” becomes the success metric.</td>
           </tr>
           <tr id="ws-selective-automation">
             <td class="workstream">Selective automation</td>
@@ -1273,7 +849,7 @@
     </div>
   </section>
 
-  <p class="footer-note">Draft timeline · Marketing Effectiveness Solution · Sequencing and durations are starting points for the working group conversation.</p>
+  <p class="footer-note">Draft timeline Â· Marketing Effectiveness Solution Â· Sequencing and durations are starting points for the working group conversation.</p>
 
 </main>
 
