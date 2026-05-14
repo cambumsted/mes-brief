@@ -207,8 +207,35 @@
     display: grid;
     grid-template-columns: repeat(12, 1fr);
     position: relative;
+    /* Weekly grid lines (4 per month = 48 total faint vertical lines) */
+    background-image: linear-gradient(to right, rgba(9,31,46,0.06) 1px, transparent 1px);
+    background-size: calc(100% / 48) 100%;
   }
   .gantt-cells > .col { border-left: 1px solid var(--line); }
+
+  /* Weekly sub-header (W1–W4 under each month) */
+  .gantt-week-header {
+    display: grid;
+    grid-template-columns: 260px repeat(12, 1fr);
+    background: #FAFBFC;
+    border-bottom: 1px solid var(--line);
+    font-size: 0.62rem;
+    color: var(--ink-soft);
+    font-weight: 600;
+    letter-spacing: 0.3px;
+  }
+  .gantt-week-header > .label-spacer { border-right: 1px solid var(--line); }
+  .gantt-week-header .month-weeks {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    border-left: 1px solid var(--line);
+  }
+  .gantt-week-header .month-weeks span {
+    text-align: center;
+    padding: 3px 0;
+    border-right: 1px dashed var(--c-n15);
+  }
+  .gantt-week-header .month-weeks span:last-child { border-right: none; }
   .bar {
     position: absolute;
     top: 8px; bottom: 8px;
@@ -500,17 +527,34 @@
         <div>Nov</div><div>Dec</div><div>Jan</div><div>Feb</div><div>Mar</div><div>Apr</div>
       </div>
 
+      <div class="gantt-week-header" aria-hidden="true">
+        <div class="label-spacer"></div>
+        <div class="month-weeks"><span>W1</span><span>W2</span><span>W3</span><span>W4</span></div>
+        <div class="month-weeks"><span>W1</span><span>W2</span><span>W3</span><span>W4</span></div>
+        <div class="month-weeks"><span>W1</span><span>W2</span><span>W3</span><span>W4</span></div>
+        <div class="month-weeks"><span>W1</span><span>W2</span><span>W3</span><span>W4</span></div>
+        <div class="month-weeks"><span>W1</span><span>W2</span><span>W3</span><span>W4</span></div>
+        <div class="month-weeks"><span>W1</span><span>W2</span><span>W3</span><span>W4</span></div>
+        <div class="month-weeks"><span>W1</span><span>W2</span><span>W3</span><span>W4</span></div>
+        <div class="month-weeks"><span>W1</span><span>W2</span><span>W3</span><span>W4</span></div>
+        <div class="month-weeks"><span>W1</span><span>W2</span><span>W3</span><span>W4</span></div>
+        <div class="month-weeks"><span>W1</span><span>W2</span><span>W3</span><span>W4</span></div>
+        <div class="month-weeks"><span>W1</span><span>W2</span><span>W3</span><span>W4</span></div>
+        <div class="month-weeks"><span>W1</span><span>W2</span><span>W3</span><span>W4</span></div>
+      </div>
+
       <div class="gantt-row milestones-row">
         <div class="label">Milestones</div>
         <div class="gantt-cells">
           <div class="col"></div><div class="col"></div><div class="col"></div><div class="col"></div>
           <div class="col"></div><div class="col"></div><div class="col"></div><div class="col"></div>
           <div class="col"></div><div class="col"></div><div class="col"></div><div class="col"></div>
-          <span class="milestone-mark tip-right" tabindex="0" style="left: 6%;"  data-label="Late May 2026 · Project kickoff"></span>
-          <span class="milestone-mark" tabindex="0" style="left: 33%;" data-label="End Aug 2026 · Manual MVP live"></span>
-          <span class="milestone-mark" tabindex="0" style="left: 58%;" data-label="End Nov 2026 · Walk-phase readout"></span>
-          <span class="milestone-mark" tabindex="0" style="left: 83%;" data-label="End Feb 2027 · V1 integrated build"></span>
-          <span class="milestone-mark tip-left"  tabindex="0" style="left: 98%;" data-label="End Apr 2027 · Embedded in leadership rituals"></span>
+          <span class="milestone-mark tip-right" tabindex="0" style="left: 6%;"   data-label="May Wk4 2026 · Project kickoff"></span>
+          <span class="milestone-mark" tabindex="0" style="left: 11%;"  data-label="Jun Wk2 2026 · Manual Unified View MVP (incl. partnerships grid) live"></span>
+          <span class="milestone-mark" tabindex="0" style="left: 25%;"  data-label="End Jul 2026 · Phase 1 exit"></span>
+          <span class="milestone-mark" tabindex="0" style="left: 58%;"  data-label="End Nov 2026 · Walk-phase readout"></span>
+          <span class="milestone-mark" tabindex="0" style="left: 83%;"  data-label="End Feb 2027 · V1 integrated build"></span>
+          <span class="milestone-mark tip-left"  tabindex="0" style="left: 98%;"  data-label="End Apr 2027 · Embedded in leadership rituals"></span>
         </div>
       </div>
 
@@ -536,12 +580,39 @@
           </div>
         </div>
         <div class="gantt-row">
+          <div class="label" style="padding-left:2.6rem; font-weight:500;"><a class="ws-link" href="#ws-discovery">↳ Paid Media discovery (Rissa)</a></div>
+          <div class="gantt-cells">
+            <div class="col"></div><div class="col"></div><div class="col"></div><div class="col"></div>
+            <div class="col"></div><div class="col"></div><div class="col"></div><div class="col"></div>
+            <div class="col"></div><div class="col"></div><div class="col"></div><div class="col"></div>
+            <div class="bar crawl" style="left: 2.083%; right: 95.833%;" title="5/11 · Paid Media discovery meeting">5/11</div>
+          </div>
+        </div>
+        <div class="gantt-row">
+          <div class="label" style="padding-left:2.6rem; font-weight:500;"><a class="ws-link" href="#ws-discovery">↳ Email discovery (Courtney &amp; Emma)</a></div>
+          <div class="gantt-cells">
+            <div class="col"></div><div class="col"></div><div class="col"></div><div class="col"></div>
+            <div class="col"></div><div class="col"></div><div class="col"></div><div class="col"></div>
+            <div class="col"></div><div class="col"></div><div class="col"></div><div class="col"></div>
+            <div class="bar crawl" style="left: 2.083%; right: 95.833%;" title="5/12 · Email discovery meeting">5/12</div>
+          </div>
+        </div>
+        <div class="gantt-row">
+          <div class="label" style="padding-left:2.6rem; font-weight:500;"><a class="ws-link" href="#ws-discovery">↳ SEO discovery (TBD)</a></div>
+          <div class="gantt-cells">
+            <div class="col"></div><div class="col"></div><div class="col"></div><div class="col"></div>
+            <div class="col"></div><div class="col"></div><div class="col"></div><div class="col"></div>
+            <div class="col"></div><div class="col"></div><div class="col"></div><div class="col"></div>
+            <div class="bar crawl" style="left: 6.25%; right: 91.667%;" title="Target: late May Wk4 · SEO discovery meeting">TBD</div>
+          </div>
+        </div>
+        <div class="gantt-row">
           <div class="label"><a class="ws-link" href="#ws-reports-inventory">Compile reports inventory</a></div>
           <div class="gantt-cells">
             <div class="col"></div><div class="col"></div><div class="col"></div><div class="col"></div>
             <div class="col"></div><div class="col"></div><div class="col"></div><div class="col"></div>
             <div class="col"></div><div class="col"></div><div class="col"></div><div class="col"></div>
-            <div class="bar crawl" style="left: 0%; right: 75%;">Inventory</div>
+            <div class="bar crawl" style="left: 0%; right: 91.667%;">Inventory · May</div>
           </div>
         </div>
         <div class="gantt-row">
@@ -550,7 +621,7 @@
             <div class="col"></div><div class="col"></div><div class="col"></div><div class="col"></div>
             <div class="col"></div><div class="col"></div><div class="col"></div><div class="col"></div>
             <div class="col"></div><div class="col"></div><div class="col"></div><div class="col"></div>
-            <div class="bar crawl" style="left: 8%; right: 67%;">Deep dive</div>
+            <div class="bar crawl" style="left: 0%; right: 87.5%;">Deep dive · May–Jun Wk2</div>
           </div>
         </div>
         <div class="gantt-row">
@@ -559,16 +630,16 @@
             <div class="col"></div><div class="col"></div><div class="col"></div><div class="col"></div>
             <div class="col"></div><div class="col"></div><div class="col"></div><div class="col"></div>
             <div class="col"></div><div class="col"></div><div class="col"></div><div class="col"></div>
-            <div class="bar crawl" style="left: 17%; right: 67%;">Template v1</div>
+            <div class="bar crawl" style="left: 0%; right: 87.5%;">Template v1 · May–Jun Wk2</div>
           </div>
         </div>
         <div class="gantt-row">
-          <div class="label"><a class="ws-link" href="#ws-manual-mvp">Manual Unified View MVP</a></div>
+          <div class="label"><a class="ws-link" href="#ws-manual-mvp">Manual Unified View MVP (incl. partnerships grid)</a></div>
           <div class="gantt-cells">
             <div class="col"></div><div class="col"></div><div class="col"></div><div class="col"></div>
             <div class="col"></div><div class="col"></div><div class="col"></div><div class="col"></div>
             <div class="col"></div><div class="col"></div><div class="col"></div><div class="col"></div>
-            <div class="bar crawl" style="left: 17%; right: 58%;">MVP build</div>
+            <span class="milestone-mark" tabindex="0" style="left: 11%;" data-label="Jun Wk2 · Manual Unified View MVP (incl. partnerships grid) milestone"></span>
           </div>
         </div>
         <div class="gantt-row">
@@ -720,27 +791,27 @@
           <tr id="ws-discovery">
             <td class="workstream">Discovery period</td>
             <td class="duration">May – Jul</td>
-            <td class="activities">Reach out to stakeholders across DDS Marketing, channel leads, GTM, and finance partners. Align on wish-list items, understand what each audience wants out of a unified marketing destination, and surface the questions they're trying to answer today. Output is a synthesized requirements list that anchors everything that follows.</td>
+            <td class="activities">Reach out to stakeholders across DDS Marketing, channel leads, GTM, and finance partners. Align on wish-list items, understand what each audience wants out of a unified marketing destination, and surface the questions they're trying to answer today. Output is a synthesized requirements list that anchors everything that follows.<br><br><strong>Channel-specific discovery sessions:</strong><ul style="margin:0.4rem 0 0 1rem;"><li><strong>Paid Media discovery (Rissa)</strong> — 5/11 · covers PMAX/SEM split and creative→web tie-out (see <a href="web-metrics-notes.html#paid-media">Web metrics notes</a>).</li><li><strong>Email discovery (Courtney &amp; Emma)</strong> — 5/12 · transactional email tracking &amp; attribution (see <a href="web-metrics-notes.html#email">Web metrics notes</a>).</li><li><strong>SEO discovery</strong> — TBD · target late May.</li></ul></td>
           </tr>
           <tr id="ws-reports-inventory">
             <td class="workstream">Compile reports inventory</td>
-            <td class="duration">2–3 weeks</td>
+            <td class="duration">May (4 wks)</td>
             <td class="activities">Catalog existing reports across all channels and pillars. Identify owners, refresh cadence, and audience. Flag duplicates and gaps so we know what we're working with before building anything new.</td>
           </tr>
           <tr id="ws-tracking-education">
             <td class="workstream">Tracking education (OCID &amp; CMM)</td>
-            <td class="duration">3–4 weeks</td>
+            <td class="duration">May – Jun Wk2</td>
             <td class="activities">Understand how OCIDs are created and tracked at Microsoft today — who owns the request process, how the CMM hierarchy is structured, and which parameters (channel, campaign, source, sub-channel, etc.) are available to leverage. Document the existing taxonomy, where it has drifted from how we actually market (e.g., PMAX still rolling up under SEM), and what should change in Walk. This becomes the input for the Walk-phase reclassification.</td>
           </tr>
           <tr id="ws-partnership-template">
             <td class="workstream">Partnership grid template (v1)</td>
-            <td class="duration">2–3 weeks</td>
+            <td class="duration">May – Jun Wk2</td>
             <td class="activities">Standardize the cross-region partnership KPI grid. Agree on minimum comparable fields. Pressure-test with 2–3 partnerships before rolling regionally.</td>
           </tr>
           <tr id="ws-manual-mvp">
-            <td class="workstream">Manual Unified View MVP</td>
-            <td class="duration">Jul – Sep</td>
-            <td class="activities">Curated deck or page that pulls headlines from each pillar. Refreshed by hand. Proves the format and the read-out before any tooling investment, and gives leadership something to react to early.</td>
+            <td class="workstream">Manual Unified View MVP (incl. partnerships grid)</td>
+            <td class="duration">Milestone · Jun Wk2</td>
+            <td class="activities">Curated deck or page that pulls headlines from each pillar, including the partnerships grid view. Refreshed by hand. Proves the format and the read-out before any tooling investment, and gives leadership something to react to early.</td>
           </tr>
           <tr id="ws-stakeholder-raci">
             <td class="workstream">Stakeholder &amp; RACI</td>
@@ -749,7 +820,7 @@
           </tr>
         </tbody>
       </table>
-      <div class="milestone"><strong>Phase 1 exit:</strong> leadership has a Manual Unified View MVP they can reference, a documented OCID/CMM landscape ready to be reclassified, and an agreed partnership grid template.</div>
+      <div class="milestone"><strong>Phase 1 exit:</strong> leadership has a Manual Unified View MVP (incl. partnerships grid) they can reference, a documented OCID/CMM landscape ready to be reclassified, and an agreed partnership grid template.</div>
     </div>
   </section>
 
