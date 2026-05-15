@@ -461,6 +461,152 @@
     color: var(--ink-soft); font-size: 0.85rem;
   }
 
+  /* === Filter bar (phase checkboxes) === */
+  .filter-bar {
+    display: flex; align-items: center; flex-wrap: wrap; gap: 0.6rem;
+    padding: 0.65rem 0.9rem;
+    background: var(--c-white);
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    margin: 0.6rem 0 1rem;
+    font-size: 0.82rem;
+  }
+  .filter-bar .filter-label {
+    font-weight: 700; color: var(--ink-soft);
+    font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.6px;
+    margin-right: 0.25rem;
+  }
+  .filter-bar label.chip {
+    display: inline-flex; align-items: center; gap: 0.35rem;
+    cursor: pointer; user-select: none;
+    padding: 0.25rem 0.65rem; border-radius: 14px;
+    border: 1px solid var(--line);
+    background: var(--bg);
+    font-weight: 600;
+    transition: opacity 0.15s ease, background 0.15s ease, border-color 0.15s ease;
+  }
+  .filter-bar label.chip input { margin: 0; accent-color: var(--ms-blue); }
+  .filter-bar label.chip.crawl:has(input:checked) { background: #ECECEC; border-color: var(--c-n50); color: #444; }
+  .filter-bar label.chip.walk:has(input:checked) { background: #EAF4FB; border-color: var(--ms-blue); color: var(--ms-blue-dark); }
+  .filter-bar label.chip.run:has(input:checked) { background: #ECF7F3; border-color: var(--c-teal); color: #1E6657; }
+  .filter-bar label.chip:has(input:not(:checked)) { opacity: 0.45; }
+  .filter-bar .hint { margin-left: auto; color: var(--ink-soft); font-size: 0.74rem; }
+
+  /* Phase visibility */
+  body.hide-crawl .phase-crawl,
+  body.hide-walk  .phase-walk,
+  body.hide-run   .phase-run { display: none !important; }
+
+  /* === Tighter gantt typography === */
+  .gantt-row { min-height: 40px; }
+  .gantt-row .label {
+    padding: 0.45rem 0.7rem 0.45rem 1.1rem;
+    font-size: 0.8rem;
+  }
+  .bar { font-size: 0.72rem; padding: 0 0.55rem; top: 7px; bottom: 7px; }
+  .gantt-header > div { padding: 0.45rem 0.35rem; font-size: 0.72rem; }
+  .gantt-week-header { font-size: 0.62rem; }
+
+  /* === Solution-group header rows inside the gantt === */
+  .gantt-row.solution-header {
+    background: #FBFCFD;
+    min-height: 30px;
+    border-bottom: 1px solid var(--line);
+  }
+  .gantt-row.solution-header .label {
+    background: transparent;
+    border-right: 1px solid var(--line);
+    font-weight: 700;
+    font-size: 0.68rem;
+    text-transform: uppercase;
+    letter-spacing: 0.7px;
+    color: var(--ink-soft);
+    padding: 0.35rem 0.7rem 0.35rem 1.8rem;
+    display: flex; align-items: center; gap: 0.45rem;
+  }
+
+  /* === Q-tag chips === */
+  .q-tags { display: inline-flex; flex-wrap: wrap; gap: 0.2rem; margin-left: 0.4rem; vertical-align: middle; }
+  .q-tag {
+    display: inline-block;
+    font-size: 0.6rem;
+    font-weight: 700;
+    padding: 0.05rem 0.38rem;
+    border-radius: 8px;
+    background: var(--ms-blue-light);
+    color: var(--ms-blue-dark);
+    letter-spacing: 0.3px;
+    line-height: 1.4;
+  }
+  .q-tag.q1 { background:#E9F4FF; color:#0B5394; }
+  .q-tag.q2 { background:#FFF4E0; color:#8A4B00; }
+  .q-tag.q3 { background:#EAF7F0; color:#1E6657; }
+  .q-tag.q4 { background:#F2EAFB; color:#5A4585; }
+  .q-tag.q5 { background:#FFEBEB; color:#A02020; }
+  .q-tag.found { background:#F2F2F2; color:#555; }
+
+  /* "NEW" badge */
+  .new-badge {
+    display: inline-block;
+    font-size: 0.6rem; font-weight: 800; letter-spacing: 0.5px;
+    color: #8A4B00; background: #FFF4E0;
+    padding: 0.1rem 0.4rem; border-radius: 8px; border: 1px solid #F0C97A;
+    vertical-align: middle;
+  }
+
+  /* === Solution sub-group in detail tables === */
+  .solution-group-detail {
+    margin-top: 1.1rem;
+    padding-top: 0.75rem;
+    border-top: 1px dashed var(--line);
+  }
+  .solution-group-detail:first-of-type { border-top: none; padding-top: 0; margin-top: 0.4rem; }
+  .solution-group-detail h4.sgh {
+    display: flex; align-items: center; flex-wrap: wrap; gap: 0.5rem;
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 0.7px;
+    color: var(--ink);
+    margin: 0 0 0.4rem;
+  }
+  .workstream-table { font-size: 0.83rem; }
+  .workstream-table th, .workstream-table td { padding: 0.45rem 0.6rem; }
+  .workstream-table td.q-cell { width: 12%; white-space: nowrap; }
+  .workstream-table td.q-cell .q-tags { margin-left: 0; }
+
+  /* === Gap-analysis callout === */
+  .gap-callout {
+    background: #FFF4E0;
+    border: 1px solid #F0C97A;
+    border-left: 4px solid #D88A2A;
+    border-radius: 6px;
+    padding: 0.85rem 1.05rem;
+    margin-top: 1rem;
+    font-size: 0.86rem;
+  }
+  .gap-callout h4 {
+    margin: 0 0 0.4rem;
+    color: #8A4B00;
+    font-size: 0.74rem;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+  }
+  .gap-callout ul { margin: 0.3rem 0 0; padding-left: 1.2rem; }
+  .gap-callout li { margin-bottom: 0.25rem; }
+  .gap-callout li strong { color: #6A3A00; }
+
+  /* Q-legend pill row */
+  .q-legend {
+    display: flex; flex-wrap: wrap; gap: 0.45rem;
+    font-size: 0.74rem; color: var(--ink-soft);
+    margin-top: 0.35rem;
+  }
+  .q-legend .q-leg-item {
+    display: inline-flex; align-items: center; gap: 0.3rem;
+    padding: 0.15rem 0.5rem; background: var(--bg);
+    border-radius: 12px;
+  }
+
 </style>
 </head>
 <body>
@@ -491,7 +637,7 @@
     <h2>At a glance</h2>
     <p class="lede">Active 6-month working window: <strong>May – Oct 2026</strong>. Phase 1 fully scoped; Phase 2 starts in August; Phase 3 ramps at the end of the window and continues beyond. Each phase delivers usable value on its own — we don't wait until "Run" to put something in leadership's hands.</p>
     <div class="phase-summary">
-      <a class="phase-card-link" href="#phase-1">
+      <a class="phase-card-link phase-crawl" href="#phase-1">
         <div class="card crawl">
           <div class="phase-tag">Phase 1</div>
           <h3>Crawl — Define &amp; Align</h3>
@@ -499,7 +645,7 @@
           <p>Discover what stakeholders need, inventory what exists, and stand up a manual MVP of the unified view.</p>
         </div>
       </a>
-      <a class="phase-card-link" href="#phase-2">
+      <a class="phase-card-link phase-walk" href="#phase-2">
         <div class="card walk">
           <div class="phase-tag">Phase 2</div>
           <h3>Walk — Centralize &amp; Standardize</h3>
@@ -507,7 +653,7 @@
           <p>Update OCID classifications, operationalize the partnership grid, and begin moment-level attribution.</p>
         </div>
       </a>
-      <a class="phase-card-link" href="#phase-3">
+      <a class="phase-card-link phase-run" href="#phase-3">
         <div class="card run">
           <div class="phase-tag">Phase 3</div>
           <h3>Run — Integrate &amp; Automate</h3>
@@ -521,7 +667,24 @@
   <!-- GANTT -->
   <section class="block">
     <h2>Timeline view · 6-month working window (May – Oct 2026)</h2>
-    <p class="lede">Phase 1 fully scoped. Phase 2 starts mid-window. Phase 3 begins to ramp at the end of the window and continues beyond — see the phase detail sections below for full plan.</p>
+    <p class="lede">Workstreams are grouped by <strong>solution area</strong> within each phase, and each row shows which <strong>brief questions</strong> it helps answer. Milestones live on the workstream they belong to (no separate milestone row).</p>
+    <div class="q-legend">
+      <span class="q-leg-item"><span class="q-tag q1">Q1</span> Where to invest</span>
+      <span class="q-leg-item"><span class="q-tag q2">Q2</span> What moved the trend</span>
+      <span class="q-leg-item"><span class="q-tag q3">Q3</span> Partnership ROI</span>
+      <span class="q-leg-item"><span class="q-tag q4">Q4</span> Campaign moment rollup</span>
+      <span class="q-leg-item"><span class="q-tag q5">Q5</span> Paid media incrementality</span>
+      <span class="q-leg-item"><span class="q-tag found">Foundation</span> Enables every question</span>
+    </div>
+
+    <div class="filter-bar" role="group" aria-label="Phase filters">
+      <span class="filter-label">Show phases</span>
+      <label class="chip crawl"><input type="checkbox" data-phase="crawl" checked> <span>Crawl</span></label>
+      <label class="chip walk"><input type="checkbox" data-phase="walk" checked> <span>Walk</span></label>
+      <label class="chip run"><input type="checkbox" data-phase="run" checked> <span>Run</span></label>
+      <span class="hint">Uncheck a phase to focus the view.</span>
+    </div>
+
     <div class="gantt">
       <div class="gantt-header">
         <div>Workstream</div>
@@ -538,20 +701,8 @@
         <div class="month-weeks"><span>W1</span><span>W2</span><span>W3</span><span>W4</span></div>
       </div>
 
-      <div class="gantt-row milestones-row">
-        <div class="label">Milestones</div>
-        <div class="gantt-cells">
-          <div class="col"></div><div class="col"></div><div class="col"></div>
-          <div class="col"></div><div class="col"></div><div class="col"></div>
-          <span class="milestone-mark tip-right" tabindex="0" style="left: 6.25%;"  data-label="May Wk2 · Discovery meetings (Paid Media 5/11, Email 5/12)"></span>
-          <span class="milestone-mark" tabindex="0" style="left: 22.92%;" data-label="Jun Wk2 · Manual Unified View MVP (incl. partnerships grid) live"></span>
-          <span class="milestone-mark" tabindex="0" style="left: 50%;"    data-label="End Jul · Phase 1 exit"></span>
-          <span class="milestone-mark tip-left" tabindex="0" style="left: 95.83%;" data-label="End Oct · Phase 2 mid-point readout"></span>
-        </div>
-      </div>
-
-      <!-- PHASE 1 · CRAWL -->
-      <div class="gantt-row" style="background:#F4F4F4;">
+      <!-- ===== PHASE 1 · CRAWL ===== -->
+      <div class="gantt-row phase-crawl" style="background:#F4F4F4;">
         <div class="label" style="font-weight:700; text-transform:uppercase; letter-spacing:0.5px; font-size:0.78rem;">Phase 1 · Crawl</div>
         <div class="gantt-cells">
           <div class="col"></div><div class="col"></div><div class="col"></div>
@@ -559,81 +710,147 @@
           <div class="bar crawl" style="left: 0%; right: 50%;">May – Jul</div>
         </div>
       </div>
-      <div class="gantt-row">
-        <div class="label"><a class="ws-link" href="#ws-discovery">Discovery period</a></div>
+
+      <!-- Crawl · Discovery & Requirements -->
+      <div class="gantt-row solution-header phase-crawl">
+        <div class="label">Discovery &amp; Requirements <span class="q-tags"><span class="q-tag found">Foundation</span></span></div>
         <div class="gantt-cells">
           <div class="col"></div><div class="col"></div><div class="col"></div>
           <div class="col"></div><div class="col"></div><div class="col"></div>
-          <div class="bar crawl" style="left: 0%; right: 50%;">Stakeholder discovery</div>
         </div>
       </div>
-      <div class="gantt-row">
-        <div class="label" style="padding-left:2.4rem; font-weight:500;"><a class="ws-link" href="#ws-discovery">↳ Paid Media discovery (Rissa)</a></div>
+      <div class="gantt-row phase-crawl">
+        <div class="label"><a class="ws-link" href="#ws-discovery">Stakeholder discovery <span class="q-tags"><span class="q-tag q1">Q1</span><span class="q-tag q2">Q2</span><span class="q-tag q3">Q3</span><span class="q-tag q4">Q4</span><span class="q-tag q5">Q5</span></span></a></div>
         <div class="gantt-cells">
           <div class="col"></div><div class="col"></div><div class="col"></div>
           <div class="col"></div><div class="col"></div><div class="col"></div>
-          <div class="bar crawl" style="left: 4.17%; right: 91.67%; background:#5A4585;" title="5/11 · Paid Media discovery meeting">5/11</div>
+          <div class="bar crawl" style="left: 0%; right: 66.67%;">Stakeholder interviews</div>
         </div>
       </div>
-      <div class="gantt-row">
-        <div class="label" style="padding-left:2.4rem; font-weight:500;"><a class="ws-link" href="#ws-discovery">↳ Email discovery (Courtney &amp; Emma)</a></div>
+      <div class="gantt-row phase-crawl">
+        <div class="label"><a class="ws-link" href="#ws-marketing-iq">Marketing IQ capabilities discovery <span class="q-tags"><span class="q-tag q1">Q1</span><span class="q-tag q2">Q2</span></span></a></div>
         <div class="gantt-cells">
           <div class="col"></div><div class="col"></div><div class="col"></div>
           <div class="col"></div><div class="col"></div><div class="col"></div>
-          <div class="bar crawl" style="left: 4.17%; right: 91.67%; background:#5A4585;" title="5/12 · Email discovery meeting">5/12</div>
+          <div class="bar crawl" style="left: 0%; right: 66.67%;">Priyanka &amp; Adam Hineline · through Jun</div>
         </div>
       </div>
-      <div class="gantt-row">
-        <div class="label" style="padding-left:2.4rem; font-weight:500;"><a class="ws-link" href="#ws-discovery">↳ SEO discovery (TBD)</a></div>
+      <div class="gantt-row phase-crawl">
+        <div class="label"><a class="ws-link" href="#ws-reports-inventory">Compile reports inventory <span class="q-tags"><span class="q-tag found">Foundation</span></span></a></div>
         <div class="gantt-cells">
           <div class="col"></div><div class="col"></div><div class="col"></div>
           <div class="col"></div><div class="col"></div><div class="col"></div>
-          <div class="bar crawl" style="left: 12.5%; right: 83.33%; background:#7F7F7F;" title="Target: late May · SEO discovery meeting">TBD</div>
+          <div class="bar crawl" style="left: 0%; right: 91.67%;">May Wk1–2</div>
         </div>
       </div>
-      <div class="gantt-row">
-        <div class="label"><a class="ws-link" href="#ws-reports-inventory">Compile reports inventory</a></div>
+
+      <!-- Crawl · Tracking & Taxonomy -->
+      <div class="gantt-row solution-header phase-crawl">
+        <div class="label">Tracking &amp; Taxonomy <span class="q-tags"><span class="q-tag q1">Q1</span><span class="q-tag q2">Q2</span><span class="q-tag q4">Q4</span></span></div>
         <div class="gantt-cells">
           <div class="col"></div><div class="col"></div><div class="col"></div>
           <div class="col"></div><div class="col"></div><div class="col"></div>
-          <div class="bar crawl" style="left: 0%; right: 83.33%;">May (4 wks)</div>
         </div>
       </div>
-      <div class="gantt-row">
-        <div class="label"><a class="ws-link" href="#ws-tracking-education">Tracking education (OCID &amp; CMM)</a></div>
-        <div class="gantt-cells">
-          <div class="col"></div><div class="col"></div><div class="col"></div>
-          <div class="col"></div><div class="col"></div><div class="col"></div>
-          <div class="bar crawl" style="left: 0%; right: 75%;">May – Jun Wk2</div>
-        </div>
-      </div>
-      <div class="gantt-row">
-        <div class="label"><a class="ws-link" href="#ws-partnership-template">Partnership grid template (v1)</a></div>
+      <div class="gantt-row phase-crawl">
+        <div class="label"><a class="ws-link" href="#ws-tracking-education">Tracking education (OCID &amp; CMM) <span class="q-tags"><span class="q-tag q1">Q1</span><span class="q-tag q2">Q2</span><span class="q-tag q4">Q4</span></span></a></div>
         <div class="gantt-cells">
           <div class="col"></div><div class="col"></div><div class="col"></div>
           <div class="col"></div><div class="col"></div><div class="col"></div>
           <div class="bar crawl" style="left: 0%; right: 75%;">May – Jun Wk2</div>
         </div>
       </div>
-      <div class="gantt-row">
-        <div class="label"><a class="ws-link" href="#ws-manual-mvp">Manual Unified View MVP <span style="color:#6B5800; font-weight:500;">(milestone)</span></a></div>
+
+      <!-- Crawl · Partnerships -->
+      <div class="gantt-row solution-header phase-crawl">
+        <div class="label">Partnerships <span class="q-tags"><span class="q-tag q3">Q3</span></span></div>
         <div class="gantt-cells">
           <div class="col"></div><div class="col"></div><div class="col"></div>
           <div class="col"></div><div class="col"></div><div class="col"></div>
-          <span class="milestone-mark" tabindex="0" style="left: 22.92%;" data-label="Jun Wk2 · Manual Unified View MVP (incl. partnerships grid)"></span>
         </div>
       </div>
-      <div class="gantt-row">
-        <div class="label"><a class="ws-link" href="#ws-stakeholder-raci">Stakeholder &amp; RACI</a></div>
+      <div class="gantt-row phase-crawl">
+        <div class="label"><a class="ws-link" href="#ws-partnership-template">Partnership grid template (v1) <span class="q-tags"><span class="q-tag q3">Q3</span></span></a></div>
+        <div class="gantt-cells">
+          <div class="col"></div><div class="col"></div><div class="col"></div>
+          <div class="col"></div><div class="col"></div><div class="col"></div>
+          <div class="bar crawl" style="left: 0%; right: 75%;">May – Jun Wk2</div>
+          <span class="milestone-mark" tabindex="0" style="left: 25%;" data-label="Jun Wk2 · AMEX partnership grid live"></span>
+        </div>
+      </div>
+
+      <!-- Crawl · Incrementality (NEW) -->
+      <div class="gantt-row solution-header phase-crawl">
+        <div class="label">Incrementality <span class="q-tags"><span class="q-tag q5">Q5</span></span> <span class="new-badge">NEW</span></div>
+        <div class="gantt-cells">
+          <div class="col"></div><div class="col"></div><div class="col"></div>
+          <div class="col"></div><div class="col"></div><div class="col"></div>
+        </div>
+      </div>
+      <div class="gantt-row phase-crawl">
+        <div class="label"><a class="ws-link" href="#ws-incrementality-scoping">Incrementality test scoping <span class="q-tags"><span class="q-tag q5">Q5</span></span></a></div>
+        <div class="gantt-cells">
+          <div class="col"></div><div class="col"></div><div class="col"></div>
+          <div class="col"></div><div class="col"></div><div class="col"></div>
+          <div class="bar crawl" style="left: 8.33%; right: 66.67%;">May Wk3 – Jun</div>
+        </div>
+      </div>
+
+      <!-- Crawl · Campaign moments (NEW) -->
+      <div class="gantt-row solution-header phase-crawl">
+        <div class="label">Campaign moments <span class="q-tags"><span class="q-tag q4">Q4</span></span> <span class="new-badge">NEW</span></div>
+        <div class="gantt-cells">
+          <div class="col"></div><div class="col"></div><div class="col"></div>
+          <div class="col"></div><div class="col"></div><div class="col"></div>
+        </div>
+      </div>
+      <div class="gantt-row phase-crawl">
+        <div class="label"><a class="ws-link" href="#ws-moment-inventory">Campaign moment inventory <span class="q-tags"><span class="q-tag q4">Q4</span></span></a></div>
+        <div class="gantt-cells">
+          <div class="col"></div><div class="col"></div><div class="col"></div>
+          <div class="col"></div><div class="col"></div><div class="col"></div>
+          <div class="bar crawl" style="left: 8.33%; right: 66.67%;">May Wk3 – Jun Wk4</div>
+        </div>
+      </div>
+
+      <!-- Crawl · Unified View -->
+      <div class="gantt-row solution-header phase-crawl">
+        <div class="label">Unified View <span class="q-tags"><span class="q-tag q1">Q1</span><span class="q-tag q2">Q2</span><span class="q-tag q3">Q3</span><span class="q-tag q4">Q4</span></span></div>
+        <div class="gantt-cells">
+          <div class="col"></div><div class="col"></div><div class="col"></div>
+          <div class="col"></div><div class="col"></div><div class="col"></div>
+        </div>
+      </div>
+      <div class="gantt-row phase-crawl">
+        <div class="label"><a class="ws-link" href="#ws-manual-mvp">Manual Unified View MVP <span class="q-tags"><span class="q-tag q1">Q1</span><span class="q-tag q2">Q2</span><span class="q-tag q3">Q3</span><span class="q-tag q4">Q4</span></span></a></div>
+        <div class="gantt-cells">
+          <div class="col"></div><div class="col"></div><div class="col"></div>
+          <div class="col"></div><div class="col"></div><div class="col"></div>
+          <div class="bar crawl" style="left: 8.33%; right: 77.08%;">Assemble &amp; ship</div>
+          <span class="milestone-mark" tabindex="0" style="left: 22.92%;" data-label="Jun Wk2 · Manual Unified View MVP live"></span>
+        </div>
+      </div>
+
+      <!-- Crawl · Governance -->
+      <div class="gantt-row solution-header phase-crawl">
+        <div class="label">Governance <span class="q-tags"><span class="q-tag found">Foundation</span></span></div>
+        <div class="gantt-cells">
+          <div class="col"></div><div class="col"></div><div class="col"></div>
+          <div class="col"></div><div class="col"></div><div class="col"></div>
+        </div>
+      </div>
+      <div class="gantt-row phase-crawl">
+        <div class="label"><a class="ws-link" href="#ws-stakeholder-raci">Stakeholder &amp; RACI <span class="q-tags"><span class="q-tag found">Foundation</span></span></a></div>
         <div class="gantt-cells">
           <div class="col"></div><div class="col"></div><div class="col"></div>
           <div class="col"></div><div class="col"></div><div class="col"></div>
           <div class="bar crawl" style="left: 0%; right: 66.67%;">Lock RACI</div>
+          <span class="milestone-mark" tabindex="0" style="left: 33.33%;" data-label="Jun Wk4 · RACI locked"></span>
         </div>
       </div>
 
-      <!-- PHASE 2 · WALK -->
-      <div class="gantt-row" style="background:#EAF4FB;">
+      <!-- ===== PHASE 2 · WALK ===== -->
+      <div class="gantt-row phase-walk" style="background:#EAF4FB;">
         <div class="label" style="font-weight:700; text-transform:uppercase; letter-spacing:0.5px; font-size:0.78rem; color:#00477A;">Phase 2 · Walk</div>
         <div class="gantt-cells">
           <div class="col"></div><div class="col"></div><div class="col"></div>
@@ -641,40 +858,87 @@
           <div class="bar walk" style="left: 50%; right: 0%;">Aug – Oct (continues)</div>
         </div>
       </div>
-      <div class="gantt-row">
-        <div class="label"><a class="ws-link" href="#ws-ocid-classifications">Update OCID classifications</a></div>
+
+      <!-- Walk · Tracking & Taxonomy -->
+      <div class="gantt-row solution-header phase-walk">
+        <div class="label">Tracking &amp; Taxonomy <span class="q-tags"><span class="q-tag q1">Q1</span><span class="q-tag q2">Q2</span><span class="q-tag q4">Q4</span></span></div>
+        <div class="gantt-cells">
+          <div class="col"></div><div class="col"></div><div class="col"></div>
+          <div class="col"></div><div class="col"></div><div class="col"></div>
+        </div>
+      </div>
+      <div class="gantt-row phase-walk">
+        <div class="label"><a class="ws-link" href="#ws-ocid-classifications">Update OCID classifications <span class="q-tags"><span class="q-tag q1">Q1</span><span class="q-tag q2">Q2</span><span class="q-tag q4">Q4</span></span></a></div>
         <div class="gantt-cells">
           <div class="col"></div><div class="col"></div><div class="col"></div>
           <div class="col"></div><div class="col"></div><div class="col"></div>
           <div class="bar walk" style="left: 50%; right: 16.67%;">Reclassify (split PMAX, etc.)</div>
+          <span class="milestone-mark tip-left" tabindex="0" style="left: 83.33%;" data-label="Sep Wk4 · Reclassification live in CMM"></span>
         </div>
       </div>
-      <div class="gantt-row">
-        <div class="label"><a class="ws-link" href="#ws-operationalize-grid">Operationalize partnership grid</a></div>
+
+      <!-- Walk · Partnerships -->
+      <div class="gantt-row solution-header phase-walk">
+        <div class="label">Partnerships <span class="q-tags"><span class="q-tag q3">Q3</span></span></div>
+        <div class="gantt-cells">
+          <div class="col"></div><div class="col"></div><div class="col"></div>
+          <div class="col"></div><div class="col"></div><div class="col"></div>
+        </div>
+      </div>
+      <div class="gantt-row phase-walk">
+        <div class="label"><a class="ws-link" href="#ws-operationalize-grid">Operationalize partnership grid <span class="q-tags"><span class="q-tag q3">Q3</span></span></a></div>
         <div class="gantt-cells">
           <div class="col"></div><div class="col"></div><div class="col"></div>
           <div class="col"></div><div class="col"></div><div class="col"></div>
           <div class="bar walk" style="left: 50%; right: 0%;">Quarterly cadence</div>
         </div>
       </div>
-      <div class="gantt-row">
-        <div class="label"><a class="ws-link" href="#ws-attribution-v1">Campaign-to-moment attribution (v1)</a></div>
+
+      <!-- Walk · Incrementality (NEW milestone) -->
+      <div class="gantt-row solution-header phase-walk">
+        <div class="label">Incrementality <span class="q-tags"><span class="q-tag q5">Q5</span></span></div>
+        <div class="gantt-cells">
+          <div class="col"></div><div class="col"></div><div class="col"></div>
+          <div class="col"></div><div class="col"></div><div class="col"></div>
+        </div>
+      </div>
+      <div class="gantt-row phase-walk">
+        <div class="label"><a class="ws-link" href="#ws-incrementality-results">Paid media incrementality results <span class="q-tags"><span class="q-tag q5">Q5</span></span></a></div>
+        <div class="gantt-cells">
+          <div class="col"></div><div class="col"></div><div class="col"></div>
+          <div class="col"></div><div class="col"></div><div class="col"></div>
+          <div class="bar walk" style="left: 50%; right: 33.33%;">Readout &amp; next steps</div>
+          <span class="milestone-mark tip-right" tabindex="0" style="left: 50%;" data-label="End of Jul · Paid media incrementality results released"></span>
+        </div>
+      </div>
+
+      <!-- Walk · Campaign moments -->
+      <div class="gantt-row solution-header phase-walk">
+        <div class="label">Campaign moments <span class="q-tags"><span class="q-tag q4">Q4</span></span></div>
+        <div class="gantt-cells">
+          <div class="col"></div><div class="col"></div><div class="col"></div>
+          <div class="col"></div><div class="col"></div><div class="col"></div>
+        </div>
+      </div>
+      <div class="gantt-row phase-walk">
+        <div class="label"><a class="ws-link" href="#ws-attribution-v1">Campaign-to-moment attribution (v1) <span class="q-tags"><span class="q-tag q4">Q4</span></span></a></div>
         <div class="gantt-cells">
           <div class="col"></div><div class="col"></div><div class="col"></div>
           <div class="col"></div><div class="col"></div><div class="col"></div>
           <div class="bar walk" style="left: 50%; right: 0%;">Manual tagging</div>
         </div>
       </div>
-      <div class="gantt-row">
-        <div class="label"><a class="ws-link" href="#ws-review-cadence">Cross-pillar review cadence</a></div>
+
+      <!-- Walk · Unified View / ROI -->
+      <div class="gantt-row solution-header phase-walk">
+        <div class="label">Unified View / ROI <span class="q-tags"><span class="q-tag q1">Q1</span><span class="q-tag q2">Q2</span></span></div>
         <div class="gantt-cells">
           <div class="col"></div><div class="col"></div><div class="col"></div>
           <div class="col"></div><div class="col"></div><div class="col"></div>
-          <div class="bar walk" style="left: 66.67%; right: 0%;">Pilot rhythm</div>
         </div>
       </div>
-      <div class="gantt-row">
-        <div class="label"><a class="ws-link" href="#ws-roi-gapfix">ROI visibility gap-fix</a></div>
+      <div class="gantt-row phase-walk">
+        <div class="label"><a class="ws-link" href="#ws-roi-gapfix">ROI visibility gap-fix <span class="q-tags"><span class="q-tag q1">Q1</span><span class="q-tag q2">Q2</span></span></a></div>
         <div class="gantt-cells">
           <div class="col"></div><div class="col"></div><div class="col"></div>
           <div class="col"></div><div class="col"></div><div class="col"></div>
@@ -682,8 +946,26 @@
         </div>
       </div>
 
-      <!-- PHASE 3 · RUN (start indicator only — continues beyond window) -->
-      <div class="gantt-row" style="background:#ECF7F3;">
+      <!-- Walk · Operating rhythm -->
+      <div class="gantt-row solution-header phase-walk">
+        <div class="label">Operating rhythm <span class="q-tags"><span class="q-tag found">Foundation</span></span></div>
+        <div class="gantt-cells">
+          <div class="col"></div><div class="col"></div><div class="col"></div>
+          <div class="col"></div><div class="col"></div><div class="col"></div>
+        </div>
+      </div>
+      <div class="gantt-row phase-walk">
+        <div class="label"><a class="ws-link" href="#ws-review-cadence">Cross-pillar review cadence <span class="q-tags"><span class="q-tag found">Foundation</span></span></a></div>
+        <div class="gantt-cells">
+          <div class="col"></div><div class="col"></div><div class="col"></div>
+          <div class="col"></div><div class="col"></div><div class="col"></div>
+          <div class="bar walk" style="left: 66.67%; right: 0%;">Pilot rhythm</div>
+          <span class="milestone-mark tip-left" tabindex="0" style="left: 95.83%;" data-label="End Oct · Phase 2 mid-point readout"></span>
+        </div>
+      </div>
+
+      <!-- ===== PHASE 3 · RUN (start indicator only) ===== -->
+      <div class="gantt-row phase-run" style="background:#ECF7F3;">
         <div class="label" style="font-weight:700; text-transform:uppercase; letter-spacing:0.5px; font-size:0.78rem; color:#1E6657;">Phase 3 · Run <span style="font-weight:500; text-transform:none; letter-spacing:0; font-size:0.72rem;">(begins post-window)</span></div>
         <div class="gantt-cells">
           <div class="col"></div><div class="col"></div><div class="col"></div>
@@ -694,65 +976,169 @@
     </div>
 
     <div style="margin-top:1rem; display:flex; flex-wrap:wrap; gap:1.2rem; font-size:0.78rem; color:var(--ink-soft);">
-      <span><span class="ms-legend-swatch"></span>Milestone</span>
+      <span><span class="ms-legend-swatch"></span>Milestone (on workstream)</span>
       <span><span style="display:inline-block; width:14px; height:10px; background:var(--c-n50); border-radius:2px; margin-right:0.3rem; vertical-align:middle;"></span>Crawl</span>
       <span><span style="display:inline-block; width:14px; height:10px; background:var(--c-med-blue); border-radius:2px; margin-right:0.3rem; vertical-align:middle;"></span>Walk</span>
       <span><span style="display:inline-block; width:14px; height:10px; background:var(--c-teal); border-radius:2px; margin-right:0.3rem; vertical-align:middle;"></span>Run</span>
-      <span><span style="display:inline-block; width:14px; height:10px; background:#5A4585; border-radius:2px; margin-right:0.3rem; vertical-align:middle;"></span>Discovery meeting</span>
     </div>
   </section>
 
   <!-- PHASE 1 DETAIL -->
-  <section class="block" id="phase-1">
+  <section class="block phase-crawl" id="phase-1">
     <h2>Phase 1 · Crawl — Define &amp; Align</h2>
     <div class="phase-block crawl">
       <div class="phase-head">
-        <h3>Get to a shared baseline</h3>
-        <span class="duration">~6–8 weeks</span>
-        <span class="goal">Goal: leadership can see one curated view of marketing performance, even if it's manually assembled.</span>
+        <h3>Get to a shared baseline, organized by question</h3>
+        <span class="duration">~8–10 weeks (May – mid-Jul)</span>
+        <span class="goal">Goal: leadership can see one curated view of marketing performance, even if it's manually assembled — and every brief question has at least one workstream behind it.</span>
       </div>
-      <table class="workstream-table">
-        <thead>
-          <tr><th>Workstream</th><th>Duration</th><th>Key activities</th></tr>
-        </thead>
-        <tbody>
-          <tr id="ws-discovery">
-            <td class="workstream">Discovery period</td>
-            <td class="duration">May – Jul</td>
-            <td class="activities">Reach out to stakeholders across DDS Marketing, channel leads, GTM, and finance partners. Align on wish-list items, understand what each audience wants out of a unified marketing destination, and surface the questions they're trying to answer today. Output is a synthesized requirements list that anchors everything that follows.<br><br><strong>Channel-specific discovery sessions:</strong><ul style="margin:0.4rem 0 0 1rem;"><li><strong>Paid Media discovery (Rissa)</strong> — 5/11 · covers PMAX/SEM split and creative→web tie-out (see <a href="web-metrics-notes.html#paid-media">Web metrics notes</a>).</li><li><strong>Email discovery (Courtney &amp; Emma)</strong> — 5/12 · transactional email tracking &amp; attribution (see <a href="web-metrics-notes.html#email">Web metrics notes</a>).</li><li><strong>SEO discovery</strong> — TBD · target late May.</li></ul></td>
-          </tr>
-          <tr id="ws-reports-inventory">
-            <td class="workstream">Compile reports inventory</td>
-            <td class="duration">May (4 wks)</td>
-            <td class="activities">Catalog existing reports across all channels and pillars. Identify owners, refresh cadence, and audience. Flag duplicates and gaps so we know what we're working with before building anything new.</td>
-          </tr>
-          <tr id="ws-tracking-education">
-            <td class="workstream">Tracking education (OCID &amp; CMM)</td>
-            <td class="duration">May – Jun Wk2</td>
-            <td class="activities">Understand how OCIDs are created and tracked at Microsoft today — who owns the request process, how the CMM hierarchy is structured, and which parameters (channel, campaign, source, sub-channel, etc.) are available to leverage. Document the existing taxonomy, where it has drifted from how we actually market (e.g., PMAX still rolling up under SEM), and what should change in Walk. This becomes the input for the Walk-phase reclassification.</td>
-          </tr>
-          <tr id="ws-partnership-template">
-            <td class="workstream">Partnership grid template (v1)</td>
-            <td class="duration">May – Jun Wk2</td>
-            <td class="activities">Standardize the cross-region partnership KPI grid. Agree on minimum comparable fields. Pressure-test with 2–3 partnerships before rolling regionally.</td>
-          </tr>
-          <tr id="ws-manual-mvp">
-            <td class="workstream">Manual Unified View MVP (incl. partnerships grid)</td>
-            <td class="duration">Milestone · Jun Wk2</td>
-            <td class="activities">Curated deck or page that pulls headlines from each pillar, including the partnerships grid view. Refreshed by hand. Proves the format and the read-out before any tooling investment, and gives leadership something to react to early.</td>
-          </tr>
-          <tr id="ws-stakeholder-raci">
-            <td class="workstream">Stakeholder &amp; RACI</td>
-            <td class="duration">Ongoing</td>
-            <td class="activities">Confirm working group, owners per pillar, and decision rights. Lock the RACI before Walk starts.</td>
-          </tr>
-        </tbody>
-      </table>
+
+      <!-- Discovery & Requirements -->
+      <div class="solution-group-detail">
+        <h4 class="sgh">Discovery &amp; Requirements <span class="q-tags"><span class="q-tag found">Foundation</span></span></h4>
+        <table class="workstream-table">
+          <thead><tr><th>Workstream</th><th>Duration</th><th>Key activities</th><th class="q-cell">Answers</th></tr></thead>
+          <tbody>
+            <tr id="ws-discovery">
+              <td class="workstream">Stakeholder discovery</td>
+              <td class="duration">May – Jun</td>
+              <td class="activities">Reach out to stakeholders across DDS Marketing, channel leads, GTM, and finance partners. Align on wish-list items, understand what each audience wants out of a unified marketing destination, and surface the questions they're trying to answer today. Output is a synthesized requirements list that anchors everything that follows.</td>
+              <td class="q-cell"><span class="q-tags"><span class="q-tag q1">Q1</span><span class="q-tag q2">Q2</span><span class="q-tag q3">Q3</span><span class="q-tag q4">Q4</span><span class="q-tag q5">Q5</span></span></td>
+            </tr>
+            <tr id="ws-marketing-iq">
+              <td class="workstream">Marketing IQ capabilities discovery <span class="new-badge">NEW</span></td>
+              <td class="duration">May – end of Jun</td>
+              <td class="activities">Understand the Marketing IQ tool that Priyanka and Adam Hineline are building. Map its current and roadmap capabilities (data sources, taxonomy support, attribution, automation) against the wish-list. Decide whether it can feed into — or partially become — the unified solution, or where it complements vs. duplicates existing work. <strong>Output:</strong> go/no-go on integration before Walk kicks off.</td>
+              <td class="q-cell"><span class="q-tags"><span class="q-tag q1">Q1</span><span class="q-tag q2">Q2</span></span></td>
+            </tr>
+            <tr id="ws-reports-inventory">
+              <td class="workstream">Compile reports inventory</td>
+              <td class="duration">May Wk1–2</td>
+              <td class="activities">Catalog existing reports across all channels and pillars. Identify owners, refresh cadence, and audience. Flag duplicates and gaps so we know what we're working with before building anything new.</td>
+              <td class="q-cell"><span class="q-tags"><span class="q-tag found">Foundation</span></span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Tracking & Taxonomy -->
+      <div class="solution-group-detail">
+        <h4 class="sgh">Tracking &amp; Taxonomy <span class="q-tags"><span class="q-tag q1">Q1</span><span class="q-tag q2">Q2</span><span class="q-tag q4">Q4</span></span></h4>
+        <table class="workstream-table">
+          <thead><tr><th>Workstream</th><th>Duration</th><th>Key activities</th><th class="q-cell">Answers</th></tr></thead>
+          <tbody>
+            <tr id="ws-tracking-education">
+              <td class="workstream">Tracking education (OCID &amp; CMM)</td>
+              <td class="duration">May – Jun Wk2</td>
+              <td class="activities">Understand how OCIDs are created and tracked at Microsoft today — who owns the request process, how the CMM hierarchy is structured, and which parameters (channel, campaign, source, sub-channel, etc.) are available to leverage. Document the existing taxonomy, where it has drifted from how we actually market (e.g., PMAX still rolling up under SEM), and what should change in Walk. This becomes the input for the Walk-phase reclassification.</td>
+              <td class="q-cell"><span class="q-tags"><span class="q-tag q1">Q1</span><span class="q-tag q2">Q2</span><span class="q-tag q4">Q4</span></span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Partnerships -->
+      <div class="solution-group-detail">
+        <h4 class="sgh">Partnerships <span class="q-tags"><span class="q-tag q3">Q3</span></span></h4>
+        <table class="workstream-table">
+          <thead><tr><th>Workstream</th><th>Duration</th><th>Key activities</th><th class="q-cell">Answers</th></tr></thead>
+          <tbody>
+            <tr id="ws-partnership-template">
+              <td class="workstream">Partnership grid template (v1)</td>
+              <td class="duration">May – Jun Wk2</td>
+              <td class="activities">Standardize the cross-region partnership KPI grid. Agree on minimum comparable fields. Pressure-test with 2–3 partnerships before rolling regionally. <strong>Milestone:</strong> AMEX grid live by Jun Wk2.</td>
+              <td class="q-cell"><span class="q-tags"><span class="q-tag q3">Q3</span></span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Incrementality (NEW) -->
+      <div class="solution-group-detail">
+        <h4 class="sgh">Incrementality <span class="q-tags"><span class="q-tag q5">Q5</span></span> <span class="new-badge">NEW</span></h4>
+        <table class="workstream-table">
+          <thead><tr><th>Workstream</th><th>Duration</th><th>Key activities</th><th class="q-cell">Answers</th></tr></thead>
+          <tbody>
+            <tr id="ws-incrementality-scoping">
+              <td class="workstream">Incrementality test scoping</td>
+              <td class="duration">May Wk3 – Jun</td>
+              <td class="activities">Partner with the paid media team to scope the in-market incrementality test: methodology (geo holdout vs. ghost ads), regions, channels covered, success metrics, and stakeholder sign-offs. Prepares for the end-of-July paid media incrementality readout in Walk.</td>
+              <td class="q-cell"><span class="q-tags"><span class="q-tag q5">Q5</span></span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Campaign moments (NEW) -->
+      <div class="solution-group-detail">
+        <h4 class="sgh">Campaign moments <span class="q-tags"><span class="q-tag q4">Q4</span></span> <span class="new-badge">NEW</span></h4>
+        <table class="workstream-table">
+          <thead><tr><th>Workstream</th><th>Duration</th><th>Key activities</th><th class="q-cell">Answers</th></tr></thead>
+          <tbody>
+            <tr id="ws-moment-inventory">
+              <td class="workstream">Campaign moment inventory</td>
+              <td class="duration">May Wk3 – Jun Wk4</td>
+              <td class="activities">Inventory the priority FY26 campaign moments (Back-to-School, Surface/Copilot launches, Holiday, Cyber Week, etc.) and the marketing activities tied to each. Sets up the moment-attribution work in Walk by defining the buckets in advance.</td>
+              <td class="q-cell"><span class="q-tags"><span class="q-tag q4">Q4</span></span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Unified View -->
+      <div class="solution-group-detail">
+        <h4 class="sgh">Unified View <span class="q-tags"><span class="q-tag q1">Q1</span><span class="q-tag q2">Q2</span><span class="q-tag q3">Q3</span><span class="q-tag q4">Q4</span></span></h4>
+        <table class="workstream-table">
+          <thead><tr><th>Workstream</th><th>Duration</th><th>Key activities</th><th class="q-cell">Answers</th></tr></thead>
+          <tbody>
+            <tr id="ws-manual-mvp">
+              <td class="workstream">Manual Unified View MVP (incl. partnerships grid)</td>
+              <td class="duration">Milestone · Jun Wk2</td>
+              <td class="activities">Curated deck or page that pulls headlines from each pillar, including the partnerships grid view. Refreshed by hand. Proves the format and the read-out before any tooling investment, and gives leadership something to react to early.</td>
+              <td class="q-cell"><span class="q-tags"><span class="q-tag q1">Q1</span><span class="q-tag q2">Q2</span><span class="q-tag q3">Q3</span><span class="q-tag q4">Q4</span></span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Governance -->
+      <div class="solution-group-detail">
+        <h4 class="sgh">Governance <span class="q-tags"><span class="q-tag found">Foundation</span></span></h4>
+        <table class="workstream-table">
+          <thead><tr><th>Workstream</th><th>Duration</th><th>Key activities</th><th class="q-cell">Answers</th></tr></thead>
+          <tbody>
+            <tr id="ws-stakeholder-raci">
+              <td class="workstream">Stakeholder &amp; RACI</td>
+              <td class="duration">May – Jun</td>
+              <td class="activities">Confirm working group, owners per pillar, and decision rights. Lock the RACI before Walk starts.</td>
+              <td class="q-cell"><span class="q-tags"><span class="q-tag found">Foundation</span></span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Crawl coverage check / gap analysis -->
+      <div class="gap-callout">
+        <h4>Crawl coverage check vs. the brief's 5 questions</h4>
+        <p style="margin:0 0 0.4rem;">Every brief question now has at least one Crawl workstream feeding it:</p>
+        <ul>
+          <li><strong>Q1 · Where to invest?</strong> — Stakeholder discovery, Marketing IQ, Tracking education, Manual Unified View MVP.</li>
+          <li><strong>Q2 · What moved the trend?</strong> — Tracking education, Marketing IQ, Manual Unified View MVP.</li>
+          <li><strong>Q3 · Partnership ROI?</strong> — Partnership grid template (AMEX live by Jun Wk2).</li>
+          <li><strong>Q4 · Campaign moment rollup?</strong> — <em>Campaign moment inventory (new)</em> scopes the moments so Walk can attribute against them.</li>
+          <li><strong>Q5 · Paid media incrementality?</strong> — <em>Incrementality test scoping (new)</em> sets up the end-of-July paid media incrementality readout in Walk.</li>
+        </ul>
+        <p style="margin:0.5rem 0 0; font-size:0.82rem; color:#6A3A00;"><strong>Pre-rewrite gap:</strong> the original Crawl was strong on foundations (discovery, tracking, partnerships) but had <em>no workstream pointing at Q4 (campaign moments) or Q5 (paid media incrementality)</em>. The two new workstreams above close those gaps and create the runway for Walk-phase deliverables to land on time.</p>
+      </div>
+
       <div class="milestone"><strong>Phase 1 exit:</strong>
         <ul style="margin:0.5rem 0 0; padding-left:1.2rem;">
           <li>Problem, goal, and direction vocalized and agreed upon with leadership / end users.</li>
           <li>Partnership grid MVP (AMEX) created and shared with regional partnerships leads.</li>
           <li>Tracking capabilities outlined and path forward defined for answering wish-list questions.</li>
+          <li>Marketing IQ fit assessed — go/no-go on integration with the unified solution.</li>
+          <li>Incrementality test scoped and ready to land results end of July.</li>
+          <li>Priority campaign moments inventoried, ready for moment-attribution in Walk.</li>
           <li>Stakeholders / RACI established.</li>
         </ul>
       </div>
@@ -760,52 +1146,117 @@
   </section>
 
   <!-- PHASE 2 DETAIL -->
-  <section class="block" id="phase-2">
+  <section class="block phase-walk" id="phase-2">
     <h2>Phase 2 · Walk — Centralize &amp; Standardize</h2>
     <div class="phase-block walk">
       <div class="phase-head">
         <h3>Move from curated artifact to operational rhythm</h3>
-        <span class="duration">~3–4 months</span>
-        <span class="goal">Goal: a real landing surface, regional contributors filling the grid on cadence, first moment-level attribution.</span>
+        <span class="duration">~3–4 months (Aug – Oct, with key results landing end of Jul)</span>
+        <span class="goal">Goal: a real landing surface, regional contributors filling the grid on cadence, first moment-level attribution, and the first incrementality readout.</span>
       </div>
-      <table class="workstream-table">
-        <thead>
-          <tr><th>Workstream</th><th>Duration</th><th>Key activities</th></tr>
-        </thead>
-        <tbody>
-          <tr id="ws-ocid-classifications">
-            <td class="workstream">Update OCID classifications</td>
-            <td class="duration">8–10 weeks</td>
-            <td class="activities">Apply what we learned in the Crawl-phase deep dive: reclassify channels and sub-channels in the CMM hierarchy so reporting reflects how we actually market. Examples: split PMAX out from SEM as its own channel, formalize partnerships as a top-level classification, and align email/paid media taxonomies. Coordinate with the OCID request owners so all new requests follow the updated structure.</td>
-          </tr>
-          <tr id="ws-operationalize-grid">
-            <td class="workstream">Operationalize partnership grid</td>
-            <td class="duration">Quarterly cadence</td>
-            <td class="activities">Regional contributors (Asia, Americas, EMEA) update the grid each quarter. Establish a QA loop. First fully comparable cross-region partnership view that leadership can rely on.</td>
-          </tr>
-          <tr id="ws-review-cadence">
-            <td class="workstream">Cross-pillar review cadence</td>
-            <td class="duration">Ongoing (start ~Sep)</td>
-            <td class="activities">Recurring working session that uses the Manual Unified View to drive a real decision each cycle. Tests whether the surface is actually decision-ready before investing in build.</td>
-          </tr>
-          <tr id="ws-attribution-v1">
-            <td class="workstream">Campaign-to-moment attribution (v1)</td>
-            <td class="duration">8–12 weeks</td>
-            <td class="activities">Tag outbound activities (email, paid, partnerships, GTM) to the moments they support — Back-to-School, Holiday, Cyber Week, etc. Manual tagging is fine in v1; the goal is proving the roll-up works before automating.</td>
-          </tr>
-          <tr id="ws-roi-gapfix">
-            <td class="workstream">ROI visibility gap-fix</td>
-            <td class="duration">4–6 weeks</td>
-            <td class="activities">Identify channels with weak or missing ROI signal. For upper- and mid-funnel channels where ROI isn't the goal, define the expected outcome (e.g., qualified traffic, engaged sessions) so every channel has something to be measured against.</td>
-          </tr>
-        </tbody>
-      </table>
-      <div class="milestone"><strong>Phase 2 exit:</strong> updated OCID classifications live in CMM, the partnership grid is on a quarterly cadence with regional contributors, and a first pass at moment-level attribution is rolled up in the Manual Unified View.</div>
+
+      <!-- Tracking & Taxonomy -->
+      <div class="solution-group-detail">
+        <h4 class="sgh">Tracking &amp; Taxonomy <span class="q-tags"><span class="q-tag q1">Q1</span><span class="q-tag q2">Q2</span><span class="q-tag q4">Q4</span></span></h4>
+        <table class="workstream-table">
+          <thead><tr><th>Workstream</th><th>Duration</th><th>Key activities</th><th class="q-cell">Answers</th></tr></thead>
+          <tbody>
+            <tr id="ws-ocid-classifications">
+              <td class="workstream">Update OCID classifications</td>
+              <td class="duration">8–10 weeks</td>
+              <td class="activities">Apply what we learned in the Crawl-phase deep dive: reclassify channels and sub-channels in the CMM hierarchy so reporting reflects how we actually market. Examples: split PMAX out from SEM as its own channel, formalize partnerships as a top-level classification, and align email/paid media taxonomies. Coordinate with the OCID request owners so all new requests follow the updated structure. <strong>Milestone:</strong> reclassification live in CMM by Sep Wk4.</td>
+              <td class="q-cell"><span class="q-tags"><span class="q-tag q1">Q1</span><span class="q-tag q2">Q2</span><span class="q-tag q4">Q4</span></span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Partnerships -->
+      <div class="solution-group-detail">
+        <h4 class="sgh">Partnerships <span class="q-tags"><span class="q-tag q3">Q3</span></span></h4>
+        <table class="workstream-table">
+          <thead><tr><th>Workstream</th><th>Duration</th><th>Key activities</th><th class="q-cell">Answers</th></tr></thead>
+          <tbody>
+            <tr id="ws-operationalize-grid">
+              <td class="workstream">Operationalize partnership grid</td>
+              <td class="duration">Quarterly cadence</td>
+              <td class="activities">Regional contributors (Asia, Americas, EMEA) update the grid each quarter. Establish a QA loop. First fully comparable cross-region partnership view that leadership can rely on.</td>
+              <td class="q-cell"><span class="q-tags"><span class="q-tag q3">Q3</span></span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Incrementality -->
+      <div class="solution-group-detail">
+        <h4 class="sgh">Incrementality <span class="q-tags"><span class="q-tag q5">Q5</span></span></h4>
+        <table class="workstream-table">
+          <thead><tr><th>Workstream</th><th>Duration</th><th>Key activities</th><th class="q-cell">Answers</th></tr></thead>
+          <tbody>
+            <tr id="ws-incrementality-results">
+              <td class="workstream">Paid media incrementality results &amp; readout</td>
+              <td class="duration">End of Jul → Aug</td>
+              <td class="activities">Receive results from the in-market incrementality test scoped in Crawl. Translate into a leadership-ready readout: lift by region/channel, holdout vs. exposed, confidence intervals, and recommendations for the next planning cycle. <strong>Milestone:</strong> paid media incrementality results released end of July.</td>
+              <td class="q-cell"><span class="q-tags"><span class="q-tag q5">Q5</span></span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Campaign moments -->
+      <div class="solution-group-detail">
+        <h4 class="sgh">Campaign moments <span class="q-tags"><span class="q-tag q4">Q4</span></span></h4>
+        <table class="workstream-table">
+          <thead><tr><th>Workstream</th><th>Duration</th><th>Key activities</th><th class="q-cell">Answers</th></tr></thead>
+          <tbody>
+            <tr id="ws-attribution-v1">
+              <td class="workstream">Campaign-to-moment attribution (v1)</td>
+              <td class="duration">8–12 weeks</td>
+              <td class="activities">Tag outbound activities (email, paid, partnerships, GTM) to the moments inventoried in Crawl — Back-to-School, Holiday, Cyber Week, etc. Manual tagging is fine in v1; the goal is proving the roll-up works before automating.</td>
+              <td class="q-cell"><span class="q-tags"><span class="q-tag q4">Q4</span></span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Unified View / ROI -->
+      <div class="solution-group-detail">
+        <h4 class="sgh">Unified View / ROI <span class="q-tags"><span class="q-tag q1">Q1</span><span class="q-tag q2">Q2</span></span></h4>
+        <table class="workstream-table">
+          <thead><tr><th>Workstream</th><th>Duration</th><th>Key activities</th><th class="q-cell">Answers</th></tr></thead>
+          <tbody>
+            <tr id="ws-roi-gapfix">
+              <td class="workstream">ROI visibility gap-fix</td>
+              <td class="duration">4–6 weeks</td>
+              <td class="activities">Identify channels with weak or missing ROI signal. For upper- and mid-funnel channels where ROI isn't the goal, define the expected outcome (e.g., qualified traffic, engaged sessions) so every channel has something to be measured against.</td>
+              <td class="q-cell"><span class="q-tags"><span class="q-tag q1">Q1</span><span class="q-tag q2">Q2</span></span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Operating rhythm -->
+      <div class="solution-group-detail">
+        <h4 class="sgh">Operating rhythm <span class="q-tags"><span class="q-tag found">Foundation</span></span></h4>
+        <table class="workstream-table">
+          <thead><tr><th>Workstream</th><th>Duration</th><th>Key activities</th><th class="q-cell">Answers</th></tr></thead>
+          <tbody>
+            <tr id="ws-review-cadence">
+              <td class="workstream">Cross-pillar review cadence</td>
+              <td class="duration">Ongoing (start ~Sep)</td>
+              <td class="activities">Recurring working session that uses the Manual Unified View to drive a real decision each cycle. Tests whether the surface is actually decision-ready before investing in build.</td>
+              <td class="q-cell"><span class="q-tags"><span class="q-tag found">Foundation</span></span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="milestone"><strong>Phase 2 exit:</strong> updated OCID classifications live in CMM, the partnership grid is on a quarterly cadence with regional contributors, the paid media incrementality readout is in leadership's hands, and a first pass at moment-level attribution is rolled up in the Manual Unified View.</div>
     </div>
   </section>
 
   <!-- PHASE 3 DETAIL -->
-  <section class="block" id="phase-3">
+  <section class="block phase-run" id="phase-3">
     <h2>Phase 3 · Run — Integrate &amp; Automate</h2>
     <div class="phase-block run">
       <div class="phase-head">
@@ -852,6 +1303,22 @@
   <p class="footer-note">Draft timeline · Marketing Effectiveness Solution · Sequencing and durations are starting points for the working group conversation.</p>
 
 </main>
+
+<script>
+(function() {
+  var checkboxes = document.querySelectorAll('.filter-bar input[type="checkbox"][data-phase]');
+  var body = document.body;
+  function apply() {
+    checkboxes.forEach(function(cb) {
+      var cls = 'hide-' + cb.dataset.phase;
+      if (cb.checked) body.classList.remove(cls);
+      else body.classList.add(cls);
+    });
+  }
+  checkboxes.forEach(function(cb) { cb.addEventListener('change', apply); });
+  apply();
+})();
+</script>
 
 </body>
 </html>
