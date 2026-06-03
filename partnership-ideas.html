@@ -998,18 +998,6 @@
         </div>
       </div>
 
-      <!-- DATE RANGE -->
-      <div class="ctrl-group">
-        <label class="ctrl-label">Date range</label>
-        <div class="ctrl-dates">
-          <input type="date" id="date-from" value="2025-11-01">
-          <span class="ctrl-sep">→</span>
-          <input type="date" id="date-to" value="2026-01-31">
-          <button type="button" class="ctrl-btn-link" id="reset-dates">Reset</button>
-        </div>
-        <div class="ctrl-hint">Filters regions whose campaign overlaps this window.</div>
-      </div>
-
       <!-- COMPARE -->
       <div class="ctrl-group">
         <label class="ctrl-label">Compare metrics</label>
@@ -1410,34 +1398,18 @@
     roi: 'ROI'
   };
 
-  // ----- visibility (region chips + date range) -----
+  // ----- visibility (region chips) -----
   function activeRegions() {
     const checked = Array.from(controls.querySelectorAll('[data-control="region"] input:checked'))
       .map(c => c.value);
     return checked;
   }
-  function dateRange() {
-    const from = document.getElementById('date-from').value;
-    const to = document.getElementById('date-to').value;
-    return { from: from || null, to: to || null };
-  }
-  function overlapsRange(tbody, range) {
-    if (!range.from && !range.to) return true;
-    const ps = tbody.getAttribute('data-period-start');
-    const pe = tbody.getAttribute('data-period-end');
-    if (!ps || !pe) return true;
-    if (range.from && pe < range.from) return false;
-    if (range.to && ps > range.to) return false;
-    return true;
-  }
   function applyFilters() {
     const regions = activeRegions();
-    const range = dateRange();
     grid.querySelectorAll('tbody.region-group').forEach(tb => {
       const reg = tb.getAttribute('data-region');
       const regionOn = regions.includes(reg);
-      const dateOn = overlapsRange(tb, range);
-      tb.classList.toggle('filtered-out', !(regionOn && dateOn));
+      tb.classList.toggle('filtered-out', !regionOn);
     });
     recomputeTotals();
     recomputeCompare();
@@ -1529,12 +1501,6 @@
 
   // ----- wire up -----
   controls.querySelectorAll('[data-control="region"] input').forEach(cb => cb.addEventListener('change', applyFilters));
-  ['date-from','date-to'].forEach(id => document.getElementById(id).addEventListener('change', applyFilters));
-  document.getElementById('reset-dates').addEventListener('click', function () {
-    document.getElementById('date-from').value = '2025-11-01';
-    document.getElementById('date-to').value = '2026-01-31';
-    applyFilters();
-  });
   ['cmp-metric-a','cmp-metric-b','cmp-scope'].forEach(id => document.getElementById(id).addEventListener('change', recomputeCompare));
 
   // initial compute
