@@ -401,6 +401,14 @@
     font-size: 0.82rem;
     font-family: Consolas, monospace;
   }
+  .metric-defs td:nth-child(3),
+  .metric-defs td:nth-child(4),
+  .metric-defs td:nth-child(5) {
+    font-size: 0.82rem;
+    color: var(--ink);
+    line-height: 1.35;
+  }
+  .metric-defs .term-aka { margin-top: 0.2rem; }
 
   /* === Open-question flag === */
   .open-flag {
@@ -948,53 +956,102 @@
 
     <table class="metric-defs">
       <thead>
-        <tr><th>Metric</th><th>Definition</th><th>EMEA source</th><th>Notes</th></tr>
+        <tr>
+          <th>Metric</th>
+          <th>Definition</th>
+          <th>EMEA source</th>
+          <th>Asia source</th>
+          <th>Americas source</th>
+          <th>Notes</th>
+        </tr>
       </thead>
       <tbody>
         <tr>
-          <td>ROI</td>
-          <td><code>Redemption Spend ÷ Campaign Spend</code></td>
-          <td>Derived (formula in column S, e.g. <code>S43</code>)</td>
-          <td><span class="open-flag">open</span><span class="open-note">"Campaign Spend" today = Offer Cost only. Should it include Media Value too?</span></td>
+          <td>Offer</td>
+          <td>The offer construct (spend threshold and reward) presented to cardholders</td>
+          <td>Header row<br><span class="term-aka">e.g. "Spend 500/100" at row 6 of each wave tab; applied uniformly across FR/DE/UK/IT</span></td>
+          <td>Column B<br><span class="term-aka">"Offer Construct" — varies by market×segment combo</span></td>
+          <td>Header row<br><span class="term-aka">Row 8 "Values" in Key Metrics Worksheet; 4 different offers run concurrently across audience segments</span></td>
+          <td>Three different shapes — see What's not comparable note below the table</td>
         </tr>
+
         <tr>
-          <td>Revenue</td>
-          <td><em>TBD</em></td>
-          <td>—</td>
-          <td><span class="open-flag">open</span><span class="open-note">Need definition. Same as Redemption Spend? Or include Adobe-attributed hardware halo?</span></td>
-        </tr>
-        <tr>
-          <td>Redemption Spend</td>
-          <td>Total $ customer spent in the qualifying purchase that triggered the offer</td>
-          <td>Column J (USD) <span class="term-aka">Column I in local currency</span></td>
-          <td>—</td>
-        </tr>
-        <tr>
-          <td>Offer Redemptions <span class="term-aka">(AMEX term) = Enrollments (EMEA term)</span></td>
-          <td>Intent step — customer enrolled in / accepted the offer</td>
+          <td>Enrollments <span class="term-aka">a.k.a. Offer Redemptions in AMEX vocab</span></td>
+          <td>Intent step — customer accepted / opted into the offer</td>
           <td>Column D</td>
-          <td>Vocabulary aliased; grid uses "Enrollments"</td>
+          <td>Not directly listed in interim block<br><span class="term-aka">Derived: Redemptions ÷ Redemption Rate (each market hit cap in Q2)</span></td>
+          <td>Pivot row "Sum of Cumulative Enrollments" (Key Metrics Worksheet, R10)</td>
+          <td>Asia value flagged in grid — confirm caps were the actual stop, not data omission</td>
         </tr>
+
         <tr>
           <td>Redemptions</td>
-          <td>Conversion step — qualifying purchase made</td>
+          <td>Conversion step — qualifying purchase made by an enrolled customer</td>
           <td>Column H</td>
+          <td>INTERIM RESULTS block column H (e.g. row 13–18 in FY26 Q2)</td>
+          <td>Pivot row "Sum of Cumulative Redemptions" (R11)</td>
           <td>—</td>
         </tr>
+
         <tr>
           <td>Redemption Rate</td>
           <td><code>Redemptions ÷ Enrollments</code></td>
           <td>Derived</td>
+          <td>Column D of INTERIM RESULTS block (pre-computed in sheet)</td>
+          <td>Pivot row R14</td>
           <td>—</td>
         </tr>
+
+        <tr>
+          <td>Redemption Spend</td>
+          <td>Total $ customer spent in the qualifying purchase that triggered the offer</td>
+          <td>Column J (USD) <span class="term-aka">Column I in local currency</span></td>
+          <td>Column E "Redeeming Spend (USD)" in INTERIM RESULTS block</td>
+          <td>Pivot row "Sum of Cumulative Redeemer Spend" (R12)</td>
+          <td>Americas calls it "Redeemer Spend"; same metric</td>
+        </tr>
+
+        <tr>
+          <td>Offer Cost</td>
+          <td>The cost to Microsoft of fulfilling the offer rewards (e.g. $200 × 304 redemptions = $60,800)</td>
+          <td>Column M (USD) <span class="term-aka">Column L in local currency</span></td>
+          <td>Column F "Offer Cost (USD)" in INTERIM RESULTS block</td>
+          <td>Pivot row "Sum of Cumulative Offer Cost" (R13)</td>
+          <td>Used as denominator in ROI formula today (see open question below)</td>
+        </tr>
+
         <tr>
           <td>AOV (Redeemers)</td>
           <td>Avg order value of redeeming customers</td>
           <td>Column P (USD) <span class="term-aka">EMEA also tracks AOV Enrolled in column G</span></td>
+          <td>Not in interim block <span class="term-aka">Derived: Red Spend ÷ Redemptions</span></td>
+          <td>Pivot row "AOV" (R15)</td>
           <td><span class="open-flag">confirm</span><span class="open-note">Grid uses AOV Redeemers — confirm this is the right one (not AOV Enrolled).</span></td>
+        </tr>
+
+        <tr>
+          <td>ROI</td>
+          <td><code>Redemption Spend ÷ Campaign Spend</code></td>
+          <td>Derived (formula in column S, e.g. <code>S43</code>)</td>
+          <td>Column G of INTERIM RESULTS block <span class="term-aka">Sheet also exposes a second ROI column using Total Spend — we use the Red Spend ÷ Offer Cost one</span></td>
+          <td>Pivot row "ROI" (R16)</td>
+          <td><span class="open-flag">open</span><span class="open-note">"Campaign Spend" today = Offer Cost only. Should it include Media Value too?</span></td>
+        </tr>
+
+        <tr>
+          <td>Revenue</td>
+          <td><em>TBD</em></td>
+          <td>—</td>
+          <td>—</td>
+          <td>—</td>
+          <td><span class="open-flag">open</span><span class="open-note">Need definition. Same as Redemption Spend? Or include Adobe-attributed hardware halo?</span></td>
         </tr>
       </tbody>
     </table>
+
+    <p style="font-size:0.8rem;color:var(--ink-soft);margin-top:0.6rem;">
+      <strong>What's not (yet) comparable:</strong> the <em>Offer</em> dimension behaves differently per region. EMEA runs <strong>one offer across all four markets</strong> (so market-level rows share the same offer). Asia runs <strong>different offers per market</strong>. Americas runs <strong>multiple offers in parallel within the same market</strong>, segmented by AMEX cardholder behavior (Spend / No-Spend / Lookalike / SBS). When comparing the drill rows below, this is why like-for-like reads differently across regions.
+    </p>
 
     <h3 style="margin-top:2.4rem;">AMEX Example <span style="font-size:0.75rem;font-weight:500;color:var(--ink-soft);text-transform:uppercase;letter-spacing:1px;margin-left:0.4rem;">FY26 Q2 · Nov 2025 – Jan 2026</span></h3>
 
