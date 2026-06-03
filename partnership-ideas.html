@@ -998,44 +998,7 @@
         </div>
       </div>
 
-      <!-- COMPARE -->
-      <div class="ctrl-group">
-        <label class="ctrl-label">Compare metrics</label>
-        <div class="ctrl-compare">
-          <select id="cmp-metric-a">
-            <option value="">— Metric A —</option>
-            <option value="enrollments">Enrollments</option>
-            <option value="redemptions">Redemptions</option>
-            <option value="redrate">Red. Rate</option>
-            <option value="redspend">Red. Spend (USD)</option>
-            <option value="offercost">Offer Cost (USD)</option>
-            <option value="aov">AOV Redeemers (USD)</option>
-            <option value="roi">ROI</option>
-          </select>
-          <span class="ctrl-sep">vs</span>
-          <select id="cmp-metric-b">
-            <option value="">— Metric B —</option>
-            <option value="enrollments">Enrollments</option>
-            <option value="redemptions">Redemptions</option>
-            <option value="redrate">Red. Rate</option>
-            <option value="redspend">Red. Spend (USD)</option>
-            <option value="offercost">Offer Cost (USD)</option>
-            <option value="aov">AOV Redeemers (USD)</option>
-            <option value="roi">ROI</option>
-          </select>
-          <select id="cmp-scope">
-            <option value="totals">Across totals row</option>
-            <option value="emea">Across EMEA markets</option>
-            <option value="asia">Across Asia markets</option>
-            <option value="americas">Across Americas segments</option>
-          </select>
-        </div>
-      </div>
-
     </div>
-
-    <!-- Compare results panel (appears when both metrics selected) -->
-    <div class="compare-panel" id="compare-panel" hidden></div>
 
     <div class="q3-wrap">
       <table class="live-grid" id="amex-q2-grid">
@@ -1375,7 +1338,6 @@
   const grid = document.getElementById('amex-q2-grid');
   if (!grid) return;
   const controls = document.getElementById('amex-controls');
-  const cmpPanel = document.getElementById('compare-panel');
   const totalsRow = document.querySelector('#amex-totals .totals-row');
   if (!controls) return;
 
@@ -1387,15 +1349,6 @@
     offercost:    v => '$' + Math.round(v).toLocaleString(),
     aov:          v => '$' + v.toFixed(2),
     roi:          v => v.toFixed(2) + 'x'
-  };
-  const METRIC_LABELS = {
-    enrollments: 'Enrollments',
-    redemptions: 'Redemptions',
-    redrate: 'Red. Rate',
-    redspend: 'Red. Spend (USD)',
-    offercost: 'Offer Cost (USD)',
-    aov: 'AOV Redeemers (USD)',
-    roi: 'ROI'
   };
 
   // ----- visibility (region chips) -----
@@ -1412,7 +1365,6 @@
       tb.classList.toggle('filtered-out', !regionOn);
     });
     recomputeTotals();
-    recomputeCompare();
   }
 
   // ----- totals -----
@@ -1450,58 +1402,8 @@
     });
   }
 
-  // ----- compare -----
-  function recomputeCompare() {
-    const a = document.getElementById('cmp-metric-a').value;
-    const b = document.getElementById('cmp-metric-b').value;
-    const scope = document.getElementById('cmp-scope').value;
-    if (!a || !b || a === b) {
-      cmpPanel.hidden = true;
-      cmpPanel.innerHTML = '';
-      return;
-    }
-
-    // pick rows to compare across
-    let rows;
-    let scopeLabel;
-    if (scope === 'totals') {
-      rows = visibleRegionTotalRows().map(r => ({ name: r.cells[0].childNodes[0].nodeValue.trim(), row: r }));
-      scopeLabel = 'Selected region totals';
-    } else {
-      const tb = grid.querySelector('tbody[data-region="' + scope + '"]');
-      if (!tb || tb.classList.contains('filtered-out')) {
-        cmpPanel.hidden = false;
-        cmpPanel.innerHTML = '<div class="cmp-title">Compare · ' + METRIC_LABELS[a] + ' vs ' + METRIC_LABELS[b] + '</div><div style="font-size:0.85rem;color:var(--ink-soft);">Selected scope is hidden by current region filter.</div>';
-        return;
-      }
-      rows = Array.from(tb.querySelectorAll('tr.market-row')).map(r => ({
-        name: r.cells[0].childNodes[0].nodeValue.trim().replace(/\s+\(.*$/, ''),
-        row: r
-      }));
-      scopeLabel = scope.charAt(0).toUpperCase() + scope.slice(1) + ' breakdown';
-    }
-
-    const html = ['<div class="cmp-title">Compare · ' + METRIC_LABELS[a] + ' vs ' + METRIC_LABELS[b] + ' · ' + scopeLabel + '</div>'];
-    html.push('<div class="cmp-rows">');
-    html.push('<div class="cmp-row" style="font-size:0.7rem;text-transform:uppercase;letter-spacing:0.5px;color:var(--ink-soft);font-weight:700;background:transparent;padding-bottom:0;"><span></span><span>' + METRIC_LABELS[a] + '</span><span>' + METRIC_LABELS[b] + '</span><span>Δ (A − B) / Ratio</span></div>');
-    rows.forEach(item => {
-      const va = readMetric(item.row, a);
-      const vb = readMetric(item.row, b);
-      if (va === null || vb === null) return;
-      const delta = va - vb;
-      const ratio = vb === 0 ? null : (va / vb);
-      const deltaClass = Math.abs(delta) < 1e-9 ? 'flat' : (delta > 0 ? 'pos' : 'neg');
-      const deltaTxt = METRIC_FORMATS[a](delta) + (ratio !== null ? ' · ' + ratio.toFixed(2) + 'x' : '');
-      html.push('<div class="cmp-row"><span class="cmp-name">' + item.name + '</span><span class="cmp-val">' + METRIC_FORMATS[a](va) + '</span><span class="cmp-val">' + METRIC_FORMATS[b](vb) + '</span><span class="cmp-delta ' + deltaClass + '">' + deltaTxt + '</span></div>');
-    });
-    html.push('</div>');
-    cmpPanel.innerHTML = html.join('');
-    cmpPanel.hidden = false;
-  }
-
   // ----- wire up -----
   controls.querySelectorAll('[data-control="region"] input').forEach(cb => cb.addEventListener('change', applyFilters));
-  ['cmp-metric-a','cmp-metric-b','cmp-scope'].forEach(id => document.getElementById(id).addEventListener('change', recomputeCompare));
 
   // initial compute
   applyFilters();
