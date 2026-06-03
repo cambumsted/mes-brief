@@ -368,6 +368,202 @@
     background: #FFF4CE;
     color: #8A6D00;
   }
+
+  /* === Metric definitions table === */
+  .metric-defs { width: 100%; border-collapse: collapse; font-size: 0.85rem; margin-top: 0.6rem; }
+  .metric-defs th, .metric-defs td {
+    padding: 0.55rem 0.7rem;
+    border-bottom: 1px solid var(--line);
+    vertical-align: top;
+    text-align: left;
+  }
+  .metric-defs thead th {
+    background: var(--ms-blue-light);
+    color: var(--ms-blue-dark);
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-weight: 700;
+    border-bottom: 2px solid var(--ms-blue);
+  }
+  .metric-defs td:first-child { font-weight: 600; color: var(--ink); white-space: nowrap; }
+  .metric-defs .term-aka {
+    display: block;
+    font-size: 0.75rem;
+    color: var(--ink-soft);
+    font-weight: 500;
+    margin-top: 0.15rem;
+  }
+  .metric-defs code {
+    background: var(--c-n05);
+    padding: 0.1rem 0.4rem;
+    border-radius: 3px;
+    font-size: 0.82rem;
+    font-family: Consolas, monospace;
+  }
+
+  /* === Open-question flag === */
+  .open-flag {
+    display: inline-block;
+    background: #FFF4CE;
+    color: #8A6D00;
+    border: 1px solid #F0DEA0;
+    border-radius: 999px;
+    padding: 0.05rem 0.55rem;
+    font-size: 0.68rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+    margin-right: 0.35rem;
+    vertical-align: middle;
+  }
+  .open-flag::before { content: "? "; }
+  .open-note { color: #6B5800; font-size: 0.82rem; }
+
+  /* === Live Q3 grid === */
+  .live-grid {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.83rem;
+    min-width: 880px;
+    background: white;
+  }
+  .live-grid th, .live-grid td {
+    padding: 0.5rem 0.6rem;
+    border-bottom: 1px solid var(--line);
+    text-align: right;
+    vertical-align: middle;
+  }
+  .live-grid thead th {
+    background: var(--c-dark-blue);
+    color: white;
+    font-size: 0.68rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-weight: 700;
+    border-bottom: 2px solid var(--ms-blue);
+    white-space: nowrap;
+  }
+  .live-grid th:first-child, .live-grid td:first-child {
+    text-align: left;
+    font-weight: 600;
+    white-space: nowrap;
+  }
+  .live-grid tbody tr:hover { background: #FAFBFC; }
+  .live-grid td.sourced {
+    cursor: help;
+    position: relative;
+    transition: background-color 0.12s ease, outline 0.12s ease;
+  }
+  .live-grid td.sourced:hover {
+    background: var(--ms-blue-light);
+    outline: 1px dashed var(--ms-blue);
+    outline-offset: -1px;
+  }
+  .live-grid td.tbd {
+    background: #FFF8E1;
+    color: #8A6D00;
+    font-style: italic;
+    font-weight: 600;
+  }
+  .live-grid td.flagged { background: #FFFCF1; }
+  .live-grid td.missing { color: var(--c-n50); font-style: italic; }
+  .live-grid tr.region-total td {
+    background: var(--bg);
+    font-weight: 700;
+    border-top: 2px solid var(--ms-blue-dark);
+  }
+  .live-grid tr.market-row td:first-child {
+    padding-left: 1.6rem;
+    font-weight: 500;
+    color: var(--ink-soft);
+  }
+  .live-grid tr.region-missing td {
+    background: #F8F8F8;
+    font-style: italic;
+    color: var(--ink-soft);
+    text-align: left;
+  }
+  .live-grid th .open-flag { text-transform: uppercase; margin-left: 0.3rem; }
+  .live-grid .num { font-variant-numeric: tabular-nums; }
+
+  /* === Source provenance tooltip === */
+  #src-tooltip {
+    position: fixed;
+    z-index: 1000;
+    background: var(--c-dark-blue);
+    color: white;
+    padding: 0.75rem 0.9rem;
+    border-radius: 6px;
+    box-shadow: 0 8px 24px rgba(9,31,46,0.3), 0 2px 6px rgba(9,31,46,0.18);
+    font-size: 0.82rem;
+    line-height: 1.45;
+    max-width: 360px;
+    pointer-events: none;
+    opacity: 0;
+    transform: translateY(4px);
+    transition: opacity 0.12s ease, transform 0.12s ease;
+    border: 1px solid rgba(255,255,255,0.15);
+  }
+  #src-tooltip.visible { opacity: 1; transform: translateY(0); }
+  #src-tooltip .tt-eyebrow {
+    font-size: 0.66rem;
+    text-transform: uppercase;
+    letter-spacing: 0.7px;
+    color: var(--c-light-blue);
+    font-weight: 700;
+    display: block;
+    margin-bottom: 0.4rem;
+  }
+  #src-tooltip .tt-row {
+    display: flex;
+    gap: 0.55rem;
+    margin: 0.18rem 0;
+  }
+  #src-tooltip .tt-row .lbl {
+    color: var(--c-light-blue);
+    font-weight: 600;
+    min-width: 56px;
+    font-size: 0.72rem;
+    flex-shrink: 0;
+  }
+  #src-tooltip .tt-row .val {
+    color: white;
+    font-size: 0.78rem;
+    word-break: break-word;
+  }
+  #src-tooltip .tt-derived {
+    display: block;
+    margin-top: 0.5rem;
+    padding-top: 0.45rem;
+    border-top: 1px solid rgba(255,255,255,0.2);
+    font-style: italic;
+    font-size: 0.78rem;
+    color: #DDEFFB;
+  }
+  #src-tooltip .tt-warn {
+    display: block;
+    margin-top: 0.5rem;
+    padding: 0.4rem 0.55rem;
+    background: rgba(255, 244, 206, 0.15);
+    border-left: 3px solid #FFB900;
+    color: #FFE89A;
+    font-size: 0.76rem;
+    border-radius: 0 4px 4px 0;
+  }
+
+  /* Q3 grid wrapper */
+  .q3-wrap { overflow-x: auto; margin-top: 0.6rem; }
+  .q3-hint {
+    background: var(--ms-blue-light);
+    color: var(--ms-blue-dark);
+    padding: 0.55rem 0.8rem;
+    border-radius: 4px;
+    font-size: 0.82rem;
+    margin: 0.6rem 0 0.4rem;
+    display: inline-block;
+  }
+  .q3-hint::before { content: "💡 "; }
 </style>
 </head>
 <body>
@@ -468,71 +664,235 @@
 
     </div>
 
-    <h3 style="margin-top:2rem;">AMEX comparability grid</h3>
-    <p class="lede">Same KPI columns, AMEX rows only — for a focused side-by-side across regions.</p>
+    <h3 style="margin-top:2rem;">AMEX metric definitions <span style="font-size:0.7rem;font-weight:500;color:var(--ink-soft);text-transform:uppercase;letter-spacing:1px;margin-left:0.4rem;">v0 · starting point</span></h3>
+    <p class="lede">The vocabulary lock for the Q3 grid below. EMEA columns are the source of truth; AMEX-side terms (e.g. "Offer Redemptions") are aliased to EMEA terms (e.g. "Enrollments") so we have one shared language.</p>
 
-    <div class="grid-wrap">
-      <table class="partnership-grid">
+    <table class="metric-defs">
+      <thead>
+        <tr><th>Metric</th><th>Definition</th><th>EMEA source</th><th>Notes</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>ROI</td>
+          <td><code>Redemption Spend ÷ Campaign Spend</code></td>
+          <td>Derived (formula in column S, e.g. <code>S43</code>)</td>
+          <td><span class="open-flag">open</span><span class="open-note">"Campaign Spend" today = Offer Cost only. Should it include Media Value too?</span></td>
+        </tr>
+        <tr>
+          <td>Revenue</td>
+          <td><em>TBD</em></td>
+          <td>—</td>
+          <td><span class="open-flag">open</span><span class="open-note">Need definition. Same as Redemption Spend? Or include Adobe-attributed hardware halo?</span></td>
+        </tr>
+        <tr>
+          <td>Redemption Spend</td>
+          <td>Total $ customer spent in the qualifying purchase that triggered the offer</td>
+          <td>Column J (USD) <span class="term-aka">Column I in local currency</span></td>
+          <td>—</td>
+        </tr>
+        <tr>
+          <td>Offer Redemptions <span class="term-aka">(AMEX term) = Enrollments (EMEA term)</span></td>
+          <td>Intent step — customer enrolled in / accepted the offer</td>
+          <td>Column D</td>
+          <td>Vocabulary aliased; grid uses "Enrollments"</td>
+        </tr>
+        <tr>
+          <td>Redemptions</td>
+          <td>Conversion step — qualifying purchase made</td>
+          <td>Column H</td>
+          <td>—</td>
+        </tr>
+        <tr>
+          <td>Redemption Rate</td>
+          <td><code>Redemptions ÷ Enrollments</code></td>
+          <td>Derived</td>
+          <td>—</td>
+        </tr>
+        <tr>
+          <td>AOV (Redeemers)</td>
+          <td>Avg order value of redeeming customers</td>
+          <td>Column P (USD) <span class="term-aka">EMEA also tracks AOV Enrolled in column G</span></td>
+          <td><span class="open-flag">confirm</span><span class="open-note">Grid uses AOV Redeemers — confirm this is the right one (not AOV Enrolled).</span></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3 style="margin-top:2.4rem;">FY25 Q3 — live comparability grid</h3>
+    <p class="lede">First focused build: AMEX FY25 Q3 across regions, using the definitions above. Real numbers pulled from the regional reports — hover any cell to see exactly where it came from.</p>
+    <div class="q3-hint">Hover any value to see file → sheet → cell → derivation</div>
+
+    <div class="q3-wrap">
+      <table class="live-grid" id="amex-q3-grid">
         <thead>
           <tr>
-            <th>Partnership</th>
-            <th>Region</th>
-            <th>Goal</th>
-            <th>Reach / Impressions</th>
-            <th>Traffic</th>
-            <th>Engagement</th>
-            <th>Conversions</th>
-            <th>Revenue / Pipeline</th>
+            <th>Region / Market</th>
+            <th>Period</th>
+            <th>Enrollments</th>
+            <th>Redemptions</th>
+            <th>Red. Rate</th>
+            <th>Red. Spend (USD)</th>
+            <th>Offer Cost (USD)</th>
+            <th>AOV Redeemers (USD)<span class="open-flag">confirm</span></th>
             <th>ROI</th>
-            <th>Brand Lift</th>
+            <th>Revenue (USD)<span class="open-flag">tbd</span></th>
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>AMEX (Americas)</td>
-            <td><span class="region">Americas</span></td>
-            <td>Conversions</td>
-            <td class="blank">—</td>
-            <td class="partial">42K sessions</td>
-            <td class="blank">—</td>
-            <td class="filled">3,150 purchases</td>
-            <td class="filled">$2.1M revenue</td>
-            <td class="filled">4.8x</td>
-            <td class="blank">—</td>
+
+          <!-- EMEA TOTAL -->
+          <tr class="region-total">
+            <td>EMEA <span class="region">All markets</span></td>
+            <td class="num">Jan 27 – Mar 17, 2025</td>
+            <td class="num sourced" data-src-file="EMEA_AMEX calc template.xlsx" data-src-sheet="AMEX FY25 Q3 W1" data-src-cell="D55 (Total row)" data-src-derived="Sum of FR + DE + UK + IT enrollments">80,610</td>
+            <td class="num sourced" data-src-file="EMEA_AMEX calc template.xlsx" data-src-sheet="AMEX FY25 Q3 W1" data-src-cell="H55 (Total row)" data-src-derived="Sum of FR + DE + UK + IT redemptions">711</td>
+            <td class="num sourced" data-src-file="EMEA_AMEX calc template.xlsx" data-src-sheet="AMEX FY25 Q3 W1" data-src-cell="Derived" data-src-derived="711 ÷ 80,610 (Redemptions ÷ Enrollments)">0.88%</td>
+            <td class="num sourced" data-src-file="EMEA_AMEX calc template.xlsx" data-src-sheet="AMEX FY25 Q3 W1" data-src-cell="J55 (Total row, USD)" data-src-derived="Sum of FR + DE + UK + IT redemption spend (USD)">$2,025,805.91</td>
+            <td class="num sourced" data-src-file="EMEA_AMEX calc template.xlsx" data-src-sheet="AMEX FY25 Q3 W1" data-src-cell="M55 (Total row, USD)" data-src-derived="Sum of FR + DE + UK + IT offer cost (USD)">$85,548.76</td>
+            <td class="num sourced flagged" data-src-file="EMEA_AMEX calc template.xlsx" data-src-sheet="AMEX FY25 Q3 W1" data-src-cell="P55 (AOV Redeemers USD, Total)" data-src-derived="Weighted AOV across markets" data-src-warn="Grid currently uses AOV Redeemers. EMEA also tracks AOV Enrolled (column G) — confirm canonical choice.">$2,849.23</td>
+            <td class="num sourced" data-src-file="EMEA_AMEX calc template.xlsx" data-src-sheet="AMEX FY25 Q3 W1" data-src-cell="S55 (Total row)" data-src-derived="$2,025,805.91 ÷ $85,548.76 (Red Spend ÷ Offer Cost)">23.68x</td>
+            <td class="tbd">TBD</td>
           </tr>
-          <tr>
-            <td>AMEX (Asia)</td>
-            <td><span class="region">Asia</span></td>
-            <td>Conversions</td>
-            <td class="blank">—</td>
-            <td class="partial">18K sessions</td>
-            <td class="blank">—</td>
-            <td class="filled">1,240 purchases</td>
-            <td class="filled">$0.9M revenue</td>
-            <td class="partial">3.2x</td>
-            <td class="blank">—</td>
+
+          <!-- EMEA market rows -->
+          <tr class="market-row">
+            <td>FR <span style="color:var(--c-n35);font-weight:400;">(cap 8,000)</span></td>
+            <td class="num">Same</td>
+            <td class="num sourced" data-src-file="EMEA_AMEX calc template.xlsx" data-src-sheet="AMEX FY25 Q3 W1" data-src-cell="D16 (FR Total row)" data-src-derived="Sum of FR weekly enrollments">4,433</td>
+            <td class="num sourced" data-src-file="EMEA_AMEX calc template.xlsx" data-src-sheet="AMEX FY25 Q3 W1" data-src-cell="H16 (FR Total row)" data-src-derived="Sum of FR weekly redemptions">23</td>
+            <td class="num sourced" data-src-file="EMEA_AMEX calc template.xlsx" data-src-sheet="AMEX FY25 Q3 W1" data-src-cell="Derived" data-src-derived="23 ÷ 4,433">0.52%</td>
+            <td class="num sourced" data-src-file="EMEA_AMEX calc template.xlsx" data-src-sheet="AMEX FY25 Q3 W1" data-src-cell="J16 (FR Total, USD)" data-src-derived="Sum of FR weekly redemption spend">$26,262.91</td>
+            <td class="num sourced" data-src-file="EMEA_AMEX calc template.xlsx" data-src-sheet="AMEX FY25 Q3 W1" data-src-cell="M16 (FR Total, USD)" data-src-derived="Sum of FR weekly offer cost">$2,435.83</td>
+            <td class="num sourced" data-src-file="EMEA_AMEX calc template.xlsx" data-src-sheet="AMEX FY25 Q3 W1" data-src-cell="P16 (FR Total)" data-src-derived="Weighted FR AOV Redeemers USD">$1,161.59</td>
+            <td class="num sourced" data-src-file="EMEA_AMEX calc template.xlsx" data-src-sheet="AMEX FY25 Q3 W1" data-src-cell="S16 (FR Total)" data-src-derived="$26,262.91 ÷ $2,435.83">10.78x</td>
+            <td class="tbd">TBD</td>
           </tr>
-          <tr>
-            <td>AMEX (EMEA)</td>
-            <td><span class="region">EMEA</span></td>
-            <td>Conversions</td>
-            <td class="blank">—</td>
-            <td class="partial">27K sessions</td>
-            <td class="blank">—</td>
-            <td class="filled">1,980 purchases</td>
-            <td class="filled">$1.4M revenue</td>
-            <td class="filled">4.1x</td>
-            <td class="blank">—</td>
+          <tr class="market-row">
+            <td>DE <span style="color:var(--c-n35);font-weight:400;">(cap 30,000)</span></td>
+            <td class="num">Same</td>
+            <td class="num sourced" data-src-file="EMEA_AMEX calc template.xlsx" data-src-sheet="AMEX FY25 Q3 W1" data-src-cell="D25 (DE Total)">21,718</td>
+            <td class="num sourced" data-src-file="EMEA_AMEX calc template.xlsx" data-src-sheet="AMEX FY25 Q3 W1" data-src-cell="H25 (DE Total)">162</td>
+            <td class="num sourced" data-src-file="EMEA_AMEX calc template.xlsx" data-src-sheet="AMEX FY25 Q3 W1" data-src-cell="Derived" data-src-derived="162 ÷ 21,718">0.75%</td>
+            <td class="num sourced" data-src-file="EMEA_AMEX calc template.xlsx" data-src-sheet="AMEX FY25 Q3 W1" data-src-cell="J25 (DE Total, USD)">$251,960</td>
+            <td class="num sourced" data-src-file="EMEA_AMEX calc template.xlsx" data-src-sheet="AMEX FY25 Q3 W1" data-src-cell="M25 (DE Total, USD)">$17,112</td>
+            <td class="num sourced" data-src-file="EMEA_AMEX calc template.xlsx" data-src-sheet="AMEX FY25 Q3 W1" data-src-cell="P25 (DE Total)">$1,574.30</td>
+            <td class="num sourced" data-src-file="EMEA_AMEX calc template.xlsx" data-src-sheet="AMEX FY25 Q3 W1" data-src-cell="S25 (DE Total)" data-src-derived="$251,960 ÷ $17,112">14.72x</td>
+            <td class="tbd">TBD</td>
           </tr>
+          <tr class="market-row">
+            <td>UK <span style="color:var(--c-n35);font-weight:400;">(cap 85,000)</span></td>
+            <td class="num">Same</td>
+            <td class="num sourced" data-src-file="EMEA_AMEX calc template.xlsx" data-src-sheet="AMEX FY25 Q3 W1" data-src-cell="D34 (UK Total)">48,891</td>
+            <td class="num sourced" data-src-file="EMEA_AMEX calc template.xlsx" data-src-sheet="AMEX FY25 Q3 W1" data-src-cell="H34 (UK Total)">495</td>
+            <td class="num sourced" data-src-file="EMEA_AMEX calc template.xlsx" data-src-sheet="AMEX FY25 Q3 W1" data-src-cell="Derived" data-src-derived="495 ÷ 48,891">1.01%</td>
+            <td class="num sourced" data-src-file="EMEA_AMEX calc template.xlsx" data-src-sheet="AMEX FY25 Q3 W1" data-src-cell="J34 (UK Total, USD)">$1,680,252</td>
+            <td class="num sourced" data-src-file="EMEA_AMEX calc template.xlsx" data-src-sheet="AMEX FY25 Q3 W1" data-src-cell="M34 (UK Total, USD)">$62,710</td>
+            <td class="num sourced" data-src-file="EMEA_AMEX calc template.xlsx" data-src-sheet="AMEX FY25 Q3 W1" data-src-cell="P34 (UK Total)">$3,304.35</td>
+            <td class="num sourced" data-src-file="EMEA_AMEX calc template.xlsx" data-src-sheet="AMEX FY25 Q3 W1" data-src-cell="S34 (UK Total)" data-src-derived="$1,680,252 ÷ $62,710">26.79x</td>
+            <td class="tbd">TBD</td>
+          </tr>
+          <tr class="market-row">
+            <td>IT <span style="color:var(--c-n35);font-weight:400;">(cap 8,000)</span></td>
+            <td class="num">Same</td>
+            <td class="num sourced" data-src-file="EMEA_AMEX calc template.xlsx" data-src-sheet="AMEX FY25 Q3 W1" data-src-cell="D43 (IT Total)">5,568</td>
+            <td class="num sourced" data-src-file="EMEA_AMEX calc template.xlsx" data-src-sheet="AMEX FY25 Q3 W1" data-src-cell="H43 (IT Total)">31</td>
+            <td class="num sourced" data-src-file="EMEA_AMEX calc template.xlsx" data-src-sheet="AMEX FY25 Q3 W1" data-src-cell="Derived" data-src-derived="31 ÷ 5,568">0.56%</td>
+            <td class="num sourced" data-src-file="EMEA_AMEX calc template.xlsx" data-src-sheet="AMEX FY25 Q3 W1" data-src-cell="J43 (IT Total, USD)">$67,331</td>
+            <td class="num sourced" data-src-file="EMEA_AMEX calc template.xlsx" data-src-sheet="AMEX FY25 Q3 W1" data-src-cell="M43 (IT Total, USD)">$3,290.93</td>
+            <td class="num sourced" data-src-file="EMEA_AMEX calc template.xlsx" data-src-sheet="AMEX FY25 Q3 W1" data-src-cell="P43 (IT Total)">$2,193.94</td>
+            <td class="num sourced" data-src-file="EMEA_AMEX calc template.xlsx" data-src-sheet="AMEX FY25 Q3 W1" data-src-cell="S43 (IT Total)" data-src-derived="$67,331 ÷ $3,290.93">20.46x</td>
+            <td class="tbd">TBD</td>
+          </tr>
+
+          <!-- ASIA TOTAL -->
+          <tr class="region-total">
+            <td>Asia <span class="region">AU + JP + SG</span></td>
+            <td class="num">Feb 4 – Mar 31, 2025</td>
+            <td class="num sourced" data-src-file="Asia_AMEX-Campaign-FY25-Q4.xlsx" data-src-sheet="Q3 Results" data-src-cell="E10 (TOTAL row)" data-src-derived="Sum of JP Con + JP SBS + AU Con + AU SBS + SG enrollments">55,400</td>
+            <td class="num sourced" data-src-file="Asia_AMEX-Campaign-FY25-Q4.xlsx" data-src-sheet="Q3 Results" data-src-cell="F10 (TOTAL row)" data-src-derived="Sum of redemptions across markets">832</td>
+            <td class="num sourced" data-src-file="Asia_AMEX-Campaign-FY25-Q4.xlsx" data-src-sheet="Q3 Results" data-src-cell="G10 (TOTAL row)" data-src-derived="832 ÷ 55,400">1.50%</td>
+            <td class="num sourced" data-src-file="Asia_AMEX-Campaign-FY25-Q4.xlsx" data-src-sheet="Q3 Results" data-src-cell="J10 (TOTAL, Redeeming Spend USD)" data-src-derived="Sum across markets">$1,519,611</td>
+            <td class="num sourced" data-src-file="Asia_AMEX-Campaign-FY25-Q4.xlsx" data-src-sheet="Q3 Results" data-src-cell="K10 (TOTAL, Offer Cost USD)" data-src-derived="Sum across markets">$138,803</td>
+            <td class="num sourced flagged" data-src-file="Asia_AMEX-Campaign-FY25-Q4.xlsx" data-src-sheet="Q3 Results" data-src-cell="Computed (sheet's H10 total = $166.83 appears to be a formula error)" data-src-derived="$1,519,611 ÷ 832 (Red Spend ÷ Redemptions)" data-src-warn="Spreadsheet total cell shows $166.83 — looks like a formula error. Per-market values (1,081 / 1,320 / 2,009 / 3,415 / 1,456) imply the correct total is $1,826.46. Using the computed value.">$1,826.46</td>
+            <td class="num sourced flagged" data-src-file="Asia_AMEX-Campaign-FY25-Q4.xlsx" data-src-sheet="Q3 Results" data-src-cell="O10 (one of two ROI columns)" data-src-derived="$1,519,611 ÷ $138,803 (Red Spend ÷ Offer Cost)" data-src-warn="Sheet has two ROI columns: M10 shows 38.36 (uses Total Spend) and O10 shows 10.95 (uses Redeeming Spend). Per our definition, 10.95 is correct.">10.95x</td>
+            <td class="tbd">TBD</td>
+          </tr>
+
+          <!-- Asia market rows -->
+          <tr class="market-row">
+            <td>JP Con <span style="color:var(--c-n35);font-weight:400;">(cap 12,000)</span></td>
+            <td class="num">Same</td>
+            <td class="num sourced" data-src-file="Asia_AMEX-Campaign-FY25-Q4.xlsx" data-src-sheet="Q3 Results" data-src-cell="E5">11,993</td>
+            <td class="num sourced" data-src-file="Asia_AMEX-Campaign-FY25-Q4.xlsx" data-src-sheet="Q3 Results" data-src-cell="F5">270</td>
+            <td class="num sourced" data-src-file="Asia_AMEX-Campaign-FY25-Q4.xlsx" data-src-sheet="Q3 Results" data-src-cell="G5">2.25%</td>
+            <td class="num sourced" data-src-file="Asia_AMEX-Campaign-FY25-Q4.xlsx" data-src-sheet="Q3 Results" data-src-cell="J5 (Redeeming Spend USD)">$284,419</td>
+            <td class="num sourced" data-src-file="Asia_AMEX-Campaign-FY25-Q4.xlsx" data-src-sheet="Q3 Results" data-src-cell="K5 (Offer Cost USD)">$62,614</td>
+            <td class="num sourced" data-src-file="Asia_AMEX-Campaign-FY25-Q4.xlsx" data-src-sheet="Q3 Results" data-src-cell="H5 (Avg Redeeming Spend USD)">$1,081</td>
+            <td class="num sourced" data-src-file="Asia_AMEX-Campaign-FY25-Q4.xlsx" data-src-sheet="Q3 Results" data-src-cell="O5" data-src-derived="$284,419 ÷ $62,614">4.54x</td>
+            <td class="tbd">TBD</td>
+          </tr>
+          <tr class="market-row">
+            <td>JP SBS <span style="color:var(--c-n35);font-weight:400;">(cap 10,000)</span></td>
+            <td class="num">Same</td>
+            <td class="num sourced" data-src-file="Asia_AMEX-Campaign-FY25-Q4.xlsx" data-src-sheet="Q3 Results" data-src-cell="E6">4,010</td>
+            <td class="num sourced" data-src-file="Asia_AMEX-Campaign-FY25-Q4.xlsx" data-src-sheet="Q3 Results" data-src-cell="F6">79</td>
+            <td class="num sourced" data-src-file="Asia_AMEX-Campaign-FY25-Q4.xlsx" data-src-sheet="Q3 Results" data-src-cell="G6">1.97%</td>
+            <td class="num sourced" data-src-file="Asia_AMEX-Campaign-FY25-Q4.xlsx" data-src-sheet="Q3 Results" data-src-cell="J6">$100,306</td>
+            <td class="num sourced" data-src-file="Asia_AMEX-Campaign-FY25-Q4.xlsx" data-src-sheet="Q3 Results" data-src-cell="K6">$15,724</td>
+            <td class="num sourced" data-src-file="Asia_AMEX-Campaign-FY25-Q4.xlsx" data-src-sheet="Q3 Results" data-src-cell="H6">$1,320</td>
+            <td class="num sourced" data-src-file="Asia_AMEX-Campaign-FY25-Q4.xlsx" data-src-sheet="Q3 Results" data-src-cell="O6" data-src-derived="$100,306 ÷ $15,724">6.38x</td>
+            <td class="tbd">TBD</td>
+          </tr>
+          <tr class="market-row">
+            <td>AU Con <span style="color:var(--c-n35);font-weight:400;">(cap 25,000)</span></td>
+            <td class="num">Same</td>
+            <td class="num sourced" data-src-file="Asia_AMEX-Campaign-FY25-Q4.xlsx" data-src-sheet="Q3 Results" data-src-cell="E7">25,000</td>
+            <td class="num sourced" data-src-file="Asia_AMEX-Campaign-FY25-Q4.xlsx" data-src-sheet="Q3 Results" data-src-cell="F7">304</td>
+            <td class="num sourced" data-src-file="Asia_AMEX-Campaign-FY25-Q4.xlsx" data-src-sheet="Q3 Results" data-src-cell="G7">1.22%</td>
+            <td class="num sourced" data-src-file="Asia_AMEX-Campaign-FY25-Q4.xlsx" data-src-sheet="Q3 Results" data-src-cell="J7">$610,676</td>
+            <td class="num sourced" data-src-file="Asia_AMEX-Campaign-FY25-Q4.xlsx" data-src-sheet="Q3 Results" data-src-cell="K7">$38,373</td>
+            <td class="num sourced" data-src-file="Asia_AMEX-Campaign-FY25-Q4.xlsx" data-src-sheet="Q3 Results" data-src-cell="H7">$2,009</td>
+            <td class="num sourced" data-src-file="Asia_AMEX-Campaign-FY25-Q4.xlsx" data-src-sheet="Q3 Results" data-src-cell="O7" data-src-derived="$610,676 ÷ $38,373">15.91x</td>
+            <td class="tbd">TBD</td>
+          </tr>
+          <tr class="market-row">
+            <td>AU SBS <span style="color:var(--c-n35);font-weight:400;">(cap 10,000)</span></td>
+            <td class="num">Same</td>
+            <td class="num sourced" data-src-file="Asia_AMEX-Campaign-FY25-Q4.xlsx" data-src-sheet="Q3 Results" data-src-cell="E8">2,848</td>
+            <td class="num sourced" data-src-file="Asia_AMEX-Campaign-FY25-Q4.xlsx" data-src-sheet="Q3 Results" data-src-cell="F8">143</td>
+            <td class="num sourced" data-src-file="Asia_AMEX-Campaign-FY25-Q4.xlsx" data-src-sheet="Q3 Results" data-src-cell="G8">5.02%</td>
+            <td class="num sourced" data-src-file="Asia_AMEX-Campaign-FY25-Q4.xlsx" data-src-sheet="Q3 Results" data-src-cell="J8">$474,710</td>
+            <td class="num sourced" data-src-file="Asia_AMEX-Campaign-FY25-Q4.xlsx" data-src-sheet="Q3 Results" data-src-cell="K8">$18,051</td>
+            <td class="num sourced" data-src-file="Asia_AMEX-Campaign-FY25-Q4.xlsx" data-src-sheet="Q3 Results" data-src-cell="H8">$3,415</td>
+            <td class="num sourced" data-src-file="Asia_AMEX-Campaign-FY25-Q4.xlsx" data-src-sheet="Q3 Results" data-src-cell="O8" data-src-derived="$474,710 ÷ $18,051">26.30x</td>
+            <td class="tbd">TBD</td>
+          </tr>
+          <tr class="market-row">
+            <td>SG <span style="color:var(--c-n35);font-weight:400;">(cap 15,000)</span></td>
+            <td class="num">Same</td>
+            <td class="num sourced" data-src-file="Asia_AMEX-Campaign-FY25-Q4.xlsx" data-src-sheet="Q3 Results" data-src-cell="E9">11,549</td>
+            <td class="num sourced" data-src-file="Asia_AMEX-Campaign-FY25-Q4.xlsx" data-src-sheet="Q3 Results" data-src-cell="F9">36</td>
+            <td class="num sourced" data-src-file="Asia_AMEX-Campaign-FY25-Q4.xlsx" data-src-sheet="Q3 Results" data-src-cell="G9">0.31%</td>
+            <td class="num sourced" data-src-file="Asia_AMEX-Campaign-FY25-Q4.xlsx" data-src-sheet="Q3 Results" data-src-cell="J9">$49,500</td>
+            <td class="num sourced" data-src-file="Asia_AMEX-Campaign-FY25-Q4.xlsx" data-src-sheet="Q3 Results" data-src-cell="K9">$4,041</td>
+            <td class="num sourced" data-src-file="Asia_AMEX-Campaign-FY25-Q4.xlsx" data-src-sheet="Q3 Results" data-src-cell="H9">$1,456</td>
+            <td class="num sourced" data-src-file="Asia_AMEX-Campaign-FY25-Q4.xlsx" data-src-sheet="Q3 Results" data-src-cell="O9" data-src-derived="$49,500 ÷ $4,041">12.25x</td>
+            <td class="tbd">TBD</td>
+          </tr>
+
+          <!-- AMERICAS: not run this quarter -->
+          <tr class="region-missing">
+            <td colspan="10">Americas — no Q3 campaign found in <code>Americas_FY26 - AMEX Performance Tracker.xlsx</code>. Americas runs on a different cadence (FY25Q4/FY26Q1, FY26Feb-Apr, FY26Q2). Need to confirm whether a Q3-equivalent exists in a separate file.</td>
+          </tr>
+
         </tbody>
       </table>
     </div>
 
-    <div class="legend">
-      <span><span class="swatch sw-filled"></span>Reported consistently</span>
-      <span><span class="swatch sw-partial"></span>Reported inconsistently / not standardized</span>
-      <span><span class="swatch sw-blank"></span>Not reported</span>
-    </div>
+    <p style="font-size:0.8rem;color:var(--ink-soft);margin-top:0.8rem;">
+      <strong>Open items called out above:</strong>
+      (1) Revenue definition · (2) "Campaign Spend" = Offer Cost only, or + Media Value? · (3) AOV Redeemers vs. AOV Enrolled.
+      Yellow-shaded cells flag sheet-level discrepancies — hover to see what was found.
+    </p>
   </section>
 
   <!-- ============== -->
@@ -629,16 +989,88 @@
     </div>
   </section>
 
-    <div class="legend">
-      <span><span class="swatch sw-filled"></span>Reported consistently</span>
-      <span><span class="swatch sw-partial"></span>Reported inconsistently / not standardized</span>
-      <span><span class="swatch sw-blank"></span>Not reported</span>
-    </div>
-  </section>
-
   <p class="footer-note">This is a working scratch-pad. Edit the HTML directly to add partnerships, KPIs, or ideas — or send notes to Cam.</p>
 
 </main>
+
+<!-- Source provenance tooltip element -->
+<div id="src-tooltip" role="tooltip" aria-hidden="true"></div>
+
+<script>
+(function () {
+  const tip = document.getElementById('src-tooltip');
+  if (!tip) return;
+  let activeEl = null;
+
+  function position(e) {
+    if (!activeEl) return;
+    const pad = 14;
+    const tr = tip.getBoundingClientRect();
+    let x = e.clientX + pad;
+    let y = e.clientY + pad;
+    if (x + tr.width + 8 > window.innerWidth) x = e.clientX - tr.width - pad;
+    if (y + tr.height + 8 > window.innerHeight) y = e.clientY - tr.height - pad;
+    tip.style.left = Math.max(8, x) + 'px';
+    tip.style.top = Math.max(8, y) + 'px';
+  }
+
+  function escapeHtml(s) {
+    return String(s || '')
+      .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+  }
+
+  function show(el, e) {
+    const file = el.getAttribute('data-src-file');
+    const sheet = el.getAttribute('data-src-sheet');
+    const cell = el.getAttribute('data-src-cell');
+    const derived = el.getAttribute('data-src-derived');
+    const warn = el.getAttribute('data-src-warn');
+    if (!file && !sheet && !cell) return;
+    activeEl = el;
+    let html = '<span class="tt-eyebrow">↳ Source</span>';
+    if (file)  html += '<div class="tt-row"><span class="lbl">File</span><span class="val">' + escapeHtml(file) + '</span></div>';
+    if (sheet) html += '<div class="tt-row"><span class="lbl">Sheet</span><span class="val">' + escapeHtml(sheet) + '</span></div>';
+    if (cell)  html += '<div class="tt-row"><span class="lbl">Cell</span><span class="val">' + escapeHtml(cell) + '</span></div>';
+    if (derived) html += '<span class="tt-derived">' + escapeHtml(derived) + '</span>';
+    if (warn) html += '<span class="tt-warn">⚠ ' + escapeHtml(warn) + '</span>';
+    tip.innerHTML = html;
+    tip.classList.add('visible');
+    tip.setAttribute('aria-hidden', 'false');
+    position(e);
+  }
+
+  function hide() {
+    activeEl = null;
+    tip.classList.remove('visible');
+    tip.setAttribute('aria-hidden', 'true');
+  }
+
+  document.addEventListener('mouseover', function (e) {
+    const el = e.target.closest('[data-src-file], [data-src-sheet], [data-src-cell]');
+    if (el && el !== activeEl) show(el, e);
+  });
+  document.addEventListener('mousemove', function (e) {
+    if (activeEl) position(e);
+  });
+  document.addEventListener('mouseout', function (e) {
+    if (!activeEl) return;
+    const to = e.relatedTarget;
+    if (!to || !activeEl.contains(to)) hide();
+  });
+  document.addEventListener('focusin', function (e) {
+    const el = e.target.closest('[data-src-file], [data-src-sheet], [data-src-cell]');
+    if (el) {
+      const r = el.getBoundingClientRect();
+      show(el, { clientX: r.left + 12, clientY: r.bottom + 6 });
+    }
+  });
+  document.addEventListener('focusout', hide);
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape') hide();
+  });
+})();
+</script>
 
 <script src="notes-widget.js"></script>
 
