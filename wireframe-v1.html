@@ -72,26 +72,49 @@
   }
   .nav a:not(.brand):hover { background: var(--bg); color: var(--ms-blue-dark); }
 
-  /* Page intro */
-  .intro {
-    max-width: 1180px;
-    margin: 1.5rem auto 0.5rem;
-    padding: 0 1.5rem;
+  /* Page header — Microsoft Confidential aesthetic */
+  .page-header {
+    background:
+      radial-gradient(ellipse at 20% 60%, rgba(255,255,255,0.9), rgba(200,228,247,0) 60%),
+      linear-gradient(135deg, #E6F0F8 0%, #F4FAFE 60%, #FFFFFF 100%);
+    border-bottom: 1px solid var(--c-n15, #D9D9D9);
+    padding: 1.4rem 1.5rem 2.4rem;
+    color: var(--c-dark-blue, #091F2E);
+    position: relative;
   }
-  .intro .meta {
-    display: inline-block;
-    background: var(--c-amber-soft);
-    color: var(--c-dark-blue);
-    border-left: 3px solid var(--c-amber);
-    font-size: 0.78rem;
-    font-weight: 600;
-    padding: 0.35rem 0.7rem;
-    margin-bottom: 0.6rem;
-    border-radius: 3px;
+  .page-header .ph-inner {
+    max-width: 1200px;
+    margin: 0 auto 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
   }
-  .intro p { color: var(--ink-soft); max-width: 780px; }
-  .intro .hint {
-    margin-top: 0.6rem;
+  .page-header .ph-brand { display: inline-flex; align-items: center; gap: 0.55rem; }
+  .page-header .ph-logo { width: 22px; height: 22px; flex-shrink: 0; }
+  .page-header .ph-wordmark {
+    font-family: "Segoe UI", -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
+    font-size: 1rem; font-weight: 600;
+    color: var(--c-dark-blue, #091F2E); letter-spacing: 0.1px;
+  }
+  .page-header .ph-confidential {
+    font-size: 0.72rem; color: var(--c-n50, #7F7F7F); font-weight: 400;
+  }
+  .page-header .ph-title-row { max-width: 1200px; margin: 0 auto; }
+  .page-header .ph-meta {
+    font-size: 0.72rem; letter-spacing: 1.5px; text-transform: uppercase;
+    color: var(--c-n50, #7F7F7F); font-weight: 600; margin-bottom: 0.4rem;
+  }
+  .page-header h1 {
+    font-size: 2.25rem; font-weight: 600; letter-spacing: -0.5px;
+    color: var(--c-dark-blue, #091F2E); margin: 0 0 0.5rem; line-height: 1.15;
+  }
+  .page-header .ph-lede {
+    font-size: 1rem; color: var(--c-dark-blue, #091F2E);
+    opacity: 0.78; max-width: 780px; margin: 0 0 0.5rem;
+  }
+  .page-header .ph-hint {
+    margin-top: 0.8rem;
     font-size: 0.82rem;
     color: var(--ms-blue-dark);
     background: var(--ms-blue-light);
@@ -579,6 +602,27 @@
 </head>
 <body>
 
+<header class="page-header">
+  <div class="ph-inner">
+    <div class="ph-brand">
+      <svg class="ph-logo" viewBox="0 0 23 23" aria-hidden="true">
+        <rect x="0" y="0" width="10" height="10" fill="#F25022"/>
+        <rect x="13" y="0" width="10" height="10" fill="#7FBA00"/>
+        <rect x="0" y="13" width="10" height="10" fill="#00A4EF"/>
+        <rect x="13" y="13" width="10" height="10" fill="#FFB900"/>
+      </svg>
+      <span class="ph-wordmark">Microsoft</span>
+    </div>
+    <div class="ph-confidential">Microsoft Confidential</div>
+  </div>
+  <div class="ph-title-row">
+    <div class="ph-meta">Wireframe · Phase 1 (Crawl) · Manual Unified View MVP</div>
+    <h1>What V1 might look like</h1>
+    <p class="ph-lede">A first-pass concept for the Manual Unified View MVP — the curated leadership surface we're targeting in Phase 1. Numbers, channels, and structure are illustrative; the goal is to show <em>shape</em>, not final design.</p>
+    <p class="ph-hint">💡 Hover any boxed element to see what it represents and how it ties back to the brief.</p>
+  </div>
+</header>
+
 <nav class="nav">
   <a href="index.html" class="brand">Performance Marketing Hub <span style="color: var(--ink-soft); font-weight: 400;">(working title)</span></a>
   <a href="index.html">Brief</a>
@@ -589,13 +633,6 @@
   <a href="reports.html">Reports inventory</a>
   <a href="archive.html">Archive</a>
 </nav>
-
-<section class="intro">
-  <span class="meta">Wireframe · Phase 1 (Crawl) · Manual Unified View MVP</span>
-  <h1>What V1 might look like</h1>
-  <p>A first-pass concept for the Manual Unified View MVP — the curated leadership surface we're targeting in Phase 1. Numbers, channels, and structure are illustrative; the goal is to show <em>shape</em>, not final design.</p>
-  <p class="hint">💡 Hover any boxed element to see what it represents and how it ties back to the brief.</p>
-</section>
 
 <div class="canvas">
   <div class="browser">

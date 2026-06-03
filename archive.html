@@ -41,16 +41,47 @@
   .nav a { color: var(--ink-soft); text-decoration: none; font-size: 0.85rem; padding: 0.25rem 0.5rem; border-radius: 4px; flex-shrink: 0; }
   .nav a:hover { background: var(--ms-blue-light); color: var(--ms-blue-dark); }
 
+  /* Page header — Microsoft Confidential aesthetic */
   .page-header {
-    background: linear-gradient(135deg, var(--c-dark-blue) 0%, var(--c-med-blue) 100%);
-    color: white;
-    padding: 2.5rem 1.5rem;
-    border-bottom: 4px solid var(--c-teal);
+    background:
+      radial-gradient(ellipse at 20% 60%, rgba(255,255,255,0.9), rgba(200,228,247,0) 60%),
+      linear-gradient(135deg, #E6F0F8 0%, #F4FAFE 60%, #FFFFFF 100%);
+    border-bottom: 1px solid var(--c-n15, #D9D9D9);
+    padding: 1.4rem 1.5rem 2.4rem;
+    color: var(--c-dark-blue, #091F2E);
+    position: relative;
   }
-  .page-header .container { max-width: 1100px; margin: 0 auto; }
-  .page-header h1 { color: white; }
-  .page-header .meta { font-size: 0.75rem; letter-spacing: 1.5px; text-transform: uppercase; opacity: 0.85; margin-bottom: 0.5rem; }
-  .page-header p { opacity: 0.95; max-width: 720px; }
+  .page-header .ph-inner {
+    max-width: 1200px;
+    margin: 0 auto 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+  .page-header .ph-brand { display: inline-flex; align-items: center; gap: 0.55rem; }
+  .page-header .ph-logo { width: 22px; height: 22px; flex-shrink: 0; }
+  .page-header .ph-wordmark {
+    font-family: "Segoe UI", -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
+    font-size: 1rem; font-weight: 600;
+    color: var(--c-dark-blue, #091F2E); letter-spacing: 0.1px;
+  }
+  .page-header .ph-confidential {
+    font-size: 0.72rem; color: var(--c-n50, #7F7F7F); font-weight: 400;
+  }
+  .page-header .ph-title-row { max-width: 1200px; margin: 0 auto; }
+  .page-header .ph-meta {
+    font-size: 0.72rem; letter-spacing: 1.5px; text-transform: uppercase;
+    color: var(--c-n50, #7F7F7F); font-weight: 600; margin-bottom: 0.4rem;
+  }
+  .page-header h1 {
+    font-size: 2.25rem; font-weight: 600; letter-spacing: -0.5px;
+    color: var(--c-dark-blue, #091F2E); margin: 0 0 0.5rem; line-height: 1.15;
+  }
+  .page-header .ph-lede {
+    font-size: 1rem; color: var(--c-dark-blue, #091F2E);
+    opacity: 0.78; max-width: 780px; margin: 0;
+  }
 
   main { max-width: 1100px; margin: 0 auto; padding: 2rem 1.5rem 4rem; }
 
@@ -81,6 +112,26 @@
 </head>
 <body>
 
+<header class="page-header">
+  <div class="ph-inner">
+    <div class="ph-brand">
+      <svg class="ph-logo" viewBox="0 0 23 23" aria-hidden="true">
+        <rect x="0" y="0" width="10" height="10" fill="#F25022"/>
+        <rect x="13" y="0" width="10" height="10" fill="#7FBA00"/>
+        <rect x="0" y="13" width="10" height="10" fill="#00A4EF"/>
+        <rect x="13" y="13" width="10" height="10" fill="#FFB900"/>
+      </svg>
+      <span class="ph-wordmark">Microsoft</span>
+    </div>
+    <div class="ph-confidential">Microsoft Confidential</div>
+  </div>
+  <div class="ph-title-row">
+    <div class="ph-meta">DDS Marketing · Working Document</div>
+    <h1>Brief Archive</h1>
+    <p class="ph-lede">Earlier iterations of the Marketing Effectiveness Solution brief, kept for reference as the framing evolves.</p>
+  </div>
+</header>
+
 <nav class="nav" aria-label="Primary navigation">
   <span class="brand">Performance Marketing Hub <span style="font-weight:400; color:var(--ink-soft); font-size:0.78rem; margin-left:0.35rem;">(working title)</span></span>
   <a href="index.html">Brief</a>
@@ -91,14 +142,6 @@
   <a href="reports.html">Reports inventory</a>
   <a href="archive.html" style="color: var(--ms-blue-dark); font-weight: 600;">Archive</a>
 </nav>
-
-<header class="page-header">
-  <div class="container">
-    <div class="meta">DDS Marketing · Working Document</div>
-    <h1>Brief Archive</h1>
-    <p>Earlier iterations of the Marketing Effectiveness Solution brief, kept for reference as the framing evolves.</p>
-  </div>
-</header>
 
 <main>
 
