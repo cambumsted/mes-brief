@@ -716,11 +716,17 @@
     white-space: normal;
     line-height: 1.2;
     vertical-align: bottom;
+    /* Only wrap at whitespace — never mid-word (prevents "Enrollment-s" splits) */
+    word-break: keep-all;
+    overflow-wrap: normal;
+    hyphens: none;
+    padding-left: 0.35rem;
+    padding-right: 0.35rem;
   }
-  .live-grid colgroup col.col-name      { width: 13%; }
-  .live-grid colgroup col.col-offer     { width: 14%; }
-  .live-grid colgroup col.col-num       { width: 9%; }
-  .live-grid colgroup col.col-revenue   { width: 10%; }
+  .live-grid colgroup col.col-name      { width: 12%; }
+  .live-grid colgroup col.col-offer     { width: 13%; }
+  .live-grid colgroup col.col-num       { width: 9.3%; }
+  .live-grid colgroup col.col-revenue   { width: 9.9%; }
 
   .live-grid td.offer-cell {
     font-size: 0.75rem;
