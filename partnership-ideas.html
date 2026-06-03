@@ -585,6 +585,157 @@
 
   /* Q3 grid wrapper */
   .q3-wrap { margin-top: 0.6rem; }
+
+  /* ===== Controls toolbar ===== */
+  .grid-controls {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.25rem;
+    align-items: flex-start;
+    padding: 0.85rem 1rem;
+    background: var(--bg);
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    margin: 0.6rem 0;
+  }
+  .grid-controls .ctrl-group { display: flex; flex-direction: column; gap: 0.35rem; min-width: 0; }
+  .grid-controls .ctrl-label {
+    font-size: 0.65rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+    color: var(--ink-soft);
+  }
+  .grid-controls .ctrl-chips { display: flex; gap: 0.3rem; flex-wrap: wrap; }
+  .grid-controls .ctrl-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+    cursor: pointer;
+    background: var(--c-white);
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    padding: 0.25rem 0.7rem;
+    font-size: 0.8rem;
+    font-weight: 600;
+    user-select: none;
+    transition: background-color 0.12s ease, border-color 0.12s ease;
+  }
+  .grid-controls .ctrl-chip:has(input:checked) {
+    background: var(--ms-blue-light);
+    border-color: var(--ms-blue);
+    color: var(--ms-blue-dark);
+  }
+  .grid-controls .ctrl-chip input { accent-color: var(--ms-blue); margin: 0; }
+  .grid-controls .ctrl-dates {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    flex-wrap: wrap;
+  }
+  .grid-controls .ctrl-dates input[type="date"] {
+    font: inherit;
+    font-size: 0.82rem;
+    padding: 0.25rem 0.45rem;
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    color: var(--ink);
+    background: var(--c-white);
+  }
+  .grid-controls .ctrl-sep { color: var(--ink-soft); font-weight: 600; }
+  .grid-controls .ctrl-btn-link {
+    background: none;
+    border: none;
+    color: var(--ms-blue-dark);
+    font: inherit;
+    font-size: 0.78rem;
+    cursor: pointer;
+    text-decoration: underline;
+    padding: 0;
+  }
+  .grid-controls .ctrl-btn-link:hover { color: var(--ms-blue); }
+  .grid-controls .ctrl-hint { font-size: 0.72rem; color: var(--ink-soft); }
+  .grid-controls .ctrl-compare { display: flex; gap: 0.4rem; flex-wrap: wrap; align-items: center; }
+  .grid-controls .ctrl-compare select {
+    font: inherit;
+    font-size: 0.82rem;
+    padding: 0.25rem 0.45rem;
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    background: var(--c-white);
+    color: var(--ink);
+  }
+
+  /* ===== Compare panel ===== */
+  .compare-panel {
+    margin: 0 0 0.6rem;
+    padding: 0.85rem 1rem;
+    background: linear-gradient(180deg, #F4FBFF 0%, #ECF7F3 100%);
+    border: 1px solid var(--c-aqua);
+    border-left: 3px solid var(--c-teal);
+    border-radius: 6px;
+  }
+  .compare-panel.empty { display: none; }
+  .compare-panel .cmp-title {
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+    color: var(--ink-soft);
+    margin-bottom: 0.5rem;
+  }
+  .compare-panel .cmp-rows { display: grid; grid-template-columns: 1fr; gap: 0.35rem; }
+  .compare-panel .cmp-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    gap: 0.5rem;
+    align-items: baseline;
+    padding: 0.4rem 0.55rem;
+    background: rgba(255,255,255,0.65);
+    border-radius: 4px;
+    font-size: 0.85rem;
+  }
+  .compare-panel .cmp-row .cmp-name { font-weight: 700; color: var(--ink); }
+  .compare-panel .cmp-row .cmp-val { font-variant-numeric: tabular-nums; }
+  .compare-panel .cmp-row .cmp-delta.pos { color: #1E6657; font-weight: 700; }
+  .compare-panel .cmp-row .cmp-delta.neg { color: #993333; font-weight: 700; }
+  .compare-panel .cmp-row .cmp-delta.flat { color: var(--ink-soft); }
+
+  /* ===== Live grid: even column spacing + header wrap ===== */
+  .live-grid { table-layout: fixed; width: 100%; }
+  .live-grid th, .live-grid td { word-wrap: break-word; overflow-wrap: break-word; }
+  .live-grid thead th {
+    white-space: normal;
+    line-height: 1.2;
+    vertical-align: bottom;
+  }
+  .live-grid colgroup col.col-name      { width: 18%; }
+  .live-grid colgroup col.col-num       { width: 10.25%; }
+  .live-grid colgroup col.col-revenue   { width: 10.5%; }
+
+  /* Totals footer row */
+  .live-grid tfoot tr.totals-row td {
+    background: var(--c-dark-blue);
+    color: white;
+    font-weight: 700;
+    border-top: 2px solid var(--c-teal);
+    font-size: 0.85rem;
+  }
+  .live-grid tfoot tr.totals-row td .region-period {
+    color: rgba(255,255,255,0.7);
+    text-transform: none;
+    letter-spacing: 0;
+    font-weight: 500;
+    font-size: 0.7rem;
+  }
+  .live-grid tfoot tr.totals-row td.tbd {
+    background: rgba(255,180,80,0.18);
+    color: #FFE89A;
+    font-style: italic;
+  }
+
+  /* Hidden region from filter */
+  tbody.region-group.filtered-out { display: none; }
 </style>
 </head>
 <body>
@@ -834,11 +985,78 @@
       </tbody>
     </table>
 
-    <h3 style="margin-top:2.4rem;">FY26 Q2 — live comparability grid</h3>
-    <p class="lede">AMEX FY26 Q2 across all three regions (mid-Nov 2025 – mid-Jan 2026). Click any region to expand its market-level drill. Hover any value to see file → sheet → cell → derivation. Yellow cells flag definition mismatches or sheet anomalies.</p>
+    <h3 style="margin-top:2.4rem;">AMEX Example <span style="font-size:0.75rem;font-weight:500;color:var(--ink-soft);text-transform:uppercase;letter-spacing:1px;margin-left:0.4rem;">FY26 Q2 · Nov 2025 – Jan 2026</span></h3>
+
+    <div class="grid-controls" id="amex-controls">
+      <!-- REGIONS multi-select -->
+      <div class="ctrl-group">
+        <label class="ctrl-label">Regions</label>
+        <div class="ctrl-chips" data-control="region">
+          <label class="ctrl-chip"><input type="checkbox" value="emea" checked> EMEA</label>
+          <label class="ctrl-chip"><input type="checkbox" value="asia" checked> Asia</label>
+          <label class="ctrl-chip"><input type="checkbox" value="americas" checked> Americas</label>
+        </div>
+      </div>
+
+      <!-- DATE RANGE -->
+      <div class="ctrl-group">
+        <label class="ctrl-label">Date range</label>
+        <div class="ctrl-dates">
+          <input type="date" id="date-from" value="2025-11-01">
+          <span class="ctrl-sep">→</span>
+          <input type="date" id="date-to" value="2026-01-31">
+          <button type="button" class="ctrl-btn-link" id="reset-dates">Reset</button>
+        </div>
+        <div class="ctrl-hint">Filters regions whose campaign overlaps this window.</div>
+      </div>
+
+      <!-- COMPARE -->
+      <div class="ctrl-group">
+        <label class="ctrl-label">Compare metrics</label>
+        <div class="ctrl-compare">
+          <select id="cmp-metric-a">
+            <option value="">— Metric A —</option>
+            <option value="enrollments">Enrollments</option>
+            <option value="redemptions">Redemptions</option>
+            <option value="redrate">Red. Rate</option>
+            <option value="redspend">Red. Spend (USD)</option>
+            <option value="offercost">Offer Cost (USD)</option>
+            <option value="aov">AOV Redeemers (USD)</option>
+            <option value="roi">ROI</option>
+          </select>
+          <span class="ctrl-sep">vs</span>
+          <select id="cmp-metric-b">
+            <option value="">— Metric B —</option>
+            <option value="enrollments">Enrollments</option>
+            <option value="redemptions">Redemptions</option>
+            <option value="redrate">Red. Rate</option>
+            <option value="redspend">Red. Spend (USD)</option>
+            <option value="offercost">Offer Cost (USD)</option>
+            <option value="aov">AOV Redeemers (USD)</option>
+            <option value="roi">ROI</option>
+          </select>
+          <select id="cmp-scope">
+            <option value="totals">Across totals row</option>
+            <option value="emea">Across EMEA markets</option>
+            <option value="asia">Across Asia markets</option>
+            <option value="americas">Across Americas segments</option>
+          </select>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Compare results panel (appears when both metrics selected) -->
+    <div class="compare-panel" id="compare-panel" hidden></div>
 
     <div class="q3-wrap">
       <table class="live-grid" id="amex-q2-grid">
+        <colgroup>
+          <col class="col-name">
+          <col class="col-num"><col class="col-num"><col class="col-num">
+          <col class="col-num"><col class="col-num"><col class="col-num">
+          <col class="col-num"><col class="col-revenue">
+        </colgroup>
         <thead>
           <tr>
             <th>Region / Market</th>
@@ -854,9 +1072,9 @@
         </thead>
 
         <!-- ===== EMEA ===== -->
-        <tbody class="region-group collapsed" data-region="emea">
-          <tr class="region-total">
-            <td>EMEA <span class="region">FR + DE + UK + IT</span><span class="region-period">Nov 11, 2025 – Jan 15, 2026</span></td>
+        <tbody class="region-group collapsed" data-region="emea" data-period-start="2025-11-11" data-period-end="2026-01-15">
+          <tr class="region-total" data-metric-enrollments="72955" data-metric-redemptions="1088" data-metric-redrate="0.0149" data-metric-redspend="2125887.41" data-metric-offercost="138304.40" data-metric-aov="1953.94" data-metric-roi="15.37">
+            <td>EMEA<span class="region-period">Nov 11, 2025 – Jan 15, 2026</span></td>
             <td class="num sourced" data-src-file="EMEA_AMEX calc template.xlsx" data-src-sheet="AMEX FY26 Q2" data-src-cell="D55 (Total row)" data-src-derived="Sum of FR + DE + UK + IT enrollments">72,955</td>
             <td class="num sourced" data-src-file="EMEA_AMEX calc template.xlsx" data-src-sheet="AMEX FY26 Q2" data-src-cell="H55 (Total row)" data-src-derived="Sum of FR + DE + UK + IT redemptions">1,088</td>
             <td class="num sourced" data-src-file="EMEA_AMEX calc template.xlsx" data-src-sheet="AMEX FY26 Q2" data-src-cell="Derived" data-src-derived="1,088 ÷ 72,955 (Redemptions ÷ Enrollments)">1.49%</td>
@@ -866,7 +1084,7 @@
             <td class="num sourced" data-src-file="EMEA_AMEX calc template.xlsx" data-src-sheet="AMEX FY26 Q2" data-src-cell="S55 (Total row)" data-src-derived="$2,125,887.41 ÷ $138,304.40 (Red Spend ÷ Offer Cost)">15.37x</td>
             <td class="tbd">TBD</td>
           </tr>
-          <tr class="market-row">
+          <tr class="market-row" data-metric-enrollments="4053" data-metric-redemptions="33" data-metric-redrate="0.0081" data-metric-redspend="46837.46" data-metric-offercost="3837.88" data-metric-aov="1306.41" data-metric-roi="12.20">
             <td>FR <span style="color:var(--c-n35);font-weight:400;">(cap 8,000)</span></td>
             <td class="num sourced" data-src-file="EMEA_AMEX calc template.xlsx" data-src-sheet="AMEX FY26 Q2" data-src-cell="D16 (FR Total row)">4,053</td>
             <td class="num sourced" data-src-file="EMEA_AMEX calc template.xlsx" data-src-sheet="AMEX FY26 Q2" data-src-cell="H16 (FR Total row)">33</td>
@@ -877,7 +1095,7 @@
             <td class="num sourced" data-src-file="EMEA_AMEX calc template.xlsx" data-src-sheet="AMEX FY26 Q2" data-src-cell="S16 (FR Total)" data-src-derived="$46,837.46 ÷ $3,837.88">12.20x</td>
             <td class="tbd">TBD</td>
           </tr>
-          <tr class="market-row">
+          <tr class="market-row" data-metric-enrollments="17545" data-metric-redemptions="286" data-metric-redrate="0.0163" data-metric-redspend="362022.14" data-metric-offercost="33215.19" data-metric-aov="1166.55" data-metric-roi="10.90">
             <td>DE <span style="color:var(--c-n35);font-weight:400;">(cap 22,000)</span></td>
             <td class="num sourced" data-src-file="EMEA_AMEX calc template.xlsx" data-src-sheet="AMEX FY26 Q2" data-src-cell="D25 (DE Total)">17,545</td>
             <td class="num sourced" data-src-file="EMEA_AMEX calc template.xlsx" data-src-sheet="AMEX FY26 Q2" data-src-cell="H25 (DE Total)">286</td>
@@ -888,7 +1106,7 @@
             <td class="num sourced" data-src-file="EMEA_AMEX calc template.xlsx" data-src-sheet="AMEX FY26 Q2" data-src-cell="S25 (DE Total)" data-src-derived="$362,022.14 ÷ $33,215.19">10.90x</td>
             <td class="tbd">TBD</td>
           </tr>
-          <tr class="market-row">
+          <tr class="market-row" data-metric-enrollments="45943" data-metric-redemptions="733" data-metric-redrate="0.0160" data-metric-redspend="1636366.21" data-metric-offercost="97060.91" data-metric-aov="2077.12" data-metric-roi="16.86">
             <td>UK <span style="color:var(--c-n35);font-weight:400;">(cap 44,000)</span></td>
             <td class="num sourced" data-src-file="EMEA_AMEX calc template.xlsx" data-src-sheet="AMEX FY26 Q2" data-src-cell="D34 (UK Total)" data-src-warn="UK exceeded its cap (45,943 vs 44,000 = 104%). Common when feature placements drive higher-than-modeled enrollment.">45,943</td>
             <td class="num sourced" data-src-file="EMEA_AMEX calc template.xlsx" data-src-sheet="AMEX FY26 Q2" data-src-cell="H34 (UK Total)">733</td>
@@ -899,7 +1117,7 @@
             <td class="num sourced" data-src-file="EMEA_AMEX calc template.xlsx" data-src-sheet="AMEX FY26 Q2" data-src-cell="S34 (UK Total)" data-src-derived="$1,636,366.21 ÷ $97,060.91">16.86x</td>
             <td class="tbd">TBD</td>
           </tr>
-          <tr class="market-row">
+          <tr class="market-row" data-metric-enrollments="5414" data-metric-redemptions="36" data-metric-redrate="0.0066" data-metric-redspend="80661.60" data-metric-offercost="4190.42" data-metric-aov="1925.86" data-metric-roi="19.25">
             <td>IT <span style="color:var(--c-n35);font-weight:400;">(cap 8,000)</span></td>
             <td class="num sourced" data-src-file="EMEA_AMEX calc template.xlsx" data-src-sheet="AMEX FY26 Q2" data-src-cell="D43 (IT Total)">5,414</td>
             <td class="num sourced" data-src-file="EMEA_AMEX calc template.xlsx" data-src-sheet="AMEX FY26 Q2" data-src-cell="H43 (IT Total)">36</td>
@@ -913,9 +1131,9 @@
         </tbody>
 
         <!-- ===== ASIA ===== -->
-        <tbody class="region-group collapsed" data-region="asia">
-          <tr class="region-total">
-            <td>Asia <span class="region">AU + JP + SG</span><span class="region-period">Nov 18 – Dec 28, 2025</span></td>
+        <tbody class="region-group collapsed" data-region="asia" data-period-start="2025-11-18" data-period-end="2025-12-28">
+          <tr class="region-total" data-metric-enrollments="72000" data-metric-redemptions="996" data-metric-redrate="0.0138" data-metric-redspend="1240095" data-metric-offercost="154803" data-metric-aov="1245.07" data-metric-roi="8.01">
+            <td>Asia<span class="region-period">Nov 18 – Dec 28, 2025</span></td>
             <td class="num sourced flagged" data-src-file="Asia_AMEX-Campaign-FY25-Q4.xlsx" data-src-sheet="FY26 Q2" data-src-cell="Derived from R13–R17" data-src-derived="Sum of AU Con + AU SBS + JP Con + JP SBS + SG = 72,000 (each market hit its cap)" data-src-warn="Asia FY26 Q2 interim block does not list enrollments directly. Derived = Redemptions ÷ Redemption Rate per market, which equals the enrollment cap for every market — implies all caps hit.">72,000</td>
             <td class="num sourced" data-src-file="Asia_AMEX-Campaign-FY25-Q4.xlsx" data-src-sheet="FY26 Q2" data-src-cell="H18 (INTERIM RESULTS 16/01/2026, TOTAL row)">996</td>
             <td class="num sourced" data-src-file="Asia_AMEX-Campaign-FY25-Q4.xlsx" data-src-sheet="FY26 Q2" data-src-cell="D18">1.38%</td>
@@ -925,7 +1143,7 @@
             <td class="num sourced" data-src-file="Asia_AMEX-Campaign-FY25-Q4.xlsx" data-src-sheet="FY26 Q2" data-src-cell="G18 (TOTAL)" data-src-derived="$1,240,095 ÷ $154,803 (Red Spend ÷ Offer Cost)">8.01x</td>
             <td class="tbd">TBD</td>
           </tr>
-          <tr class="market-row">
+          <tr class="market-row" data-metric-enrollments="20000" data-metric-redemptions="427" data-metric-redrate="0.0214" data-metric-redspend="504682" data-metric-offercost="56141" data-metric-aov="1181.93" data-metric-roi="8.99">
             <td>AU Consumer <span style="color:var(--c-n35);font-weight:400;">(cap 20,000)</span></td>
             <td class="num sourced flagged" data-src-file="Asia_AMEX-Campaign-FY25-Q4.xlsx" data-src-sheet="FY26 Q2" data-src-cell="Derived (427 ÷ 2.135%)" data-src-derived="Equals enrollment cap — implies cap reached" data-src-warn="Enrollments not listed in interim block. Computed = Redemptions ÷ Redemption Rate.">20,000</td>
             <td class="num sourced" data-src-file="Asia_AMEX-Campaign-FY25-Q4.xlsx" data-src-sheet="FY26 Q2" data-src-cell="H13">427</td>
@@ -936,7 +1154,7 @@
             <td class="num sourced" data-src-file="Asia_AMEX-Campaign-FY25-Q4.xlsx" data-src-sheet="FY26 Q2" data-src-cell="G13" data-src-derived="$504,682 ÷ $56,141">8.99x</td>
             <td class="tbd">TBD</td>
           </tr>
-          <tr class="market-row">
+          <tr class="market-row" data-metric-enrollments="10000" data-metric-redemptions="153" data-metric-redrate="0.0153" data-metric-redspend="266978" data-metric-offercost="20226" data-metric-aov="1744.95" data-metric-roi="13.20">
             <td>AU SBS <span style="color:var(--c-n35);font-weight:400;">(cap 10,000)</span></td>
             <td class="num sourced flagged" data-src-file="Asia_AMEX-Campaign-FY25-Q4.xlsx" data-src-sheet="FY26 Q2" data-src-cell="Derived (153 ÷ 1.53%)" data-src-derived="Equals enrollment cap" data-src-warn="Computed from Redemptions ÷ Redemption Rate.">10,000</td>
             <td class="num sourced" data-src-file="Asia_AMEX-Campaign-FY25-Q4.xlsx" data-src-sheet="FY26 Q2" data-src-cell="H14">153</td>
@@ -947,7 +1165,7 @@
             <td class="num sourced" data-src-file="Asia_AMEX-Campaign-FY25-Q4.xlsx" data-src-sheet="FY26 Q2" data-src-cell="G14" data-src-derived="$266,978 ÷ $20,226">13.20x</td>
             <td class="tbd">TBD</td>
           </tr>
-          <tr class="market-row">
+          <tr class="market-row" data-metric-enrollments="20000" data-metric-redemptions="310" data-metric-redrate="0.0155" data-metric-redspend="326214" data-metric-offercost="59819" data-metric-aov="1052.30" data-metric-roi="5.45">
             <td>JP Consumer <span style="color:var(--c-n35);font-weight:400;">(cap 20,000)</span></td>
             <td class="num sourced flagged" data-src-file="Asia_AMEX-Campaign-FY25-Q4.xlsx" data-src-sheet="FY26 Q2" data-src-cell="Derived (310 ÷ 1.55%)" data-src-derived="Equals enrollment cap" data-src-warn="Computed from Redemptions ÷ Redemption Rate.">20,000</td>
             <td class="num sourced" data-src-file="Asia_AMEX-Campaign-FY25-Q4.xlsx" data-src-sheet="FY26 Q2" data-src-cell="H15">310</td>
@@ -958,7 +1176,7 @@
             <td class="num sourced" data-src-file="Asia_AMEX-Campaign-FY25-Q4.xlsx" data-src-sheet="FY26 Q2" data-src-cell="G15" data-src-derived="$326,214 ÷ $59,819">5.45x</td>
             <td class="tbd">TBD</td>
           </tr>
-          <tr class="market-row">
+          <tr class="market-row" data-metric-enrollments="10000" data-metric-redemptions="58" data-metric-redrate="0.0058" data-metric-redspend="70530" data-metric-offercost="11185" data-metric-aov="1216.03" data-metric-roi="6.31">
             <td>JP SBS <span style="color:var(--c-n35);font-weight:400;">(cap 10,000)</span></td>
             <td class="num sourced flagged" data-src-file="Asia_AMEX-Campaign-FY25-Q4.xlsx" data-src-sheet="FY26 Q2" data-src-cell="Derived (58 ÷ 0.58%)" data-src-derived="Equals enrollment cap" data-src-warn="Computed from Redemptions ÷ Redemption Rate.">10,000</td>
             <td class="num sourced" data-src-file="Asia_AMEX-Campaign-FY25-Q4.xlsx" data-src-sheet="FY26 Q2" data-src-cell="H16">58</td>
@@ -969,7 +1187,7 @@
             <td class="num sourced" data-src-file="Asia_AMEX-Campaign-FY25-Q4.xlsx" data-src-sheet="FY26 Q2" data-src-cell="G16" data-src-derived="$70,530 ÷ $11,185">6.31x</td>
             <td class="tbd">TBD</td>
           </tr>
-          <tr class="market-row">
+          <tr class="market-row" data-metric-enrollments="12000" data-metric-redemptions="48" data-metric-redrate="0.0040" data-metric-redspend="71691" data-metric-offercost="7432" data-metric-aov="1493.56" data-metric-roi="9.65">
             <td>SG (All) <span style="color:var(--c-n35);font-weight:400;">(cap 12,000)</span></td>
             <td class="num sourced flagged" data-src-file="Asia_AMEX-Campaign-FY25-Q4.xlsx" data-src-sheet="FY26 Q2" data-src-cell="Derived (48 ÷ 0.4%)" data-src-derived="Equals enrollment cap" data-src-warn="Computed from Redemptions ÷ Redemption Rate.">12,000</td>
             <td class="num sourced" data-src-file="Asia_AMEX-Campaign-FY25-Q4.xlsx" data-src-sheet="FY26 Q2" data-src-cell="H17">48</td>
@@ -983,9 +1201,9 @@
         </tbody>
 
         <!-- ===== AMERICAS ===== -->
-        <tbody class="region-group collapsed" data-region="americas">
-          <tr class="region-total">
-            <td>Americas <span class="region">All segments</span><span class="region-period">Nov 22, 2025 – Jan 17, 2026</span></td>
+        <tbody class="region-group collapsed" data-region="americas" data-period-start="2025-11-22" data-period-end="2026-01-17">
+          <tr class="region-total" data-metric-enrollments="156834" data-metric-redemptions="1223" data-metric-redrate="0.0078" data-metric-redspend="576722.64" data-metric-offercost="64915" data-metric-aov="471.56" data-metric-roi="8.88">
+            <td>Americas<span class="region-period">Nov 22, 2025 – Jan 17, 2026</span></td>
             <td class="num sourced" data-src-file="Americas_FY26 - AMEX Performance Tracker.xlsx" data-src-sheet="Key Metrics Worksheet" data-src-cell="I10 (Grand Total, Sum of Cumulative Enrollments)" data-src-derived="Sum across 4 audience segments">156,834</td>
             <td class="num sourced" data-src-file="Americas_FY26 - AMEX Performance Tracker.xlsx" data-src-sheet="Key Metrics Worksheet" data-src-cell="I11 (Grand Total, Cumulative Redemptions)">1,223</td>
             <td class="num sourced" data-src-file="Americas_FY26 - AMEX Performance Tracker.xlsx" data-src-sheet="Key Metrics Worksheet" data-src-cell="I14 (Redemption Rate)">0.78%</td>
@@ -995,7 +1213,7 @@
             <td class="num sourced" data-src-file="Americas_FY26 - AMEX Performance Tracker.xlsx" data-src-sheet="Key Metrics Worksheet" data-src-cell="I16 (ROI)" data-src-derived="$576,722.64 ÷ $64,915 (Red Spend ÷ Offer Cost)">8.88x</td>
             <td class="tbd">TBD</td>
           </tr>
-          <tr class="market-row">
+          <tr class="market-row" data-metric-enrollments="89990" data-metric-redemptions="920" data-metric-redrate="0.0102" data-metric-redspend="154396.79" data-metric-offercost="13800" data-metric-aov="167.82" data-metric-roi="11.19">
             <td>Consumer – No Spend <span style="color:var(--c-n35);font-weight:400;">(Spend $70, get $15)</span></td>
             <td class="num sourced" data-src-file="Americas_FY26 - AMEX Performance Tracker.xlsx" data-src-sheet="Key Metrics Worksheet" data-src-cell="E10">89,990</td>
             <td class="num sourced" data-src-file="Americas_FY26 - AMEX Performance Tracker.xlsx" data-src-sheet="Key Metrics Worksheet" data-src-cell="E11">920</td>
@@ -1006,7 +1224,7 @@
             <td class="num sourced" data-src-file="Americas_FY26 - AMEX Performance Tracker.xlsx" data-src-sheet="Key Metrics Worksheet" data-src-cell="E16" data-src-derived="$154,396.79 ÷ $13,800">11.19x</td>
             <td class="tbd">TBD</td>
           </tr>
-          <tr class="market-row">
+          <tr class="market-row" data-metric-enrollments="22000" data-metric-redemptions="124" data-metric-redrate="0.0056" data-metric-redspend="172204.43" data-metric-offercost="31000" data-metric-aov="1388.75" data-metric-roi="5.55">
             <td>Consumer – SB Lookalike <span style="color:var(--c-n35);font-weight:400;">(Spend $1,000, get $250)</span></td>
             <td class="num sourced" data-src-file="Americas_FY26 - AMEX Performance Tracker.xlsx" data-src-sheet="Key Metrics Worksheet" data-src-cell="F10">22,000</td>
             <td class="num sourced" data-src-file="Americas_FY26 - AMEX Performance Tracker.xlsx" data-src-sheet="Key Metrics Worksheet" data-src-cell="F11">124</td>
@@ -1017,7 +1235,7 @@
             <td class="num sourced" data-src-file="Americas_FY26 - AMEX Performance Tracker.xlsx" data-src-sheet="Key Metrics Worksheet" data-src-cell="F16" data-src-derived="$172,204.43 ÷ $31,000">5.55x</td>
             <td class="tbd">TBD</td>
           </tr>
-          <tr class="market-row">
+          <tr class="market-row" data-metric-enrollments="20000" data-metric-redemptions="118" data-metric-redrate="0.0059" data-metric-redspend="140393.81" data-metric-offercost="9440" data-metric-aov="1189.78" data-metric-roi="14.87">
             <td>Consumer – Spend <span style="color:var(--c-n35);font-weight:400;">(Spend $450, get $80)</span></td>
             <td class="num sourced" data-src-file="Americas_FY26 - AMEX Performance Tracker.xlsx" data-src-sheet="Key Metrics Worksheet" data-src-cell="G10">20,000</td>
             <td class="num sourced" data-src-file="Americas_FY26 - AMEX Performance Tracker.xlsx" data-src-sheet="Key Metrics Worksheet" data-src-cell="G11">118</td>
@@ -1028,7 +1246,7 @@
             <td class="num sourced" data-src-file="Americas_FY26 - AMEX Performance Tracker.xlsx" data-src-sheet="Key Metrics Worksheet" data-src-cell="G16" data-src-derived="$140,393.81 ÷ $9,440">14.87x</td>
             <td class="tbd">TBD</td>
           </tr>
-          <tr class="market-row">
+          <tr class="market-row" data-metric-enrollments="24844" data-metric-redemptions="61" data-metric-redrate="0.0025" data-metric-redspend="109727.61" data-metric-offercost="10675" data-metric-aov="1798.81" data-metric-roi="10.28">
             <td>Small Business <span style="color:var(--c-n35);font-weight:400;">(Spend $1,000, get $175)</span></td>
             <td class="num sourced" data-src-file="Americas_FY26 - AMEX Performance Tracker.xlsx" data-src-sheet="Key Metrics Worksheet" data-src-cell="H10">24,844</td>
             <td class="num sourced" data-src-file="Americas_FY26 - AMEX Performance Tracker.xlsx" data-src-sheet="Key Metrics Worksheet" data-src-cell="H11">61</td>
@@ -1040,6 +1258,19 @@
             <td class="tbd">TBD</td>
           </tr>
         </tbody>
+        <tfoot id="amex-totals">
+          <tr class="totals-row">
+            <td>Totals <span class="region-period">Selected regions only</span></td>
+            <td class="num" data-total-metric="enrollments">—</td>
+            <td class="num" data-total-metric="redemptions">—</td>
+            <td class="num" data-total-metric="redrate">—</td>
+            <td class="num" data-total-metric="redspend">—</td>
+            <td class="num" data-total-metric="offercost">—</td>
+            <td class="num" data-total-metric="aov">—</td>
+            <td class="num" data-total-metric="roi">—</td>
+            <td class="tbd">TBD</td>
+          </tr>
+        </tfoot>
       </table>
     </div>
 
@@ -1148,6 +1379,166 @@
       }
     });
   });
+})();
+</script>
+
+<script>
+(function () {
+  const grid = document.getElementById('amex-q2-grid');
+  if (!grid) return;
+  const controls = document.getElementById('amex-controls');
+  const cmpPanel = document.getElementById('compare-panel');
+  const totalsRow = document.querySelector('#amex-totals .totals-row');
+  if (!controls) return;
+
+  const METRIC_FORMATS = {
+    enrollments:  v => Math.round(v).toLocaleString(),
+    redemptions:  v => Math.round(v).toLocaleString(),
+    redrate:      v => (v * 100).toFixed(2) + '%',
+    redspend:     v => '$' + Math.round(v).toLocaleString(),
+    offercost:    v => '$' + Math.round(v).toLocaleString(),
+    aov:          v => '$' + v.toFixed(2),
+    roi:          v => v.toFixed(2) + 'x'
+  };
+  const METRIC_LABELS = {
+    enrollments: 'Enrollments',
+    redemptions: 'Redemptions',
+    redrate: 'Red. Rate',
+    redspend: 'Red. Spend (USD)',
+    offercost: 'Offer Cost (USD)',
+    aov: 'AOV Redeemers (USD)',
+    roi: 'ROI'
+  };
+
+  // ----- visibility (region chips + date range) -----
+  function activeRegions() {
+    const checked = Array.from(controls.querySelectorAll('[data-control="region"] input:checked'))
+      .map(c => c.value);
+    return checked;
+  }
+  function dateRange() {
+    const from = document.getElementById('date-from').value;
+    const to = document.getElementById('date-to').value;
+    return { from: from || null, to: to || null };
+  }
+  function overlapsRange(tbody, range) {
+    if (!range.from && !range.to) return true;
+    const ps = tbody.getAttribute('data-period-start');
+    const pe = tbody.getAttribute('data-period-end');
+    if (!ps || !pe) return true;
+    if (range.from && pe < range.from) return false;
+    if (range.to && ps > range.to) return false;
+    return true;
+  }
+  function applyFilters() {
+    const regions = activeRegions();
+    const range = dateRange();
+    grid.querySelectorAll('tbody.region-group').forEach(tb => {
+      const reg = tb.getAttribute('data-region');
+      const regionOn = regions.includes(reg);
+      const dateOn = overlapsRange(tb, range);
+      tb.classList.toggle('filtered-out', !(regionOn && dateOn));
+    });
+    recomputeTotals();
+    recomputeCompare();
+  }
+
+  // ----- totals -----
+  function visibleRegionTotalRows() {
+    return Array.from(grid.querySelectorAll('tbody.region-group:not(.filtered-out) > tr.region-total'));
+  }
+  function readMetric(row, key) {
+    const raw = row.getAttribute('data-metric-' + key);
+    if (raw === null || raw === '') return null;
+    const num = parseFloat(raw);
+    return isFinite(num) ? num : null;
+  }
+  function recomputeTotals() {
+    if (!totalsRow) return;
+    const rows = visibleRegionTotalRows();
+    if (rows.length === 0) {
+      totalsRow.querySelectorAll('td[data-total-metric]').forEach(td => td.textContent = '—');
+      return;
+    }
+    const sumKeys = ['enrollments','redemptions','redspend','offercost'];
+    const sums = {};
+    sumKeys.forEach(k => {
+      sums[k] = rows.reduce((acc, r) => {
+        const v = readMetric(r, k);
+        return v === null ? acc : acc + v;
+      }, 0);
+    });
+    // derived
+    sums.redrate = sums.enrollments > 0 ? (sums.redemptions / sums.enrollments) : 0;
+    sums.aov     = sums.redemptions > 0 ? (sums.redspend / sums.redemptions) : 0;
+    sums.roi     = sums.offercost > 0 ? (sums.redspend / sums.offercost) : 0;
+    Object.keys(METRIC_FORMATS).forEach(k => {
+      const td = totalsRow.querySelector('td[data-total-metric="' + k + '"]');
+      if (td) td.textContent = METRIC_FORMATS[k](sums[k]);
+    });
+  }
+
+  // ----- compare -----
+  function recomputeCompare() {
+    const a = document.getElementById('cmp-metric-a').value;
+    const b = document.getElementById('cmp-metric-b').value;
+    const scope = document.getElementById('cmp-scope').value;
+    if (!a || !b || a === b) {
+      cmpPanel.hidden = true;
+      cmpPanel.innerHTML = '';
+      return;
+    }
+
+    // pick rows to compare across
+    let rows;
+    let scopeLabel;
+    if (scope === 'totals') {
+      rows = visibleRegionTotalRows().map(r => ({ name: r.cells[0].childNodes[0].nodeValue.trim(), row: r }));
+      scopeLabel = 'Selected region totals';
+    } else {
+      const tb = grid.querySelector('tbody[data-region="' + scope + '"]');
+      if (!tb || tb.classList.contains('filtered-out')) {
+        cmpPanel.hidden = false;
+        cmpPanel.innerHTML = '<div class="cmp-title">Compare · ' + METRIC_LABELS[a] + ' vs ' + METRIC_LABELS[b] + '</div><div style="font-size:0.85rem;color:var(--ink-soft);">Selected scope is hidden by current region filter.</div>';
+        return;
+      }
+      rows = Array.from(tb.querySelectorAll('tr.market-row')).map(r => ({
+        name: r.cells[0].childNodes[0].nodeValue.trim().replace(/\s+\(.*$/, ''),
+        row: r
+      }));
+      scopeLabel = scope.charAt(0).toUpperCase() + scope.slice(1) + ' breakdown';
+    }
+
+    const html = ['<div class="cmp-title">Compare · ' + METRIC_LABELS[a] + ' vs ' + METRIC_LABELS[b] + ' · ' + scopeLabel + '</div>'];
+    html.push('<div class="cmp-rows">');
+    html.push('<div class="cmp-row" style="font-size:0.7rem;text-transform:uppercase;letter-spacing:0.5px;color:var(--ink-soft);font-weight:700;background:transparent;padding-bottom:0;"><span></span><span>' + METRIC_LABELS[a] + '</span><span>' + METRIC_LABELS[b] + '</span><span>Δ (A − B) / Ratio</span></div>');
+    rows.forEach(item => {
+      const va = readMetric(item.row, a);
+      const vb = readMetric(item.row, b);
+      if (va === null || vb === null) return;
+      const delta = va - vb;
+      const ratio = vb === 0 ? null : (va / vb);
+      const deltaClass = Math.abs(delta) < 1e-9 ? 'flat' : (delta > 0 ? 'pos' : 'neg');
+      const deltaTxt = METRIC_FORMATS[a](delta) + (ratio !== null ? ' · ' + ratio.toFixed(2) + 'x' : '');
+      html.push('<div class="cmp-row"><span class="cmp-name">' + item.name + '</span><span class="cmp-val">' + METRIC_FORMATS[a](va) + '</span><span class="cmp-val">' + METRIC_FORMATS[b](vb) + '</span><span class="cmp-delta ' + deltaClass + '">' + deltaTxt + '</span></div>');
+    });
+    html.push('</div>');
+    cmpPanel.innerHTML = html.join('');
+    cmpPanel.hidden = false;
+  }
+
+  // ----- wire up -----
+  controls.querySelectorAll('[data-control="region"] input').forEach(cb => cb.addEventListener('change', applyFilters));
+  ['date-from','date-to'].forEach(id => document.getElementById(id).addEventListener('change', applyFilters));
+  document.getElementById('reset-dates').addEventListener('click', function () {
+    document.getElementById('date-from').value = '2025-11-01';
+    document.getElementById('date-to').value = '2026-01-31';
+    applyFilters();
+  });
+  ['cmp-metric-a','cmp-metric-b','cmp-scope'].forEach(id => document.getElementById(id).addEventListener('change', recomputeCompare));
+
+  // initial compute
+  applyFilters();
 })();
 </script>
 
