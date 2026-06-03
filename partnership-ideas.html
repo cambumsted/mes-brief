@@ -425,11 +425,11 @@
     width: 100%;
     border-collapse: collapse;
     font-size: 0.83rem;
-    min-width: 880px;
+    min-width: 0;
     background: white;
   }
   .live-grid th, .live-grid td {
-    padding: 0.5rem 0.6rem;
+    padding: 0.5rem 0.5rem;
     border-bottom: 1px solid var(--line);
     text-align: right;
     vertical-align: middle;
@@ -447,7 +447,7 @@
   .live-grid th:first-child, .live-grid td:first-child {
     text-align: left;
     font-weight: 600;
-    white-space: nowrap;
+    white-space: normal;
   }
   .live-grid tbody tr:hover { background: #FAFBFC; }
   .live-grid td.sourced {
@@ -486,6 +486,37 @@
   }
   .live-grid th .open-flag { text-transform: uppercase; margin-left: 0.3rem; }
   .live-grid .num { font-variant-numeric: tabular-nums; }
+
+  /* Region heading row — clickable collapse trigger */
+  .live-grid tbody.region-group > tr.region-total {
+    cursor: pointer;
+    user-select: none;
+  }
+  .live-grid tbody.region-group > tr.region-total td:first-child::before {
+    content: "▾";
+    display: inline-block;
+    margin-right: 0.5rem;
+    color: var(--ms-blue);
+    transition: transform 0.15s ease;
+    font-size: 0.85em;
+  }
+  .live-grid tbody.region-group.collapsed > tr.region-total td:first-child::before {
+    transform: rotate(-90deg);
+  }
+  .live-grid tbody.region-group.collapsed > tr.market-row { display: none; }
+  .live-grid tbody.region-group > tr.region-total:hover { background: #EEF6FB; }
+
+  /* Period as secondary text in region-total first cell */
+  .live-grid .region-period {
+    display: block;
+    font-size: 0.7rem;
+    font-weight: 500;
+    color: var(--ink-soft);
+    text-transform: none;
+    letter-spacing: 0;
+    margin-top: 0.15rem;
+    padding-left: 1.6rem; /* aligns under the chevron+name */
+  }
 
   /* === Source provenance tooltip === */
   #src-tooltip {
@@ -553,17 +584,7 @@
   }
 
   /* Q3 grid wrapper */
-  .q3-wrap { overflow-x: auto; margin-top: 0.6rem; }
-  .q3-hint {
-    background: var(--ms-blue-light);
-    color: var(--ms-blue-dark);
-    padding: 0.55rem 0.8rem;
-    border-radius: 4px;
-    font-size: 0.82rem;
-    margin: 0.6rem 0 0.4rem;
-    display: inline-block;
-  }
-  .q3-hint::before { content: "💡 "; }
+  .q3-wrap { margin-top: 0.6rem; }
 </style>
 </head>
 <body>
@@ -589,14 +610,11 @@
 
 <main>
 
-  <!-- ============== -->
-  <!-- AMEX V1 MVP    -->
-  <!-- ============== -->
-  <section class="block" id="amex">
-    <h2>AMEX V1 MVP</h2>
-    <p class="lede">A focused build for AMEX across Americas, Asia, and EMEA — the path we'll walk and the grid we'll fill.</p>
-
-    <h3 style="margin-top:1.2rem;">The path</h3>
+  <!-- ============================ -->
+  <!-- AMEX V1 MVP · The path       -->
+  <!-- ============================ -->
+  <section class="block" id="path">
+    <h2>AMEX V1 MVP · The path</h2>
     <div class="flow">
 
       <div class="flow-step">
@@ -664,293 +682,11 @@
 
     </div>
 
-    <h3 style="margin-top:2rem;">AMEX metric definitions <span style="font-size:0.7rem;font-weight:500;color:var(--ink-soft);text-transform:uppercase;letter-spacing:1px;margin-left:0.4rem;">v0 · starting point</span></h3>
-    <p class="lede">The vocabulary lock for the Q3 grid below. EMEA columns are the source of truth; AMEX-side terms (e.g. "Offer Redemptions") are aliased to EMEA terms (e.g. "Enrollments") so we have one shared language.</p>
-
-    <table class="metric-defs">
-      <thead>
-        <tr><th>Metric</th><th>Definition</th><th>EMEA source</th><th>Notes</th></tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>ROI</td>
-          <td><code>Redemption Spend ÷ Campaign Spend</code></td>
-          <td>Derived (formula in column S, e.g. <code>S43</code>)</td>
-          <td><span class="open-flag">open</span><span class="open-note">"Campaign Spend" today = Offer Cost only. Should it include Media Value too?</span></td>
-        </tr>
-        <tr>
-          <td>Revenue</td>
-          <td><em>TBD</em></td>
-          <td>—</td>
-          <td><span class="open-flag">open</span><span class="open-note">Need definition. Same as Redemption Spend? Or include Adobe-attributed hardware halo?</span></td>
-        </tr>
-        <tr>
-          <td>Redemption Spend</td>
-          <td>Total $ customer spent in the qualifying purchase that triggered the offer</td>
-          <td>Column J (USD) <span class="term-aka">Column I in local currency</span></td>
-          <td>—</td>
-        </tr>
-        <tr>
-          <td>Offer Redemptions <span class="term-aka">(AMEX term) = Enrollments (EMEA term)</span></td>
-          <td>Intent step — customer enrolled in / accepted the offer</td>
-          <td>Column D</td>
-          <td>Vocabulary aliased; grid uses "Enrollments"</td>
-        </tr>
-        <tr>
-          <td>Redemptions</td>
-          <td>Conversion step — qualifying purchase made</td>
-          <td>Column H</td>
-          <td>—</td>
-        </tr>
-        <tr>
-          <td>Redemption Rate</td>
-          <td><code>Redemptions ÷ Enrollments</code></td>
-          <td>Derived</td>
-          <td>—</td>
-        </tr>
-        <tr>
-          <td>AOV (Redeemers)</td>
-          <td>Avg order value of redeeming customers</td>
-          <td>Column P (USD) <span class="term-aka">EMEA also tracks AOV Enrolled in column G</span></td>
-          <td><span class="open-flag">confirm</span><span class="open-note">Grid uses AOV Redeemers — confirm this is the right one (not AOV Enrolled).</span></td>
-        </tr>
-      </tbody>
-    </table>
-
-    <h3 style="margin-top:2.4rem;">FY26 Q2 — live comparability grid</h3>
-    <p class="lede">Pivoted from FY25 Q3 — all three regions have actuals from campaigns that ran <strong>mid-Nov 2025 through Jan 2026</strong>. Same definitions as the dictionary above. Hover any value to see file → sheet → cell → derivation.</p>
-    <div class="q3-hint">Hover any value to see file → sheet → cell → derivation. Yellow cells flag definition mismatches or sheet anomalies.</div>
-
-    <div class="q3-wrap">
-      <table class="live-grid" id="amex-q2-grid">
-        <thead>
-          <tr>
-            <th>Region / Market</th>
-            <th>Period</th>
-            <th>Enrollments</th>
-            <th>Redemptions</th>
-            <th>Red. Rate</th>
-            <th>Red. Spend (USD)</th>
-            <th>Offer Cost (USD)</th>
-            <th>AOV Redeemers (USD)<span class="open-flag">confirm</span></th>
-            <th>ROI</th>
-            <th>Revenue (USD)<span class="open-flag">tbd</span></th>
-          </tr>
-        </thead>
-        <tbody>
-
-          <!-- ===== EMEA TOTAL ===== -->
-          <tr class="region-total">
-            <td>EMEA <span class="region">FR + DE + UK + IT</span></td>
-            <td class="num">Nov 11, 2025 – Jan 15, 2026</td>
-            <td class="num sourced" data-src-file="EMEA_AMEX calc template.xlsx" data-src-sheet="AMEX FY26 Q2" data-src-cell="D55 (Total row)" data-src-derived="Sum of FR + DE + UK + IT enrollments">72,955</td>
-            <td class="num sourced" data-src-file="EMEA_AMEX calc template.xlsx" data-src-sheet="AMEX FY26 Q2" data-src-cell="H55 (Total row)" data-src-derived="Sum of FR + DE + UK + IT redemptions">1,088</td>
-            <td class="num sourced" data-src-file="EMEA_AMEX calc template.xlsx" data-src-sheet="AMEX FY26 Q2" data-src-cell="Derived" data-src-derived="1,088 ÷ 72,955 (Redemptions ÷ Enrollments)">1.49%</td>
-            <td class="num sourced" data-src-file="EMEA_AMEX calc template.xlsx" data-src-sheet="AMEX FY26 Q2" data-src-cell="J55 (Total row, USD)" data-src-derived="Sum of FR + DE + UK + IT redemption spend">$2,125,887.41</td>
-            <td class="num sourced" data-src-file="EMEA_AMEX calc template.xlsx" data-src-sheet="AMEX FY26 Q2" data-src-cell="M55 (Total row, USD)" data-src-derived="Sum of FR + DE + UK + IT offer cost">$138,304.40</td>
-            <td class="num sourced flagged" data-src-file="EMEA_AMEX calc template.xlsx" data-src-sheet="AMEX FY26 Q2" data-src-cell="P55 (AOV Redeemers USD, Total)" data-src-derived="Weighted AOV across markets" data-src-warn="Using AOV Redeemers. EMEA also tracks AOV Enrolled (column G) — confirm canonical choice.">$1,953.94</td>
-            <td class="num sourced" data-src-file="EMEA_AMEX calc template.xlsx" data-src-sheet="AMEX FY26 Q2" data-src-cell="S55 (Total row)" data-src-derived="$2,125,887.41 ÷ $138,304.40 (Red Spend ÷ Offer Cost)">15.37x</td>
-            <td class="tbd">TBD</td>
-          </tr>
-          <tr class="market-row">
-            <td>FR <span style="color:var(--c-n35);font-weight:400;">(cap 8,000)</span></td>
-            <td class="num">Same</td>
-            <td class="num sourced" data-src-file="EMEA_AMEX calc template.xlsx" data-src-sheet="AMEX FY26 Q2" data-src-cell="D16 (FR Total row)">4,053</td>
-            <td class="num sourced" data-src-file="EMEA_AMEX calc template.xlsx" data-src-sheet="AMEX FY26 Q2" data-src-cell="H16 (FR Total row)">33</td>
-            <td class="num sourced" data-src-file="EMEA_AMEX calc template.xlsx" data-src-sheet="AMEX FY26 Q2" data-src-cell="Derived" data-src-derived="33 ÷ 4,053">0.81%</td>
-            <td class="num sourced" data-src-file="EMEA_AMEX calc template.xlsx" data-src-sheet="AMEX FY26 Q2" data-src-cell="J16 (FR Total, USD)">$46,837.46</td>
-            <td class="num sourced" data-src-file="EMEA_AMEX calc template.xlsx" data-src-sheet="AMEX FY26 Q2" data-src-cell="M16 (FR Total, USD)">$3,837.88</td>
-            <td class="num sourced" data-src-file="EMEA_AMEX calc template.xlsx" data-src-sheet="AMEX FY26 Q2" data-src-cell="P16 (FR Total)">$1,306.41</td>
-            <td class="num sourced" data-src-file="EMEA_AMEX calc template.xlsx" data-src-sheet="AMEX FY26 Q2" data-src-cell="S16 (FR Total)" data-src-derived="$46,837.46 ÷ $3,837.88">12.20x</td>
-            <td class="tbd">TBD</td>
-          </tr>
-          <tr class="market-row">
-            <td>DE <span style="color:var(--c-n35);font-weight:400;">(cap 22,000)</span></td>
-            <td class="num">Same</td>
-            <td class="num sourced" data-src-file="EMEA_AMEX calc template.xlsx" data-src-sheet="AMEX FY26 Q2" data-src-cell="D25 (DE Total)">17,545</td>
-            <td class="num sourced" data-src-file="EMEA_AMEX calc template.xlsx" data-src-sheet="AMEX FY26 Q2" data-src-cell="H25 (DE Total)">286</td>
-            <td class="num sourced" data-src-file="EMEA_AMEX calc template.xlsx" data-src-sheet="AMEX FY26 Q2" data-src-cell="Derived" data-src-derived="286 ÷ 17,545">1.63%</td>
-            <td class="num sourced" data-src-file="EMEA_AMEX calc template.xlsx" data-src-sheet="AMEX FY26 Q2" data-src-cell="J25 (DE Total, USD)">$362,022.14</td>
-            <td class="num sourced" data-src-file="EMEA_AMEX calc template.xlsx" data-src-sheet="AMEX FY26 Q2" data-src-cell="M25 (DE Total, USD)">$33,215.19</td>
-            <td class="num sourced" data-src-file="EMEA_AMEX calc template.xlsx" data-src-sheet="AMEX FY26 Q2" data-src-cell="P25 (DE Total)">$1,166.55</td>
-            <td class="num sourced" data-src-file="EMEA_AMEX calc template.xlsx" data-src-sheet="AMEX FY26 Q2" data-src-cell="S25 (DE Total)" data-src-derived="$362,022.14 ÷ $33,215.19">10.90x</td>
-            <td class="tbd">TBD</td>
-          </tr>
-          <tr class="market-row">
-            <td>UK <span style="color:var(--c-n35);font-weight:400;">(cap 44,000)</span></td>
-            <td class="num">Same</td>
-            <td class="num sourced" data-src-file="EMEA_AMEX calc template.xlsx" data-src-sheet="AMEX FY26 Q2" data-src-cell="D34 (UK Total)" data-src-warn="UK exceeded its cap (45,943 vs 44,000 = 104%). Common when feature placements drive higher-than-modeled enrollment.">45,943</td>
-            <td class="num sourced" data-src-file="EMEA_AMEX calc template.xlsx" data-src-sheet="AMEX FY26 Q2" data-src-cell="H34 (UK Total)">733</td>
-            <td class="num sourced" data-src-file="EMEA_AMEX calc template.xlsx" data-src-sheet="AMEX FY26 Q2" data-src-cell="Derived" data-src-derived="733 ÷ 45,943">1.60%</td>
-            <td class="num sourced" data-src-file="EMEA_AMEX calc template.xlsx" data-src-sheet="AMEX FY26 Q2" data-src-cell="J34 (UK Total, USD)">$1,636,366.21</td>
-            <td class="num sourced" data-src-file="EMEA_AMEX calc template.xlsx" data-src-sheet="AMEX FY26 Q2" data-src-cell="M34 (UK Total, USD)">$97,060.91</td>
-            <td class="num sourced" data-src-file="EMEA_AMEX calc template.xlsx" data-src-sheet="AMEX FY26 Q2" data-src-cell="P34 (UK Total)">$2,077.12</td>
-            <td class="num sourced" data-src-file="EMEA_AMEX calc template.xlsx" data-src-sheet="AMEX FY26 Q2" data-src-cell="S34 (UK Total)" data-src-derived="$1,636,366.21 ÷ $97,060.91">16.86x</td>
-            <td class="tbd">TBD</td>
-          </tr>
-          <tr class="market-row">
-            <td>IT <span style="color:var(--c-n35);font-weight:400;">(cap 8,000)</span></td>
-            <td class="num">Same</td>
-            <td class="num sourced" data-src-file="EMEA_AMEX calc template.xlsx" data-src-sheet="AMEX FY26 Q2" data-src-cell="D43 (IT Total)">5,414</td>
-            <td class="num sourced" data-src-file="EMEA_AMEX calc template.xlsx" data-src-sheet="AMEX FY26 Q2" data-src-cell="H43 (IT Total)">36</td>
-            <td class="num sourced" data-src-file="EMEA_AMEX calc template.xlsx" data-src-sheet="AMEX FY26 Q2" data-src-cell="Derived" data-src-derived="36 ÷ 5,414">0.66%</td>
-            <td class="num sourced" data-src-file="EMEA_AMEX calc template.xlsx" data-src-sheet="AMEX FY26 Q2" data-src-cell="J43 (IT Total, USD)">$80,661.60</td>
-            <td class="num sourced" data-src-file="EMEA_AMEX calc template.xlsx" data-src-sheet="AMEX FY26 Q2" data-src-cell="M43 (IT Total, USD)">$4,190.42</td>
-            <td class="num sourced" data-src-file="EMEA_AMEX calc template.xlsx" data-src-sheet="AMEX FY26 Q2" data-src-cell="P43 (IT Total)">$1,925.86</td>
-            <td class="num sourced" data-src-file="EMEA_AMEX calc template.xlsx" data-src-sheet="AMEX FY26 Q2" data-src-cell="S43 (IT Total)" data-src-derived="$80,661.60 ÷ $4,190.42">19.25x</td>
-            <td class="tbd">TBD</td>
-          </tr>
-
-          <!-- ===== ASIA TOTAL ===== -->
-          <tr class="region-total">
-            <td>Asia <span class="region">AU + JP + SG</span></td>
-            <td class="num">Nov 18 – Dec 28, 2025</td>
-            <td class="num sourced flagged" data-src-file="Asia_AMEX-Campaign-FY25-Q4.xlsx" data-src-sheet="FY26 Q2" data-src-cell="Derived from R13–R17" data-src-derived="Sum of AU Con + AU SBS + JP Con + JP SBS + SG = 72,000 (each market hit its cap)" data-src-warn="Asia FY26 Q2 interim block does not list enrollments directly. Derived = Redemptions ÷ Redemption Rate per market, which equals the enrollment cap for every market — implies all caps hit.">72,000</td>
-            <td class="num sourced" data-src-file="Asia_AMEX-Campaign-FY25-Q4.xlsx" data-src-sheet="FY26 Q2" data-src-cell="H18 (INTERIM RESULTS 16/01/2026, TOTAL row)">996</td>
-            <td class="num sourced" data-src-file="Asia_AMEX-Campaign-FY25-Q4.xlsx" data-src-sheet="FY26 Q2" data-src-cell="D18">1.38%</td>
-            <td class="num sourced" data-src-file="Asia_AMEX-Campaign-FY25-Q4.xlsx" data-src-sheet="FY26 Q2" data-src-cell="E18 (Redeeming Spend USD, TOTAL)">$1,240,095</td>
-            <td class="num sourced" data-src-file="Asia_AMEX-Campaign-FY25-Q4.xlsx" data-src-sheet="FY26 Q2" data-src-cell="F18 (Offer Cost USD, TOTAL)">$154,803</td>
-            <td class="num sourced flagged" data-src-file="Asia_AMEX-Campaign-FY25-Q4.xlsx" data-src-sheet="FY26 Q2" data-src-cell="Derived" data-src-derived="$1,240,095 ÷ 996 (Red Spend ÷ Redemptions)" data-src-warn="Asia interim block has no AOV column. Computed from totals.">$1,245.07</td>
-            <td class="num sourced" data-src-file="Asia_AMEX-Campaign-FY25-Q4.xlsx" data-src-sheet="FY26 Q2" data-src-cell="G18 (TOTAL)" data-src-derived="$1,240,095 ÷ $154,803 (Red Spend ÷ Offer Cost)">8.01x</td>
-            <td class="tbd">TBD</td>
-          </tr>
-          <tr class="market-row">
-            <td>AU Consumer <span style="color:var(--c-n35);font-weight:400;">(cap 20,000)</span></td>
-            <td class="num">Same</td>
-            <td class="num sourced flagged" data-src-file="Asia_AMEX-Campaign-FY25-Q4.xlsx" data-src-sheet="FY26 Q2" data-src-cell="Derived (427 ÷ 2.135%)" data-src-derived="Equals enrollment cap — implies cap reached" data-src-warn="Enrollments not listed in interim block. Computed = Redemptions ÷ Redemption Rate.">20,000</td>
-            <td class="num sourced" data-src-file="Asia_AMEX-Campaign-FY25-Q4.xlsx" data-src-sheet="FY26 Q2" data-src-cell="H13">427</td>
-            <td class="num sourced" data-src-file="Asia_AMEX-Campaign-FY25-Q4.xlsx" data-src-sheet="FY26 Q2" data-src-cell="D13">2.14%</td>
-            <td class="num sourced" data-src-file="Asia_AMEX-Campaign-FY25-Q4.xlsx" data-src-sheet="FY26 Q2" data-src-cell="E13">$504,682</td>
-            <td class="num sourced" data-src-file="Asia_AMEX-Campaign-FY25-Q4.xlsx" data-src-sheet="FY26 Q2" data-src-cell="F13">$56,141</td>
-            <td class="num sourced" data-src-file="Asia_AMEX-Campaign-FY25-Q4.xlsx" data-src-sheet="FY26 Q2" data-src-cell="Derived" data-src-derived="$504,682 ÷ 427">$1,181.93</td>
-            <td class="num sourced" data-src-file="Asia_AMEX-Campaign-FY25-Q4.xlsx" data-src-sheet="FY26 Q2" data-src-cell="G13" data-src-derived="$504,682 ÷ $56,141">8.99x</td>
-            <td class="tbd">TBD</td>
-          </tr>
-          <tr class="market-row">
-            <td>AU SBS <span style="color:var(--c-n35);font-weight:400;">(cap 10,000)</span></td>
-            <td class="num">Same</td>
-            <td class="num sourced flagged" data-src-file="Asia_AMEX-Campaign-FY25-Q4.xlsx" data-src-sheet="FY26 Q2" data-src-cell="Derived (153 ÷ 1.53%)" data-src-derived="Equals enrollment cap" data-src-warn="Computed from Redemptions ÷ Redemption Rate.">10,000</td>
-            <td class="num sourced" data-src-file="Asia_AMEX-Campaign-FY25-Q4.xlsx" data-src-sheet="FY26 Q2" data-src-cell="H14">153</td>
-            <td class="num sourced" data-src-file="Asia_AMEX-Campaign-FY25-Q4.xlsx" data-src-sheet="FY26 Q2" data-src-cell="D14">1.53%</td>
-            <td class="num sourced" data-src-file="Asia_AMEX-Campaign-FY25-Q4.xlsx" data-src-sheet="FY26 Q2" data-src-cell="E14">$266,978</td>
-            <td class="num sourced" data-src-file="Asia_AMEX-Campaign-FY25-Q4.xlsx" data-src-sheet="FY26 Q2" data-src-cell="F14">$20,226</td>
-            <td class="num sourced" data-src-file="Asia_AMEX-Campaign-FY25-Q4.xlsx" data-src-sheet="FY26 Q2" data-src-cell="Derived" data-src-derived="$266,978 ÷ 153">$1,744.95</td>
-            <td class="num sourced" data-src-file="Asia_AMEX-Campaign-FY25-Q4.xlsx" data-src-sheet="FY26 Q2" data-src-cell="G14" data-src-derived="$266,978 ÷ $20,226">13.20x</td>
-            <td class="tbd">TBD</td>
-          </tr>
-          <tr class="market-row">
-            <td>JP Consumer <span style="color:var(--c-n35);font-weight:400;">(cap 20,000)</span></td>
-            <td class="num">Same</td>
-            <td class="num sourced flagged" data-src-file="Asia_AMEX-Campaign-FY25-Q4.xlsx" data-src-sheet="FY26 Q2" data-src-cell="Derived (310 ÷ 1.55%)" data-src-derived="Equals enrollment cap" data-src-warn="Computed from Redemptions ÷ Redemption Rate.">20,000</td>
-            <td class="num sourced" data-src-file="Asia_AMEX-Campaign-FY25-Q4.xlsx" data-src-sheet="FY26 Q2" data-src-cell="H15">310</td>
-            <td class="num sourced" data-src-file="Asia_AMEX-Campaign-FY25-Q4.xlsx" data-src-sheet="FY26 Q2" data-src-cell="D15">1.55%</td>
-            <td class="num sourced" data-src-file="Asia_AMEX-Campaign-FY25-Q4.xlsx" data-src-sheet="FY26 Q2" data-src-cell="E15">$326,214</td>
-            <td class="num sourced" data-src-file="Asia_AMEX-Campaign-FY25-Q4.xlsx" data-src-sheet="FY26 Q2" data-src-cell="F15">$59,819</td>
-            <td class="num sourced" data-src-file="Asia_AMEX-Campaign-FY25-Q4.xlsx" data-src-sheet="FY26 Q2" data-src-cell="Derived" data-src-derived="$326,214 ÷ 310">$1,052.30</td>
-            <td class="num sourced" data-src-file="Asia_AMEX-Campaign-FY25-Q4.xlsx" data-src-sheet="FY26 Q2" data-src-cell="G15" data-src-derived="$326,214 ÷ $59,819">5.45x</td>
-            <td class="tbd">TBD</td>
-          </tr>
-          <tr class="market-row">
-            <td>JP SBS <span style="color:var(--c-n35);font-weight:400;">(cap 10,000)</span></td>
-            <td class="num">Same</td>
-            <td class="num sourced flagged" data-src-file="Asia_AMEX-Campaign-FY25-Q4.xlsx" data-src-sheet="FY26 Q2" data-src-cell="Derived (58 ÷ 0.58%)" data-src-derived="Equals enrollment cap" data-src-warn="Computed from Redemptions ÷ Redemption Rate.">10,000</td>
-            <td class="num sourced" data-src-file="Asia_AMEX-Campaign-FY25-Q4.xlsx" data-src-sheet="FY26 Q2" data-src-cell="H16">58</td>
-            <td class="num sourced" data-src-file="Asia_AMEX-Campaign-FY25-Q4.xlsx" data-src-sheet="FY26 Q2" data-src-cell="D16">0.58%</td>
-            <td class="num sourced" data-src-file="Asia_AMEX-Campaign-FY25-Q4.xlsx" data-src-sheet="FY26 Q2" data-src-cell="E16">$70,530</td>
-            <td class="num sourced" data-src-file="Asia_AMEX-Campaign-FY25-Q4.xlsx" data-src-sheet="FY26 Q2" data-src-cell="F16">$11,185</td>
-            <td class="num sourced" data-src-file="Asia_AMEX-Campaign-FY25-Q4.xlsx" data-src-sheet="FY26 Q2" data-src-cell="Derived" data-src-derived="$70,530 ÷ 58">$1,216.03</td>
-            <td class="num sourced" data-src-file="Asia_AMEX-Campaign-FY25-Q4.xlsx" data-src-sheet="FY26 Q2" data-src-cell="G16" data-src-derived="$70,530 ÷ $11,185">6.31x</td>
-            <td class="tbd">TBD</td>
-          </tr>
-          <tr class="market-row">
-            <td>SG (All) <span style="color:var(--c-n35);font-weight:400;">(cap 12,000)</span></td>
-            <td class="num">Same</td>
-            <td class="num sourced flagged" data-src-file="Asia_AMEX-Campaign-FY25-Q4.xlsx" data-src-sheet="FY26 Q2" data-src-cell="Derived (48 ÷ 0.4%)" data-src-derived="Equals enrollment cap" data-src-warn="Computed from Redemptions ÷ Redemption Rate.">12,000</td>
-            <td class="num sourced" data-src-file="Asia_AMEX-Campaign-FY25-Q4.xlsx" data-src-sheet="FY26 Q2" data-src-cell="H17">48</td>
-            <td class="num sourced" data-src-file="Asia_AMEX-Campaign-FY25-Q4.xlsx" data-src-sheet="FY26 Q2" data-src-cell="D17">0.40%</td>
-            <td class="num sourced" data-src-file="Asia_AMEX-Campaign-FY25-Q4.xlsx" data-src-sheet="FY26 Q2" data-src-cell="E17">$71,691</td>
-            <td class="num sourced" data-src-file="Asia_AMEX-Campaign-FY25-Q4.xlsx" data-src-sheet="FY26 Q2" data-src-cell="F17">$7,432</td>
-            <td class="num sourced" data-src-file="Asia_AMEX-Campaign-FY25-Q4.xlsx" data-src-sheet="FY26 Q2" data-src-cell="Derived" data-src-derived="$71,691 ÷ 48">$1,493.56</td>
-            <td class="num sourced" data-src-file="Asia_AMEX-Campaign-FY25-Q4.xlsx" data-src-sheet="FY26 Q2" data-src-cell="G17" data-src-derived="$71,691 ÷ $7,432">9.65x</td>
-            <td class="tbd">TBD</td>
-          </tr>
-
-          <!-- ===== AMERICAS TOTAL ===== -->
-          <tr class="region-total">
-            <td>Americas <span class="region">All segments</span></td>
-            <td class="num">Nov 22, 2025 – Jan 17, 2026</td>
-            <td class="num sourced" data-src-file="Americas_FY26 - AMEX Performance Tracker.xlsx" data-src-sheet="Key Metrics Worksheet" data-src-cell="I10 (Grand Total, Sum of Cumulative Enrollments)" data-src-derived="Sum across 4 audience segments">156,834</td>
-            <td class="num sourced" data-src-file="Americas_FY26 - AMEX Performance Tracker.xlsx" data-src-sheet="Key Metrics Worksheet" data-src-cell="I11 (Grand Total, Cumulative Redemptions)">1,223</td>
-            <td class="num sourced" data-src-file="Americas_FY26 - AMEX Performance Tracker.xlsx" data-src-sheet="Key Metrics Worksheet" data-src-cell="I14 (Redemption Rate)">0.78%</td>
-            <td class="num sourced" data-src-file="Americas_FY26 - AMEX Performance Tracker.xlsx" data-src-sheet="Key Metrics Worksheet" data-src-cell="I12 (Cumulative Redeemer Spend)">$576,722.64</td>
-            <td class="num sourced" data-src-file="Americas_FY26 - AMEX Performance Tracker.xlsx" data-src-sheet="Key Metrics Worksheet" data-src-cell="I13 (Cumulative Offer Cost)">$64,915</td>
-            <td class="num sourced flagged" data-src-file="Americas_FY26 - AMEX Performance Tracker.xlsx" data-src-sheet="Key Metrics Worksheet" data-src-cell="I15 (AOV)" data-src-derived="$576,722.64 ÷ 1,223 (weighted across segments)" data-src-warn="Americas calls this 'AOV' (Avg Order Value); EMEA splits AOV-Enrolled vs AOV-Redeemers. This is the redeemer-side number — equivalent to EMEA AOV Redeemers.">$471.56</td>
-            <td class="num sourced" data-src-file="Americas_FY26 - AMEX Performance Tracker.xlsx" data-src-sheet="Key Metrics Worksheet" data-src-cell="I16 (ROI)" data-src-derived="$576,722.64 ÷ $64,915 (Red Spend ÷ Offer Cost)">8.88x</td>
-            <td class="tbd">TBD</td>
-          </tr>
-          <tr class="market-row">
-            <td>Consumer – No Spend <span style="color:var(--c-n35);font-weight:400;">(Spend $70, get $15)</span></td>
-            <td class="num">Same</td>
-            <td class="num sourced" data-src-file="Americas_FY26 - AMEX Performance Tracker.xlsx" data-src-sheet="Key Metrics Worksheet" data-src-cell="E10">89,990</td>
-            <td class="num sourced" data-src-file="Americas_FY26 - AMEX Performance Tracker.xlsx" data-src-sheet="Key Metrics Worksheet" data-src-cell="E11">920</td>
-            <td class="num sourced" data-src-file="Americas_FY26 - AMEX Performance Tracker.xlsx" data-src-sheet="Key Metrics Worksheet" data-src-cell="E14">1.02%</td>
-            <td class="num sourced" data-src-file="Americas_FY26 - AMEX Performance Tracker.xlsx" data-src-sheet="Key Metrics Worksheet" data-src-cell="E12">$154,396.79</td>
-            <td class="num sourced" data-src-file="Americas_FY26 - AMEX Performance Tracker.xlsx" data-src-sheet="Key Metrics Worksheet" data-src-cell="E13">$13,800</td>
-            <td class="num sourced" data-src-file="Americas_FY26 - AMEX Performance Tracker.xlsx" data-src-sheet="Key Metrics Worksheet" data-src-cell="E15">$167.82</td>
-            <td class="num sourced" data-src-file="Americas_FY26 - AMEX Performance Tracker.xlsx" data-src-sheet="Key Metrics Worksheet" data-src-cell="E16" data-src-derived="$154,396.79 ÷ $13,800">11.19x</td>
-            <td class="tbd">TBD</td>
-          </tr>
-          <tr class="market-row">
-            <td>Consumer – SB Lookalike <span style="color:var(--c-n35);font-weight:400;">(Spend $1,000, get $250)</span></td>
-            <td class="num">Same</td>
-            <td class="num sourced" data-src-file="Americas_FY26 - AMEX Performance Tracker.xlsx" data-src-sheet="Key Metrics Worksheet" data-src-cell="F10">22,000</td>
-            <td class="num sourced" data-src-file="Americas_FY26 - AMEX Performance Tracker.xlsx" data-src-sheet="Key Metrics Worksheet" data-src-cell="F11">124</td>
-            <td class="num sourced" data-src-file="Americas_FY26 - AMEX Performance Tracker.xlsx" data-src-sheet="Key Metrics Worksheet" data-src-cell="F14">0.56%</td>
-            <td class="num sourced" data-src-file="Americas_FY26 - AMEX Performance Tracker.xlsx" data-src-sheet="Key Metrics Worksheet" data-src-cell="F12">$172,204.43</td>
-            <td class="num sourced" data-src-file="Americas_FY26 - AMEX Performance Tracker.xlsx" data-src-sheet="Key Metrics Worksheet" data-src-cell="F13">$31,000</td>
-            <td class="num sourced" data-src-file="Americas_FY26 - AMEX Performance Tracker.xlsx" data-src-sheet="Key Metrics Worksheet" data-src-cell="F15">$1,388.75</td>
-            <td class="num sourced" data-src-file="Americas_FY26 - AMEX Performance Tracker.xlsx" data-src-sheet="Key Metrics Worksheet" data-src-cell="F16" data-src-derived="$172,204.43 ÷ $31,000">5.55x</td>
-            <td class="tbd">TBD</td>
-          </tr>
-          <tr class="market-row">
-            <td>Consumer – Spend <span style="color:var(--c-n35);font-weight:400;">(Spend $450, get $80)</span></td>
-            <td class="num">Same</td>
-            <td class="num sourced" data-src-file="Americas_FY26 - AMEX Performance Tracker.xlsx" data-src-sheet="Key Metrics Worksheet" data-src-cell="G10">20,000</td>
-            <td class="num sourced" data-src-file="Americas_FY26 - AMEX Performance Tracker.xlsx" data-src-sheet="Key Metrics Worksheet" data-src-cell="G11">118</td>
-            <td class="num sourced" data-src-file="Americas_FY26 - AMEX Performance Tracker.xlsx" data-src-sheet="Key Metrics Worksheet" data-src-cell="G14">0.59%</td>
-            <td class="num sourced" data-src-file="Americas_FY26 - AMEX Performance Tracker.xlsx" data-src-sheet="Key Metrics Worksheet" data-src-cell="G12">$140,393.81</td>
-            <td class="num sourced" data-src-file="Americas_FY26 - AMEX Performance Tracker.xlsx" data-src-sheet="Key Metrics Worksheet" data-src-cell="G13">$9,440</td>
-            <td class="num sourced" data-src-file="Americas_FY26 - AMEX Performance Tracker.xlsx" data-src-sheet="Key Metrics Worksheet" data-src-cell="G15">$1,189.78</td>
-            <td class="num sourced" data-src-file="Americas_FY26 - AMEX Performance Tracker.xlsx" data-src-sheet="Key Metrics Worksheet" data-src-cell="G16" data-src-derived="$140,393.81 ÷ $9,440">14.87x</td>
-            <td class="tbd">TBD</td>
-          </tr>
-          <tr class="market-row">
-            <td>Small Business <span style="color:var(--c-n35);font-weight:400;">(Spend $1,000, get $175)</span></td>
-            <td class="num">Same</td>
-            <td class="num sourced" data-src-file="Americas_FY26 - AMEX Performance Tracker.xlsx" data-src-sheet="Key Metrics Worksheet" data-src-cell="H10">24,844</td>
-            <td class="num sourced" data-src-file="Americas_FY26 - AMEX Performance Tracker.xlsx" data-src-sheet="Key Metrics Worksheet" data-src-cell="H11">61</td>
-            <td class="num sourced" data-src-file="Americas_FY26 - AMEX Performance Tracker.xlsx" data-src-sheet="Key Metrics Worksheet" data-src-cell="H14">0.25%</td>
-            <td class="num sourced" data-src-file="Americas_FY26 - AMEX Performance Tracker.xlsx" data-src-sheet="Key Metrics Worksheet" data-src-cell="H12">$109,727.61</td>
-            <td class="num sourced" data-src-file="Americas_FY26 - AMEX Performance Tracker.xlsx" data-src-sheet="Key Metrics Worksheet" data-src-cell="H13">$10,675</td>
-            <td class="num sourced" data-src-file="Americas_FY26 - AMEX Performance Tracker.xlsx" data-src-sheet="Key Metrics Worksheet" data-src-cell="H15">$1,798.81</td>
-            <td class="num sourced" data-src-file="Americas_FY26 - AMEX Performance Tracker.xlsx" data-src-sheet="Key Metrics Worksheet" data-src-cell="H16" data-src-derived="$109,727.61 ÷ $10,675">10.28x</td>
-            <td class="tbd">TBD</td>
-          </tr>
-
-        </tbody>
-      </table>
-    </div>
-
-    <p style="font-size:0.8rem;color:var(--ink-soft);margin-top:0.8rem;">
-      <strong>Open items called out above:</strong>
-      (1) Revenue definition · (2) "Campaign Spend" = Offer Cost only, or + Media Value? · (3) AOV Redeemers vs. AOV Enrolled.
-      Yellow-shaded cells flag sheet-level discrepancies — hover to see what was found.
-    </p>
   </section>
 
-  <!-- ============== -->
-  <!-- THE GRID       -->
-  <!-- ============== -->
+  <!-- ================================ -->
+  <!-- Partnership KPI comparability    -->
+  <!-- ================================ -->
   <section class="block" id="grid">
     <h2>Partnership KPI comparability grid</h2>
 
@@ -1042,6 +778,278 @@
     </div>
   </section>
 
+  <!-- ====================================== -->
+  <!-- AMEX metric definitions + FY26 Q2 grid -->
+  <!-- ====================================== -->
+  <section class="block" id="amex">
+    <h2>AMEX metric definitions <span style="font-size:0.7rem;font-weight:500;color:var(--ink-soft);text-transform:uppercase;letter-spacing:1px;margin-left:0.4rem;">v0 · starting point</span></h2>
+
+    <table class="metric-defs">
+      <thead>
+        <tr><th>Metric</th><th>Definition</th><th>EMEA source</th><th>Notes</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>ROI</td>
+          <td><code>Redemption Spend ÷ Campaign Spend</code></td>
+          <td>Derived (formula in column S, e.g. <code>S43</code>)</td>
+          <td><span class="open-flag">open</span><span class="open-note">"Campaign Spend" today = Offer Cost only. Should it include Media Value too?</span></td>
+        </tr>
+        <tr>
+          <td>Revenue</td>
+          <td><em>TBD</em></td>
+          <td>—</td>
+          <td><span class="open-flag">open</span><span class="open-note">Need definition. Same as Redemption Spend? Or include Adobe-attributed hardware halo?</span></td>
+        </tr>
+        <tr>
+          <td>Redemption Spend</td>
+          <td>Total $ customer spent in the qualifying purchase that triggered the offer</td>
+          <td>Column J (USD) <span class="term-aka">Column I in local currency</span></td>
+          <td>—</td>
+        </tr>
+        <tr>
+          <td>Offer Redemptions <span class="term-aka">(AMEX term) = Enrollments (EMEA term)</span></td>
+          <td>Intent step — customer enrolled in / accepted the offer</td>
+          <td>Column D</td>
+          <td>Vocabulary aliased; grid uses "Enrollments"</td>
+        </tr>
+        <tr>
+          <td>Redemptions</td>
+          <td>Conversion step — qualifying purchase made</td>
+          <td>Column H</td>
+          <td>—</td>
+        </tr>
+        <tr>
+          <td>Redemption Rate</td>
+          <td><code>Redemptions ÷ Enrollments</code></td>
+          <td>Derived</td>
+          <td>—</td>
+        </tr>
+        <tr>
+          <td>AOV (Redeemers)</td>
+          <td>Avg order value of redeeming customers</td>
+          <td>Column P (USD) <span class="term-aka">EMEA also tracks AOV Enrolled in column G</span></td>
+          <td><span class="open-flag">confirm</span><span class="open-note">Grid uses AOV Redeemers — confirm this is the right one (not AOV Enrolled).</span></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3 style="margin-top:2.4rem;">FY26 Q2 — live comparability grid</h3>
+    <p class="lede">AMEX FY26 Q2 across all three regions (mid-Nov 2025 – mid-Jan 2026). Click any region to expand its market-level drill. Hover any value to see file → sheet → cell → derivation. Yellow cells flag definition mismatches or sheet anomalies.</p>
+
+    <div class="q3-wrap">
+      <table class="live-grid" id="amex-q2-grid">
+        <thead>
+          <tr>
+            <th>Region / Market</th>
+            <th>Enrollments</th>
+            <th>Redemptions</th>
+            <th>Red. Rate</th>
+            <th>Red. Spend (USD)</th>
+            <th>Offer Cost (USD)</th>
+            <th>AOV Redeemers (USD)<span class="open-flag">confirm</span></th>
+            <th>ROI</th>
+            <th>Revenue (USD)<span class="open-flag">tbd</span></th>
+          </tr>
+        </thead>
+
+        <!-- ===== EMEA ===== -->
+        <tbody class="region-group collapsed" data-region="emea">
+          <tr class="region-total">
+            <td>EMEA <span class="region">FR + DE + UK + IT</span><span class="region-period">Nov 11, 2025 – Jan 15, 2026</span></td>
+            <td class="num sourced" data-src-file="EMEA_AMEX calc template.xlsx" data-src-sheet="AMEX FY26 Q2" data-src-cell="D55 (Total row)" data-src-derived="Sum of FR + DE + UK + IT enrollments">72,955</td>
+            <td class="num sourced" data-src-file="EMEA_AMEX calc template.xlsx" data-src-sheet="AMEX FY26 Q2" data-src-cell="H55 (Total row)" data-src-derived="Sum of FR + DE + UK + IT redemptions">1,088</td>
+            <td class="num sourced" data-src-file="EMEA_AMEX calc template.xlsx" data-src-sheet="AMEX FY26 Q2" data-src-cell="Derived" data-src-derived="1,088 ÷ 72,955 (Redemptions ÷ Enrollments)">1.49%</td>
+            <td class="num sourced" data-src-file="EMEA_AMEX calc template.xlsx" data-src-sheet="AMEX FY26 Q2" data-src-cell="J55 (Total row, USD)" data-src-derived="Sum of FR + DE + UK + IT redemption spend">$2,125,887.41</td>
+            <td class="num sourced" data-src-file="EMEA_AMEX calc template.xlsx" data-src-sheet="AMEX FY26 Q2" data-src-cell="M55 (Total row, USD)" data-src-derived="Sum of FR + DE + UK + IT offer cost">$138,304.40</td>
+            <td class="num sourced flagged" data-src-file="EMEA_AMEX calc template.xlsx" data-src-sheet="AMEX FY26 Q2" data-src-cell="P55 (AOV Redeemers USD, Total)" data-src-derived="Weighted AOV across markets" data-src-warn="Using AOV Redeemers. EMEA also tracks AOV Enrolled (column G) — confirm canonical choice.">$1,953.94</td>
+            <td class="num sourced" data-src-file="EMEA_AMEX calc template.xlsx" data-src-sheet="AMEX FY26 Q2" data-src-cell="S55 (Total row)" data-src-derived="$2,125,887.41 ÷ $138,304.40 (Red Spend ÷ Offer Cost)">15.37x</td>
+            <td class="tbd">TBD</td>
+          </tr>
+          <tr class="market-row">
+            <td>FR <span style="color:var(--c-n35);font-weight:400;">(cap 8,000)</span></td>
+            <td class="num sourced" data-src-file="EMEA_AMEX calc template.xlsx" data-src-sheet="AMEX FY26 Q2" data-src-cell="D16 (FR Total row)">4,053</td>
+            <td class="num sourced" data-src-file="EMEA_AMEX calc template.xlsx" data-src-sheet="AMEX FY26 Q2" data-src-cell="H16 (FR Total row)">33</td>
+            <td class="num sourced" data-src-file="EMEA_AMEX calc template.xlsx" data-src-sheet="AMEX FY26 Q2" data-src-cell="Derived" data-src-derived="33 ÷ 4,053">0.81%</td>
+            <td class="num sourced" data-src-file="EMEA_AMEX calc template.xlsx" data-src-sheet="AMEX FY26 Q2" data-src-cell="J16 (FR Total, USD)">$46,837.46</td>
+            <td class="num sourced" data-src-file="EMEA_AMEX calc template.xlsx" data-src-sheet="AMEX FY26 Q2" data-src-cell="M16 (FR Total, USD)">$3,837.88</td>
+            <td class="num sourced" data-src-file="EMEA_AMEX calc template.xlsx" data-src-sheet="AMEX FY26 Q2" data-src-cell="P16 (FR Total)">$1,306.41</td>
+            <td class="num sourced" data-src-file="EMEA_AMEX calc template.xlsx" data-src-sheet="AMEX FY26 Q2" data-src-cell="S16 (FR Total)" data-src-derived="$46,837.46 ÷ $3,837.88">12.20x</td>
+            <td class="tbd">TBD</td>
+          </tr>
+          <tr class="market-row">
+            <td>DE <span style="color:var(--c-n35);font-weight:400;">(cap 22,000)</span></td>
+            <td class="num sourced" data-src-file="EMEA_AMEX calc template.xlsx" data-src-sheet="AMEX FY26 Q2" data-src-cell="D25 (DE Total)">17,545</td>
+            <td class="num sourced" data-src-file="EMEA_AMEX calc template.xlsx" data-src-sheet="AMEX FY26 Q2" data-src-cell="H25 (DE Total)">286</td>
+            <td class="num sourced" data-src-file="EMEA_AMEX calc template.xlsx" data-src-sheet="AMEX FY26 Q2" data-src-cell="Derived" data-src-derived="286 ÷ 17,545">1.63%</td>
+            <td class="num sourced" data-src-file="EMEA_AMEX calc template.xlsx" data-src-sheet="AMEX FY26 Q2" data-src-cell="J25 (DE Total, USD)">$362,022.14</td>
+            <td class="num sourced" data-src-file="EMEA_AMEX calc template.xlsx" data-src-sheet="AMEX FY26 Q2" data-src-cell="M25 (DE Total, USD)">$33,215.19</td>
+            <td class="num sourced" data-src-file="EMEA_AMEX calc template.xlsx" data-src-sheet="AMEX FY26 Q2" data-src-cell="P25 (DE Total)">$1,166.55</td>
+            <td class="num sourced" data-src-file="EMEA_AMEX calc template.xlsx" data-src-sheet="AMEX FY26 Q2" data-src-cell="S25 (DE Total)" data-src-derived="$362,022.14 ÷ $33,215.19">10.90x</td>
+            <td class="tbd">TBD</td>
+          </tr>
+          <tr class="market-row">
+            <td>UK <span style="color:var(--c-n35);font-weight:400;">(cap 44,000)</span></td>
+            <td class="num sourced" data-src-file="EMEA_AMEX calc template.xlsx" data-src-sheet="AMEX FY26 Q2" data-src-cell="D34 (UK Total)" data-src-warn="UK exceeded its cap (45,943 vs 44,000 = 104%). Common when feature placements drive higher-than-modeled enrollment.">45,943</td>
+            <td class="num sourced" data-src-file="EMEA_AMEX calc template.xlsx" data-src-sheet="AMEX FY26 Q2" data-src-cell="H34 (UK Total)">733</td>
+            <td class="num sourced" data-src-file="EMEA_AMEX calc template.xlsx" data-src-sheet="AMEX FY26 Q2" data-src-cell="Derived" data-src-derived="733 ÷ 45,943">1.60%</td>
+            <td class="num sourced" data-src-file="EMEA_AMEX calc template.xlsx" data-src-sheet="AMEX FY26 Q2" data-src-cell="J34 (UK Total, USD)">$1,636,366.21</td>
+            <td class="num sourced" data-src-file="EMEA_AMEX calc template.xlsx" data-src-sheet="AMEX FY26 Q2" data-src-cell="M34 (UK Total, USD)">$97,060.91</td>
+            <td class="num sourced" data-src-file="EMEA_AMEX calc template.xlsx" data-src-sheet="AMEX FY26 Q2" data-src-cell="P34 (UK Total)">$2,077.12</td>
+            <td class="num sourced" data-src-file="EMEA_AMEX calc template.xlsx" data-src-sheet="AMEX FY26 Q2" data-src-cell="S34 (UK Total)" data-src-derived="$1,636,366.21 ÷ $97,060.91">16.86x</td>
+            <td class="tbd">TBD</td>
+          </tr>
+          <tr class="market-row">
+            <td>IT <span style="color:var(--c-n35);font-weight:400;">(cap 8,000)</span></td>
+            <td class="num sourced" data-src-file="EMEA_AMEX calc template.xlsx" data-src-sheet="AMEX FY26 Q2" data-src-cell="D43 (IT Total)">5,414</td>
+            <td class="num sourced" data-src-file="EMEA_AMEX calc template.xlsx" data-src-sheet="AMEX FY26 Q2" data-src-cell="H43 (IT Total)">36</td>
+            <td class="num sourced" data-src-file="EMEA_AMEX calc template.xlsx" data-src-sheet="AMEX FY26 Q2" data-src-cell="Derived" data-src-derived="36 ÷ 5,414">0.66%</td>
+            <td class="num sourced" data-src-file="EMEA_AMEX calc template.xlsx" data-src-sheet="AMEX FY26 Q2" data-src-cell="J43 (IT Total, USD)">$80,661.60</td>
+            <td class="num sourced" data-src-file="EMEA_AMEX calc template.xlsx" data-src-sheet="AMEX FY26 Q2" data-src-cell="M43 (IT Total, USD)">$4,190.42</td>
+            <td class="num sourced" data-src-file="EMEA_AMEX calc template.xlsx" data-src-sheet="AMEX FY26 Q2" data-src-cell="P43 (IT Total)">$1,925.86</td>
+            <td class="num sourced" data-src-file="EMEA_AMEX calc template.xlsx" data-src-sheet="AMEX FY26 Q2" data-src-cell="S43 (IT Total)" data-src-derived="$80,661.60 ÷ $4,190.42">19.25x</td>
+            <td class="tbd">TBD</td>
+          </tr>
+        </tbody>
+
+        <!-- ===== ASIA ===== -->
+        <tbody class="region-group collapsed" data-region="asia">
+          <tr class="region-total">
+            <td>Asia <span class="region">AU + JP + SG</span><span class="region-period">Nov 18 – Dec 28, 2025</span></td>
+            <td class="num sourced flagged" data-src-file="Asia_AMEX-Campaign-FY25-Q4.xlsx" data-src-sheet="FY26 Q2" data-src-cell="Derived from R13–R17" data-src-derived="Sum of AU Con + AU SBS + JP Con + JP SBS + SG = 72,000 (each market hit its cap)" data-src-warn="Asia FY26 Q2 interim block does not list enrollments directly. Derived = Redemptions ÷ Redemption Rate per market, which equals the enrollment cap for every market — implies all caps hit.">72,000</td>
+            <td class="num sourced" data-src-file="Asia_AMEX-Campaign-FY25-Q4.xlsx" data-src-sheet="FY26 Q2" data-src-cell="H18 (INTERIM RESULTS 16/01/2026, TOTAL row)">996</td>
+            <td class="num sourced" data-src-file="Asia_AMEX-Campaign-FY25-Q4.xlsx" data-src-sheet="FY26 Q2" data-src-cell="D18">1.38%</td>
+            <td class="num sourced" data-src-file="Asia_AMEX-Campaign-FY25-Q4.xlsx" data-src-sheet="FY26 Q2" data-src-cell="E18 (Redeeming Spend USD, TOTAL)">$1,240,095</td>
+            <td class="num sourced" data-src-file="Asia_AMEX-Campaign-FY25-Q4.xlsx" data-src-sheet="FY26 Q2" data-src-cell="F18 (Offer Cost USD, TOTAL)">$154,803</td>
+            <td class="num sourced flagged" data-src-file="Asia_AMEX-Campaign-FY25-Q4.xlsx" data-src-sheet="FY26 Q2" data-src-cell="Derived" data-src-derived="$1,240,095 ÷ 996 (Red Spend ÷ Redemptions)" data-src-warn="Asia interim block has no AOV column. Computed from totals.">$1,245.07</td>
+            <td class="num sourced" data-src-file="Asia_AMEX-Campaign-FY25-Q4.xlsx" data-src-sheet="FY26 Q2" data-src-cell="G18 (TOTAL)" data-src-derived="$1,240,095 ÷ $154,803 (Red Spend ÷ Offer Cost)">8.01x</td>
+            <td class="tbd">TBD</td>
+          </tr>
+          <tr class="market-row">
+            <td>AU Consumer <span style="color:var(--c-n35);font-weight:400;">(cap 20,000)</span></td>
+            <td class="num sourced flagged" data-src-file="Asia_AMEX-Campaign-FY25-Q4.xlsx" data-src-sheet="FY26 Q2" data-src-cell="Derived (427 ÷ 2.135%)" data-src-derived="Equals enrollment cap — implies cap reached" data-src-warn="Enrollments not listed in interim block. Computed = Redemptions ÷ Redemption Rate.">20,000</td>
+            <td class="num sourced" data-src-file="Asia_AMEX-Campaign-FY25-Q4.xlsx" data-src-sheet="FY26 Q2" data-src-cell="H13">427</td>
+            <td class="num sourced" data-src-file="Asia_AMEX-Campaign-FY25-Q4.xlsx" data-src-sheet="FY26 Q2" data-src-cell="D13">2.14%</td>
+            <td class="num sourced" data-src-file="Asia_AMEX-Campaign-FY25-Q4.xlsx" data-src-sheet="FY26 Q2" data-src-cell="E13">$504,682</td>
+            <td class="num sourced" data-src-file="Asia_AMEX-Campaign-FY25-Q4.xlsx" data-src-sheet="FY26 Q2" data-src-cell="F13">$56,141</td>
+            <td class="num sourced" data-src-file="Asia_AMEX-Campaign-FY25-Q4.xlsx" data-src-sheet="FY26 Q2" data-src-cell="Derived" data-src-derived="$504,682 ÷ 427">$1,181.93</td>
+            <td class="num sourced" data-src-file="Asia_AMEX-Campaign-FY25-Q4.xlsx" data-src-sheet="FY26 Q2" data-src-cell="G13" data-src-derived="$504,682 ÷ $56,141">8.99x</td>
+            <td class="tbd">TBD</td>
+          </tr>
+          <tr class="market-row">
+            <td>AU SBS <span style="color:var(--c-n35);font-weight:400;">(cap 10,000)</span></td>
+            <td class="num sourced flagged" data-src-file="Asia_AMEX-Campaign-FY25-Q4.xlsx" data-src-sheet="FY26 Q2" data-src-cell="Derived (153 ÷ 1.53%)" data-src-derived="Equals enrollment cap" data-src-warn="Computed from Redemptions ÷ Redemption Rate.">10,000</td>
+            <td class="num sourced" data-src-file="Asia_AMEX-Campaign-FY25-Q4.xlsx" data-src-sheet="FY26 Q2" data-src-cell="H14">153</td>
+            <td class="num sourced" data-src-file="Asia_AMEX-Campaign-FY25-Q4.xlsx" data-src-sheet="FY26 Q2" data-src-cell="D14">1.53%</td>
+            <td class="num sourced" data-src-file="Asia_AMEX-Campaign-FY25-Q4.xlsx" data-src-sheet="FY26 Q2" data-src-cell="E14">$266,978</td>
+            <td class="num sourced" data-src-file="Asia_AMEX-Campaign-FY25-Q4.xlsx" data-src-sheet="FY26 Q2" data-src-cell="F14">$20,226</td>
+            <td class="num sourced" data-src-file="Asia_AMEX-Campaign-FY25-Q4.xlsx" data-src-sheet="FY26 Q2" data-src-cell="Derived" data-src-derived="$266,978 ÷ 153">$1,744.95</td>
+            <td class="num sourced" data-src-file="Asia_AMEX-Campaign-FY25-Q4.xlsx" data-src-sheet="FY26 Q2" data-src-cell="G14" data-src-derived="$266,978 ÷ $20,226">13.20x</td>
+            <td class="tbd">TBD</td>
+          </tr>
+          <tr class="market-row">
+            <td>JP Consumer <span style="color:var(--c-n35);font-weight:400;">(cap 20,000)</span></td>
+            <td class="num sourced flagged" data-src-file="Asia_AMEX-Campaign-FY25-Q4.xlsx" data-src-sheet="FY26 Q2" data-src-cell="Derived (310 ÷ 1.55%)" data-src-derived="Equals enrollment cap" data-src-warn="Computed from Redemptions ÷ Redemption Rate.">20,000</td>
+            <td class="num sourced" data-src-file="Asia_AMEX-Campaign-FY25-Q4.xlsx" data-src-sheet="FY26 Q2" data-src-cell="H15">310</td>
+            <td class="num sourced" data-src-file="Asia_AMEX-Campaign-FY25-Q4.xlsx" data-src-sheet="FY26 Q2" data-src-cell="D15">1.55%</td>
+            <td class="num sourced" data-src-file="Asia_AMEX-Campaign-FY25-Q4.xlsx" data-src-sheet="FY26 Q2" data-src-cell="E15">$326,214</td>
+            <td class="num sourced" data-src-file="Asia_AMEX-Campaign-FY25-Q4.xlsx" data-src-sheet="FY26 Q2" data-src-cell="F15">$59,819</td>
+            <td class="num sourced" data-src-file="Asia_AMEX-Campaign-FY25-Q4.xlsx" data-src-sheet="FY26 Q2" data-src-cell="Derived" data-src-derived="$326,214 ÷ 310">$1,052.30</td>
+            <td class="num sourced" data-src-file="Asia_AMEX-Campaign-FY25-Q4.xlsx" data-src-sheet="FY26 Q2" data-src-cell="G15" data-src-derived="$326,214 ÷ $59,819">5.45x</td>
+            <td class="tbd">TBD</td>
+          </tr>
+          <tr class="market-row">
+            <td>JP SBS <span style="color:var(--c-n35);font-weight:400;">(cap 10,000)</span></td>
+            <td class="num sourced flagged" data-src-file="Asia_AMEX-Campaign-FY25-Q4.xlsx" data-src-sheet="FY26 Q2" data-src-cell="Derived (58 ÷ 0.58%)" data-src-derived="Equals enrollment cap" data-src-warn="Computed from Redemptions ÷ Redemption Rate.">10,000</td>
+            <td class="num sourced" data-src-file="Asia_AMEX-Campaign-FY25-Q4.xlsx" data-src-sheet="FY26 Q2" data-src-cell="H16">58</td>
+            <td class="num sourced" data-src-file="Asia_AMEX-Campaign-FY25-Q4.xlsx" data-src-sheet="FY26 Q2" data-src-cell="D16">0.58%</td>
+            <td class="num sourced" data-src-file="Asia_AMEX-Campaign-FY25-Q4.xlsx" data-src-sheet="FY26 Q2" data-src-cell="E16">$70,530</td>
+            <td class="num sourced" data-src-file="Asia_AMEX-Campaign-FY25-Q4.xlsx" data-src-sheet="FY26 Q2" data-src-cell="F16">$11,185</td>
+            <td class="num sourced" data-src-file="Asia_AMEX-Campaign-FY25-Q4.xlsx" data-src-sheet="FY26 Q2" data-src-cell="Derived" data-src-derived="$70,530 ÷ 58">$1,216.03</td>
+            <td class="num sourced" data-src-file="Asia_AMEX-Campaign-FY25-Q4.xlsx" data-src-sheet="FY26 Q2" data-src-cell="G16" data-src-derived="$70,530 ÷ $11,185">6.31x</td>
+            <td class="tbd">TBD</td>
+          </tr>
+          <tr class="market-row">
+            <td>SG (All) <span style="color:var(--c-n35);font-weight:400;">(cap 12,000)</span></td>
+            <td class="num sourced flagged" data-src-file="Asia_AMEX-Campaign-FY25-Q4.xlsx" data-src-sheet="FY26 Q2" data-src-cell="Derived (48 ÷ 0.4%)" data-src-derived="Equals enrollment cap" data-src-warn="Computed from Redemptions ÷ Redemption Rate.">12,000</td>
+            <td class="num sourced" data-src-file="Asia_AMEX-Campaign-FY25-Q4.xlsx" data-src-sheet="FY26 Q2" data-src-cell="H17">48</td>
+            <td class="num sourced" data-src-file="Asia_AMEX-Campaign-FY25-Q4.xlsx" data-src-sheet="FY26 Q2" data-src-cell="D17">0.40%</td>
+            <td class="num sourced" data-src-file="Asia_AMEX-Campaign-FY25-Q4.xlsx" data-src-sheet="FY26 Q2" data-src-cell="E17">$71,691</td>
+            <td class="num sourced" data-src-file="Asia_AMEX-Campaign-FY25-Q4.xlsx" data-src-sheet="FY26 Q2" data-src-cell="F17">$7,432</td>
+            <td class="num sourced" data-src-file="Asia_AMEX-Campaign-FY25-Q4.xlsx" data-src-sheet="FY26 Q2" data-src-cell="Derived" data-src-derived="$71,691 ÷ 48">$1,493.56</td>
+            <td class="num sourced" data-src-file="Asia_AMEX-Campaign-FY25-Q4.xlsx" data-src-sheet="FY26 Q2" data-src-cell="G17" data-src-derived="$71,691 ÷ $7,432">9.65x</td>
+            <td class="tbd">TBD</td>
+          </tr>
+        </tbody>
+
+        <!-- ===== AMERICAS ===== -->
+        <tbody class="region-group collapsed" data-region="americas">
+          <tr class="region-total">
+            <td>Americas <span class="region">All segments</span><span class="region-period">Nov 22, 2025 – Jan 17, 2026</span></td>
+            <td class="num sourced" data-src-file="Americas_FY26 - AMEX Performance Tracker.xlsx" data-src-sheet="Key Metrics Worksheet" data-src-cell="I10 (Grand Total, Sum of Cumulative Enrollments)" data-src-derived="Sum across 4 audience segments">156,834</td>
+            <td class="num sourced" data-src-file="Americas_FY26 - AMEX Performance Tracker.xlsx" data-src-sheet="Key Metrics Worksheet" data-src-cell="I11 (Grand Total, Cumulative Redemptions)">1,223</td>
+            <td class="num sourced" data-src-file="Americas_FY26 - AMEX Performance Tracker.xlsx" data-src-sheet="Key Metrics Worksheet" data-src-cell="I14 (Redemption Rate)">0.78%</td>
+            <td class="num sourced" data-src-file="Americas_FY26 - AMEX Performance Tracker.xlsx" data-src-sheet="Key Metrics Worksheet" data-src-cell="I12 (Cumulative Redeemer Spend)">$576,722.64</td>
+            <td class="num sourced" data-src-file="Americas_FY26 - AMEX Performance Tracker.xlsx" data-src-sheet="Key Metrics Worksheet" data-src-cell="I13 (Cumulative Offer Cost)">$64,915</td>
+            <td class="num sourced flagged" data-src-file="Americas_FY26 - AMEX Performance Tracker.xlsx" data-src-sheet="Key Metrics Worksheet" data-src-cell="I15 (AOV)" data-src-derived="$576,722.64 ÷ 1,223 (weighted across segments)" data-src-warn="Americas calls this 'AOV' (Avg Order Value); EMEA splits AOV-Enrolled vs AOV-Redeemers. This is the redeemer-side number — equivalent to EMEA AOV Redeemers.">$471.56</td>
+            <td class="num sourced" data-src-file="Americas_FY26 - AMEX Performance Tracker.xlsx" data-src-sheet="Key Metrics Worksheet" data-src-cell="I16 (ROI)" data-src-derived="$576,722.64 ÷ $64,915 (Red Spend ÷ Offer Cost)">8.88x</td>
+            <td class="tbd">TBD</td>
+          </tr>
+          <tr class="market-row">
+            <td>Consumer – No Spend <span style="color:var(--c-n35);font-weight:400;">(Spend $70, get $15)</span></td>
+            <td class="num sourced" data-src-file="Americas_FY26 - AMEX Performance Tracker.xlsx" data-src-sheet="Key Metrics Worksheet" data-src-cell="E10">89,990</td>
+            <td class="num sourced" data-src-file="Americas_FY26 - AMEX Performance Tracker.xlsx" data-src-sheet="Key Metrics Worksheet" data-src-cell="E11">920</td>
+            <td class="num sourced" data-src-file="Americas_FY26 - AMEX Performance Tracker.xlsx" data-src-sheet="Key Metrics Worksheet" data-src-cell="E14">1.02%</td>
+            <td class="num sourced" data-src-file="Americas_FY26 - AMEX Performance Tracker.xlsx" data-src-sheet="Key Metrics Worksheet" data-src-cell="E12">$154,396.79</td>
+            <td class="num sourced" data-src-file="Americas_FY26 - AMEX Performance Tracker.xlsx" data-src-sheet="Key Metrics Worksheet" data-src-cell="E13">$13,800</td>
+            <td class="num sourced" data-src-file="Americas_FY26 - AMEX Performance Tracker.xlsx" data-src-sheet="Key Metrics Worksheet" data-src-cell="E15">$167.82</td>
+            <td class="num sourced" data-src-file="Americas_FY26 - AMEX Performance Tracker.xlsx" data-src-sheet="Key Metrics Worksheet" data-src-cell="E16" data-src-derived="$154,396.79 ÷ $13,800">11.19x</td>
+            <td class="tbd">TBD</td>
+          </tr>
+          <tr class="market-row">
+            <td>Consumer – SB Lookalike <span style="color:var(--c-n35);font-weight:400;">(Spend $1,000, get $250)</span></td>
+            <td class="num sourced" data-src-file="Americas_FY26 - AMEX Performance Tracker.xlsx" data-src-sheet="Key Metrics Worksheet" data-src-cell="F10">22,000</td>
+            <td class="num sourced" data-src-file="Americas_FY26 - AMEX Performance Tracker.xlsx" data-src-sheet="Key Metrics Worksheet" data-src-cell="F11">124</td>
+            <td class="num sourced" data-src-file="Americas_FY26 - AMEX Performance Tracker.xlsx" data-src-sheet="Key Metrics Worksheet" data-src-cell="F14">0.56%</td>
+            <td class="num sourced" data-src-file="Americas_FY26 - AMEX Performance Tracker.xlsx" data-src-sheet="Key Metrics Worksheet" data-src-cell="F12">$172,204.43</td>
+            <td class="num sourced" data-src-file="Americas_FY26 - AMEX Performance Tracker.xlsx" data-src-sheet="Key Metrics Worksheet" data-src-cell="F13">$31,000</td>
+            <td class="num sourced" data-src-file="Americas_FY26 - AMEX Performance Tracker.xlsx" data-src-sheet="Key Metrics Worksheet" data-src-cell="F15">$1,388.75</td>
+            <td class="num sourced" data-src-file="Americas_FY26 - AMEX Performance Tracker.xlsx" data-src-sheet="Key Metrics Worksheet" data-src-cell="F16" data-src-derived="$172,204.43 ÷ $31,000">5.55x</td>
+            <td class="tbd">TBD</td>
+          </tr>
+          <tr class="market-row">
+            <td>Consumer – Spend <span style="color:var(--c-n35);font-weight:400;">(Spend $450, get $80)</span></td>
+            <td class="num sourced" data-src-file="Americas_FY26 - AMEX Performance Tracker.xlsx" data-src-sheet="Key Metrics Worksheet" data-src-cell="G10">20,000</td>
+            <td class="num sourced" data-src-file="Americas_FY26 - AMEX Performance Tracker.xlsx" data-src-sheet="Key Metrics Worksheet" data-src-cell="G11">118</td>
+            <td class="num sourced" data-src-file="Americas_FY26 - AMEX Performance Tracker.xlsx" data-src-sheet="Key Metrics Worksheet" data-src-cell="G14">0.59%</td>
+            <td class="num sourced" data-src-file="Americas_FY26 - AMEX Performance Tracker.xlsx" data-src-sheet="Key Metrics Worksheet" data-src-cell="G12">$140,393.81</td>
+            <td class="num sourced" data-src-file="Americas_FY26 - AMEX Performance Tracker.xlsx" data-src-sheet="Key Metrics Worksheet" data-src-cell="G13">$9,440</td>
+            <td class="num sourced" data-src-file="Americas_FY26 - AMEX Performance Tracker.xlsx" data-src-sheet="Key Metrics Worksheet" data-src-cell="G15">$1,189.78</td>
+            <td class="num sourced" data-src-file="Americas_FY26 - AMEX Performance Tracker.xlsx" data-src-sheet="Key Metrics Worksheet" data-src-cell="G16" data-src-derived="$140,393.81 ÷ $9,440">14.87x</td>
+            <td class="tbd">TBD</td>
+          </tr>
+          <tr class="market-row">
+            <td>Small Business <span style="color:var(--c-n35);font-weight:400;">(Spend $1,000, get $175)</span></td>
+            <td class="num sourced" data-src-file="Americas_FY26 - AMEX Performance Tracker.xlsx" data-src-sheet="Key Metrics Worksheet" data-src-cell="H10">24,844</td>
+            <td class="num sourced" data-src-file="Americas_FY26 - AMEX Performance Tracker.xlsx" data-src-sheet="Key Metrics Worksheet" data-src-cell="H11">61</td>
+            <td class="num sourced" data-src-file="Americas_FY26 - AMEX Performance Tracker.xlsx" data-src-sheet="Key Metrics Worksheet" data-src-cell="H14">0.25%</td>
+            <td class="num sourced" data-src-file="Americas_FY26 - AMEX Performance Tracker.xlsx" data-src-sheet="Key Metrics Worksheet" data-src-cell="H12">$109,727.61</td>
+            <td class="num sourced" data-src-file="Americas_FY26 - AMEX Performance Tracker.xlsx" data-src-sheet="Key Metrics Worksheet" data-src-cell="H13">$10,675</td>
+            <td class="num sourced" data-src-file="Americas_FY26 - AMEX Performance Tracker.xlsx" data-src-sheet="Key Metrics Worksheet" data-src-cell="H15">$1,798.81</td>
+            <td class="num sourced" data-src-file="Americas_FY26 - AMEX Performance Tracker.xlsx" data-src-sheet="Key Metrics Worksheet" data-src-cell="H16" data-src-derived="$109,727.61 ÷ $10,675">10.28x</td>
+            <td class="tbd">TBD</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p style="font-size:0.8rem;color:var(--ink-soft);margin-top:0.8rem;">
+      <strong>Open items called out above:</strong>
+      (1) Revenue definition · (2) "Campaign Spend" = Offer Cost only, or + Media Value? · (3) AOV Redeemers vs. AOV Enrolled.
+      Yellow-shaded cells flag sheet-level discrepancies — hover to see what was found.
+    </p>
+  </section>
+
   <p class="footer-note">This is a working scratch-pad. Edit the HTML directly to add partnerships, KPIs, or ideas — or send notes to Cam.</p>
 
 </main>
@@ -1121,6 +1129,24 @@
   document.addEventListener('focusout', hide);
   document.addEventListener('keydown', function (e) {
     if (e.key === 'Escape') hide();
+  });
+})();
+</script>
+
+<script>
+(function () {
+  document.querySelectorAll('.live-grid tbody.region-group > tr.region-total').forEach(function (row) {
+    row.addEventListener('click', function (e) {
+      row.parentElement.classList.toggle('collapsed');
+    });
+    row.setAttribute('role', 'button');
+    row.setAttribute('tabindex', '0');
+    row.addEventListener('keydown', function (e) {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        row.parentElement.classList.toggle('collapsed');
+      }
+    });
   });
 })();
 </script>
