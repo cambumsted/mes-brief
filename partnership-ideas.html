@@ -410,6 +410,43 @@
   }
   .metric-defs .term-aka { margin-top: 0.2rem; }
 
+  /* Structured source cells: doc → sheet → cell → description */
+  .metric-defs .src-cell { line-height: 1.4; padding-top: 0.5rem; padding-bottom: 0.5rem; }
+  .metric-defs .src-doc {
+    font-size: 0.65rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--ms-blue-dark);
+    margin-bottom: 0.15rem;
+    word-break: break-word;
+    line-height: 1.25;
+  }
+  .metric-defs .src-sheet {
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: var(--ink);
+    margin-bottom: 0.2rem;
+  }
+  .metric-defs .src-ref {
+    display: inline-block;
+    font-family: Consolas, monospace;
+    font-size: 0.72rem;
+    color: var(--ink);
+    background: var(--c-n05);
+    border: 1px solid var(--line);
+    padding: 0.1rem 0.45rem;
+    border-radius: 3px;
+    margin-bottom: 0.3rem;
+  }
+  .metric-defs .src-ref.derived { background: #FFF8E1; border-color: #F0DEA0; color: #6B5800; }
+  .metric-defs .src-desc {
+    font-size: 0.74rem;
+    color: var(--ink-soft);
+    margin: 0;
+  }
+  .metric-defs .src-na { color: var(--c-n50); font-style: italic; font-size: 0.85rem; }
+
   /* === Open-question flag === */
   .open-flag {
     display: inline-block;
@@ -975,81 +1012,201 @@
         <tr>
           <td>Offer</td>
           <td>The offer construct (spend threshold and reward) presented to cardholders</td>
-          <td>Header row<br><span class="term-aka">e.g. "Spend 500/100" at row 6 of each wave tab; applied uniformly across FR/DE/UK/IT</span></td>
-          <td>Column B<br><span class="term-aka">"Offer Construct" — varies by market×segment combo</span></td>
-          <td>Header row<br><span class="term-aka">Row 8 "Values" in Key Metrics Worksheet; 4 different offers run concurrently across audience segments</span></td>
+          <td class="src-cell">
+            <div class="src-doc">EMEA_AMEX calc template.xlsx</div>
+            <div class="src-sheet">AMEX FY26 Q2 (and equivalent quarterly tabs)</div>
+            <span class="src-ref">R6 header</span>
+            <div class="src-desc">Single offer applied uniformly across FR/DE/UK/IT in local currency (e.g. "Spend 500/100").</div>
+          </td>
+          <td class="src-cell">
+            <div class="src-doc">Asia_AMEX-Campaign-FY25-Q4.xlsx</div>
+            <div class="src-sheet">FY26 Q2 (and equivalent quarterly tabs)</div>
+            <span class="src-ref">Col B, rows 4–8</span>
+            <div class="src-desc">Per market×segment offer construct — varies by market and audience.</div>
+          </td>
+          <td class="src-cell">
+            <div class="src-doc">Americas_FY26 - AMEX Performance Tracker.xlsx</div>
+            <div class="src-sheet">Key Metrics Worksheet</div>
+            <span class="src-ref">R8 "Values"</span>
+            <div class="src-desc">4 different offers run concurrently across audience segments in the same market.</div>
+          </td>
           <td>Three different shapes — see What's not comparable note below the table</td>
         </tr>
 
         <tr>
           <td>Enrollments <span class="term-aka">a.k.a. Offer Redemptions in AMEX vocab</span></td>
           <td>Intent step — customer accepted / opted into the offer</td>
-          <td>Column D</td>
-          <td>Not directly listed in interim block<br><span class="term-aka">Derived: Redemptions ÷ Redemption Rate (each market hit cap in Q2)</span></td>
-          <td>Pivot row "Sum of Cumulative Enrollments" (Key Metrics Worksheet, R10)</td>
+          <td class="src-cell">
+            <div class="src-doc">EMEA_AMEX calc template.xlsx</div>
+            <div class="src-sheet">AMEX FY26 Q2</div>
+            <span class="src-ref">Col D, totals R16/R25/R34/R43/R55</span>
+            <div class="src-desc">Sum of weekly enrollments per market.</div>
+          </td>
+          <td class="src-cell">
+            <div class="src-doc">Asia_AMEX-Campaign-FY25-Q4.xlsx</div>
+            <div class="src-sheet">FY26 Q2</div>
+            <span class="src-ref derived">Derived</span>
+            <div class="src-desc">Not listed in interim results block. Each market hit its cap in Q2 — value reverse-computed from Redemptions ÷ Redemption Rate.</div>
+          </td>
+          <td class="src-cell">
+            <div class="src-doc">Americas_FY26 - AMEX Performance Tracker.xlsx</div>
+            <div class="src-sheet">Key Metrics Worksheet</div>
+            <span class="src-ref">R10 "Sum of Cumulative Enrollments"</span>
+            <div class="src-desc">PivotTable total across 4 audience segments.</div>
+          </td>
           <td>Asia value flagged in grid — confirm caps were the actual stop, not data omission</td>
         </tr>
 
         <tr>
           <td>Redemptions</td>
           <td>Conversion step — qualifying purchase made by an enrolled customer</td>
-          <td>Column H</td>
-          <td>INTERIM RESULTS block column H (e.g. row 13–18 in FY26 Q2)</td>
-          <td>Pivot row "Sum of Cumulative Redemptions" (R11)</td>
+          <td class="src-cell">
+            <div class="src-doc">EMEA_AMEX calc template.xlsx</div>
+            <div class="src-sheet">AMEX FY26 Q2</div>
+            <span class="src-ref">Col H, totals R16/R25/R34/R43/R55</span>
+            <div class="src-desc">Sum of weekly redemptions per market.</div>
+          </td>
+          <td class="src-cell">
+            <div class="src-doc">Asia_AMEX-Campaign-FY25-Q4.xlsx</div>
+            <div class="src-sheet">FY26 Q2</div>
+            <span class="src-ref">Col H, R13–R18 (INTERIM RESULTS block)</span>
+            <div class="src-desc">Interim actuals captured as of 16/01/2026.</div>
+          </td>
+          <td class="src-cell">
+            <div class="src-doc">Americas_FY26 - AMEX Performance Tracker.xlsx</div>
+            <div class="src-sheet">Key Metrics Worksheet</div>
+            <span class="src-ref">R11</span>
+            <div class="src-desc">PivotTable total across audience segments.</div>
+          </td>
           <td>—</td>
         </tr>
 
         <tr>
           <td>Redemption Rate</td>
           <td><code>Redemptions ÷ Enrollments</code></td>
-          <td>Derived</td>
-          <td>Column D of INTERIM RESULTS block (pre-computed in sheet)</td>
-          <td>Pivot row R14</td>
+          <td class="src-cell">
+            <div class="src-doc">EMEA_AMEX calc template.xlsx</div>
+            <div class="src-sheet">AMEX FY26 Q2</div>
+            <span class="src-ref derived">Derived</span>
+            <div class="src-desc">Redemptions ÷ Enrollments. Not pre-computed in the sheet at the market-total level.</div>
+          </td>
+          <td class="src-cell">
+            <div class="src-doc">Asia_AMEX-Campaign-FY25-Q4.xlsx</div>
+            <div class="src-sheet">FY26 Q2</div>
+            <span class="src-ref">Col D, R13–R18 (INTERIM RESULTS)</span>
+            <div class="src-desc">Pre-computed by the sheet.</div>
+          </td>
+          <td class="src-cell">
+            <div class="src-doc">Americas_FY26 - AMEX Performance Tracker.xlsx</div>
+            <div class="src-sheet">Key Metrics Worksheet</div>
+            <span class="src-ref">R14</span>
+            <div class="src-desc">PivotTable-computed redemption rate.</div>
+          </td>
           <td>—</td>
         </tr>
 
         <tr>
           <td>Redemption Spend</td>
           <td>Total $ customer spent in the qualifying purchase that triggered the offer</td>
-          <td>Column J (USD) <span class="term-aka">Column I in local currency</span></td>
-          <td>Column E "Redeeming Spend (USD)" in INTERIM RESULTS block</td>
-          <td>Pivot row "Sum of Cumulative Redeemer Spend" (R12)</td>
+          <td class="src-cell">
+            <div class="src-doc">EMEA_AMEX calc template.xlsx</div>
+            <div class="src-sheet">AMEX FY26 Q2</div>
+            <span class="src-ref">Col J (USD) · Col I (local)</span>
+            <div class="src-desc">Sum of weekly redemption spend, USD converted via the FX header at the top of the sheet.</div>
+          </td>
+          <td class="src-cell">
+            <div class="src-doc">Asia_AMEX-Campaign-FY25-Q4.xlsx</div>
+            <div class="src-sheet">FY26 Q2</div>
+            <span class="src-ref">Col E "Redeeming Spend (USD)", R13–R18</span>
+            <div class="src-desc">USD already converted in the interim block.</div>
+          </td>
+          <td class="src-cell">
+            <div class="src-doc">Americas_FY26 - AMEX Performance Tracker.xlsx</div>
+            <div class="src-sheet">Key Metrics Worksheet</div>
+            <span class="src-ref">R12 "Sum of Cumulative Redeemer Spend"</span>
+            <div class="src-desc">Americas labels this "Redeemer Spend" — same metric, different name.</div>
+          </td>
           <td>Americas calls it "Redeemer Spend"; same metric</td>
         </tr>
 
         <tr>
           <td>Offer Cost</td>
           <td>The cost to Microsoft of fulfilling the offer rewards (e.g. $200 × 304 redemptions = $60,800)</td>
-          <td>Column M (USD) <span class="term-aka">Column L in local currency</span></td>
-          <td>Column F "Offer Cost (USD)" in INTERIM RESULTS block</td>
-          <td>Pivot row "Sum of Cumulative Offer Cost" (R13)</td>
+          <td class="src-cell">
+            <div class="src-doc">EMEA_AMEX calc template.xlsx</div>
+            <div class="src-sheet">AMEX FY26 Q2</div>
+            <span class="src-ref">Col M (USD) · Col L (local)</span>
+            <div class="src-desc">Sum of offer rewards paid out per market.</div>
+          </td>
+          <td class="src-cell">
+            <div class="src-doc">Asia_AMEX-Campaign-FY25-Q4.xlsx</div>
+            <div class="src-sheet">FY26 Q2</div>
+            <span class="src-ref">Col F "Offer Cost (USD)", R13–R18</span>
+            <div class="src-desc">USD-converted reward fulfillment cost in the interim block.</div>
+          </td>
+          <td class="src-cell">
+            <div class="src-doc">Americas_FY26 - AMEX Performance Tracker.xlsx</div>
+            <div class="src-sheet">Key Metrics Worksheet</div>
+            <span class="src-ref">R13 "Sum of Cumulative Offer Cost"</span>
+            <div class="src-desc">PivotTable total across audience segments.</div>
+          </td>
           <td>Used as denominator in ROI formula today (see open question below)</td>
         </tr>
 
         <tr>
           <td>AOV (Redeemers)</td>
           <td>Avg order value of redeeming customers</td>
-          <td>Column P (USD) <span class="term-aka">EMEA also tracks AOV Enrolled in column G</span></td>
-          <td>Not in interim block <span class="term-aka">Derived: Red Spend ÷ Redemptions</span></td>
-          <td>Pivot row "AOV" (R15)</td>
+          <td class="src-cell">
+            <div class="src-doc">EMEA_AMEX calc template.xlsx</div>
+            <div class="src-sheet">AMEX FY26 Q2</div>
+            <span class="src-ref">Col P (USD) · Col K (local)</span>
+            <div class="src-desc">Pre-computed by the sheet. EMEA also tracks AOV Enrolled in Col G — we use Redeemers per the dictionary.</div>
+          </td>
+          <td class="src-cell">
+            <div class="src-doc">Asia_AMEX-Campaign-FY25-Q4.xlsx</div>
+            <div class="src-sheet">FY26 Q2</div>
+            <span class="src-ref derived">Derived</span>
+            <div class="src-desc">Not in interim block. Computed as Redemption Spend ÷ Redemptions.</div>
+          </td>
+          <td class="src-cell">
+            <div class="src-doc">Americas_FY26 - AMEX Performance Tracker.xlsx</div>
+            <div class="src-sheet">Key Metrics Worksheet</div>
+            <span class="src-ref">R15 "AOV"</span>
+            <div class="src-desc">PivotTable-computed across all audience segments.</div>
+          </td>
           <td><span class="open-flag">confirm</span><span class="open-note">Grid uses AOV Redeemers — confirm this is the right one (not AOV Enrolled).</span></td>
         </tr>
 
         <tr>
           <td>ROI</td>
           <td><code>Redemption Spend ÷ Campaign Spend</code></td>
-          <td>Derived (formula in column S, e.g. <code>S43</code>)</td>
-          <td>Column G of INTERIM RESULTS block <span class="term-aka">Sheet also exposes a second ROI column using Total Spend — we use the Red Spend ÷ Offer Cost one</span></td>
-          <td>Pivot row "ROI" (R16)</td>
+          <td class="src-cell">
+            <div class="src-doc">EMEA_AMEX calc template.xlsx</div>
+            <div class="src-sheet">AMEX FY26 Q2</div>
+            <span class="src-ref">Col S (formula)</span>
+            <div class="src-desc">Red Spend ÷ Offer Cost per market, computed in-cell.</div>
+          </td>
+          <td class="src-cell">
+            <div class="src-doc">Asia_AMEX-Campaign-FY25-Q4.xlsx</div>
+            <div class="src-sheet">FY26 Q2</div>
+            <span class="src-ref">Col G, R13–R18 (INTERIM RESULTS)</span>
+            <div class="src-desc">Sheet exposes a second ROI column using Total Spend (gives ~38x). We use the Red Spend ÷ Offer Cost column per our dictionary.</div>
+          </td>
+          <td class="src-cell">
+            <div class="src-doc">Americas_FY26 - AMEX Performance Tracker.xlsx</div>
+            <div class="src-sheet">Key Metrics Worksheet</div>
+            <span class="src-ref">R16 "ROI"</span>
+            <div class="src-desc">PivotTable-computed ROI across segments.</div>
+          </td>
           <td><span class="open-flag">open</span><span class="open-note">"Campaign Spend" today = Offer Cost only. Should it include Media Value too?</span></td>
         </tr>
 
         <tr>
           <td>Revenue</td>
           <td><em>TBD</em></td>
-          <td>—</td>
-          <td>—</td>
-          <td>—</td>
+          <td class="src-cell"><span class="src-na">—</span></td>
+          <td class="src-cell"><span class="src-na">—</span></td>
+          <td class="src-cell"><span class="src-na">—</span></td>
           <td><span class="open-flag">open</span><span class="open-note">Need definition. Same as Redemption Spend? Or include Adobe-attributed hardware halo?</span></td>
         </tr>
       </tbody>
