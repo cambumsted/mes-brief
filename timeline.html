@@ -103,6 +103,31 @@
     font-size: 2.25rem; font-weight: 600; letter-spacing: -0.5px;
     color: var(--c-dark-blue, #091F2E); margin: 0 0 0.5rem; line-height: 1.15;
   }
+  .page-header h1 .ph-wip {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    vertical-align: middle;
+    margin-left: 0.75rem;
+    padding: 0.22rem 0.7rem 0.22rem 0.55rem;
+    border-radius: 999px;
+    background: #FFFBEA;
+    border: 1px solid #E8D78A;
+    color: #8A6D00;
+    font-size: 0.72rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+    line-height: 1;
+    position: relative;
+    top: -4px;
+  }
+  .page-header h1 .ph-wip .ph-wip-dot {
+    width: 7px; height: 7px;
+    border-radius: 50%;
+    background: #E8A300;
+    box-shadow: 0 0 0 2px rgba(232,163,0,0.18);
+  }
   .page-header .ph-lede {
     font-size: 1rem; color: var(--c-dark-blue, #091F2E);
     opacity: 0.78; max-width: 780px; margin: 0;
@@ -678,7 +703,7 @@
   </div>
   <div class="ph-title-row">
     <div class="ph-meta">DDS Marketing · Working Document · Draft</div>
-    <h1>Workstream Timeline</h1>
+    <h1>Workstream Timeline <span class="ph-wip" title="This page is actively being updated as the project progresses."><span class="ph-wip-dot"></span>Work in progress</span></h1>
     <p class="ph-lede">A reasonable path from where we are today to an integrated marketing effectiveness solution — sequenced through the Crawl, Walk, Run framework with rough time estimates per workstream. Dates are illustrative; actual sequencing depends on resourcing and stakeholder alignment.</p>
   </div>
 </header>
@@ -933,28 +958,6 @@
       </div>
 
       <div class="gantt-row phase-run">
-        <div class="label"><a class="ws-link" href="#ws-integrated-build">Integrated solution build</a></div>
-        <div class="gantt-cells">
-          <div class="col"></div><div class="col"></div><div class="col"></div>
-          <div class="col"></div><div class="col"></div><div class="col"></div>
-          <div class="col"></div><div class="col"></div><div class="col"></div>
-          <div class="col"></div><div class="col"></div><div class="col"></div>
-          <div class="bar run" style="left: 50%; right: 16.67%;"></div>
-        </div>
-      </div>
-
-      <div class="gantt-row phase-run">
-        <div class="label"><a class="ws-link" href="#ws-automate-attribution">Automate moment attribution</a></div>
-        <div class="gantt-cells">
-          <div class="col"></div><div class="col"></div><div class="col"></div>
-          <div class="col"></div><div class="col"></div><div class="col"></div>
-          <div class="col"></div><div class="col"></div><div class="col"></div>
-          <div class="col"></div><div class="col"></div><div class="col"></div>
-          <div class="bar run" style="left: 58.33%; right: 25%;"></div>
-        </div>
-      </div>
-
-      <div class="gantt-row phase-run">
         <div class="label"><a class="ws-link" href="#ws-trend-view">Continuous trend view</a></div>
         <div class="gantt-cells">
           <div class="col"></div><div class="col"></div><div class="col"></div>
@@ -967,17 +970,6 @@
 
       <div class="gantt-row phase-run">
         <div class="label"><a class="ws-link" href="#ws-embed-rituals">Embed in leadership rituals</a></div>
-        <div class="gantt-cells">
-          <div class="col"></div><div class="col"></div><div class="col"></div>
-          <div class="col"></div><div class="col"></div><div class="col"></div>
-          <div class="col"></div><div class="col"></div><div class="col"></div>
-          <div class="col"></div><div class="col"></div><div class="col"></div>
-          <div class="bar run" style="left: 75%; right: 0%;"></div>
-        </div>
-      </div>
-
-      <div class="gantt-row phase-run">
-        <div class="label"><a class="ws-link" href="#ws-selective-automation">Selective automation</a></div>
         <div class="gantt-cells">
           <div class="col"></div><div class="col"></div><div class="col"></div>
           <div class="col"></div><div class="col"></div><div class="col"></div>
@@ -1111,18 +1103,6 @@
             <td class="duration">Quarterly cadence</td>
             <td class="activities">Regional contributors update the grid each quarter with a QA loop — now the steady-state operating rhythm.</td>
           </tr>
-          <tr id="ws-integrated-build">
-            <td class="workstream">Integrated solution build</td>
-            <td class="status"></td>
-            <td class="duration">3–5 months</td>
-            <td class="activities">Move from links + curation to integrated drill-downs across the four pillars.</td>
-          </tr>
-          <tr id="ws-automate-attribution">
-            <td class="workstream">Automate moment attribution</td>
-            <td class="status"></td>
-            <td class="duration">6–8 weeks</td>
-            <td class="activities">Replace manual tagging with system-side rules; keep human review for ambiguity.</td>
-          </tr>
           <tr id="ws-trend-view">
             <td class="workstream">Continuous trend view</td>
             <td class="status"></td>
@@ -1134,12 +1114,6 @@
             <td class="status"></td>
             <td class="duration">Ongoing</td>
             <td class="activities">Solution named as source of truth in MBR, planning, and investment conversations.</td>
-          </tr>
-          <tr id="ws-selective-automation">
-            <td class="workstream">Selective automation</td>
-            <td class="status"></td>
-            <td class="duration">Continuous</td>
-            <td class="activities">Automate where ROI justifies it; leave manual processes manual where cheaper.</td>
           </tr>
         </tbody>
       </table>
