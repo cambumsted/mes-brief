@@ -185,16 +185,25 @@
   }
 
   /* Gantt-style timeline */
-  .gantt {
+  .gantt-scroll {
     margin-top: 1rem;
+    overflow-x: auto;
+    overflow-y: visible;
     border: 1px solid var(--line);
     border-radius: 6px;
-    overflow: visible;
+    background: var(--c-white);
+    /* Subtle hint that horizontal scroll is available */
+    background-image: linear-gradient(to right, rgba(255,255,255,0) 96%, rgba(9,31,46,0.04) 100%);
+    /* Breathing room so absolutely-positioned milestone tooltips render inside the scroll area */
+    padding: 40px 0 28px;
+  }
+  .gantt {
+    min-width: 1320px; /* 260 label + 12 months · 88px min */
     background: var(--c-white);
   }
   .gantt-header, .gantt-row {
     display: grid;
-    grid-template-columns: 300px repeat(6, 1fr);
+    grid-template-columns: 260px repeat(12, minmax(84px, 1fr));
     align-items: stretch;
   }
   .gantt-header {
@@ -233,18 +242,18 @@
   .gantt-cells {
     grid-column: 2 / -1;
     display: grid;
-    grid-template-columns: repeat(6, 1fr);
+    grid-template-columns: repeat(12, 1fr);
     position: relative;
-    /* Weekly grid lines (4 per month = 24 total faint vertical lines) */
+    /* Weekly grid lines (4 per month = 48 total faint vertical lines) */
     background-image: linear-gradient(to right, rgba(9,31,46,0.08) 1px, transparent 1px);
-    background-size: calc(100% / 24) 100%;
+    background-size: calc(100% / 48) 100%;
   }
   .gantt-cells > .col { border-left: 1px solid var(--line); }
 
   /* Weekly sub-header (W1–W4 under each month) */
   .gantt-week-header {
     display: grid;
-    grid-template-columns: 300px repeat(6, 1fr);
+    grid-template-columns: 260px repeat(12, minmax(84px, 1fr));
     background: #FAFBFC;
     border-bottom: 1px solid var(--line);
     font-size: 0.68rem;
@@ -349,7 +358,7 @@
     list-style: none;
     cursor: pointer;
     display: grid;
-    grid-template-columns: 300px repeat(6, 1fr);
+    grid-template-columns: 260px repeat(12, minmax(84px, 1fr));
     align-items: stretch;
     background: var(--bg);
     border-bottom: 1px solid var(--line);
@@ -530,10 +539,116 @@
   .gantt-row .label {
     padding: 0.45rem 0.7rem 0.45rem 1.1rem;
     font-size: 0.8rem;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    flex-wrap: wrap;
   }
   .bar { font-size: 0.72rem; padding: 0 0.55rem; top: 7px; bottom: 7px; }
   .gantt-header > div { padding: 0.45rem 0.35rem; font-size: 0.72rem; }
   .gantt-week-header { font-size: 0.62rem; }
+
+  /* === Status indicators === */
+  .status-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+    font-size: 0.6rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    padding: 0.12rem 0.5rem;
+    border-radius: 10px;
+    white-space: nowrap;
+    line-height: 1.2;
+  }
+  .status-badge.complete {
+    background: #DFF6DD;
+    color: #0B6A0B;
+    border: 1px solid #92C892;
+  }
+  .status-badge.progress {
+    background: #FFF4CE;
+    color: #8A6D00;
+    border: 1px solid #E8C547;
+  }
+  .status-badge::before {
+    display: inline-block;
+    font-size: 0.7rem;
+    line-height: 1;
+  }
+  .status-badge.complete::before { content: "\2713"; } /* ✓ */
+  .status-badge.progress::before {
+    content: "";
+    width: 7px; height: 7px;
+    border-radius: 50%;
+    background: #E8A300;
+    box-shadow: 0 0 0 2px rgba(232,163,0,0.25);
+    animation: pulseDot 1.6s ease-in-out infinite;
+  }
+  @keyframes pulseDot {
+    0%, 100% { box-shadow: 0 0 0 2px rgba(232,163,0,0.25); }
+    50%      { box-shadow: 0 0 0 5px rgba(232,163,0,0.05); }
+  }
+
+  /* Bar variants for status */
+  .bar.status-complete {
+    background: #107C10 !important;
+    color: #FFFFFF;
+  }
+  .bar.status-complete::after {
+    content: "\2713";
+    margin-left: auto;
+    padding-left: 0.4rem;
+    font-weight: 700;
+    opacity: 0.95;
+  }
+  .bar.status-progress {
+    background-image: repeating-linear-gradient(
+      -45deg,
+      rgba(255,255,255,0.28) 0 8px,
+      rgba(255,255,255,0) 8px 16px
+    );
+    background-size: 22.6px 100%;
+    animation: barStripeShift 1.6s linear infinite;
+  }
+  @keyframes barStripeShift {
+    from { background-position: 0 0; }
+    to   { background-position: 22.6px 0; }
+  }
+
+  /* Dedicated project-milestones row (Crawl) */
+  .gantt-row.project-milestones {
+    min-height: 38px;
+    background: #FFFCF1;
+  }
+  .gantt-row.project-milestones .label {
+    background: #FFF6D8;
+    color: #6B5800;
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    font-weight: 700;
+  }
+  /* Top-row milestones: render tooltip BELOW so it isn't clipped above the gantt */
+  .gantt-row.project-milestones .milestone-mark::after {
+    bottom: auto;
+    top: calc(100% + 14px);
+  }
+
+  /* Horizontal scroll hint */
+  .gantt-scroll-hint {
+    font-size: 0.72rem;
+    color: var(--ink-soft);
+    margin: 0.4rem 0 0.6rem;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+  }
+  .gantt-scroll-hint::before {
+    content: "\2194"; /* ↔ */
+    font-size: 0.9rem;
+  }
 
 </style>
 </head>
@@ -581,7 +696,7 @@
           <div class="phase-tag">Phase 1</div>
           <h3>Crawl — Define &amp; Align</h3>
           <span class="duration">~6–8 weeks</span>
-          <p>Discover what stakeholders need, inventory what exists, and stand up a manual MVP of the unified view.</p>
+          <p>Discover what stakeholders need, inventory what exists, land the paid media incrementality readout, and stand up campaign-to-moment attribution.</p>
         </div>
       </a>
       <a class="phase-card-link phase-walk" href="#phase-2">
@@ -589,7 +704,7 @@
           <div class="phase-tag">Phase 2</div>
           <h3>Walk — Centralize &amp; Standardize</h3>
           <span class="duration">~3–4 months</span>
-          <p>Update OCID classifications, operationalize the partnership grid, and begin moment-level attribution.</p>
+          <p>Operationalize the partnership grid on a quarterly cadence and let the Crawl foundations mature into recurring inputs to leadership decisions.</p>
         </div>
       </a>
       <a class="phase-card-link phase-run" href="#phase-3">
@@ -605,7 +720,7 @@
 
   <!-- GANTT -->
   <section class="block">
-    <h2>Timeline view · 6-month working window (May – Oct 2026)</h2>
+    <h2>Timeline view · 12-month working window (May 2026 – Apr 2027)</h2>
 
     <div class="filter-bar" role="group" aria-label="Phase filters">
       <span class="filter-label">Show phases</span>
@@ -615,14 +730,24 @@
       <span class="hint">Uncheck a phase to focus the view.</span>
     </div>
 
+    <p class="gantt-scroll-hint">Scroll horizontally to see the full Crawl → Walk → Run arc.</p>
+
+    <div class="gantt-scroll">
     <div class="gantt">
       <div class="gantt-header">
         <div>Workstream</div>
-        <div>May</div><div>Jun</div><div>Jul</div><div>Aug</div><div>Sep</div><div>Oct</div>
+        <div>May 26</div><div>Jun</div><div>Jul</div><div>Aug</div><div>Sep</div><div>Oct</div>
+        <div>Nov</div><div>Dec</div><div>Jan 27</div><div>Feb</div><div>Mar</div><div>Apr</div>
       </div>
 
       <div class="gantt-week-header" aria-hidden="true">
         <div class="label-spacer"></div>
+        <div class="month-weeks"><span>W1</span><span>W2</span><span>W3</span><span>W4</span></div>
+        <div class="month-weeks"><span>W1</span><span>W2</span><span>W3</span><span>W4</span></div>
+        <div class="month-weeks"><span>W1</span><span>W2</span><span>W3</span><span>W4</span></div>
+        <div class="month-weeks"><span>W1</span><span>W2</span><span>W3</span><span>W4</span></div>
+        <div class="month-weeks"><span>W1</span><span>W2</span><span>W3</span><span>W4</span></div>
+        <div class="month-weeks"><span>W1</span><span>W2</span><span>W3</span><span>W4</span></div>
         <div class="month-weeks"><span>W1</span><span>W2</span><span>W3</span><span>W4</span></div>
         <div class="month-weeks"><span>W1</span><span>W2</span><span>W3</span><span>W4</span></div>
         <div class="month-weeks"><span>W1</span><span>W2</span><span>W3</span><span>W4</span></div>
@@ -637,89 +762,120 @@
         <div class="gantt-cells">
           <div class="col"></div><div class="col"></div><div class="col"></div>
           <div class="col"></div><div class="col"></div><div class="col"></div>
-          <div class="bar crawl" style="left: 0%; right: 50%;">May – Jul</div>
+          <div class="col"></div><div class="col"></div><div class="col"></div>
+          <div class="col"></div><div class="col"></div><div class="col"></div>
+          <div class="bar crawl" style="left: 0%; right: 75%;"></div>
         </div>
       </div>
 
-      <div class="gantt-row phase-crawl">
-        <div class="label"><a class="ws-link" href="#ws-discovery">Stakeholder discovery</a></div>
+      <!-- Project milestones (Crawl-level) -->
+      <div class="gantt-row phase-crawl project-milestones">
+        <div class="label">Project milestones</div>
         <div class="gantt-cells">
           <div class="col"></div><div class="col"></div><div class="col"></div>
           <div class="col"></div><div class="col"></div><div class="col"></div>
-          <div class="bar crawl" style="left: 0%; right: 66.67%;">Stakeholder interviews</div>
-        </div>
-      </div>
-      <div class="gantt-row phase-crawl">
-        <div class="label"><a class="ws-link" href="#ws-marketing-iq">Marketing IQ capabilities discovery</a></div>
-        <div class="gantt-cells">
           <div class="col"></div><div class="col"></div><div class="col"></div>
           <div class="col"></div><div class="col"></div><div class="col"></div>
-          <div class="bar crawl" style="left: 0%; right: 66.67%;">Priyanka &amp; Adam Hineline · through Jun</div>
-        </div>
-      </div>
-      <div class="gantt-row phase-crawl">
-        <div class="label"><a class="ws-link" href="#ws-reports-inventory">Compile reports inventory</a></div>
-        <div class="gantt-cells">
-          <div class="col"></div><div class="col"></div><div class="col"></div>
-          <div class="col"></div><div class="col"></div><div class="col"></div>
-          <div class="bar crawl" style="left: 0%; right: 91.67%;">May Wk1–2</div>
+          <span class="milestone-mark" tabindex="0" style="left: 11.46%;" data-label="Jun Wk2 · Share with DDS LT"></span>
         </div>
       </div>
 
+      <!-- 1. Compile reports inventory (COMPLETE) -->
       <div class="gantt-row phase-crawl">
-        <div class="label"><a class="ws-link" href="#ws-tracking-education">Tracking education (OCID &amp; CMM)</a></div>
+        <div class="label">
+          <a class="ws-link" href="#ws-reports-inventory">Compile reports inventory</a>
+          <span class="status-badge complete">Complete</span>
+        </div>
         <div class="gantt-cells">
           <div class="col"></div><div class="col"></div><div class="col"></div>
           <div class="col"></div><div class="col"></div><div class="col"></div>
-          <div class="bar crawl" style="left: 0%; right: 75%;">May – Jun Wk2</div>
+          <div class="col"></div><div class="col"></div><div class="col"></div>
+          <div class="col"></div><div class="col"></div><div class="col"></div>
+          <div class="bar crawl status-complete" style="left: 0%; right: 95.83%;"></div>
         </div>
       </div>
 
+      <!-- 2. Stakeholder discovery (IN PROGRESS) -->
+      <div class="gantt-row phase-crawl">
+        <div class="label">
+          <a class="ws-link" href="#ws-discovery">Stakeholder discovery</a>
+          <span class="status-badge progress">In progress</span>
+        </div>
+        <div class="gantt-cells">
+          <div class="col"></div><div class="col"></div><div class="col"></div>
+          <div class="col"></div><div class="col"></div><div class="col"></div>
+          <div class="col"></div><div class="col"></div><div class="col"></div>
+          <div class="col"></div><div class="col"></div><div class="col"></div>
+          <div class="bar crawl status-progress" style="left: 0%; right: 83.33%;"></div>
+        </div>
+      </div>
+
+      <!-- 3. Marketing IQ capabilities discovery (IN PROGRESS) -->
+      <div class="gantt-row phase-crawl">
+        <div class="label">
+          <a class="ws-link" href="#ws-marketing-iq">Marketing IQ capabilities discovery</a>
+          <span class="status-badge progress">In progress</span>
+        </div>
+        <div class="gantt-cells">
+          <div class="col"></div><div class="col"></div><div class="col"></div>
+          <div class="col"></div><div class="col"></div><div class="col"></div>
+          <div class="col"></div><div class="col"></div><div class="col"></div>
+          <div class="col"></div><div class="col"></div><div class="col"></div>
+          <div class="bar crawl status-progress" style="left: 0%; right: 83.33%;"></div>
+        </div>
+      </div>
+
+      <!-- 4. Partnership grid template (v1) -->
       <div class="gantt-row phase-crawl">
         <div class="label"><a class="ws-link" href="#ws-partnership-template">Partnership grid template (v1)</a></div>
         <div class="gantt-cells">
           <div class="col"></div><div class="col"></div><div class="col"></div>
           <div class="col"></div><div class="col"></div><div class="col"></div>
-          <div class="bar crawl" style="left: 0%; right: 75%;">May – Jun Wk2</div>
-          <span class="milestone-mark" tabindex="0" style="left: 25%;" data-label="Jun Wk2 · AMEX partnership grid live"></span>
+          <div class="col"></div><div class="col"></div><div class="col"></div>
+          <div class="col"></div><div class="col"></div><div class="col"></div>
+          <div class="bar crawl" style="left: 0%; right: 87.5%;"></div>
+          <span class="milestone-mark" tabindex="0" style="left: 12.5%;" data-label="Jun Wk2 · AMEX partnership grid live"></span>
         </div>
       </div>
 
+      <!-- 5. Campaign-to-moment attribution (IN PROGRESS, moved from Walk) -->
       <div class="gantt-row phase-crawl">
-        <div class="label"><a class="ws-link" href="#ws-incrementality-scoping">Incrementality test scoping</a></div>
+        <div class="label">
+          <a class="ws-link" href="#ws-attribution-v1">Campaign-to-moment attribution</a>
+          <span class="status-badge progress">In progress</span>
+        </div>
         <div class="gantt-cells">
           <div class="col"></div><div class="col"></div><div class="col"></div>
           <div class="col"></div><div class="col"></div><div class="col"></div>
-          <div class="bar crawl" style="left: 8.33%; right: 66.67%;">May Wk3 – Jun</div>
+          <div class="col"></div><div class="col"></div><div class="col"></div>
+          <div class="col"></div><div class="col"></div><div class="col"></div>
+          <div class="bar crawl status-progress" style="left: 4.17%; right: 66.67%;"></div>
         </div>
       </div>
 
+      <!-- 6. Paid media incrementality results (moved from Walk → Jul Wk1) -->
       <div class="gantt-row phase-crawl">
-        <div class="label"><a class="ws-link" href="#ws-moment-inventory">Campaign moment inventory</a></div>
+        <div class="label"><a class="ws-link" href="#ws-incrementality-results">Paid media incrementality results</a></div>
         <div class="gantt-cells">
           <div class="col"></div><div class="col"></div><div class="col"></div>
           <div class="col"></div><div class="col"></div><div class="col"></div>
-          <div class="bar crawl" style="left: 8.33%; right: 66.67%;">May Wk3 – Jun Wk4</div>
+          <div class="col"></div><div class="col"></div><div class="col"></div>
+          <div class="col"></div><div class="col"></div><div class="col"></div>
+          <div class="bar crawl" style="left: 16.67%; right: 79.17%;"></div>
+          <span class="milestone-mark" tabindex="0" style="left: 17.71%;" data-label="Jul Wk1 · Paid media incrementality results released"></span>
         </div>
       </div>
 
-      <div class="gantt-row phase-crawl">
-        <div class="label"><a class="ws-link" href="#ws-manual-mvp">Manual Unified View MVP</a></div>
-        <div class="gantt-cells">
-          <div class="col"></div><div class="col"></div><div class="col"></div>
-          <div class="col"></div><div class="col"></div><div class="col"></div>
-          <div class="bar crawl" style="left: 8.33%; right: 77.08%;">Assemble &amp; ship</div>
-          <span class="milestone-mark" tabindex="0" style="left: 22.92%;" data-label="Jun Wk2 · Manual Unified View MVP live"></span>
-        </div>
-      </div>
-
+      <!-- 7. Stakeholder & RACI -->
       <div class="gantt-row phase-crawl">
         <div class="label"><a class="ws-link" href="#ws-stakeholder-raci">Stakeholder &amp; RACI</a></div>
         <div class="gantt-cells">
           <div class="col"></div><div class="col"></div><div class="col"></div>
           <div class="col"></div><div class="col"></div><div class="col"></div>
-          <div class="bar crawl" style="left: 0%; right: 66.67%;">Lock RACI</div>
-          <span class="milestone-mark" tabindex="0" style="left: 33.33%;" data-label="Jun Wk4 · RACI locked"></span>
+          <div class="col"></div><div class="col"></div><div class="col"></div>
+          <div class="col"></div><div class="col"></div><div class="col"></div>
+          <div class="bar crawl" style="left: 0%; right: 83.33%;"></div>
+          <span class="milestone-mark" tabindex="0" style="left: 16.67%;" data-label="Jun Wk4 · RACI locked"></span>
         </div>
       </div>
 
@@ -729,17 +885,9 @@
         <div class="gantt-cells">
           <div class="col"></div><div class="col"></div><div class="col"></div>
           <div class="col"></div><div class="col"></div><div class="col"></div>
-          <div class="bar walk" style="left: 50%; right: 0%;">Aug – Oct (continues)</div>
-        </div>
-      </div>
-
-      <div class="gantt-row phase-walk">
-        <div class="label"><a class="ws-link" href="#ws-ocid-classifications">Update OCID classifications</a></div>
-        <div class="gantt-cells">
           <div class="col"></div><div class="col"></div><div class="col"></div>
           <div class="col"></div><div class="col"></div><div class="col"></div>
-          <div class="bar walk" style="left: 50%; right: 16.67%;">Reclassify (split PMAX, etc.)</div>
-          <span class="milestone-mark tip-left" tabindex="0" style="left: 83.33%;" data-label="Sep Wk4 · Reclassification live in CMM"></span>
+          <div class="bar walk" style="left: 25%; right: 50%;"></div>
         </div>
       </div>
 
@@ -748,64 +896,88 @@
         <div class="gantt-cells">
           <div class="col"></div><div class="col"></div><div class="col"></div>
           <div class="col"></div><div class="col"></div><div class="col"></div>
-          <div class="bar walk" style="left: 50%; right: 0%;">Quarterly cadence</div>
+          <div class="col"></div><div class="col"></div><div class="col"></div>
+          <div class="col"></div><div class="col"></div><div class="col"></div>
+          <div class="bar walk" style="left: 25%; right: 50%;"></div>
         </div>
       </div>
 
-      <div class="gantt-row phase-walk">
-        <div class="label"><a class="ws-link" href="#ws-incrementality-results">Paid media incrementality results</a></div>
-        <div class="gantt-cells">
-          <div class="col"></div><div class="col"></div><div class="col"></div>
-          <div class="col"></div><div class="col"></div><div class="col"></div>
-          <div class="bar walk" style="left: 50%; right: 33.33%;">Readout &amp; next steps</div>
-          <span class="milestone-mark tip-right" tabindex="0" style="left: 50%;" data-label="End of Jul · Paid media incrementality results released"></span>
-        </div>
-      </div>
-
-      <div class="gantt-row phase-walk">
-        <div class="label"><a class="ws-link" href="#ws-attribution-v1">Campaign-to-moment attribution (v1)</a></div>
-        <div class="gantt-cells">
-          <div class="col"></div><div class="col"></div><div class="col"></div>
-          <div class="col"></div><div class="col"></div><div class="col"></div>
-          <div class="bar walk" style="left: 50%; right: 0%;">Manual tagging</div>
-        </div>
-      </div>
-
-      <div class="gantt-row phase-walk">
-        <div class="label"><a class="ws-link" href="#ws-roi-gapfix">ROI visibility gap-fix</a></div>
-        <div class="gantt-cells">
-          <div class="col"></div><div class="col"></div><div class="col"></div>
-          <div class="col"></div><div class="col"></div><div class="col"></div>
-          <div class="bar walk" style="left: 66.67%; right: 0%;">Define proxies</div>
-        </div>
-      </div>
-
-      <div class="gantt-row phase-walk">
-        <div class="label"><a class="ws-link" href="#ws-review-cadence">Cross-pillar review cadence</a></div>
-        <div class="gantt-cells">
-          <div class="col"></div><div class="col"></div><div class="col"></div>
-          <div class="col"></div><div class="col"></div><div class="col"></div>
-          <div class="bar walk" style="left: 66.67%; right: 0%;">Pilot rhythm</div>
-          <span class="milestone-mark tip-left" tabindex="0" style="left: 95.83%;" data-label="End Oct · Phase 2 mid-point readout"></span>
-        </div>
-      </div>
-
-      <!-- ===== PHASE 3 · RUN (start indicator only) ===== -->
+      <!-- ===== PHASE 3 · RUN ===== -->
       <div class="gantt-row phase-run" style="background:#ECF7F3;">
-        <div class="label" style="font-weight:700; text-transform:uppercase; letter-spacing:0.5px; font-size:0.78rem; color:#1E6657;">Phase 3 · Run <span style="font-weight:500; text-transform:none; letter-spacing:0; font-size:0.72rem;">(begins post-window)</span></div>
+        <div class="label" style="font-weight:700; text-transform:uppercase; letter-spacing:0.5px; font-size:0.78rem; color:#1E6657;">Phase 3 · Run</div>
         <div class="gantt-cells">
           <div class="col"></div><div class="col"></div><div class="col"></div>
           <div class="col"></div><div class="col"></div><div class="col"></div>
-          <div class="bar run" style="left: 91.67%; right: 0%;">Starts Oct Wk3 →</div>
+          <div class="col"></div><div class="col"></div><div class="col"></div>
+          <div class="col"></div><div class="col"></div><div class="col"></div>
+          <div class="bar run" style="left: 50%; right: 0%;"></div>
+        </div>
+      </div>
+
+      <div class="gantt-row phase-run">
+        <div class="label"><a class="ws-link" href="#ws-integrated-build">Integrated solution build</a></div>
+        <div class="gantt-cells">
+          <div class="col"></div><div class="col"></div><div class="col"></div>
+          <div class="col"></div><div class="col"></div><div class="col"></div>
+          <div class="col"></div><div class="col"></div><div class="col"></div>
+          <div class="col"></div><div class="col"></div><div class="col"></div>
+          <div class="bar run" style="left: 50%; right: 16.67%;"></div>
+        </div>
+      </div>
+
+      <div class="gantt-row phase-run">
+        <div class="label"><a class="ws-link" href="#ws-automate-attribution">Automate moment attribution</a></div>
+        <div class="gantt-cells">
+          <div class="col"></div><div class="col"></div><div class="col"></div>
+          <div class="col"></div><div class="col"></div><div class="col"></div>
+          <div class="col"></div><div class="col"></div><div class="col"></div>
+          <div class="col"></div><div class="col"></div><div class="col"></div>
+          <div class="bar run" style="left: 58.33%; right: 25%;"></div>
+        </div>
+      </div>
+
+      <div class="gantt-row phase-run">
+        <div class="label"><a class="ws-link" href="#ws-trend-view">Continuous trend view</a></div>
+        <div class="gantt-cells">
+          <div class="col"></div><div class="col"></div><div class="col"></div>
+          <div class="col"></div><div class="col"></div><div class="col"></div>
+          <div class="col"></div><div class="col"></div><div class="col"></div>
+          <div class="col"></div><div class="col"></div><div class="col"></div>
+          <div class="bar run" style="left: 66.67%; right: 16.67%;"></div>
+        </div>
+      </div>
+
+      <div class="gantt-row phase-run">
+        <div class="label"><a class="ws-link" href="#ws-embed-rituals">Embed in leadership rituals</a></div>
+        <div class="gantt-cells">
+          <div class="col"></div><div class="col"></div><div class="col"></div>
+          <div class="col"></div><div class="col"></div><div class="col"></div>
+          <div class="col"></div><div class="col"></div><div class="col"></div>
+          <div class="col"></div><div class="col"></div><div class="col"></div>
+          <div class="bar run" style="left: 75%; right: 0%;"></div>
+        </div>
+      </div>
+
+      <div class="gantt-row phase-run">
+        <div class="label"><a class="ws-link" href="#ws-selective-automation">Selective automation</a></div>
+        <div class="gantt-cells">
+          <div class="col"></div><div class="col"></div><div class="col"></div>
+          <div class="col"></div><div class="col"></div><div class="col"></div>
+          <div class="col"></div><div class="col"></div><div class="col"></div>
+          <div class="col"></div><div class="col"></div><div class="col"></div>
+          <div class="bar run" style="left: 75%; right: 0%;"></div>
         </div>
       </div>
     </div>
+    </div>
 
-    <div style="margin-top:1rem; display:flex; flex-wrap:wrap; gap:1.2rem; font-size:0.78rem; color:var(--ink-soft);">
+    <div style="margin-top:1rem; display:flex; flex-wrap:wrap; gap:1.2rem; font-size:0.78rem; color:var(--ink-soft); align-items:center;">
       <span><span class="ms-legend-swatch"></span>Milestone (on workstream)</span>
       <span><span style="display:inline-block; width:14px; height:10px; background:var(--c-n50); border-radius:2px; margin-right:0.3rem; vertical-align:middle;"></span>Crawl</span>
       <span><span style="display:inline-block; width:14px; height:10px; background:var(--c-med-blue); border-radius:2px; margin-right:0.3rem; vertical-align:middle;"></span>Walk</span>
       <span><span style="display:inline-block; width:14px; height:10px; background:var(--c-teal); border-radius:2px; margin-right:0.3rem; vertical-align:middle;"></span>Run</span>
+      <span><span class="status-badge complete" style="margin-right:0.1rem;">Complete</span></span>
+      <span><span class="status-badge progress" style="margin-right:0.1rem;">In progress</span></span>
     </div>
   </section>
 
@@ -814,47 +986,37 @@
     <h2>Phase 1 · Crawl — Define &amp; Align</h2>
     <div class="phase-block crawl">
       <table class="workstream-table">
-        <thead><tr><th>Workstream</th><th>Duration</th><th>Key activities</th></tr></thead>
+        <thead><tr><th>Workstream</th><th>Status / Duration</th><th>Key activities</th></tr></thead>
         <tbody>
+          <tr id="ws-reports-inventory">
+            <td class="workstream">Compile reports inventory <span class="status-badge complete" style="margin-left:0.4rem;">Complete</span></td>
+            <td class="duration">May Wk1–2</td>
+            <td class="activities">Catalog existing reports across channels — owner, cadence, audience, gaps.</td>
+          </tr>
           <tr id="ws-discovery">
-            <td class="workstream">Stakeholder discovery</td>
+            <td class="workstream">Stakeholder discovery <span class="status-badge progress" style="margin-left:0.4rem;">In progress</span></td>
             <td class="duration">May – Jun</td>
             <td class="activities">Interview DDS Marketing, channel leads, GTM, Finance — synthesize requirements list.</td>
           </tr>
           <tr id="ws-marketing-iq">
-            <td class="workstream">Marketing IQ capabilities discovery</td>
+            <td class="workstream">Marketing IQ capabilities discovery <span class="status-badge progress" style="margin-left:0.4rem;">In progress</span></td>
             <td class="duration">May – end of Jun</td>
             <td class="activities">Map Marketing IQ's current and roadmap capabilities against requirements; go/no-go on integration.</td>
-          </tr>
-          <tr id="ws-reports-inventory">
-            <td class="workstream">Compile reports inventory</td>
-            <td class="duration">May Wk1–2</td>
-            <td class="activities">Catalog existing reports across channels — owner, cadence, audience, gaps.</td>
-          </tr>
-          <tr id="ws-tracking-education">
-            <td class="workstream">Tracking education (OCID &amp; CMM)</td>
-            <td class="duration">May – Jun Wk2</td>
-            <td class="activities">Document OCID/CMM taxonomy as-is and where it's drifted from how we market today.</td>
           </tr>
           <tr id="ws-partnership-template">
             <td class="workstream">Partnership grid template (v1)</td>
             <td class="duration">May – Jun Wk2</td>
             <td class="activities">Standardize cross-region partnership KPI grid; AMEX live by Jun Wk2.</td>
           </tr>
-          <tr id="ws-incrementality-scoping">
-            <td class="workstream">Incrementality test scoping</td>
-            <td class="duration">May Wk3 – Jun</td>
-            <td class="activities">Scope the in-market test with paid media — methodology, regions, metrics, sign-offs.</td>
+          <tr id="ws-attribution-v1">
+            <td class="workstream">Campaign-to-moment attribution <span class="status-badge progress" style="margin-left:0.4rem;">In progress</span></td>
+            <td class="duration">May – Aug</td>
+            <td class="activities">Currently testing the addition of campaign classifications to clickthrough links on social &amp; display. Establishes the data foundation to roll moments up in the unified view.</td>
           </tr>
-          <tr id="ws-moment-inventory">
-            <td class="workstream">Campaign moment inventory</td>
-            <td class="duration">May Wk3 – Jun Wk4</td>
-            <td class="activities">Inventory priority FY26 GTM moments and the marketing activities tied to each.</td>
-          </tr>
-          <tr id="ws-manual-mvp">
-            <td class="workstream">Manual Unified View MVP</td>
-            <td class="duration">Milestone · Jun Wk2</td>
-            <td class="activities">Curated view (deck or page) that pulls headlines from each pillar — by Jun Wk2.</td>
+          <tr id="ws-incrementality-results">
+            <td class="workstream">Paid media incrementality results &amp; readout</td>
+            <td class="duration">Milestone · Jul Wk1</td>
+            <td class="activities">Receive results, translate to leadership-ready readout — released Jul Wk1.</td>
           </tr>
           <tr id="ws-stakeholder-raci">
             <td class="workstream">Stakeholder &amp; RACI</td>
@@ -866,12 +1028,12 @@
 
       <div class="milestone"><strong>Phase 1 exit:</strong>
         <ul style="margin:0.5rem 0 0; padding-left:1.2rem;">
-          <li>Problem, goal, and direction vocalized and agreed upon with leadership / end users.</li>
+          <li>Reports inventory complete and shared.</li>
+          <li>Problem, goal, and direction shared with DDS LT (Jun Wk2) and agreed upon with leadership / end users.</li>
           <li>Partnership grid MVP (AMEX) created and shared with regional partnerships leads.</li>
-          <li>Tracking capabilities outlined and path forward defined for answering wish-list questions.</li>
           <li>Marketing IQ fit assessed — go/no-go on integration with the unified solution.</li>
-          <li>Incrementality test scoped and ready to land results end of July.</li>
-          <li>Priority campaign moments inventoried, ready for moment-attribution in Walk.</li>
+          <li>Paid media incrementality results released and digested (Jul Wk1).</li>
+          <li>Campaign-to-moment attribution foundation in place (clickthrough classifications live on social &amp; display).</li>
           <li>Stakeholders / RACI established.</li>
         </ul>
       </div>
@@ -885,40 +1047,15 @@
       <table class="workstream-table">
         <thead><tr><th>Workstream</th><th>Duration</th><th>Key activities</th></tr></thead>
         <tbody>
-          <tr id="ws-ocid-classifications">
-            <td class="workstream">Update OCID classifications</td>
-            <td class="duration">8–10 weeks</td>
-            <td class="activities">Reclassify channels in CMM (PMAX out of SEM, etc.) — live by Sep Wk4.</td>
-          </tr>
           <tr id="ws-operationalize-grid">
             <td class="workstream">Operationalize partnership grid</td>
             <td class="duration">Quarterly cadence</td>
             <td class="activities">Regional contributors update the grid each quarter with a QA loop.</td>
           </tr>
-          <tr id="ws-incrementality-results">
-            <td class="workstream">Paid media incrementality results &amp; readout</td>
-            <td class="duration">End of Jul → Aug</td>
-            <td class="activities">Receive results, translate to leadership-ready readout — released end of July.</td>
-          </tr>
-          <tr id="ws-attribution-v1">
-            <td class="workstream">Campaign-to-moment attribution (v1)</td>
-            <td class="duration">8–12 weeks</td>
-            <td class="activities">Manually tag outbound activity (email, paid, partnerships) to GTM moments.</td>
-          </tr>
-          <tr id="ws-roi-gapfix">
-            <td class="workstream">ROI visibility gap-fix</td>
-            <td class="duration">4–6 weeks</td>
-            <td class="activities">Define expected-outcome metric for upper/mid-funnel channels lacking direct ROI.</td>
-          </tr>
-          <tr id="ws-review-cadence">
-            <td class="workstream">Cross-pillar review cadence</td>
-            <td class="duration">Ongoing (start ~Sep)</td>
-            <td class="activities">Recurring working session that drives one real decision each cycle from the Manual Unified View.</td>
-          </tr>
         </tbody>
       </table>
 
-      <div class="milestone"><strong>Phase 2 exit:</strong> updated OCID classifications live in CMM, the partnership grid is on a quarterly cadence with regional contributors, the paid media incrementality readout is in leadership's hands, and a first pass at moment-level attribution is rolled up in the Manual Unified View.</div>
+      <div class="milestone"><strong>Phase 2 exit:</strong> the partnership grid is on a steady quarterly cadence with regional contributors, the foundation laid in Crawl (campaign-to-moment attribution, incrementality learnings) is informing investment conversations, and we are ready to move into integrated build in Run.</div>
     </div>
   </section>
 
