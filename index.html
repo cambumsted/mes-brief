@@ -549,10 +549,10 @@
   .moment-mock .mcard .row .v.up { color: #2C7A4B; }
   .moment-mock .mcard .row .v.down { color: #993333; }
 
-  /* answer-surfaces grid: 3 cols (5 cards = 3+2 layout) */
+  /* answer-surfaces grid: 2 cols (4 cards = 2×2 layout) */
   .grid-4-2 {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(2, 1fr);
     gap: 1rem;
   }
   @media (max-width: 1000px) { .grid-4-2 { grid-template-columns: 1fr 1fr; } }
@@ -1358,38 +1358,21 @@
 
     <div class="grid-4-2" style="margin-top:1.2rem;">
 
-      <!-- Q1: Investment -->
+      <!-- Q1: Investment & trend (merged) -->
       <div class="qcard q1 clickable" data-modal="modal-q1" tabindex="0" role="button" aria-haspopup="dialog" aria-controls="modal-q1">
-        <span class="q-tag">Investment</span>
-        <div class="q-q">If we had $1M to spend tomorrow, where does it go?</div>
+        <span class="q-tag">Investment &amp; trend</span>
+        <div class="q-q">Where do we double down — and what's driving the trend?</div>
         <div class="q-answer">
           <ul>
-            <li>LTV:CAC by paid-media channel</li>
+            <li>LTV:CAC by paid-media channel, with MoM &amp; YoY deltas pre-flagged</li>
             <li>Partnership goal achievement, side by side</li>
-            <li>Surfaces where to lean in vs. pull back</li>
-          </ul>
-        </div>
-        <div class="q-meta">
-          <span class="lab">Sources</span>
-          Triweekly · Exec Monthly · Partnership grid · Power BI / CJA links
-        </div>
-        <span class="preview-cta">See example</span>
-      </div>
-
-      <!-- Q2: Trend driver -->
-      <div class="qcard q2 clickable" data-modal="modal-q2" tabindex="0" role="button" aria-haspopup="dialog" aria-controls="modal-q2">
-        <span class="q-tag">Trend driver</span>
-        <div class="q-q">What moved the number?</div>
-        <div class="q-answer">
-          <ul>
-            <li>Trend by channel × LOB</li>
-            <li>MoM &amp; YoY deltas pre-flagged</li>
             <li>Click a channel → CJA workspace with segments &amp; filters already on</li>
+            <li>Surfaces where to lean in vs. pull back — and what changed</li>
           </ul>
         </div>
         <div class="q-meta">
           <span class="lab">Sources</span>
-          Manual chart · Saved CJA / Adobe Analytics workspaces
+          Triweekly · Exec Monthly · Partnership grid · Saved CJA / Adobe Analytics workspaces
         </div>
         <span class="preview-cta">See example</span>
       </div>
@@ -1689,12 +1672,12 @@
 <!-- ============= MODALS · Answer-surface examples ============= -->
 <div class="modal-backdrop" id="modal-backdrop" role="dialog" aria-modal="true">
 
-  <!-- Q1 modal -->
+  <!-- Q1 modal (merged: Investment + Trend driver) -->
   <div class="modal" id="modal-q1" data-modal-content hidden>
     <div class="modal-head">
       <div>
-        <div class="mh-eyebrow">Investment · Example</div>
-        <div class="mh-title">If we had $1M to spend tomorrow, where does it go?</div>
+        <div class="mh-eyebrow">Investment &amp; trend · Example</div>
+        <div class="mh-title">Where do we double down — and what's driving the trend?</div>
       </div>
       <button class="modal-close" type="button" aria-label="Close">×</button>
     </div>
@@ -1728,29 +1711,20 @@
         </div>
         <span class="ltv-pill">Above goal · room to invest</span>
       </div>
-    </div>
-    <div class="modal-foot">
-      Illustrative. Real numbers come from the Triweekly + Exec Monthly + Partnership grid each cycle.
-    </div>
-  </div>
 
-  <!-- Q2 modal -->
-  <div class="modal" id="modal-q2" data-modal-content hidden>
-    <div class="modal-head">
-      <div>
-        <div class="mh-eyebrow">Trend driver · Example</div>
-        <div class="mh-title">CJA saved workspace · segments &amp; filters pre-applied</div>
+      <div style="margin: 1.4rem 0 0.6rem; padding-top: 1rem; border-top: 1px solid var(--line);">
+        <div style="font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.8px; color: var(--ink-soft); font-weight: 700; margin-bottom: 0.35rem;">What moved the number — open in CJA</div>
+        <div style="font-size: 0.88rem; color: var(--ink-soft); margin-bottom: 0.6rem;">Click a channel from the tables above and land in a saved CJA workspace with USA · Surface Consumer · Buying Page Visits filters already on.</div>
       </div>
-      <button class="modal-close" type="button" aria-label="Close">×</button>
-    </div>
-    <div class="modal-body" style="padding: 0;">
-      <img src="images/cja-workspace.png" alt="CJA saved workspace example showing USA all-up traffic and channel breakdown" style="display:block; width:100%; height:auto;" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
-      <div style="display:none; align-items:center; justify-content:center; min-height: 220px; padding: 1.5rem; background: var(--c-n05); color: var(--ink-soft); font-size: 0.9rem; text-align: center;">
-        Save the screenshot to <code style="background:white; padding: 0.1rem 0.35rem; border-radius:3px;">images/cja-workspace.png</code> to display it here.
+      <div style="margin: 0 -1.5rem -1.5rem;">
+        <img src="images/cja-workspace.png" alt="CJA saved workspace example showing USA all-up traffic and channel breakdown" style="display:block; width:100%; height:auto;" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
+        <div style="display:none; align-items:center; justify-content:center; min-height: 220px; padding: 1.5rem; background: var(--c-n05); color: var(--ink-soft); font-size: 0.9rem; text-align: center;">
+          Save the screenshot to <code style="background:white; padding: 0.1rem 0.35rem; border-radius:3px;">images/cja-workspace.png</code> to display it here.
+        </div>
       </div>
     </div>
     <div class="modal-foot">
-      From the Hub, this opens directly in CJA with USA · Surface Consumer · Buying Page Visits filters already on.
+      Illustrative. Real numbers come from the Triweekly + Exec Monthly + Partnership grid each cycle; the trend view opens directly in CJA with filters pre-applied.
     </div>
   </div>
 
