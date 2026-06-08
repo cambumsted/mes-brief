@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Marketing IQ — Marketing Effectiveness Solution</title>
+<link rel="stylesheet" href="notes-widget.css" />
+<style>
+  :root {
+    --c-dark-blue: #091F2E;
+    --c-med-blue: #0078D4;
+    --c-teal: #49C5B1;
+    --c-white: #FFFFFF;
+    --c-n05: #F2F2F2;
+    --c-n15: #D9D9D9;
+    --c-n25: #BFBFBF;
+    --c-n50: #7F7F7F;
+
+    --ms-blue: var(--c-med-blue);
+    --ms-blue-dark: var(--c-dark-blue);
+    --ms-blue-light: #E6F2FB;
+    --ink: var(--c-dark-blue);
+    --ink-soft: var(--c-n50);
+    --line: var(--c-n15);
+    --bg: var(--c-n05);
+    --card: var(--c-white);
+    --shadow: 0 1.6px 3.6px rgba(9,31,46,0.08), 0 0.3px 0.9px rgba(9,31,46,0.06);
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    font-family: "Segoe UI", -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
+    color: var(--ink);
+    background: var(--bg);
+    line-height: 1.55;
+    font-size: 16px;
+  }
+  a { color: var(--ms-blue-dark); }
+  h1, h2, h3, h4 { color: var(--ink); margin-top: 0; line-height: 1.25; }
+  h1 { font-size: 2.2rem; font-weight: 600; letter-spacing: -0.5px; }
+  h2 { font-size: 1.4rem; font-weight: 600; margin-bottom: 0.4rem; }
+  h3 { font-size: 1.05rem; font-weight: 600; margin-bottom: 0.3rem; }
+  p { margin: 0.4rem 0; }
+
+  /* Top nav */
+  .nav {
+    position: sticky; top: 0; z-index: 100;
+    background: rgba(255,255,255,0.96);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line);
+    padding: 0 1.5rem;
+    height: 56px;
+    display: flex; align-items: center; gap: 1.25rem;
+  }
+  .nav .brand { font-weight: 600; color: var(--ms-blue-dark); margin-right: auto; flex-shrink: 0; font-size: 0.95rem; }
+  .nav a {
+    color: var(--ink-soft); text-decoration: none;
+    font-size: 0.85rem; padding: 0.25rem 0.5rem;
+    border-radius: 4px; flex-shrink: 0;
+  }
+  .nav a:hover { background: var(--ms-blue-light); color: var(--ms-blue-dark); }
+
+  /* Page header */
+  .page-header {
+    background:
+      radial-gradient(ellipse at 20% 60%, rgba(255,255,255,0.9), rgba(200,228,247,0) 60%),
+      linear-gradient(135deg, #E6F0F8 0%, #F4FAFE 60%, #FFFFFF 100%);
+    border-bottom: 1px solid var(--c-n15, #D9D9D9);
+    padding: 1.4rem 1.5rem 2.4rem;
+    color: var(--c-dark-blue, #091F2E);
+    position: relative;
+  }
+  .page-header .ph-inner {
+    max-width: 1200px;
+    margin: 0 auto 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+  .page-header .ph-brand { display: inline-flex; align-items: center; gap: 0.55rem; }
+  .page-header .ph-logo { width: 22px; height: 22px; flex-shrink: 0; }
+  .page-header .ph-wordmark {
+    font-size: 1rem; font-weight: 600;
+    color: var(--c-dark-blue, #091F2E); letter-spacing: 0.1px;
+  }
+  .page-header .ph-confidential {
+    font-size: 0.72rem; color: var(--c-n50, #7F7F7F); font-weight: 400;
+  }
+  .page-header .ph-title-row { max-width: 1200px; margin: 0 auto; }
+  .page-header .ph-meta {
+    font-size: 0.72rem; letter-spacing: 1.5px; text-transform: uppercase;
+    color: var(--c-n50, #7F7F7F); font-weight: 600; margin-bottom: 0.4rem;
+  }
+  .page-header h1 {
+    font-size: 2.25rem; font-weight: 600; letter-spacing: -0.5px;
+    color: var(--c-dark-blue, #091F2E); margin: 0 0 0.5rem; line-height: 1.15;
+  }
+
+  main {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem 1.5rem 4rem;
+  }
+
+  /* Section panels (collapsible) */
+  section.block {
+    background: var(--c-white);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 1.5rem 1.5rem 1.75rem;
+    margin-bottom: 1.5rem;
+    box-shadow: var(--shadow);
+  }
+  section.block h2 {
+    border-bottom: 1px solid var(--line);
+    padding-bottom: 0.6rem;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: baseline;
+    gap: 0.5rem;
+  }
+  section.block .section-toggle {
+    margin-left: auto;
+    background: var(--c-n05);
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    width: 28px;
+    height: 28px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 0.75rem;
+    color: var(--ink-soft);
+    font-family: inherit;
+    padding: 0;
+    line-height: 1;
+    transition: background-color 0.12s ease, color 0.12s ease, border-color 0.12s ease;
+    flex-shrink: 0;
+    align-self: center;
+  }
+  section.block .section-toggle:hover {
+    background: var(--ms-blue-light);
+    border-color: var(--ms-blue);
+    color: var(--ms-blue-dark);
+  }
+  section.block .section-toggle .chev {
+    display: inline-block;
+    transition: transform 0.2s ease;
+  }
+  section.block.collapsed .section-toggle .chev { transform: rotate(-90deg); }
+  section.block.collapsed > *:not(h2) { display: none; }
+  section.block.collapsed { padding-bottom: 1rem; }
+
+  /* ============================================ */
+  /* Marketing IQ mini gantt                       */
+  /* Mirrors the workstream timeline page, filtered */
+  /* to Marketing IQ-related rows only.             */
+  /* ============================================ */
+  .miq-tl { margin-top: 0.8rem; }
+  .miq-tl-meta {
+    font-size: 0.8rem;
+    color: var(--ink-soft);
+    margin-bottom: 0.7rem;
+  }
+  .miq-tl-meta a { color: var(--ms-blue-dark); font-weight: 600; }
+  .miq-tl-scroll {
+    overflow-x: auto;
+    overflow-y: visible;
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    background: var(--c-white);
+    padding: 36px 0 16px;
+  }
+  .miq-tl-gantt { min-width: 1100px; }
+  .miq-tl-header, .miq-tl-row {
+    display: grid;
+    grid-template-columns: 320px repeat(12, minmax(60px, 1fr));
+    align-items: stretch;
+  }
+  .miq-tl-header {
+    background: var(--bg);
+    border-bottom: 1px solid var(--line);
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--ink-soft);
+    font-weight: 600;
+  }
+  .miq-tl-header > div {
+    padding: 0.45rem 0.3rem;
+    text-align: center;
+    border-left: 1px solid var(--line);
+  }
+  .miq-tl-header > div:first-child {
+    text-align: left;
+    border-left: none;
+    padding-left: 0.9rem;
+  }
+  .miq-tl-row {
+    border-bottom: 1px solid var(--line);
+    min-height: 44px;
+  }
+  .miq-tl-row:last-child { border-bottom: none; }
+  .miq-tl-row .label {
+    padding: 0.4rem 0.7rem 0.4rem 0.9rem;
+    font-size: 0.82rem;
+    font-weight: 500;
+    border-right: 1px solid var(--line);
+    background: #FAFBFC;
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+    flex-wrap: wrap;
+    line-height: 1.25;
+  }
+  .miq-tl-row .label a {
+    color: inherit;
+    text-decoration: none;
+  }
+  .miq-tl-row .label a:hover { color: var(--ms-blue); }
+  .miq-tl-cells {
+    grid-column: 2 / -1;
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    position: relative;
+    background-image: linear-gradient(to right, rgba(9,31,46,0.08) 1px, transparent 1px);
+    background-size: calc(100% / 12) 100%;
+  }
+  .miq-tl-cells > .col { border-left: 1px solid var(--line); }
+  .miq-tl-bar {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    height: 22px;
+    border-radius: 4px;
+    color: var(--c-white);
+    font-size: 0.7rem;
+    font-weight: 600;
+    padding: 0 0.55rem;
+    display: flex;
+    align-items: center;
+    box-shadow: 0 1px 2px rgba(9,31,46,0.15);
+  }
+  .miq-tl-bar.crawl { background: var(--c-n50); }
+  .miq-tl-bar.walk  { background: var(--c-med-blue); }
+  .miq-tl-bar.run   { background: var(--c-teal); color: var(--c-dark-blue); }
+  /* Striped "in progress" treatment */
+  .miq-tl-bar.status-progress {
+    background-image: repeating-linear-gradient(
+      -45deg,
+      rgba(255,255,255,0.18) 0 7px,
+      rgba(255,255,255,0) 7px 14px
+    );
+  }
+  /* Phase grouping rows */
+  .miq-tl-row.phase-head .label {
+    background: var(--bg);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-size: 0.7rem;
+    color: var(--ink);
+  }
+  .miq-tl-row.phase-head.crawl .label { background: #F4F4F4; }
+  .miq-tl-row.phase-head.walk  .label { background: #EAF4FB; color: #00477A; }
+  .miq-tl-row.phase-head.run   .label { background: #ECF7F3; color: #1E6657; }
+
+  /* Status badges */
+  .miq-status-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.18rem;
+    font-size: 0.52rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+    padding: 0.05rem 0.32rem;
+    border-radius: 8px;
+    white-space: nowrap;
+    line-height: 1.1;
+    flex-shrink: 0;
+    background: #FFFBEA;
+    color: #8A6D00;
+    border: 1px solid #E8D78A;
+  }
+  .miq-status-badge::before {
+    content: "";
+    width: 5px; height: 5px;
+    border-radius: 50%;
+    background: #C99700;
+  }
+
+  /* Milestone diamond */
+  .miq-milestone {
+    position: absolute;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 12px; height: 12px;
+    z-index: 2;
+    cursor: help;
+  }
+  .miq-milestone::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: #FFB900;
+    border: 2px solid #6B5800;
+    box-shadow: 0 1px 3px rgba(9,31,46,0.25);
+    transform: rotate(45deg);
+  }
+  .miq-milestone::after {
+    content: attr(data-label);
+    position: absolute;
+    bottom: calc(100% + 10px);
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--c-dark-blue);
+    color: white;
+    padding: 0.4rem 0.6rem;
+    border-radius: 5px;
+    font-size: 0.72rem;
+    font-weight: 600;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.15s ease;
+    box-shadow: 0 2px 8px rgba(9,31,46,0.3);
+    z-index: 10;
+  }
+  .miq-milestone:hover::after,
+  .miq-milestone:focus::after { opacity: 1; }
+  .miq-milestone.tip-left::after { left: auto; right: -6px; transform: none; }
+  .miq-milestone.tip-right::after { left: -6px; right: auto; transform: none; }
+
+  .miq-tl-legend {
+    margin-top: 0.8rem;
+    display: flex; flex-wrap: wrap; gap: 1rem;
+    font-size: 0.72rem; color: var(--ink-soft); align-items: center;
+  }
+  .miq-tl-legend .sw {
+    display: inline-block; width: 14px; height: 10px;
+    border-radius: 2px; margin-right: 0.3rem; vertical-align: middle;
+  }
+  .miq-tl-legend .sw.crawl { background: var(--c-n50); }
+  .miq-tl-legend .sw.walk  { background: var(--c-med-blue); }
+  .miq-tl-legend .sw.run   { background: var(--c-teal); }
+  .miq-tl-legend .ms-sw {
+    display: inline-block; width: 11px; height: 11px;
+    background: #FFB900; border: 1.5px solid #6B5800;
+    transform: rotate(45deg);
+    margin-right: 0.35rem;
+    vertical-align: middle;
+  }
+
+  /* Empty-state hint card under the timeline */
+  .miq-overview-hint {
+    color: var(--ink-soft);
+    font-size: 0.92rem;
+    background: var(--bg);
+    border: 1px dashed var(--c-n25);
+    border-radius: 6px;
+    padding: 1rem 1.2rem;
+  }
+</style>
+</head>
+<body>
+
+<header class="page-header">
+  <div class="ph-inner">
+    <div class="ph-brand">
+      <svg class="ph-logo" viewBox="0 0 23 23" aria-hidden="true">
+        <rect x="0" y="0" width="10" height="10" fill="#F25022"/>
+        <rect x="13" y="0" width="10" height="10" fill="#7FBA00"/>
+        <rect x="0" y="13" width="10" height="10" fill="#00A4EF"/>
+        <rect x="13" y="13" width="10" height="10" fill="#FFB900"/>
+      </svg>
+      <span class="ph-wordmark">Microsoft</span>
+    </div>
+    <div class="ph-confidential">Microsoft Confidential</div>
+  </div>
+  <div class="ph-title-row">
+    <div class="ph-meta">Digital Direct Sales</div>
+    <h1>Marketing IQ</h1>
+  </div>
+</header>
+
+<nav class="nav" aria-label="Primary navigation">
+  <span class="brand">Performance Marketing Hub <span style="font-weight:400; color:var(--ink-soft); font-size:0.78rem; margin-left:0.35rem;">(working title)</span></span>
+  <a href="index.html">Brief</a>
+  <a href="timeline.html">Timeline</a>
+  <a href="partnership-ideas.html">Partnerships reporting</a>
+  <a href="marketing-iq.html" style="color: var(--ms-blue-dark); font-weight: 600;">Marketing IQ</a>
+  <a href="web-metrics-notes.html">Notes</a>
+  <a href="reports.html">Reports inventory</a>
+  <a href="archive.html">Archive</a>
+</nav>
+
+<main>
+
+  <!-- ============================ -->
+  <!-- Marketing IQ Timeline (mini) -->
+  <!-- ============================ -->
+  <section class="block" id="timeline">
+    <h2>Marketing IQ Timeline<button type="button" class="section-toggle" aria-label="Collapse section" aria-expanded="true"><span class="chev">▾</span></button></h2>
+    <div class="miq-tl">
+      <p class="miq-tl-meta">Marketing IQ-related workstreams pulled from the <a href="timeline.html">full workstream timeline</a>. May 2026 – Apr 2027.</p>
+
+      <div class="miq-tl-scroll">
+      <div class="miq-tl-gantt">
+        <div class="miq-tl-header">
+          <div>Workstream</div>
+          <div>May 26</div><div>Jun</div><div>Jul</div><div>Aug</div><div>Sep</div><div>Oct</div>
+          <div>Nov</div><div>Dec</div><div>Jan 27</div><div>Feb</div><div>Mar</div><div>Apr</div>
+        </div>
+
+        <!-- CRAWL -->
+        <div class="miq-tl-row phase-head crawl">
+          <div class="label">Phase 1 · Crawl</div>
+          <div class="miq-tl-cells">
+            <div class="col"></div><div class="col"></div><div class="col"></div>
+            <div class="col"></div><div class="col"></div><div class="col"></div>
+            <div class="col"></div><div class="col"></div><div class="col"></div>
+            <div class="col"></div><div class="col"></div><div class="col"></div>
+          </div>
+        </div>
+        <div class="miq-tl-row">
+          <div class="label">
+            <a href="timeline.html#ws-marketing-iq">Marketing IQ capabilities discovery</a>
+            <span class="miq-status-badge">In progress</span>
+          </div>
+          <div class="miq-tl-cells">
+            <div class="col"></div><div class="col"></div><div class="col"></div>
+            <div class="col"></div><div class="col"></div><div class="col"></div>
+            <div class="col"></div><div class="col"></div><div class="col"></div>
+            <div class="col"></div><div class="col"></div><div class="col"></div>
+            <div class="miq-tl-bar crawl status-progress" style="left: 0%; right: 83.33%;"></div>
+          </div>
+        </div>
+        <div class="miq-tl-row">
+          <div class="label">
+            <a href="timeline.html#ws-miq-data-sources">Compile &amp; share data sources for Marketing IQ</a>
+          </div>
+          <div class="miq-tl-cells">
+            <div class="col"></div><div class="col"></div><div class="col"></div>
+            <div class="col"></div><div class="col"></div><div class="col"></div>
+            <div class="col"></div><div class="col"></div><div class="col"></div>
+            <div class="col"></div><div class="col"></div><div class="col"></div>
+            <div class="miq-tl-bar crawl" style="left: 8.33%; right: 83.33%;"></div>
+          </div>
+        </div>
+
+        <!-- WALK -->
+        <div class="miq-tl-row phase-head walk">
+          <div class="label">Phase 2 · Walk</div>
+          <div class="miq-tl-cells">
+            <div class="col"></div><div class="col"></div><div class="col"></div>
+            <div class="col"></div><div class="col"></div><div class="col"></div>
+            <div class="col"></div><div class="col"></div><div class="col"></div>
+            <div class="col"></div><div class="col"></div><div class="col"></div>
+          </div>
+        </div>
+        <div class="miq-tl-row">
+          <div class="label">
+            <a href="timeline.html#ws-miq-dev">Development of Outbound Marketing IQ</a>
+          </div>
+          <div class="miq-tl-cells">
+            <div class="col"></div><div class="col"></div><div class="col"></div>
+            <div class="col"></div><div class="col"></div><div class="col"></div>
+            <div class="col"></div><div class="col"></div><div class="col"></div>
+            <div class="col"></div><div class="col"></div><div class="col"></div>
+            <div class="miq-tl-bar walk" style="left: 16.67%; right: 66.67%;"></div>
+            <span class="miq-milestone" tabindex="0" style="left: 33.33%;" data-label="Aug Wk4 · First test of Marketing IQ with Outbound Marketing data"></span>
+          </div>
+        </div>
+      </div>
+      </div>
+
+      <div class="miq-tl-legend">
+        <span><span class="ms-sw"></span>Milestone (hover for label)</span>
+        <span><span class="sw crawl"></span>Crawl</span>
+        <span><span class="sw walk"></span>Walk</span>
+        <span><span class="sw run"></span>Run</span>
+        <span><span class="miq-status-badge" style="margin-right:0.1rem;">In progress</span></span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Placeholder for future Marketing IQ content -->
+  <section class="block" id="overview">
+    <h2>Overview<button type="button" class="section-toggle" aria-label="Collapse section" aria-expanded="true"><span class="chev">▾</span></button></h2>
+    <p class="miq-overview-hint">
+      Working space for Marketing IQ notes — capabilities discovery, the data-source handoff for Outbound, dev questions for the MIQ team, and learnings from the first Outbound test.
+      Add freely; tear it apart as we go.
+    </p>
+  </section>
+
+</main>
+
+<script>
+(function () {
+  // Section toggles
+  document.querySelectorAll('section.block .section-toggle').forEach(function (btn) {
+    btn.addEventListener('click', function (e) {
+      e.stopPropagation();
+      const section = btn.closest('section.block');
+      if (!section) return;
+      const collapsing = !section.classList.contains('collapsed');
+      section.classList.toggle('collapsed');
+      btn.setAttribute('aria-expanded', collapsing ? 'false' : 'true');
+      btn.setAttribute('aria-label', collapsing ? 'Expand section' : 'Collapse section');
+    });
+  });
+})();
+</script>
+
+</body>
+</html>
