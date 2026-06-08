@@ -568,9 +568,9 @@
     border: 1px solid #92C892;
   }
   .status-badge.progress {
-    background: #FFF4CE;
+    background: #FFFBEA;
     color: #8A6D00;
-    border: 1px solid #E8C547;
+    border: 1px solid #E8D78A;
   }
   .status-badge::before {
     display: inline-block;
@@ -580,15 +580,9 @@
   .status-badge.complete::before { content: "\2713"; } /* ✓ */
   .status-badge.progress::before {
     content: "";
-    width: 7px; height: 7px;
+    width: 6px; height: 6px;
     border-radius: 50%;
-    background: #E8A300;
-    box-shadow: 0 0 0 2px rgba(232,163,0,0.25);
-    animation: pulseDot 1.6s ease-in-out infinite;
-  }
-  @keyframes pulseDot {
-    0%, 100% { box-shadow: 0 0 0 2px rgba(232,163,0,0.25); }
-    50%      { box-shadow: 0 0 0 5px rgba(232,163,0,0.05); }
+    background: #C99700;
   }
 
   /* Bar variants for status */
@@ -606,15 +600,9 @@
   .bar.status-progress {
     background-image: repeating-linear-gradient(
       -45deg,
-      rgba(255,255,255,0.28) 0 8px,
-      rgba(255,255,255,0) 8px 16px
+      rgba(255,255,255,0.18) 0 7px,
+      rgba(255,255,255,0) 7px 14px
     );
-    background-size: 22.6px 100%;
-    animation: barStripeShift 1.6s linear infinite;
-  }
-  @keyframes barStripeShift {
-    from { background-position: 0 0; }
-    to   { background-position: 22.6px 0; }
   }
 
   /* Dedicated project-milestones row (Crawl) */
@@ -827,13 +815,16 @@
 
       <!-- 4. Partnership grid template (v1) -->
       <div class="gantt-row phase-crawl">
-        <div class="label"><a class="ws-link" href="#ws-partnership-template">Partnership grid template (v1)</a></div>
+        <div class="label">
+          <a class="ws-link" href="#ws-partnership-template">Partnership grid template (v1)</a>
+          <span class="status-badge progress">In progress</span>
+        </div>
         <div class="gantt-cells">
           <div class="col"></div><div class="col"></div><div class="col"></div>
           <div class="col"></div><div class="col"></div><div class="col"></div>
           <div class="col"></div><div class="col"></div><div class="col"></div>
           <div class="col"></div><div class="col"></div><div class="col"></div>
-          <div class="bar crawl" style="left: 0%; right: 87.5%;"></div>
+          <div class="bar crawl status-progress" style="left: 0%; right: 87.5%;"></div>
           <span class="milestone-mark" tabindex="0" style="left: 12.5%;" data-label="Jun Wk2 · AMEX partnership grid live"></span>
         </div>
       </div>
@@ -863,19 +854,6 @@
           <div class="col"></div><div class="col"></div><div class="col"></div>
           <div class="bar crawl" style="left: 16.67%; right: 79.17%;"></div>
           <span class="milestone-mark" tabindex="0" style="left: 17.71%;" data-label="Jul Wk1 · Paid media incrementality results released"></span>
-        </div>
-      </div>
-
-      <!-- 7. Stakeholder & RACI -->
-      <div class="gantt-row phase-crawl">
-        <div class="label"><a class="ws-link" href="#ws-stakeholder-raci">Stakeholder &amp; RACI</a></div>
-        <div class="gantt-cells">
-          <div class="col"></div><div class="col"></div><div class="col"></div>
-          <div class="col"></div><div class="col"></div><div class="col"></div>
-          <div class="col"></div><div class="col"></div><div class="col"></div>
-          <div class="col"></div><div class="col"></div><div class="col"></div>
-          <div class="bar crawl" style="left: 0%; right: 83.33%;"></div>
-          <span class="milestone-mark" tabindex="0" style="left: 16.67%;" data-label="Jun Wk4 · RACI locked"></span>
         </div>
       </div>
 
@@ -1004,7 +982,7 @@
             <td class="activities">Map Marketing IQ's current and roadmap capabilities against requirements; go/no-go on integration.</td>
           </tr>
           <tr id="ws-partnership-template">
-            <td class="workstream">Partnership grid template (v1)</td>
+            <td class="workstream">Partnership grid template (v1) <span class="status-badge progress" style="margin-left:0.4rem;">In progress</span></td>
             <td class="duration">May – Jun Wk2</td>
             <td class="activities">Standardize cross-region partnership KPI grid; AMEX live by Jun Wk2.</td>
           </tr>
@@ -1018,11 +996,6 @@
             <td class="duration">Milestone · Jul Wk1</td>
             <td class="activities">Receive results, translate to leadership-ready readout — released Jul Wk1.</td>
           </tr>
-          <tr id="ws-stakeholder-raci">
-            <td class="workstream">Stakeholder &amp; RACI</td>
-            <td class="duration">May – Jun</td>
-            <td class="activities">Lock working group, per-pillar owners, and decision rights before Walk starts.</td>
-          </tr>
         </tbody>
       </table>
 
@@ -1034,7 +1007,6 @@
           <li>Marketing IQ fit assessed — go/no-go on integration with the unified solution.</li>
           <li>Paid media incrementality results released and digested (Jul Wk1).</li>
           <li>Campaign-to-moment attribution foundation in place (clickthrough classifications live on social &amp; display).</li>
-          <li>Stakeholders / RACI established.</li>
         </ul>
       </div>
     </div>
