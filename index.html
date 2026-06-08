@@ -1087,24 +1087,71 @@
     margin-bottom: 0.5rem;
   }
   .phase-summary .pcard p { font-size: 0.88rem; margin: 0; color: var(--ink); }
-  .phase-summary .pcard .phase-summary-list {
-    margin: 0.65rem 0 0; padding: 0 0 0 1rem;
-    font-size: 0.82rem; color: var(--ink);
+
+  /* Brief-level gantt summary (3 phase bars only) */
+  .brief-gantt {
+    margin: 1rem 0 0.4rem;
+    background: var(--c-white);
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    padding: 1rem 1.1rem 1.25rem;
   }
-  .phase-summary .pcard .phase-summary-list li {
-    margin-bottom: 0.2rem; line-height: 1.4;
+  .brief-gantt-months {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    font-size: 0.62rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--ink-soft);
+    font-weight: 600;
+    border-bottom: 1px solid var(--line);
+    padding-bottom: 0.35rem;
+    margin-bottom: 0.8rem;
   }
-  .phase-summary .pcard .phase-summary-list li::marker { color: var(--ink-soft); }
-  .phase-summary .pcard .phase-summary-milestone {
-    margin-top: 0.75rem;
-    padding: 0.35rem 0.6rem;
-    background: #FFF6D8;
-    border-left: 3px solid #E8C547;
-    border-radius: 3px;
-    font-size: 0.78rem;
-    color: #6B5800;
+  .brief-gantt-months span {
+    text-align: center;
+    border-left: 1px dashed var(--c-n15);
+    padding: 0 2px;
   }
-  .phase-summary .pcard .phase-summary-milestone strong { color: #8A6D00; }
+  .brief-gantt-months span:first-child { border-left: none; }
+  .brief-gantt-track {
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    height: 34px;
+    margin-bottom: 0.45rem;
+    background-image: linear-gradient(to right, rgba(9,31,46,0.06) 1px, transparent 1px);
+    background-size: calc(100% / 12) 100%;
+    border-radius: 4px;
+  }
+  .brief-gantt-bar {
+    position: absolute;
+    top: 4px; bottom: 4px;
+    border-radius: 4px;
+    color: var(--c-white);
+    font-size: 0.75rem;
+    font-weight: 600;
+    padding: 0 0.7rem;
+    display: flex;
+    align-items: center;
+    box-shadow: 0 1px 2px rgba(9,31,46,0.15);
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  }
+  .brief-gantt-bar.crawl { background: var(--c-n50); }
+  .brief-gantt-bar.walk  { background: var(--c-med-blue); }
+  .brief-gantt-bar.run   { background: var(--c-teal); color: var(--c-dark-blue); }
+  .brief-gantt-legend {
+    margin-top: 0.6rem;
+    display: flex; flex-wrap: wrap; gap: 1rem;
+    font-size: 0.72rem; color: var(--ink-soft);
+  }
+  .brief-gantt-legend .sw {
+    display: inline-block; width: 12px; height: 10px;
+    border-radius: 2px; margin-right: 0.3rem; vertical-align: middle;
+  }
+  .brief-gantt-legend .sw.crawl { background: var(--c-n50); }
+  .brief-gantt-legend .sw.walk  { background: var(--c-med-blue); }
+  .brief-gantt-legend .sw.run   { background: var(--c-teal); }
 
   /* Gantt */
   .gantt {
@@ -1495,19 +1542,37 @@
     <h2>Crawl, walk, run.</h2>
     <p style="margin: 0.2rem 0 0.4rem; color: var(--ink-soft); font-size: 0.95rem;">A high-level read of the work ahead. The full month-by-month view, milestones, and per-workstream status live on the <a href="timeline.html">workstream timeline</a>.</p>
 
+    <!-- High-level gantt summary -->
+    <div class="brief-gantt" aria-label="High-level phase timeline">
+      <div class="brief-gantt-months" aria-hidden="true">
+        <span>May 26</span><span>Jun</span><span>Jul</span><span>Aug</span><span>Sep</span><span>Oct</span>
+        <span>Nov</span><span>Dec</span><span>Jan 27</span><span>Feb</span><span>Mar</span><span>Apr</span>
+      </div>
+      <!-- Crawl: May – Jul (months 1–3) -->
+      <div class="brief-gantt-track">
+        <div class="brief-gantt-bar crawl" style="left: 0%; right: 75%;">Crawl · Define &amp; Align</div>
+      </div>
+      <!-- Walk: Aug – Oct (months 4–6) -->
+      <div class="brief-gantt-track">
+        <div class="brief-gantt-bar walk" style="left: 25%; right: 50%;">Walk · Centralize &amp; Standardize</div>
+      </div>
+      <!-- Run: Nov – Apr (months 7–12) -->
+      <div class="brief-gantt-track">
+        <div class="brief-gantt-bar run" style="left: 50%; right: 0%;">Run · Integrate &amp; Automate</div>
+      </div>
+      <div class="brief-gantt-legend">
+        <span><span class="sw crawl"></span>Crawl</span>
+        <span><span class="sw walk"></span>Walk</span>
+        <span><span class="sw run"></span>Run</span>
+      </div>
+    </div>
+
     <div class="phase-summary">
       <div class="pcard crawl">
         <div class="phase-tag">Phase 1</div>
         <h3>Crawl · Define &amp; Align</h3>
         <span class="duration">May – Jul 2026</span>
         <p>Discover what stakeholders need, inventory what exists, land the paid media incrementality readout, and stand up the foundations for campaign-to-moment attribution.</p>
-        <ul class="phase-summary-list">
-          <li>Reports inventory + curated-by-channel shortlist</li>
-          <li>Stakeholder &amp; Marketing IQ capabilities discovery</li>
-          <li>Partnership grid template (v1) — AMEX live</li>
-          <li>Paid media incrementality results readout</li>
-        </ul>
-        <div class="phase-summary-milestone"><strong>Jun Wk2</strong> · Share with DDS LT</div>
       </div>
 
       <div class="pcard walk">
@@ -1515,12 +1580,6 @@
         <h3>Walk · Centralize &amp; Standardize</h3>
         <span class="duration">Aug – Oct 2026</span>
         <p>Hand canonical data sources to Marketing IQ, share the V1 AMEX reporting template with RDS stakeholders, and expand manual partnerships reporting beyond AMEX.</p>
-        <ul class="phase-summary-list">
-          <li>Data sources compiled &amp; shared with Marketing IQ</li>
-          <li>V1 AMEX template shared with RDS stakeholders</li>
-          <li>Manual partnerships reporting expanded to more types</li>
-        </ul>
-        <div class="phase-summary-milestone"><strong>Sep Wk2</strong> · First Marketing IQ test with Outbound Marketing data</div>
       </div>
 
       <div class="pcard run">
@@ -1528,13 +1587,6 @@
         <h3>Run · Integrate &amp; Automate</h3>
         <span class="duration">Nov 2026 – Apr 2027</span>
         <p>Move from links + curation to an integrated solution with drill-downs, automate where ROI justifies it, and embed it in leadership rituals.</p>
-        <ul class="phase-summary-list">
-          <li>Operationalize the partnership grid on a quarterly cadence</li>
-          <li>Integrated solution build + continuous trend view</li>
-          <li>Automate moment attribution; selective automation elsewhere</li>
-          <li>Embed in leadership rituals as the source of truth</li>
-        </ul>
-        <div class="phase-summary-milestone"><strong>End Apr</strong> · Embedded in MBR &amp; planning</div>
       </div>
     </div>
 
