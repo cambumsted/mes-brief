@@ -198,12 +198,12 @@
     padding: 40px 0 28px;
   }
   .gantt {
-    min-width: 1320px; /* 260 label + 12 months · 88px min */
+    min-width: 1420px; /* 360 label + 12 months · 88px min */
     background: var(--c-white);
   }
   .gantt-header, .gantt-row {
     display: grid;
-    grid-template-columns: 260px repeat(12, minmax(84px, 1fr));
+    grid-template-columns: 360px repeat(12, minmax(84px, 1fr));
     align-items: stretch;
   }
   .gantt-header {
@@ -253,7 +253,7 @@
   /* Weekly sub-header (W1–W4 under each month) */
   .gantt-week-header {
     display: grid;
-    grid-template-columns: 260px repeat(12, minmax(84px, 1fr));
+    grid-template-columns: 360px repeat(12, minmax(84px, 1fr));
     background: #FAFBFC;
     border-bottom: 1px solid var(--line);
     font-size: 0.68rem;
@@ -358,7 +358,7 @@
     list-style: none;
     cursor: pointer;
     display: grid;
-    grid-template-columns: 260px repeat(12, minmax(84px, 1fr));
+    grid-template-columns: 360px repeat(12, minmax(84px, 1fr));
     align-items: stretch;
     background: var(--bg);
     border-bottom: 1px solid var(--line);
@@ -462,14 +462,19 @@
     font-weight: 600;
     border-bottom: 2px solid var(--line);
   }
-  .workstream-table td.workstream { font-weight: 600; width: 30%; }
+  .workstream-table td.workstream { font-weight: 600; width: 28%; }
+  .workstream-table td.status {
+    width: 10%;
+    white-space: nowrap;
+    vertical-align: middle;
+  }
   .workstream-table td.duration {
-    width: 15%;
+    width: 14%;
     color: var(--ms-blue-dark);
     font-weight: 600;
     white-space: nowrap;
   }
-  .workstream-table td.activities { color: var(--ink); width: 55%; }
+  .workstream-table td.activities { color: var(--ink); width: 48%; }
   .workstream-table tbody tr:nth-child(even) { background: #FAFBFC; }
   .workstream-table tbody tr:hover { background: #F1F6FA; }
 
@@ -535,23 +540,30 @@
   body.hide-run   .phase-run { display: none !important; }
 
   /* === Tighter gantt typography === */
-  .gantt-row { min-height: 40px; height: 40px; }
+  .gantt-row { min-height: 44px; }
   .gantt-row .label {
-    padding: 0.45rem 0.7rem 0.45rem 1.1rem;
+    padding: 0.4rem 0.7rem 0.4rem 1.1rem;
     font-size: 0.8rem;
     display: flex;
     align-items: center;
     gap: 0.35rem;
-    flex-wrap: nowrap;
-    overflow: hidden;
+    flex-wrap: wrap;
+    line-height: 1.25;
   }
   .gantt-row .label a.ws-link {
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
     min-width: 0;
+    white-space: normal;
+    word-break: break-word;
   }
-  .bar { font-size: 0.72rem; padding: 0 0.55rem; top: 7px; bottom: 7px; }
+  /* Lock bar to a fixed height centered in the row, so label wrap can't resize it */
+  .bar {
+    top: 50%;
+    bottom: auto;
+    transform: translateY(-50%);
+    height: 26px;
+    font-size: 0.72rem;
+    padding: 0 0.55rem;
+  }
   .gantt-header > div { padding: 0.45rem 0.35rem; font-size: 0.72rem; }
   .gantt-week-header { font-size: 0.62rem; }
 
@@ -683,37 +695,6 @@
 </nav>
 
 <main>
-
-  <!-- PHASE SUMMARY -->
-  <section class="block">
-    <h2>At a glance</h2>
-    <div class="phase-summary">
-      <a class="phase-card-link phase-crawl" href="#phase-1">
-        <div class="card crawl">
-          <div class="phase-tag">Phase 1</div>
-          <h3>Crawl — Define &amp; Align</h3>
-          <span class="duration">~6–8 weeks</span>
-          <p>Discover what stakeholders need, inventory what exists, land the paid media incrementality readout, and stand up campaign-to-moment attribution.</p>
-        </div>
-      </a>
-      <a class="phase-card-link phase-walk" href="#phase-2">
-        <div class="card walk">
-          <div class="phase-tag">Phase 2</div>
-          <h3>Walk — Centralize &amp; Standardize</h3>
-          <span class="duration">~3–4 months</span>
-          <p>Operationalize the partnership grid on a quarterly cadence and let the Crawl foundations mature into recurring inputs to leadership decisions.</p>
-        </div>
-      </a>
-      <a class="phase-card-link phase-run" href="#phase-3">
-        <div class="card run">
-          <div class="phase-tag">Phase 3</div>
-          <h3>Run — Integrate &amp; Automate</h3>
-          <span class="duration">~4–6 months</span>
-          <p>Integrated solution with drill-downs, automation where ROI justifies it, embedded in leadership rituals.</p>
-        </div>
-      </a>
-    </div>
-  </section>
 
   <!-- GANTT -->
   <section class="block">
@@ -901,6 +882,7 @@
           <div class="col"></div><div class="col"></div><div class="col"></div>
           <div class="col"></div><div class="col"></div><div class="col"></div>
           <div class="bar walk" style="left: 25%; right: 58.33%;"></div>
+          <span class="milestone-mark" tabindex="0" style="left: 35.42%;" data-label="Sep Wk2 · First test of Marketing IQ with Outbound Marketing data"></span>
         </div>
       </div>
 
@@ -1022,40 +1004,47 @@
     <h2>Phase 1 · Crawl — Define &amp; Align</h2>
     <div class="phase-block crawl">
       <table class="workstream-table">
-        <thead><tr><th>Workstream</th><th>Status / Duration</th><th>Key activities</th></tr></thead>
+        <thead><tr><th>Workstream</th><th>Status</th><th>Duration</th><th>Key activities</th></tr></thead>
         <tbody>
           <tr id="ws-reports-inventory">
-            <td class="workstream">Compile reports inventory <span class="status-badge complete" style="margin-left:0.4rem;">Complete</span></td>
+            <td class="workstream">Compile reports inventory</td>
+            <td class="status"><span class="status-badge complete">Complete</span></td>
             <td class="duration">May Wk1–2</td>
             <td class="activities">Catalog existing reports across channels — owner, cadence, audience, gaps.</td>
           </tr>
           <tr id="ws-curated-reports">
-            <td class="workstream">Compile list of curated reports by channel <span class="status-badge progress" style="margin-left:0.4rem;">In progress</span></td>
+            <td class="workstream">Compile list of curated reports by channel</td>
+            <td class="status"><span class="status-badge progress">In progress</span></td>
             <td class="duration">May Wk2 – Jul Wk1</td>
             <td class="activities">From the broader inventory, identify the short list of reports each channel actually relies on for decisions — the curated set that the unified view should surface or replace.</td>
           </tr>
           <tr id="ws-discovery">
-            <td class="workstream">Stakeholder discovery <span class="status-badge progress" style="margin-left:0.4rem;">In progress</span></td>
+            <td class="workstream">Stakeholder discovery</td>
+            <td class="status"><span class="status-badge progress">In progress</span></td>
             <td class="duration">May – Jun</td>
             <td class="activities">Interview DDS Marketing, channel leads, GTM, Finance — synthesize requirements list.</td>
           </tr>
           <tr id="ws-marketing-iq">
-            <td class="workstream">Marketing IQ capabilities discovery <span class="status-badge progress" style="margin-left:0.4rem;">In progress</span></td>
+            <td class="workstream">Marketing IQ capabilities discovery</td>
+            <td class="status"><span class="status-badge progress">In progress</span></td>
             <td class="duration">May – end of Jun</td>
             <td class="activities">Map Marketing IQ's current and roadmap capabilities against requirements; go/no-go on integration.</td>
           </tr>
           <tr id="ws-partnership-template">
-            <td class="workstream">Partnership grid template (v1) <span class="status-badge progress" style="margin-left:0.4rem;">In progress</span></td>
+            <td class="workstream">Partnership grid template (v1)</td>
+            <td class="status"><span class="status-badge progress">In progress</span></td>
             <td class="duration">May – Jun Wk2</td>
             <td class="activities">Standardize cross-region partnership KPI grid; AMEX live by Jun Wk2.</td>
           </tr>
           <tr id="ws-attribution-v1">
-            <td class="workstream">Campaign-to-moment attribution <span class="status-badge progress" style="margin-left:0.4rem;">In progress</span></td>
+            <td class="workstream">Campaign-to-moment attribution</td>
+            <td class="status"><span class="status-badge progress">In progress</span></td>
             <td class="duration">May – Aug</td>
             <td class="activities">Currently testing the addition of campaign classifications to clickthrough links on social &amp; display. Establishes the data foundation to roll moments up in the unified view.</td>
           </tr>
           <tr id="ws-incrementality-results">
             <td class="workstream">Paid media incrementality results &amp; readout</td>
+            <td class="status"></td>
             <td class="duration">Milestone · Jul Wk1</td>
             <td class="activities">Receive results, translate to leadership-ready readout — released Jul Wk1.</td>
           </tr>
@@ -1080,20 +1069,23 @@
     <h2>Phase 2 · Walk — Centralize &amp; Standardize</h2>
     <div class="phase-block walk">
       <table class="workstream-table">
-        <thead><tr><th>Workstream</th><th>Duration</th><th>Key activities</th></tr></thead>
+        <thead><tr><th>Workstream</th><th>Status</th><th>Duration</th><th>Key activities</th></tr></thead>
         <tbody>
           <tr id="ws-miq-data-sources">
             <td class="workstream">Compile &amp; share data sources for Marketing IQ</td>
+            <td class="status"></td>
             <td class="duration">Aug – Sep</td>
-            <td class="activities">Pull together the canonical data sources (channel, campaign, attribution, partnership) and hand them to the Marketing IQ team so they can wire them in.</td>
+            <td class="activities">Pull together the canonical data sources (channel, campaign, attribution, partnership) and hand them to the Marketing IQ team so they can wire them in. First test of Marketing IQ with Outbound Marketing data targeted for Sep Wk2.</td>
           </tr>
           <tr id="ws-amex-rds-share">
             <td class="workstream">Share V1 AMEX partnership reporting template with RDS stakeholders</td>
+            <td class="status"></td>
             <td class="duration">Milestone · Aug Wk2</td>
             <td class="activities">Walk RDS stakeholders through the V1 AMEX partnership reporting template — collect feedback and lock the format before expanding.</td>
           </tr>
           <tr id="ws-expand-partnerships">
             <td class="workstream">Expand manual partnerships reporting to additional partnership types</td>
+            <td class="status"></td>
             <td class="duration">Aug — ongoing</td>
             <td class="activities">Use the V1 AMEX template as a pattern and apply it to additional partnership types (beyond AMEX), keeping the format consistent so the rollups are comparable.</td>
           </tr>
@@ -1110,36 +1102,42 @@
     <div class="phase-block run">
       <table class="workstream-table">
         <thead>
-          <tr><th>Workstream</th><th>Duration</th><th>Key activities</th></tr>
+          <tr><th>Workstream</th><th>Status</th><th>Duration</th><th>Key activities</th></tr>
         </thead>
         <tbody>
           <tr id="ws-operationalize-grid">
             <td class="workstream">Operationalize partnership grid</td>
+            <td class="status"></td>
             <td class="duration">Quarterly cadence</td>
             <td class="activities">Regional contributors update the grid each quarter with a QA loop — now the steady-state operating rhythm.</td>
           </tr>
           <tr id="ws-integrated-build">
             <td class="workstream">Integrated solution build</td>
+            <td class="status"></td>
             <td class="duration">3–5 months</td>
             <td class="activities">Move from links + curation to integrated drill-downs across the four pillars.</td>
           </tr>
           <tr id="ws-automate-attribution">
             <td class="workstream">Automate moment attribution</td>
+            <td class="status"></td>
             <td class="duration">6–8 weeks</td>
             <td class="activities">Replace manual tagging with system-side rules; keep human review for ambiguity.</td>
           </tr>
           <tr id="ws-trend-view">
             <td class="workstream">Continuous trend view</td>
+            <td class="status"></td>
             <td class="duration">4–6 weeks</td>
             <td class="activities">Always-on headline trends replace MBR-only cadence; alerting on directional shifts.</td>
           </tr>
           <tr id="ws-embed-rituals">
             <td class="workstream">Embed in leadership rituals</td>
+            <td class="status"></td>
             <td class="duration">Ongoing</td>
             <td class="activities">Solution named as source of truth in MBR, planning, and investment conversations.</td>
           </tr>
           <tr id="ws-selective-automation">
             <td class="workstream">Selective automation</td>
+            <td class="status"></td>
             <td class="duration">Continuous</td>
             <td class="activities">Automate where ROI justifies it; leave manual processes manual where cheaper.</td>
           </tr>
