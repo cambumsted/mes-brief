@@ -1087,6 +1087,24 @@
     margin-bottom: 0.5rem;
   }
   .phase-summary .pcard p { font-size: 0.88rem; margin: 0; color: var(--ink); }
+  .phase-summary .pcard .phase-summary-list {
+    margin: 0.65rem 0 0; padding: 0 0 0 1rem;
+    font-size: 0.82rem; color: var(--ink);
+  }
+  .phase-summary .pcard .phase-summary-list li {
+    margin-bottom: 0.2rem; line-height: 1.4;
+  }
+  .phase-summary .pcard .phase-summary-list li::marker { color: var(--ink-soft); }
+  .phase-summary .pcard .phase-summary-milestone {
+    margin-top: 0.75rem;
+    padding: 0.35rem 0.6rem;
+    background: #FFF6D8;
+    border-left: 3px solid #E8C547;
+    border-radius: 3px;
+    font-size: 0.78rem;
+    color: #6B5800;
+  }
+  .phase-summary .pcard .phase-summary-milestone strong { color: #8A6D00; }
 
   /* Gantt */
   .gantt {
@@ -1474,193 +1492,53 @@
   <!-- 3. TIMELINE -->
   <section id="timeline">
     <span class="section-num">03 · The Timeline</span>
-    <h2>Crawl, walk, run — roughly 10–12 months.</h2>
+    <h2>Crawl, walk, run.</h2>
+    <p style="margin: 0.2rem 0 0.4rem; color: var(--ink-soft); font-size: 0.95rem;">A high-level read of the work ahead. The full month-by-month view, milestones, and per-workstream status live on the <a href="timeline.html">workstream timeline</a>.</p>
 
     <div class="phase-summary">
       <div class="pcard crawl">
         <div class="phase-tag">Phase 1</div>
-        <h3>Crawl</h3>
-        <span class="duration">~6–8 weeks</span>
-        <p>Define what we have, what we're missing, and what "good" looks like.</p>
+        <h3>Crawl · Define &amp; Align</h3>
+        <span class="duration">May – Jul 2026</span>
+        <p>Discover what stakeholders need, inventory what exists, land the paid media incrementality readout, and stand up the foundations for campaign-to-moment attribution.</p>
+        <ul class="phase-summary-list">
+          <li>Reports inventory + curated-by-channel shortlist</li>
+          <li>Stakeholder &amp; Marketing IQ capabilities discovery</li>
+          <li>Partnership grid template (v1) — AMEX live</li>
+          <li>Paid media incrementality results readout</li>
+        </ul>
+        <div class="phase-summary-milestone"><strong>Jun Wk2</strong> · Share with DDS LT</div>
       </div>
+
       <div class="pcard walk">
         <div class="phase-tag">Phase 2</div>
-        <h3>Walk</h3>
-        <span class="duration">~3–4 months</span>
-        <p>Stand up a live destination and the rhythms that keep it current.</p>
+        <h3>Walk · Centralize &amp; Standardize</h3>
+        <span class="duration">Aug – Oct 2026</span>
+        <p>Hand canonical data sources to Marketing IQ, share the V1 AMEX reporting template with RDS stakeholders, and expand manual partnerships reporting beyond AMEX.</p>
+        <ul class="phase-summary-list">
+          <li>Data sources compiled &amp; shared with Marketing IQ</li>
+          <li>V1 AMEX template shared with RDS stakeholders</li>
+          <li>Manual partnerships reporting expanded to more types</li>
+        </ul>
+        <div class="phase-summary-milestone"><strong>Sep Wk2</strong> · First Marketing IQ test with Outbound Marketing data</div>
       </div>
+
       <div class="pcard run">
         <div class="phase-tag">Phase 3</div>
-        <h3>Run</h3>
-        <span class="duration">~4–6 months</span>
-        <p>Integrate, automate where it's worth it, embed in leadership rituals.</p>
+        <h3>Run · Integrate &amp; Automate</h3>
+        <span class="duration">Nov 2026 – Apr 2027</span>
+        <p>Move from links + curation to an integrated solution with drill-downs, automate where ROI justifies it, and embed it in leadership rituals.</p>
+        <ul class="phase-summary-list">
+          <li>Operationalize the partnership grid on a quarterly cadence</li>
+          <li>Integrated solution build + continuous trend view</li>
+          <li>Automate moment attribution; selective automation elsewhere</li>
+          <li>Embed in leadership rituals as the source of truth</li>
+        </ul>
+        <div class="phase-summary-milestone"><strong>End Apr</strong> · Embedded in MBR &amp; planning</div>
       </div>
     </div>
 
-    <h3 style="margin-top:1.75rem;">Workstreams across the 12 months</h3>
-
-    <div class="gantt">
-      <div class="gantt-header">
-        <div>Workstream</div>
-        <div>May</div><div>Jun</div><div>Jul</div><div>Aug</div><div>Sep</div><div>Oct</div>
-        <div>Nov</div><div>Dec</div><div>Jan</div><div>Feb</div><div>Mar</div><div>Apr</div>
-      </div>
-
-      <div class="gantt-row milestones-row">
-        <div class="label">Milestones</div>
-        <div class="gantt-cells">
-          <div class="col"></div><div class="col"></div><div class="col"></div><div class="col"></div>
-          <div class="col"></div><div class="col"></div><div class="col"></div><div class="col"></div>
-          <div class="col"></div><div class="col"></div><div class="col"></div><div class="col"></div>
-          <span class="milestone-mark tip-right" style="left: 6%;"  data-label="Late May · Kickoff"></span>
-          <span class="milestone-mark" style="left: 33%;" data-label="End Aug · MVP live"></span>
-          <span class="milestone-mark" style="left: 58%;" data-label="End Nov · Walk readout"></span>
-          <span class="milestone-mark" style="left: 83%;" data-label="End Feb · V1 build"></span>
-          <span class="milestone-mark tip-left"  style="left: 98%;" data-label="End Apr · Embedded"></span>
-        </div>
-      </div>
-
-      <div class="gantt-row">
-        <div class="label">Discovery period</div>
-        <div class="gantt-cells">
-          <div class="col"></div><div class="col"></div><div class="col"></div><div class="col"></div>
-          <div class="col"></div><div class="col"></div><div class="col"></div><div class="col"></div>
-          <div class="col"></div><div class="col"></div><div class="col"></div><div class="col"></div>
-          <div class="bar crawl" style="left: 0%; right: 75%;">Crawl · discovery</div>
-        </div>
-      </div>
-
-      <div class="gantt-row">
-        <div class="label">Compile reports inventory</div>
-        <div class="gantt-cells">
-          <div class="col"></div><div class="col"></div><div class="col"></div><div class="col"></div>
-          <div class="col"></div><div class="col"></div><div class="col"></div><div class="col"></div>
-          <div class="col"></div><div class="col"></div><div class="col"></div><div class="col"></div>
-          <div class="bar crawl" style="left: 0%; right: 75%;">Crawl · inventory</div>
-        </div>
-      </div>
-
-      <div class="gantt-row">
-        <div class="label">Tracking education (OCID &amp; CMM)</div>
-        <div class="gantt-cells">
-          <div class="col"></div><div class="col"></div><div class="col"></div><div class="col"></div>
-          <div class="col"></div><div class="col"></div><div class="col"></div><div class="col"></div>
-          <div class="col"></div><div class="col"></div><div class="col"></div><div class="col"></div>
-          <div class="bar crawl" style="left: 8%; right: 67%;">Crawl · deep dive</div>
-        </div>
-      </div>
-
-      <div class="gantt-row">
-        <div class="label">Update OCID classifications</div>
-        <div class="gantt-cells">
-          <div class="col"></div><div class="col"></div><div class="col"></div><div class="col"></div>
-          <div class="col"></div><div class="col"></div><div class="col"></div><div class="col"></div>
-          <div class="col"></div><div class="col"></div><div class="col"></div><div class="col"></div>
-          <div class="bar walk" style="left: 25%; right: 50%;">Walk · reclassify (PMAX, etc.)</div>
-        </div>
-      </div>
-
-      <div class="gantt-row">
-        <div class="label">Partnership grid &amp; quarterly cadence</div>
-        <div class="gantt-cells">
-          <div class="col"></div><div class="col"></div><div class="col"></div><div class="col"></div>
-          <div class="col"></div><div class="col"></div><div class="col"></div><div class="col"></div>
-          <div class="col"></div><div class="col"></div><div class="col"></div><div class="col"></div>
-          <div class="bar crawl" style="left: 17%; right: 67%;">Crawl · template v1</div>
-          <div class="bar walk" style="left: 25%; right: 25%;">Walk · operationalize</div>
-        </div>
-      </div>
-
-      <div class="gantt-row">
-        <div class="label">Manual Unified View MVP</div>
-        <div class="gantt-cells">
-          <div class="col"></div><div class="col"></div><div class="col"></div><div class="col"></div>
-          <div class="col"></div><div class="col"></div><div class="col"></div><div class="col"></div>
-          <div class="col"></div><div class="col"></div><div class="col"></div><div class="col"></div>
-          <div class="bar crawl" style="left: 17%; right: 58%;">Crawl · MVP build</div>
-        </div>
-      </div>
-
-      <div class="gantt-row">
-        <div class="label">Cross-pillar review cadence</div>
-        <div class="gantt-cells">
-          <div class="col"></div><div class="col"></div><div class="col"></div><div class="col"></div>
-          <div class="col"></div><div class="col"></div><div class="col"></div><div class="col"></div>
-          <div class="col"></div><div class="col"></div><div class="col"></div><div class="col"></div>
-          <div class="bar walk" style="left: 33%; right: 25%;">Walk · pilot rhythm</div>
-        </div>
-      </div>
-
-      <div class="gantt-row">
-        <div class="label">Campaign-to-moment attribution</div>
-        <div class="gantt-cells">
-          <div class="col"></div><div class="col"></div><div class="col"></div><div class="col"></div>
-          <div class="col"></div><div class="col"></div><div class="col"></div><div class="col"></div>
-          <div class="col"></div><div class="col"></div><div class="col"></div><div class="col"></div>
-          <div class="bar walk" style="left: 33%; right: 33%;">Walk · v1 manual tagging</div>
-          <div class="bar run" style="left: 67%; right: 17%;">Run · automate</div>
-        </div>
-      </div>
-
-      <div class="gantt-row">
-        <div class="label">ROI visibility gap-fix</div>
-        <div class="gantt-cells">
-          <div class="col"></div><div class="col"></div><div class="col"></div><div class="col"></div>
-          <div class="col"></div><div class="col"></div><div class="col"></div><div class="col"></div>
-          <div class="col"></div><div class="col"></div><div class="col"></div><div class="col"></div>
-          <div class="bar walk" style="left: 42%; right: 42%;">Walk · define proxies</div>
-        </div>
-      </div>
-
-      <div class="gantt-row">
-        <div class="label">Integrated solution build</div>
-        <div class="gantt-cells">
-          <div class="col"></div><div class="col"></div><div class="col"></div><div class="col"></div>
-          <div class="col"></div><div class="col"></div><div class="col"></div><div class="col"></div>
-          <div class="col"></div><div class="col"></div><div class="col"></div><div class="col"></div>
-          <div class="bar run" style="left: 50%; right: 8%;">Run · build</div>
-        </div>
-      </div>
-
-      <div class="gantt-row">
-        <div class="label">Continuous trend view</div>
-        <div class="gantt-cells">
-          <div class="col"></div><div class="col"></div><div class="col"></div><div class="col"></div>
-          <div class="col"></div><div class="col"></div><div class="col"></div><div class="col"></div>
-          <div class="col"></div><div class="col"></div><div class="col"></div><div class="col"></div>
-          <div class="bar run" style="left: 75%; right: 17%;">Run · always-on</div>
-        </div>
-      </div>
-
-      <div class="gantt-row">
-        <div class="label">Embed in leadership rituals</div>
-        <div class="gantt-cells">
-          <div class="col"></div><div class="col"></div><div class="col"></div><div class="col"></div>
-          <div class="col"></div><div class="col"></div><div class="col"></div><div class="col"></div>
-          <div class="col"></div><div class="col"></div><div class="col"></div><div class="col"></div>
-          <div class="bar run" style="left: 75%; right: 0%;">Run · adoption</div>
-        </div>
-      </div>
-
-      <div class="gantt-row">
-        <div class="label">Selective automation</div>
-        <div class="gantt-cells">
-          <div class="col"></div><div class="col"></div><div class="col"></div><div class="col"></div>
-          <div class="col"></div><div class="col"></div><div class="col"></div><div class="col"></div>
-          <div class="col"></div><div class="col"></div><div class="col"></div><div class="col"></div>
-          <div class="bar run" style="left: 58%; right: 0%;">Run · continuous</div>
-        </div>
-      </div>
-    </div>
-
-    <p style="margin-top: 0.6rem; font-size: 0.85rem; color: var(--ink-soft);">See per-phase detail and the collapsible view on the <a href="timeline.html">workstream timeline</a>.</p>
-
-    <div class="gantt-legend">
-      <span><span class="swatch sw-crawl"></span>Crawl · define &amp; align</span>
-      <span><span class="swatch sw-walk"></span>Walk · centralize &amp; standardize</span>
-      <span><span class="swatch sw-run"></span>Run · integrate &amp; automate</span>
-      <span><span class="swatch sw-milestone"></span>Milestone (hover for label)</span>
-    </div>
+    <p style="margin-top: 1.2rem; font-size: 0.88rem; color: var(--ink-soft);">For the gantt view, per-workstream status, and milestone detail, see the <a href="timeline.html">workstream timeline</a>.</p>
   </section>
 
 </main>
