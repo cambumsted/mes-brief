@@ -1330,6 +1330,18 @@
     body { background: white; }
     section { box-shadow: none; border: 1px solid #ccc; page-break-inside: avoid; }
   }
+
+  /* Subtle focus fade: dim sections that are not the most-in-view */
+  main section {
+    opacity: 0.4;
+    transition: opacity 0.45s ease;
+  }
+  main section.is-focused {
+    opacity: 1;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    main section { transition: none; opacity: 1; }
+  }
 </style>
 </head>
 <body>
@@ -1608,6 +1620,42 @@
   </div>
 
 </div>
+
+<script>
+(function() {
+  // Subtle focus-fade: highlight the section most in view
+  const sections = document.querySelectorAll('main > section');
+  if (sections.length && 'IntersectionObserver' in window) {
+    const visibility = new Map();
+    sections.forEach(s => visibility.set(s, 0));
+    function refocus() {
+      let best = null;
+      let bestRatio = 0;
+      visibility.forEach((ratio, sec) => {
+        if (ratio > bestRatio) { bestRatio = ratio; best = sec; }
+      });
+      sections.forEach(s => s.classList.toggle('is-focused', s === best));
+    }
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => visibility.set(e.target, e.intersectionRatio));
+      refocus();
+    }, { threshold: [0, 0.25, 0.5, 0.75, 1] });
+    sections.forEach(s => io.observe(s));
+    // Initial pass so something is focused on load
+    requestAnimationFrame(() => {
+      sections.forEach(s => {
+        const r = s.getBoundingClientRect();
+        const vh = window.innerHeight || document.documentElement.clientHeight;
+        const visible = Math.max(0, Math.min(r.bottom, vh) - Math.max(r.top, 0));
+        visibility.set(s, visible / Math.max(1, r.height));
+      });
+      refocus();
+    });
+  } else {
+    sections.forEach(s => s.classList.add('is-focused'));
+  }
+})();
+</script>
 
 <script>
 (function() {
