@@ -1333,14 +1333,19 @@
 
   /* Subtle focus fade: dim sections that are not the most-in-view */
   main section {
-    opacity: 0.4;
-    transition: opacity 0.45s ease;
+    opacity: 0.18;
+    filter: blur(1.5px) saturate(0.7);
+    transform: scale(0.985);
+    transform-origin: center top;
+    transition: opacity 0.5s ease, filter 0.5s ease, transform 0.5s ease;
   }
   main section.is-focused {
     opacity: 1;
+    filter: none;
+    transform: scale(1);
   }
   @media (prefers-reduced-motion: reduce) {
-    main section { transition: none; opacity: 1; }
+    main section { transition: none; opacity: 1; filter: none; transform: none; }
   }
 </style>
 </head>
