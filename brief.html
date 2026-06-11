@@ -1,0 +1,1823 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Marketing Effectiveness Hub — Leadership Brief</title>
+<style>
+  :root {
+    --c-dark-blue: #091F2E;
+    --c-med-blue: #0078D4;
+    --c-teal: #49C5B1;
+    --c-white: #FFFFFF;
+    --c-n05: #F2F2F2;
+    --c-n15: #D9D9D9;
+    --c-n25: #BFBFBF;
+    --c-n35: #A6A6A6;
+    --c-n50: #7F7F7F;
+    --c-light-blue: #8DC8E8;
+    --c-aqua: #B9DCD2;
+    --c-lavender: #C5B4E3;
+
+    --ms-blue: var(--c-med-blue);
+    --ms-blue-dark: var(--c-dark-blue);
+    --ms-blue-light: #E6F2FB;
+    --ink: var(--c-dark-blue);
+    --ink-soft: var(--c-n50);
+    --line: var(--c-n15);
+    --bg: var(--c-n05);
+    --card: var(--c-white);
+    --accent-warn: #8A6D00;
+    --accent-warn-bg: #FFF4CE;
+    --accent-good: #2C7A4B;
+    --accent-good-bg: #E4F5DC;
+    --shadow: 0 1.6px 3.6px rgba(9,31,46,0.08), 0 0.3px 0.9px rgba(9,31,46,0.06);
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    font-family: "Segoe UI", -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
+    color: var(--ink);
+    background: var(--bg);
+    line-height: 1.55;
+    font-size: 16px;
+  }
+  a { color: var(--ms-blue-dark); }
+  h1, h2, h3, h4 { color: var(--ink); margin-top: 0; line-height: 1.25; }
+  h1 { font-size: 2.4rem; font-weight: 600; letter-spacing: -0.5px; }
+  h2 { font-size: 1.55rem; font-weight: 600; margin-bottom: 0.4rem; }
+  h3 { font-size: 1.1rem; font-weight: 600; margin-bottom: 0.3rem; }
+  h4 { font-size: 0.85rem; font-weight: 600; margin-bottom: 0.25rem; text-transform: uppercase; letter-spacing: 1px; color: var(--ink-soft); }
+  p { margin: 0.5rem 0; }
+
+  /* Nav */
+  .nav {
+    position: sticky; top: 0; z-index: 100;
+    background: rgba(255,255,255,0.96);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line);
+    padding: 0 1.5rem;
+    height: 56px;
+    display: flex; align-items: center; gap: 1.25rem;
+  }
+  .nav .brand { font-weight: 600; color: var(--ms-blue-dark); margin-right: auto; flex-shrink: 0; font-size: 0.95rem; }
+  .nav a {
+    color: var(--ink-soft); text-decoration: none;
+    font-size: 0.85rem; padding: 0.25rem 0.5rem;
+    border-radius: 4px; flex-shrink: 0;
+  }
+  .nav a:hover { background: var(--ms-blue-light); color: var(--ms-blue-dark); }
+
+  /* Page header — Microsoft Confidential aesthetic */
+  .page-header {
+    background:
+      radial-gradient(ellipse at 20% 60%, rgba(255,255,255,0.9), rgba(200,228,247,0) 60%),
+      linear-gradient(135deg, #E6F0F8 0%, #F4FAFE 60%, #FFFFFF 100%);
+    border-bottom: 1px solid var(--c-n15, #D9D9D9);
+    padding: 1.4rem 1.5rem 2.4rem;
+    color: var(--c-dark-blue, #091F2E);
+    position: relative;
+  }
+  .page-header .ph-inner {
+    max-width: 1200px;
+    margin: 0 auto 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+  .page-header .ph-brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.55rem;
+  }
+  .page-header .ph-logo { width: 22px; height: 22px; flex-shrink: 0; }
+  .page-header .ph-wordmark {
+    font-family: "Segoe UI", -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--c-dark-blue, #091F2E);
+    letter-spacing: 0.1px;
+  }
+  .page-header .ph-confidential {
+    font-size: 0.72rem;
+    color: var(--c-n50, #7F7F7F);
+    font-weight: 400;
+  }
+  .page-header .ph-title-row {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  .page-header .ph-meta {
+    font-size: 0.72rem;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--c-n50, #7F7F7F);
+    font-weight: 600;
+    margin-bottom: 0.4rem;
+  }
+  .page-header h1 {
+    font-size: 2.25rem;
+    font-weight: 600;
+    letter-spacing: -0.5px;
+    color: var(--c-dark-blue, #091F2E);
+    margin: 0 0 0.5rem;
+    line-height: 1.15;
+  }
+  .page-header .ph-lede {
+    font-size: 1rem;
+    color: var(--c-dark-blue, #091F2E);
+    opacity: 0.78;
+    max-width: 780px;
+    margin: 0;
+  }
+  .page-header .anchor-row {
+    display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1.1rem;
+  }
+  .page-header .anchor-row a {
+    background: rgba(255,255,255,0.7);
+    color: var(--c-dark-blue, #091F2E);
+    border: 1px solid rgba(9,31,46,0.18);
+    text-decoration: none;
+    padding: 0.35rem 0.85rem;
+    border-radius: 20px;
+    font-size: 0.78rem;
+    font-weight: 600;
+  }
+  .page-header .anchor-row a:hover { background: var(--c-white, #FFF); border-color: var(--c-dark-blue, #091F2E); }
+
+  main { max-width: 1100px; margin: 0 auto; padding: 2.5rem 1.5rem 4rem; }
+
+  section {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 2rem;
+    margin-bottom: 1.5rem;
+    box-shadow: var(--shadow);
+  }
+  .section-num {
+    font-size: 0.75rem; letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--ms-blue-dark);
+    font-weight: 600;
+    display: block;
+    margin-bottom: 0.5rem;
+  }
+
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
+  @media (max-width: 800px) { .grid-2, .grid-3 { grid-template-columns: 1fr; } }
+
+  .card {
+    background: var(--bg);
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    padding: 1.1rem 1.25rem 1.2rem;
+  }
+  .card .label {
+    font-size: 0.7rem; text-transform: uppercase; letter-spacing: 1px;
+    color: var(--ink-soft); font-weight: 600; margin-bottom: 0.6rem;
+  }
+  .card ul { margin: 0.4rem 0 0; padding-left: 1.2rem; }
+  .card li { margin: 0.3rem 0; font-size: 0.92rem; }
+
+  /* Problem item list — scannable bold lead + supporting line */
+  .issue-list {
+    list-style: none; margin: 0; padding: 0;
+    display: flex; flex-direction: column; gap: 0.7rem;
+  }
+  .issue-list li {
+    background: var(--c-white);
+    border: 1px solid var(--line);
+    border-radius: 5px;
+    padding: 0.65rem 0.85rem;
+    font-size: 0.9rem;
+    line-height: 1.45;
+  }
+  .issue-list li strong {
+    display: block;
+    color: var(--ink);
+    font-weight: 600;
+    font-size: 0.95rem;
+    margin-bottom: 0.15rem;
+  }
+  .issue-list li span { color: var(--ink-soft); }
+  .card.problem-gaps { border-left: 3px solid var(--c-med-blue); }
+  .card.problem-cost { border-left: 3px solid #C9A227; }
+
+  /* Deliverable highlight */
+  .deliverable-card {
+    background: linear-gradient(135deg, #F4FBFF 0%, #ECF7F3 100%);
+    border: 1px solid var(--c-aqua);
+    border-left: 4px solid var(--c-teal);
+    border-radius: 8px;
+    padding: 1.4rem 1.6rem;
+    margin-top: 1rem;
+  }
+  .deliverable-card h3 { margin-bottom: 0.5rem; }
+  .deliverable-card p { margin: 0.4rem 0; font-size: 0.95rem; }
+  .deliverable-card .pill-row { margin-top: 0.6rem; display: flex; flex-wrap: wrap; gap: 0.4rem; }
+  .deliverable-card .pill {
+    display: inline-block;
+    background: var(--c-white);
+    border: 1px solid var(--c-aqua);
+    color: var(--ms-blue-dark);
+    font-size: 0.75rem;
+    padding: 0.2rem 0.6rem;
+    border-radius: 12px;
+    font-weight: 600;
+  }
+
+  /* Three-layer deliverable visual */
+  .layer-stack { display: grid; grid-template-columns: 1fr; gap: 0.75rem; margin-top: 1rem; }
+  .layer {
+    border-radius: 6px;
+    padding: 1rem 1.2rem;
+    border: 1px solid var(--line);
+    background: var(--c-white);
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    gap: 1.25rem;
+    align-items: center;
+  }
+  @media (max-width: 700px) { .layer { grid-template-columns: 1fr; gap: 0.4rem; } }
+  .layer .layer-headline {
+    padding: 0.75rem 0.95rem;
+    border-radius: 4px;
+  }
+  .layer .layer-headline .title {
+    display: block;
+    font-size: 1.15rem;
+    font-weight: 700;
+    line-height: 1.25;
+    letter-spacing: -0.2px;
+  }
+  .layer .layer-headline .sub {
+    display: block;
+    margin-top: 0.25rem;
+    font-size: 0.85rem;
+    font-weight: 500;
+    opacity: 0.85;
+    line-height: 1.35;
+  }
+  .layer .layer-body {
+    font-size: 0.92rem;
+    color: var(--ink);
+    margin: 0;
+  }
+  .layer .layer-body strong { color: var(--ink); font-weight: 600; }
+  .layer.l1 .layer-headline { background: #E4F1FB; color: var(--c-dark-blue); }
+  .layer.l2 .layer-headline { background: #ECF7F3; color: #1E6B5C; }
+  .layer.l3 .layer-headline { background: #FFF4CE; color: #8A6D00; }
+
+  /* v0.3 — Story problem */
+  .story-lede {
+    font-size: 1.05rem;
+    line-height: 1.55;
+    color: var(--ink);
+    max-width: 820px;
+    margin: 0.6rem 0 1.2rem;
+  }
+  .story-lede strong { color: var(--ink); font-weight: 600; }
+
+  .qlist {
+    display: flex; flex-direction: column; gap: 0.55rem;
+    margin: 0.4rem 0 1rem;
+    padding: 0;
+    list-style: none;
+  }
+  .qlist li {
+    background: var(--c-white);
+    border: 1px solid var(--line);
+    border-left: 3px solid var(--c-med-blue);
+    border-radius: 5px;
+    padding: 0.7rem 0.95rem;
+    font-size: 0.97rem;
+    line-height: 1.45;
+    display: flex; gap: 0.7rem; align-items: flex-start;
+  }
+  .qlist li::before {
+    content: "?";
+    flex-shrink: 0;
+    width: 26px; height: 26px;
+    border-radius: 50%;
+    background: var(--ms-blue-light);
+    color: var(--ms-blue-dark);
+    font-weight: 700;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.95rem;
+    margin-top: 0.05rem;
+  }
+  .qlist li em { font-style: normal; color: var(--ink-soft); display: block; font-size: 0.85rem; margin-top: 0.15rem; }
+
+  .today-line {
+    background: #FFF4CE;
+    border-left: 3px solid #C9A227;
+    color: #6B5800;
+    padding: 0.7rem 0.95rem;
+    border-radius: 0 5px 5px 0;
+    font-size: 0.92rem;
+    margin-top: 1rem;
+  }
+  .today-line strong { color: #4D3F00; }
+
+  /* v0.3 — Question answer surfaces */
+  .qcard {
+    background: var(--c-white);
+    border: 1px solid var(--line);
+    border-top: 4px solid var(--c-med-blue);
+    border-radius: 6px;
+    padding: 1.1rem 1.2rem 1.2rem;
+    display: flex; flex-direction: column;
+    gap: 0.5rem;
+  }
+  .qcard .q-tag {
+    font-size: 0.7rem; text-transform: uppercase; letter-spacing: 1px;
+    color: var(--ms-blue-dark); font-weight: 600;
+  }
+  .qcard .q-q {
+    font-weight: 600; font-size: 1rem; color: var(--ink); line-height: 1.35;
+  }
+  .qcard .q-answer {
+    font-size: 0.9rem; color: var(--ink); margin-top: 0.2rem;
+  }
+  .qcard .q-answer strong { font-weight: 600; }
+  .qcard .q-meta {
+    margin-top: auto;
+    padding-top: 0.55rem;
+    border-top: 1px dashed var(--line);
+    font-size: 0.78rem;
+    color: var(--ink-soft);
+  }
+  .qcard .q-meta .lab {
+    text-transform: uppercase; letter-spacing: 1px; font-weight: 600;
+    color: var(--ink-soft); display: block; margin-bottom: 0.2rem;
+  }
+  .qcard.q1 { border-top-color: var(--c-med-blue); }
+  .qcard.q2 { border-top-color: var(--c-teal); }
+  .qcard.q3 { border-top-color: #C9A227; }
+  .qcard.q4 { border-top-color: #B58CDA; }
+
+  /* v0.3 — Parking lot for "what other questions are we getting?" */
+  .parking-lot {
+    margin-top: 1rem;
+    background: #FFFEF5;
+    border: 1px dashed #E5D88E;
+    border-radius: 8px;
+    padding: 1.1rem 1.25rem 1.2rem;
+  }
+  .parking-lot .pl-head {
+    display: flex; align-items: baseline; justify-content: space-between;
+    flex-wrap: wrap; gap: 0.5rem; margin-bottom: 0.6rem;
+  }
+  .parking-lot .pl-title {
+    font-weight: 700; font-size: 1rem; color: var(--ink);
+  }
+  .parking-lot .pl-cta {
+    font-size: 0.78rem;
+    background: var(--c-dark-blue); color: white;
+    padding: 0.3rem 0.7rem; border-radius: 14px;
+    font-weight: 600; text-decoration: none;
+  }
+  .parking-lot .pl-cta:hover { background: var(--c-med-blue); }
+  .parking-lot ul {
+    list-style: none; padding: 0; margin: 0.2rem 0 0;
+    display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.4rem 0.9rem;
+  }
+  @media (max-width: 700px) { .parking-lot ul { grid-template-columns: 1fr; } }
+  .parking-lot li {
+    background: white;
+    border: 1px solid #EFE5B5;
+    border-radius: 5px;
+    padding: 0.5rem 0.7rem;
+    font-size: 0.88rem;
+    color: var(--ink);
+    display: flex; gap: 0.55rem; align-items: flex-start;
+  }
+  .parking-lot li::before {
+    content: "+"; flex-shrink: 0;
+    width: 18px; height: 18px;
+    border-radius: 50%;
+    background: #FFF4CE; color: #8A6D00;
+    font-weight: 700; font-size: 0.85rem;
+    display: flex; align-items: center; justify-content: center;
+    margin-top: 1px;
+  }
+  .parking-lot li.placeholder {
+    color: var(--ink-soft); font-style: italic;
+    border-style: dashed;
+  }
+  .parking-lot li.placeholder::before { background: white; border: 1px dashed #E5D88E; color: var(--c-n50); }
+
+  /* v0.3 — Expandable answer surface card */
+  .qcard {
+    position: relative;
+  }
+  .qcard .show-example {
+    margin-top: 0.5rem;
+    background: var(--ms-blue-light);
+    color: var(--ms-blue-dark);
+    border: none;
+    border-radius: 999px;
+    padding: 0.4rem 0.95rem;
+    font-size: 0.82rem;
+    font-weight: 600;
+    cursor: pointer;
+    display: inline-flex; align-items: center; gap: 0.4rem;
+    align-self: flex-start;
+    font-family: inherit;
+  }
+  .qcard .show-example:hover { background: var(--c-med-blue); color: white; }
+  .qcard .show-example .arrow { transition: transform 0.2s ease; }
+  .qcard .example {
+    display: none;
+    margin-top: 0.85rem;
+    padding-top: 0.85rem;
+    border-top: 1px dashed var(--line);
+  }
+  .qcard.open .example { display: block; }
+  .qcard.open .show-example .arrow { transform: rotate(180deg); }
+  .qcard .example-cap {
+    font-size: 0.74rem; text-transform: uppercase; letter-spacing: 1px;
+    color: var(--ink-soft); font-weight: 700; margin-bottom: 0.45rem;
+    display: flex; align-items: center; gap: 0.4rem; flex-wrap: wrap;
+  }
+  .qcard .example-cap .src-pill {
+    background: var(--c-n05); color: var(--ink); border: 1px solid var(--line);
+    font-size: 0.68rem; padding: 0.1rem 0.5rem; border-radius: 10px;
+    text-transform: none; letter-spacing: 0; font-weight: 600;
+  }
+  .qcard .example-frame {
+    background: white;
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    overflow: hidden;
+  }
+  .qcard .example-frame img {
+    display: block; width: 100%; height: auto;
+  }
+  .qcard .example-foot {
+    font-size: 0.78rem; color: var(--ink-soft); margin-top: 0.5rem;
+  }
+  .qcard .example-foot a { font-weight: 600; }
+
+  /* mini partnership grid (Q3 example) */
+  .mini-grid {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.78rem;
+  }
+  .mini-grid th, .mini-grid td {
+    padding: 0.45rem 0.55rem;
+    border-bottom: 1px solid var(--line);
+    text-align: center;
+    vertical-align: middle;
+  }
+  .mini-grid th {
+    background: var(--c-dark-blue); color: white;
+    font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.5px; font-weight: 600;
+  }
+  .mini-grid th:first-child, .mini-grid td:first-child { text-align: left; font-weight: 600; }
+  .mini-grid .filled { background: var(--c-aqua); color: var(--c-dark-blue); font-weight: 600; }
+  .mini-grid .partial { background: #FFF4CE; color: #8A6D00; font-weight: 600; }
+  .mini-grid .blank { color: var(--c-n25); }
+
+  /* Investment example (Q1) */
+  .invest-mock {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem;
+  }
+  @media (max-width: 700px) { .invest-mock { grid-template-columns: 1fr; } }
+  .invest-mock .mock-card {
+    background: white; border: 1px solid var(--line); border-radius: 6px;
+    padding: 0.7rem 0.85rem;
+  }
+  .invest-mock .mock-card h5 {
+    margin: 0 0 0.4rem; font-size: 0.78rem;
+    text-transform: uppercase; letter-spacing: 1px; color: var(--ink-soft);
+  }
+  .invest-mock table { width: 100%; border-collapse: collapse; font-size: 0.82rem; }
+  .invest-mock td, .invest-mock th {
+    padding: 0.32rem 0.4rem; border-bottom: 1px solid var(--line);
+    text-align: left;
+  }
+  .invest-mock td:last-child, .invest-mock th:last-child { text-align: right; font-variant-numeric: tabular-nums; }
+  .invest-mock tr:last-child td { border-bottom: none; }
+  .invest-mock .verdict {
+    font-size: 0.7rem; font-weight: 700;
+    padding: 0.1rem 0.5rem; border-radius: 10px;
+    display: inline-block;
+  }
+  .invest-mock .verdict.go { background: #DCEEDD; color: #1E6B5C; }
+  .invest-mock .verdict.hold { background: #FFF4CE; color: #8A6D00; }
+  .invest-mock .verdict.cut { background: #FBE3E3; color: #993333; }
+  .invest-mock .total-line {
+    grid-column: 1 / -1;
+    background: linear-gradient(90deg, var(--c-dark-blue), var(--c-med-blue));
+    color: white;
+    padding: 0.55rem 0.95rem;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-align: center;
+  }
+  .invest-mock .total-line strong { font-weight: 700; }
+
+  /* Campaign moments example (Q4) */
+  .moment-mock {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.6rem;
+  }
+  @media (max-width: 700px) { .moment-mock { grid-template-columns: 1fr; } }
+  .moment-mock .mcard {
+    background: white; border: 1px solid var(--line); border-radius: 6px;
+    padding: 0.7rem 0.8rem;
+    border-top: 3px solid var(--c-lavender);
+  }
+  .moment-mock .mcard h5 {
+    margin: 0 0 0.3rem; font-size: 0.85rem; font-weight: 600;
+  }
+  .moment-mock .mcard .moment-date {
+    font-size: 0.7rem; color: var(--ink-soft); margin-bottom: 0.5rem;
+  }
+  .moment-mock .mcard .row {
+    display: flex; justify-content: space-between; font-size: 0.78rem;
+    padding: 0.18rem 0; border-bottom: 1px solid var(--line);
+  }
+  .moment-mock .mcard .row:last-of-type { border-bottom: none; }
+  .moment-mock .mcard .row .v { font-weight: 600; font-variant-numeric: tabular-nums; }
+  .moment-mock .mcard .row .v.up { color: #2C7A4B; }
+  .moment-mock .mcard .row .v.down { color: #993333; }
+
+  /* answer-surfaces grid: 2 cols (4 cards = 2×2 layout) */
+  .grid-4-2 {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+  }
+  @media (max-width: 1000px) { .grid-4-2 { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 600px)  { .grid-4-2 { grid-template-columns: 1fr; } }
+
+  .qcard.q5 { border-top-color: #2C7A4B; }
+  .qcard.q5 .q-answer li::before { background: #2C7A4B; }
+  .qcard .pending-pill {
+    margin-top: 0.6rem;
+    align-self: flex-start;
+    background: #FFF4CE;
+    color: #8A6D00;
+    border: 1px solid #F0DEA0;
+    font-size: 0.78rem;
+    font-weight: 600;
+    padding: 0.3rem 0.7rem;
+    border-radius: 999px;
+    display: inline-flex; align-items: center; gap: 0.4rem;
+  }
+  .qcard .pending-pill::before {
+    content: "⏳";
+    font-size: 0.85rem;
+  }
+
+  /* Behind-every-answer dropdowns */
+  details.bblock-detail {
+    background: var(--c-white);
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    padding: 0;
+    margin-bottom: 0.55rem;
+    overflow: hidden;
+  }
+  details.bblock-detail summary {
+    list-style: none;
+    cursor: pointer;
+    padding: 0.95rem 1.15rem;
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 0.5rem;
+  }
+  details.bblock-detail summary::-webkit-details-marker { display: none; }
+  details.bblock-detail summary .sum-left {
+    display: flex; align-items: center; gap: 0.6rem; flex-wrap: wrap;
+  }
+  details.bblock-detail summary .sum-tag {
+    display: inline-block;
+    font-size: 0.68rem; text-transform: uppercase; letter-spacing: 1px;
+    font-weight: 700;
+    padding: 0.15rem 0.55rem;
+    border-radius: 10px;
+  }
+  details.bblock-detail.curated .sum-tag { background: var(--ms-blue-light); color: var(--ms-blue-dark); }
+  details.bblock-detail.dash .sum-tag { background: #ECF7F3; color: #1E6B5C; }
+  details.bblock-detail summary .sum-title {
+    font-size: 0.95rem; font-weight: 600; color: var(--ink);
+  }
+  details.bblock-detail summary .chev {
+    color: var(--ink-soft); transition: transform 0.2s ease; flex-shrink: 0;
+  }
+  details.bblock-detail[open] summary .chev { transform: rotate(180deg); }
+  details.bblock-detail .body {
+    padding: 0 1.15rem 1.1rem;
+    border-top: 1px solid var(--line);
+    padding-top: 0.85rem;
+    font-size: 0.9rem; color: var(--ink);
+  }
+  details.bblock-detail .body p { margin: 0.3rem 0; }
+  details.bblock-detail .body ul { margin: 0.3rem 0 0; padding-left: 1.2rem; }
+  details.bblock-detail .body li { margin: 0.2rem 0; font-size: 0.88rem; }
+
+  /* Inline "also hearing" strip */
+  .hearing-line {
+    margin: 1.1rem 0 0;
+    display: flex; align-items: center; gap: 0.6rem;
+    flex-wrap: wrap;
+    font-size: 0.85rem;
+  }
+  .hearing-eyebrow {
+    font-size: 0.7rem; text-transform: uppercase; letter-spacing: 1.4px;
+    color: var(--ink-soft); font-weight: 700;
+  }
+  .hearing-tag {
+    background: white;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    padding: 0.3rem 0.8rem;
+    font-size: 0.82rem;
+    color: var(--ink);
+    font-weight: 500;
+  }
+  .hearing-tag.placeholder { color: var(--ink-soft); border-style: dashed; }
+
+  /* Q-card answer as bullets */
+  .qcard .q-answer ul {
+    margin: 0.2rem 0 0; padding-left: 1.05rem;
+    list-style: none;
+  }
+  .qcard .q-answer li {
+    position: relative;
+    padding-left: 1rem;
+    margin: 0.25rem 0;
+    font-size: 0.9rem;
+    line-height: 1.4;
+  }
+  .qcard .q-answer li::before {
+    content: ""; position: absolute; left: 0; top: 0.55rem;
+    width: 5px; height: 5px; border-radius: 50%;
+    background: var(--c-med-blue);
+  }
+  .qcard.q2 .q-answer li::before { background: var(--c-teal); }
+  .qcard.q3 .q-answer li::before { background: #C9A227; }
+  .qcard.q4 .q-answer li::before { background: #B58CDA; }
+
+  /* Modal lightbox for examples */
+  .modal-backdrop {
+    position: fixed; inset: 0;
+    background: rgba(9, 31, 46, 0.55);
+    backdrop-filter: blur(3px);
+    z-index: 999;
+    display: none;
+    align-items: flex-start; justify-content: center;
+    padding: 4vh 1rem 6vh;
+    overflow-y: auto;
+    animation: fade-in 0.18s ease;
+  }
+  .modal-backdrop.open { display: flex; }
+  @keyframes fade-in { from { opacity: 0; } to { opacity: 1; } }
+  @keyframes pop-in {
+    from { transform: translateY(8px) scale(0.98); opacity: 0; }
+    to { transform: translateY(0) scale(1); opacity: 1; }
+  }
+  .modal {
+    background: white;
+    border-radius: 12px;
+    max-width: 880px;
+    width: 100%;
+    box-shadow: 0 20px 60px rgba(9,31,46,0.35), 0 4px 12px rgba(9,31,46,0.18);
+    border: 1px solid rgba(255,255,255,0.4);
+    overflow: hidden;
+    animation: pop-in 0.22s cubic-bezier(0.2, 0.7, 0.3, 1);
+  }
+  .modal-head {
+    padding: 1.1rem 1.4rem 1rem;
+    background: linear-gradient(135deg, var(--c-dark-blue) 0%, var(--c-med-blue) 100%);
+    color: white;
+    display: flex; justify-content: space-between; align-items: flex-start;
+    gap: 1rem;
+  }
+  .modal-head .mh-eyebrow {
+    font-size: 0.7rem; text-transform: uppercase; letter-spacing: 1.4px;
+    opacity: 0.85; margin-bottom: 0.25rem;
+  }
+  .modal-head .mh-title { font-size: 1.1rem; font-weight: 700; line-height: 1.3; }
+  .modal-close {
+    background: rgba(255,255,255,0.16);
+    border: 1px solid rgba(255,255,255,0.28);
+    color: white;
+    border-radius: 50%;
+    width: 32px; height: 32px;
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer;
+    font-size: 1.1rem;
+    line-height: 1;
+    flex-shrink: 0;
+    font-family: inherit;
+  }
+  .modal-close:hover { background: rgba(255,255,255,0.3); }
+  .modal-body {
+    padding: 1.5rem 1.5rem 0.9rem;
+    max-height: 70vh;
+    overflow-y: auto;
+  }
+  .modal-foot {
+    padding: 0.85rem 1.5rem 1.2rem;
+    font-size: 0.78rem;
+    color: var(--ink-soft);
+    border-top: 1px solid var(--line);
+  }
+  .modal-foot a { font-weight: 600; }
+  body.modal-open { overflow: hidden; }
+
+  /* Click affordance on cards */
+  .qcard.clickable {
+    cursor: pointer;
+    transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
+  }
+  .qcard.clickable:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 18px rgba(9,31,46,0.10);
+  }
+  .qcard .preview-cta {
+    margin-top: 0.6rem;
+    display: inline-flex; align-items: center; gap: 0.35rem;
+    font-size: 0.78rem;
+    color: var(--ms-blue-dark);
+    font-weight: 600;
+    align-self: flex-start;
+  }
+  .qcard .preview-cta::after {
+    content: "↗";
+    font-size: 0.95rem;
+    transition: transform 0.15s ease;
+  }
+  .qcard.clickable:hover .preview-cta::after {
+    transform: translate(2px, -2px);
+  }
+
+  /* Q3 mini-grid: key vs secondary highlighting */
+  .mini-grid td.key {
+    background: var(--c-aqua);
+    color: var(--c-dark-blue);
+    font-weight: 700;
+    box-shadow: inset 0 0 0 2px var(--c-teal);
+  }
+  .mini-grid td.sec {
+    background: #F4FBFF;
+    color: var(--ink);
+    font-weight: 500;
+  }
+  .mini-grid td.muted { color: var(--ink-soft); }
+  .grid-legend {
+    display: flex; gap: 0.9rem; flex-wrap: wrap;
+    margin-top: 0.6rem;
+    font-size: 0.76rem; color: var(--ink-soft);
+  }
+  .grid-legend .sw {
+    display: inline-block; width: 12px; height: 12px;
+    border-radius: 3px; margin-right: 0.3rem; vertical-align: middle;
+  }
+  .grid-legend .sw.key { background: var(--c-aqua); box-shadow: inset 0 0 0 2px var(--c-teal); }
+  .grid-legend .sw.sec { background: #F4FBFF; border: 1px solid var(--line); }
+  .grid-legend .sw.muted { background: white; border: 1px solid var(--c-n25); }
+
+  /* Q1 totals row for LTV:CAC vs goal */
+  .ltv-summary {
+    background: var(--c-dark-blue);
+    color: white;
+    padding: 0.8rem 1rem;
+    border-radius: 6px;
+    margin-top: 0.7rem;
+    display: flex; justify-content: space-between; align-items: center;
+    flex-wrap: wrap; gap: 0.6rem;
+  }
+  .ltv-summary .ltv-label {
+    font-size: 0.72rem; text-transform: uppercase; letter-spacing: 1px;
+    opacity: 0.85;
+  }
+  .ltv-summary .ltv-value {
+    font-size: 1.4rem; font-weight: 700; letter-spacing: -0.5px;
+  }
+  .ltv-summary .ltv-vs {
+    font-size: 0.85rem; opacity: 0.92;
+  }
+  .ltv-summary .ltv-pill {
+    background: #DCEEDD; color: #1E6B5C;
+    padding: 0.25rem 0.65rem;
+    border-radius: 999px;
+    font-size: 0.78rem;
+    font-weight: 700;
+  }
+
+  /* Q4 moment card with split rows */
+  .moment-mock .mcard .channel-block {
+    margin-top: 0.55rem;
+    padding-top: 0.45rem;
+    border-top: 1px solid var(--line);
+  }
+  .moment-mock .mcard .channel-block:first-of-type {
+    border-top: none;
+    padding-top: 0;
+    margin-top: 0;
+  }
+  .moment-mock .mcard .channel-name {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--ink-soft);
+    font-weight: 700;
+    margin-bottom: 0.25rem;
+  }
+  /* v0.3 — Building blocks */
+  .blocks { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 1rem; }
+  @media (max-width: 800px) { .blocks { grid-template-columns: 1fr; } }
+  .bblock {
+    background: var(--c-white);
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    padding: 1.1rem 1.25rem 1.2rem;
+  }
+  .bblock h4.bblock-title {
+    font-size: 0.95rem;
+    font-weight: 600;
+    text-transform: none;
+    letter-spacing: 0;
+    color: var(--ink);
+    margin-bottom: 0.4rem;
+  }
+  .bblock .bblock-tag {
+    display: inline-block;
+    font-size: 0.68rem; text-transform: uppercase; letter-spacing: 1px;
+    font-weight: 700;
+    padding: 0.15rem 0.55rem;
+    border-radius: 10px;
+    margin-bottom: 0.5rem;
+  }
+  .bblock.curated .bblock-tag { background: var(--ms-blue-light); color: var(--ms-blue-dark); }
+  .bblock.dash .bblock-tag { background: #ECF7F3; color: #1E6B5C; }
+  .bblock p { font-size: 0.9rem; margin: 0.3rem 0; color: var(--ink); }
+  .bblock ul { margin: 0.3rem 0 0; padding-left: 1.2rem; }
+  .bblock li { font-size: 0.88rem; color: var(--ink); margin: 0.2rem 0; }
+
+  .scope-row {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;
+    margin-top: 1.1rem;
+  }
+  @media (max-width: 700px) { .scope-row { grid-template-columns: 1fr; } }
+  .scope {
+    border: 1px solid var(--line);
+    border-radius: 5px;
+    padding: 0.8rem 1rem;
+    font-size: 0.88rem;
+  }
+  .scope.in { background: #ECF7F3; border-left: 3px solid var(--c-teal); }
+  .scope.out { background: #FAFAFA; border-left: 3px solid var(--c-n25); }
+  .scope .scope-label {
+    font-size: 0.7rem; text-transform: uppercase; letter-spacing: 1px;
+    font-weight: 700; display: block; margin-bottom: 0.3rem;
+  }
+  .scope.in .scope-label { color: #1E6B5C; }
+  .scope.out .scope-label { color: var(--ink-soft); }
+  .scope ul { margin: 0; padding-left: 0; list-style: none; }
+  .scope li { margin: 0.3rem 0; padding-left: 1.4rem; position: relative; }
+  .scope.in li::before {
+    content: "\2713";
+    position: absolute; left: 0; top: 0;
+    color: #2C7A4B; font-weight: 700;
+  }
+  .scope.out li::before {
+    content: "\2715";
+    position: absolute; left: 0; top: 0;
+    color: var(--c-n50); font-weight: 700;
+  }
+
+  /* v0.3 visual — small section eyebrow */
+  .hint-head {
+    font-size: 0.74rem !important;
+    text-transform: uppercase;
+    letter-spacing: 1.4px;
+    color: var(--ink-soft);
+    font-weight: 700;
+    margin: 1.4rem 0 0.5rem;
+  }
+
+  /* v0.3 visual — question tiles */
+  .qtiles {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 0.7rem;
+    margin: 0.4rem 0 0.4rem;
+  }
+  @media (max-width: 1100px) { .qtiles { grid-template-columns: repeat(3, 1fr); } }
+  @media (max-width: 800px)  { .qtiles { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 600px)  { .qtiles { grid-template-columns: 1fr; } }
+  .qtile {
+    background: var(--c-white);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 1rem 1rem 1.05rem;
+    display: flex; flex-direction: column;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 1px 2px rgba(9,31,46,0.05);
+  }
+  .qtile::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--c-med-blue), var(--c-teal));
+  }
+  .qtile .qnum {
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: var(--c-med-blue);
+    line-height: 1;
+    letter-spacing: -1px;
+    margin: 0.2rem 0 0.5rem;
+  }
+  .qtile .qtext {
+    font-weight: 600;
+    font-size: 0.95rem;
+    color: var(--ink);
+    line-height: 1.35;
+    margin-bottom: 0.45rem;
+  }
+  .qtile .qcap {
+    font-size: 0.82rem;
+    color: var(--ink-soft);
+    margin-top: auto;
+    line-height: 1.4;
+  }
+
+  /* v0.3 visual — today flow */
+  .today-flow {
+    display: flex;
+    align-items: stretch;
+    gap: 0.35rem;
+    margin: 0.4rem 0 0;
+  }
+  .today-flow .step {
+    flex: 1 1 0;
+    min-width: 0;
+    background: var(--c-white);
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    padding: 0.7rem 0.7rem;
+    font-size: 0.85rem;
+    line-height: 1.35;
+    color: var(--ink);
+    text-align: center;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .today-flow .step.warn {
+    background: #FFF4CE;
+    border-color: #F0DEA0;
+    color: #6B5800;
+    font-weight: 600;
+  }
+  .today-flow .arrow {
+    display: flex; align-items: center; justify-content: center;
+    color: var(--c-med-blue);
+    font-size: 1.4rem;
+    font-weight: 700;
+    flex: 0 0 auto;
+    width: 18px;
+  }
+  @media (max-width: 800px) {
+    .today-flow { flex-direction: column; }
+    .today-flow .arrow { transform: rotate(90deg); width: 100%; height: 18px; }
+  }
+
+  /* v0.3 visual — hub diagram */
+  .hub-diagram {
+    margin: 1rem 0 0;
+    background: linear-gradient(180deg, #F4FBFF 0%, #ECF7F3 100%);
+    border: 1px solid var(--c-aqua);
+    border-radius: 10px;
+    padding: 1.6rem 1.5rem 1.8rem;
+    display: flex; flex-direction: column; align-items: center;
+    gap: 0.55rem;
+  }
+  .hub-tier {
+    display: flex; flex-wrap: wrap; gap: 0.55rem;
+    justify-content: center;
+    width: 100%;
+  }
+  .hub-pill {
+    background: var(--c-white);
+    border: 1px solid var(--line);
+    padding: 0.6rem 1rem;
+    border-radius: 6px;
+    font-size: 0.88rem;
+    font-weight: 600;
+    color: var(--ink);
+    box-shadow: 0 1px 2px rgba(9,31,46,0.08);
+    text-align: center;
+    flex: 0 1 auto;
+  }
+  .hub-pill.q { border-left: 3px solid var(--c-med-blue); }
+  .hub-pill.c { border-left: 3px solid var(--c-teal); }
+  .hub-down {
+    width: 2px; height: 22px;
+    background: var(--c-med-blue);
+    position: relative;
+  }
+  .hub-down::after {
+    content: "";
+    position: absolute;
+    bottom: -1px; left: 50%;
+    transform: translateX(-50%);
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 7px solid var(--c-med-blue);
+  }
+  .hub-down.teal { background: var(--c-teal); }
+  .hub-down.teal::after { border-top-color: var(--c-teal); }
+  /* upward-feeding arrow (data sources -> hub) */
+  .hub-up {
+    width: 2px; height: 22px;
+    background: var(--c-teal);
+    position: relative;
+  }
+  .hub-up::after {
+    content: "";
+    position: absolute;
+    top: -1px; left: 50%;
+    transform: translateX(-50%);
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-bottom: 7px solid var(--c-teal);
+  }
+  .hub-tier.sources {
+    margin-top: 0.1rem;
+  }
+  .hub-sources-label {
+    font-size: 0.72rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--ink-soft);
+    margin-top: 0.1rem;
+  }
+  .hub-core {
+    background: var(--c-dark-blue);
+    color: white;
+    padding: 1rem 2rem;
+    border-radius: 8px;
+    text-align: center;
+    box-shadow: 0 2px 8px rgba(9,31,46,0.22);
+    border: 1px solid var(--c-dark-blue);
+  }
+  .hub-core .hub-title {
+    font-size: 1.2rem;
+    font-weight: 700;
+    letter-spacing: -0.2px;
+  }
+  .hub-core .hub-sub {
+    font-size: 0.8rem;
+    opacity: 0.85;
+    margin-top: 0.2rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+
+  /* v0.3 visual — tighter qcard meta */
+  .qcard .q-meta .lab { display: block; }
+
+  /* Phase summary */
+  .phase-summary { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-top: 1rem; }
+  @media (max-width: 800px) { .phase-summary { grid-template-columns: 1fr; } }
+  .phase-summary .pcard {
+    background: var(--c-white);
+    border: 1px solid var(--line);
+    border-top: 4px solid var(--c-n35);
+    border-radius: 6px;
+    padding: 1rem 1.1rem;
+  }
+  .phase-summary .pcard.crawl { border-top-color: var(--c-n35); }
+  .phase-summary .pcard.walk { border-top-color: var(--c-med-blue); }
+  .phase-summary .pcard.run { border-top-color: var(--c-teal); }
+  .phase-summary .pcard .phase-tag { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 1px; color: var(--ink-soft); font-weight: 600; }
+  .phase-summary .pcard h3 { margin: 0.3rem 0 0.5rem; font-size: 1.05rem; }
+  .phase-summary .pcard .duration {
+    display: inline-block;
+    background: var(--ms-blue-light); color: var(--ms-blue-dark);
+    font-size: 0.72rem; font-weight: 600;
+    padding: 0.1rem 0.55rem; border-radius: 10px;
+    margin-bottom: 0.5rem;
+  }
+  .phase-summary .pcard p { font-size: 0.88rem; margin: 0; color: var(--ink); }
+
+  /* Brief-level gantt summary (3 phase bars only) */
+  .brief-gantt {
+    margin: 1rem 0 0.4rem;
+    background: var(--c-white);
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    padding: 1rem 1.1rem 1.25rem;
+  }
+  .brief-gantt-months {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    font-size: 0.62rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--ink-soft);
+    font-weight: 600;
+    border-bottom: 1px solid var(--line);
+    padding-bottom: 0.35rem;
+    margin-bottom: 0.8rem;
+  }
+  .brief-gantt-months span {
+    text-align: center;
+    border-left: 1px dashed var(--c-n15);
+    padding: 0 2px;
+  }
+  .brief-gantt-months span:first-child { border-left: none; }
+  .brief-gantt-track {
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    height: 34px;
+    margin-bottom: 0.45rem;
+    background-image: linear-gradient(to right, rgba(9,31,46,0.06) 1px, transparent 1px);
+    background-size: calc(100% / 12) 100%;
+    border-radius: 4px;
+  }
+  .brief-gantt-bar {
+    position: absolute;
+    top: 4px; bottom: 4px;
+    border-radius: 4px;
+    color: var(--c-white);
+    font-size: 0.75rem;
+    font-weight: 600;
+    padding: 0 0.7rem;
+    display: flex;
+    align-items: center;
+    box-shadow: 0 1px 2px rgba(9,31,46,0.15);
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  }
+  .brief-gantt-bar.crawl { background: var(--c-n50); }
+  .brief-gantt-bar.walk  { background: var(--c-med-blue); }
+  .brief-gantt-bar.run   { background: var(--c-teal); color: var(--c-dark-blue); }
+  .brief-gantt-legend {
+    margin-top: 0.6rem;
+    display: flex; flex-wrap: wrap; gap: 1rem;
+    font-size: 0.72rem; color: var(--ink-soft);
+  }
+  .brief-gantt-legend .sw {
+    display: inline-block; width: 12px; height: 10px;
+    border-radius: 2px; margin-right: 0.3rem; vertical-align: middle;
+  }
+  .brief-gantt-legend .sw.crawl { background: var(--c-n50); }
+  .brief-gantt-legend .sw.walk  { background: var(--c-med-blue); }
+  .brief-gantt-legend .sw.run   { background: var(--c-teal); }
+
+  /* Gantt */
+  .gantt {
+    margin-top: 1rem;
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    overflow: visible;
+    background: var(--c-white);
+  }
+  .gantt-header, .gantt-row {
+    display: grid;
+    grid-template-columns: 240px repeat(12, 1fr);
+    align-items: stretch;
+  }
+  .gantt-header {
+    background: var(--bg);
+    border-bottom: 1px solid var(--line);
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--ink-soft);
+    font-weight: 600;
+  }
+  .gantt-header > div {
+    padding: 0.5rem 0.4rem;
+    text-align: center;
+    border-left: 1px solid var(--line);
+  }
+  .gantt-header > div:first-child {
+    text-align: left;
+    border-left: none;
+    padding-left: 0.9rem;
+  }
+  .gantt-row { border-bottom: 1px solid var(--line); min-height: 44px; }
+  .gantt-row:last-child { border-bottom: none; }
+  .gantt-row .label {
+    padding: 0.6rem 0.9rem;
+    font-size: 0.85rem;
+    font-weight: 600;
+    border-right: 1px solid var(--line);
+    background: #FAFBFC;
+    display: flex; align-items: center;
+  }
+  .gantt-cells {
+    grid-column: 2 / -1;
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    position: relative;
+  }
+  .gantt-cells > .col { border-left: 1px solid var(--line); }
+  .bar {
+    position: absolute;
+    top: 8px; bottom: 8px;
+    border-radius: 4px;
+    color: var(--c-white);
+    font-size: 0.72rem;
+    font-weight: 600;
+    padding: 0 0.6rem;
+    display: flex; align-items: center;
+    box-shadow: 0 1px 2px rgba(9,31,46,0.15);
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  }
+  .bar.crawl { background: var(--c-n50); }
+  .bar.walk { background: var(--c-med-blue); }
+  .bar.run { background: var(--c-teal); color: var(--c-dark-blue); }
+
+  /* Milestones row */
+  .gantt-row.milestones-row { min-height: 38px; background: #FFFCF1; }
+  .gantt-row.milestones-row .label {
+    background: #FFF6D8;
+    color: #6B5800;
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+  .milestone-mark {
+    position: absolute;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 14px; height: 14px;
+    z-index: 2;
+    cursor: help;
+  }
+  .milestone-mark::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: var(--c-amber, #FFB900);
+    border: 2px solid #6B5800;
+    box-shadow: 0 1px 3px rgba(9,31,46,0.25);
+    transform: rotate(45deg);
+  }
+  .milestone-mark::after {
+    content: attr(data-label);
+    position: absolute;
+    bottom: calc(100% + 14px);
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--c-dark-blue);
+    color: white;
+    padding: 0.45rem 0.7rem;
+    border-radius: 5px;
+    font-size: 0.74rem;
+    font-weight: 600;
+    letter-spacing: 0;
+    text-transform: none;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.15s ease;
+    box-shadow: 0 2px 8px rgba(9,31,46,0.3);
+    z-index: 10;
+  }
+  .milestone-mark:hover::after,
+  .milestone-mark:focus::after { opacity: 1; }
+
+  /* Edge-aware tooltip alignment */
+  .milestone-mark.tip-left::after { left: auto; right: -6px; transform: none; }
+  .milestone-mark.tip-right::after { left: -6px; right: auto; transform: none; }
+
+  .gantt-legend {
+    display: flex; flex-wrap: wrap; gap: 1rem;
+    margin-top: 0.8rem; font-size: 0.78rem; color: var(--ink-soft);
+  }
+  .gantt-legend .swatch {
+    display: inline-block; width: 12px; height: 12px;
+    border-radius: 3px; vertical-align: middle; margin-right: 0.35rem;
+  }
+  .gantt-legend .sw-crawl { background: var(--c-n50); }
+  .gantt-legend .sw-walk { background: var(--c-med-blue); }
+  .gantt-legend .sw-run { background: var(--c-teal); }
+  .gantt-legend .sw-milestone {
+    background: var(--c-amber, #FFB900);
+    border: 1.5px solid #6B5800;
+    transform: rotate(45deg);
+    border-radius: 0;
+  }
+
+  ul, ol { margin: 0.4rem 0 0.6rem; padding-left: 1.3rem; }
+  li { margin: 0.3rem 0; }
+
+  footer {
+    text-align: center; padding: 2rem 1.5rem;
+    color: var(--ink-soft); font-size: 0.8rem;
+    border-top: 1px solid var(--line);
+  }
+
+  @media print {
+    .nav { display: none; }
+    body { background: white; }
+    section { box-shadow: none; border: 1px solid #ccc; page-break-inside: avoid; }
+  }
+</style>
+</head>
+<body>
+
+<header class="page-header">
+  <div class="ph-inner">
+    <div class="ph-brand">
+      <svg class="ph-logo" viewBox="0 0 23 23" aria-hidden="true">
+        <rect x="0" y="0" width="10" height="10" fill="#F25022"/>
+        <rect x="13" y="0" width="10" height="10" fill="#7FBA00"/>
+        <rect x="0" y="13" width="10" height="10" fill="#00A4EF"/>
+        <rect x="13" y="13" width="10" height="10" fill="#FFB900"/>
+      </svg>
+      <span class="ph-wordmark">Microsoft</span>
+    </div>
+    <div class="ph-confidential">Microsoft Confidential</div>
+  </div>
+  <div class="ph-title-row">
+    <div class="ph-meta">Digital Direct Sales</div>
+    <h1>Marketing Effectiveness Solution</h1>
+    <div style="margin-top: 0.5rem; font-size: 1.05rem; color: var(--ink-soft); font-weight: 400;">How can we level up our understanding of marketing performance?</div>
+  </div>
+</header>
+
+<nav class="nav" aria-label="Primary navigation">
+  <span class="brand">Marketing Effectiveness Hub</span>
+  <a href="brief.html" style="color: var(--ms-blue-dark); font-weight: 600;">Brief</a>
+  <a href="timeline.html">Timeline</a>
+  <a href="partnership-ideas.html">Partnerships reporting</a>
+  <a href="marketing-iq.html">Marketing IQ</a>
+  <a href="web-metrics-notes.html">Notes</a>
+  <a href="reports.html">Reports inventory</a>
+  <a href="archive.html">Archive</a>
+</nav>
+
+<main>
+
+  <!-- 1. PROBLEM -->
+  <section id="problem">
+    <span class="section-num">01 · The Problem</span>
+    <h2>Our team needs to be able to answer these questions faster.</h2>
+
+    <h3 class="hint-head">Asked every cycle</h3>
+    <div class="qtiles">
+      <div class="qtile">
+        <div class="qtext">Where do I invest incremental dollars?</div>
+        <div class="qcap">Budget opens up — or gets pulled. Where do we have room to invest?</div>
+      </div>
+      <div class="qtile">
+        <div class="qtext">What channel is driving this trend?</div>
+        <div class="qcap">Traffic, conversion, revenue — which lever moved it?</div>
+      </div>
+      <div class="qtile">
+        <div class="qtext">What's the ROI of this partnership?</div>
+        <div class="qcap">NFL, AMEX (Americas / Asia / EMEA), and others.</div>
+      </div>
+      <div class="qtile">
+        <div class="qtext">How is marketing contributing to a campaign moment?</div>
+        <div class="qcap">Back to School, product launches, Holiday — the rollup story.</div>
+      </div>
+      <div class="qtile">
+        <div class="qtext">What is the incremental impact of paid media?</div>
+        <div class="qcap">How much business would have happened without the spend?</div>
+      </div>
+    </div>
+
+    <h3 class="hint-head">Today, answering any one means</h3>
+    <div class="today-flow">
+      <div class="step">Chase channel &amp; region owners</div>
+      <span class="arrow">→</span>
+      <div class="step">Pull reports manually</div>
+      <span class="arrow">→</span>
+      <div class="step">Reconcile definitions &amp; create presentation</div>
+      <span class="arrow">→</span>
+      <div class="step warn" style="flex: 1.7 1 0; white-space: nowrap;">Answer arrives late — or not at all</div>
+    </div>
+  </section>
+
+  <!-- 2. DELIVERABLE -->
+  <section id="deliverable">
+    <span class="section-num">02 · The Deliverable</span>
+    <h2>A self-service hub built around the questions.</h2>
+
+    <div class="hub-diagram">
+      <div class="hub-sources-label">Data sources</div>
+      <div class="hub-tier sources">
+        <div class="hub-pill c">Manually curated reports</div>
+        <div class="hub-pill c">Web data</div>
+        <div class="hub-pill c">Campaign data</div>
+        <div class="hub-pill c">CRM data</div>
+        <div class="hub-pill c">Budget data</div>
+      </div>
+      <div class="hub-down teal"></div>
+      <div class="hub-core">
+        <div class="hub-title">MarketingIQ</div>
+        <div class="hub-sub">acting as a self service hub</div>
+      </div>
+      <div class="hub-down"></div>
+      <div class="hub-sources-label">Answers to the questions that we have</div>
+      <div class="hub-tier">
+        <div class="hub-pill q">Channel Trends &amp; Budget Allocation</div>
+        <div class="hub-pill q">Partnership ROI</div>
+        <div class="hub-pill q">Campaign Moments</div>
+        <div class="hub-pill q">Paid Media Incrementality</div>
+      </div>
+    </div>
+
+    <div class="grid-4-2" style="margin-top:1.2rem;">
+
+      <!-- Q1: Investment & trend (merged) -->
+      <div class="qcard q1 clickable" data-modal="modal-q1" tabindex="0" role="button" aria-haspopup="dialog" aria-controls="modal-q1">
+        <span class="q-tag">Investment &amp; trend</span>
+        <div class="q-q">What channel is driving the greatest efficiency, and where do we have room to invest?</div>
+        <div class="q-answer">
+          <ul>
+            <li>LTV:CAC by paid-media channel, with MoM &amp; YoY deltas pre-flagged</li>
+            <li>Partnership goal achievement, side by side</li>
+            <li>Click a channel → CJA workspace with segments &amp; filters already on</li>
+            <li>Surfaces where to lean in vs. pull back — and what changed</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Q3: Partnership ROI -->
+      <div class="qcard q3 clickable" data-modal="modal-q3" tabindex="0" role="button" aria-haspopup="dialog" aria-controls="modal-q3">
+        <span class="q-tag">Partnership ROI</span>
+        <div class="q-q">Is the spend earning its keep?</div>
+        <div class="q-answer">
+          <ul>
+            <li>Comparability grid as the front door</li>
+            <li>Same KPIs across regions, side by side</li>
+            <li>Each row links to that partnership's source</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Q4: Campaign moments -->
+      <div class="qcard q4 clickable" data-modal="modal-q4" tabindex="0" role="button" aria-haspopup="dialog" aria-controls="modal-q4">
+        <span class="q-tag">Campaign moments</span>
+        <div class="q-q">How is marketing showing up for this moment?</div>
+        <div class="q-answer">
+          <ul>
+            <li>Email + Paid Media combined into one rollup</li>
+            <li>Traffic driven and conversion on that traffic</li>
+            <li>One card per GTM moment — Back to School, launches, Holiday</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Q5: Paid media incrementality -->
+      <div class="qcard q5">
+        <span class="q-tag">Paid media incrementality</span>
+        <div class="q-q">What's the incremental impact of paid media?</div>
+        <div class="q-answer">
+          <ul>
+            <li>Quarterly incrementality tests run with our agency</li>
+            <li>Measures the lift paid media is actually causing for Surface</li>
+            <li>Frames whether incremental dollars compound or get absorbed</li>
+          </ul>
+        </div>
+        <span class="pending-pill">First report in progress</span>
+      </div>
+
+    </div>
+
+    <h3 class="hint-head">What's behind every answer</h3>
+
+    <details class="bblock-detail curated">
+      <summary>
+        <span class="sum-left">
+          <span class="sum-tag">A · Curated</span>
+          <span class="sum-title">Manually curated reports</span>
+        </span>
+        <span class="chev">▾</span>
+      </summary>
+      <div class="body">
+        <ul>
+          <li>Examples: cross-channel efficiency snapshot, partnership grid, GTM moment rollup</li>
+          <li>Cadence: monthly headline · quarterly partnership</li>
+          <li>Sources: Reports inventory (Paid Media, Partnership, Cross-channel)</li>
+        </ul>
+      </div>
+    </details>
+
+    <details class="bblock-detail dash">
+      <summary>
+        <span class="sum-left">
+          <span class="sum-tag">B · Direct links</span>
+          <span class="sum-title">Pre-segmented dashboard links</span>
+        </span>
+        <span class="chev">▾</span>
+      </summary>
+      <div class="body">
+        <p>Live tools, pre-filtered to the slice that matches the question — so leaders don't land on a generic dashboard and have to reconfigure it.</p>
+        <ul>
+          <li>Tools: Adobe Analytics · CJA · Power BI</li>
+          <li>Pre-applied filters: LOB · region · channel · time window · GTM moment</li>
+          <li>Each link labeled with what it answers and what it doesn't</li>
+        </ul>
+      </div>
+    </details>
+
+    <details class="bblock-detail miq">
+      <summary>
+        <span class="sum-left">
+          <span class="sum-tag" style="background:#E6F0FA; color:#0E5A8A;">C · Marketing IQ</span>
+          <span class="sum-title">Agentic analysis across siloed data</span>
+        </span>
+        <span class="chev">▾</span>
+      </summary>
+      <div class="body">
+        <p>Marketing IQ is an agentic tool that allows us to use Copilot to analyze a variety of data sources simultaneously, pulling together insights that would otherwise remain silo'd.</p>
+      </div>
+    </details>
+  </section>
+
+  <!-- 3. TIMELINE -->
+  <section id="timeline">
+    <span class="section-num">03 · The Timeline</span>
+    <h2>Crawl, walk, run.</h2>
+    <p style="margin: 0.2rem 0 0.4rem; color: var(--ink-soft); font-size: 0.95rem;">A high-level read of the work ahead. The full month-by-month view, milestones, and per-workstream status live on the <a href="timeline.html">workstream timeline</a>.</p>
+
+    <!-- High-level gantt summary -->
+    <div class="brief-gantt" aria-label="High-level phase timeline">
+      <div class="brief-gantt-months" aria-hidden="true">
+        <span>May 26</span><span>Jun</span><span>Jul</span><span>Aug</span><span>Sep</span><span>Oct</span>
+        <span>Nov</span><span>Dec</span><span>Jan 27</span><span>Feb</span><span>Mar</span><span>Apr</span>
+      </div>
+      <!-- Crawl: May – Jul (months 1–3) -->
+      <div class="brief-gantt-track">
+        <div class="brief-gantt-bar crawl" style="left: 0%; right: 75%;">Crawl · Define &amp; Align</div>
+      </div>
+      <!-- Walk: Aug – Oct (months 4–6) -->
+      <div class="brief-gantt-track">
+        <div class="brief-gantt-bar walk" style="left: 25%; right: 50%;">Walk · Centralize &amp; Standardize</div>
+      </div>
+      <!-- Run: Nov – Apr (months 7–12) -->
+      <div class="brief-gantt-track">
+        <div class="brief-gantt-bar run" style="left: 50%; right: 0%;">Run · Integrate &amp; Automate</div>
+      </div>
+      <div class="brief-gantt-legend">
+        <span><span class="sw crawl"></span>Crawl</span>
+        <span><span class="sw walk"></span>Walk</span>
+        <span><span class="sw run"></span>Run</span>
+      </div>
+    </div>
+
+    <div class="phase-summary">
+      <div class="pcard crawl">
+        <div class="phase-tag">Phase 1</div>
+        <h3>Crawl · Define &amp; Align</h3>
+        <span class="duration">May – Jul 2026</span>
+        <p>Discover what stakeholders need, inventory what exists, share the V1 AMEX reporting template with RDS stakeholders, land the paid media incrementality readout, and stand up the foundations for campaign-to-moment attribution.</p>
+      </div>
+
+      <div class="pcard walk">
+        <div class="phase-tag">Phase 2</div>
+        <h3>Walk · Centralize &amp; Standardize</h3>
+        <span class="duration">Aug – Oct 2026</span>
+        <p>Hand canonical data sources to Marketing IQ, and expand manual partnerships reporting beyond AMEX.</p>
+      </div>
+
+      <div class="pcard run">
+        <div class="phase-tag">Phase 3</div>
+        <h3>Run · Integrate &amp; Automate</h3>
+        <span class="duration">Nov 2026 – Apr 2027</span>
+        <p>Move from links + curation to an integrated solution with drill-downs, automate where we are capable, and embed it in leadership rituals.</p>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  Marketing Effectiveness Hub · Marketing Effectiveness Solution · Draft v0.4 · For internal DDS leadership review · Earlier versions in the <a href="archive.html">archive</a>
+</footer>
+
+<!-- ============= MODALS · Answer-surface examples ============= -->
+<div class="modal-backdrop" id="modal-backdrop" role="dialog" aria-modal="true">
+
+  <!-- Q1 modal (merged: Investment + Trend driver) -->
+  <div class="modal" id="modal-q1" data-modal-content hidden>
+    <div class="modal-head">
+      <div>
+        <div class="mh-eyebrow">Investment &amp; trend · Example</div>
+        <div class="mh-title">What channel is driving the greatest efficiency, and where do we have room to invest?</div>
+      </div>
+      <button class="modal-close" type="button" aria-label="Close">×</button>
+    </div>
+    <div class="modal-body">
+      <div class="invest-mock">
+        <div class="mock-card">
+          <h5>Paid media · LTV:CAC</h5>
+          <table>
+            <tr><th>Channel</th><th>LTV:CAC</th><th></th></tr>
+            <tr><td>Search</td><td>5.4</td><td><span class="verdict go">Lean in</span></td></tr>
+            <tr><td>PMAX</td><td>3.8</td><td><span class="verdict go">Lean in</span></td></tr>
+            <tr><td>Display</td><td>2.1</td><td><span class="verdict hold">Hold</span></td></tr>
+            <tr><td>Social</td><td>1.4</td><td><span class="verdict cut">Pull back</span></td></tr>
+          </table>
+        </div>
+        <div class="mock-card">
+          <h5>Partnerships · conv strength</h5>
+          <table>
+            <tr><th>Partnership</th><th>ROI</th><th></th></tr>
+            <tr><td>AMEX (Americas)</td><td>4.8x</td><td><span class="verdict go">Lean in</span></td></tr>
+            <tr><td>AMEX (EMEA)</td><td>4.1x</td><td><span class="verdict go">Lean in</span></td></tr>
+            <tr><td>AMEX (Asia)</td><td>3.2x</td><td><span class="verdict hold">Hold</span></td></tr>
+            <tr><td>NFL</td><td>—</td><td><span class="verdict hold">No data</span></td></tr>
+          </table>
+        </div>
+      </div>
+      <div class="ltv-summary">
+        <div>
+          <div class="ltv-label">Paid Media — overall LTV:CAC</div>
+          <div class="ltv-value">3.6 <span class="ltv-vs">vs. <strong>2.53</strong> goal</span></div>
+        </div>
+        <span class="ltv-pill">Above goal · room to invest</span>
+      </div>
+
+      <div style="margin: 1.4rem 0 0.6rem; padding-top: 1rem; border-top: 1px solid var(--line);">
+        <div style="font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.8px; color: var(--ink-soft); font-weight: 700; margin-bottom: 0.35rem;">What moved the number — open in CJA</div>
+        <div style="font-size: 0.88rem; color: var(--ink-soft); margin-bottom: 0.6rem;">Click a channel from the tables above and land in a saved CJA workspace with USA · Surface Consumer · Buying Page Visits filters already on.</div>
+      </div>
+      <div style="margin: 0 -1.5rem -1.5rem;">
+        <img src="images/cja-workspace.png" alt="CJA saved workspace example showing USA all-up traffic and channel breakdown" style="display:block; width:100%; height:auto;" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
+        <div style="display:none; align-items:center; justify-content:center; min-height: 220px; padding: 1.5rem; background: var(--c-n05); color: var(--ink-soft); font-size: 0.9rem; text-align: center;">
+          Save the screenshot to <code style="background:white; padding: 0.1rem 0.35rem; border-radius:3px;">images/cja-workspace.png</code> to display it here.
+        </div>
+      </div>
+    </div>
+    <div class="modal-foot">
+      Illustrative. Real numbers come from the Triweekly + Exec Monthly + Partnership grid each cycle; the trend view opens directly in CJA with filters pre-applied.
+    </div>
+  </div>
+
+  <!-- Q3 modal -->
+  <div class="modal" id="modal-q3" data-modal-content hidden>
+    <div class="modal-head">
+      <div>
+        <div class="mh-eyebrow">Partnership ROI · Example</div>
+        <div class="mh-title">Comparability grid — same KPIs, every region</div>
+      </div>
+      <button class="modal-close" type="button" aria-label="Close">×</button>
+    </div>
+    <div class="modal-body">
+      <div style="overflow-x: auto;">
+        <table class="mini-grid">
+          <thead>
+            <tr>
+              <th>Partnership</th><th>Region</th><th>Goal</th>
+              <th>Reach</th><th>Traffic</th><th>Conv.</th><th>Revenue</th><th>ROI</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>AMEX</td><td>Americas</td><td>Conv.</td>
+              <td class="muted">—</td><td class="sec">42K</td><td class="sec">3,150</td><td class="sec">$2.1M</td><td class="key">4.8x</td>
+            </tr>
+            <tr>
+              <td>AMEX</td><td>Asia</td><td>Conv.</td>
+              <td class="muted">—</td><td class="sec">18K</td><td class="sec">1,240</td><td class="sec">$0.9M</td><td class="key">3.2x</td>
+            </tr>
+            <tr>
+              <td>AMEX</td><td>EMEA</td><td>Conv.</td>
+              <td class="muted">—</td><td class="sec">27K</td><td class="sec">1,980</td><td class="sec">$1.4M</td><td class="key">4.1x</td>
+            </tr>
+            <tr>
+              <td>NFL</td><td>Americas</td><td>Traffic</td>
+              <td class="sec">8.4M</td><td class="key">186K</td><td class="sec">2,140</td><td class="sec">$0.6M</td><td class="muted">—</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="grid-legend">
+        <span><span class="sw key"></span>Key KPI for that goal</span>
+        <span><span class="sw sec"></span>Secondary read</span>
+        <span><span class="sw muted"></span>Not reported / not the focus</span>
+      </div>
+    </div>
+    <div class="modal-foot">
+      Conversion partnerships are read on <strong>ROI</strong>; traffic partnerships are read on <strong>Traffic</strong>. Living version on the <a href="partnership-ideas.html#grid">Partnerships reporting page</a>.
+    </div>
+  </div>
+
+  <!-- Q4 modal -->
+  <div class="modal" id="modal-q4" data-modal-content hidden>
+    <div class="modal-head">
+      <div>
+        <div class="mh-eyebrow">Campaign moments · Example</div>
+        <div class="mh-title">Moment rollup — Email + Paid Media combined</div>
+      </div>
+      <button class="modal-close" type="button" aria-label="Close">×</button>
+    </div>
+    <div class="modal-body">
+      <div class="moment-mock">
+        <div class="mcard">
+          <h5>Back to School</h5>
+          <div class="moment-date">Jul 15 – Sep 5</div>
+          <div class="channel-block">
+            <div class="channel-name">Email</div>
+            <div class="row"><span>Traffic driven</span><span class="v">182K</span></div>
+            <div class="row"><span>Conv. on traffic</span><span class="v up">3.4%</span></div>
+          </div>
+          <div class="channel-block">
+            <div class="channel-name">Paid Media</div>
+            <div class="row"><span>Traffic driven</span><span class="v">1.1M</span></div>
+            <div class="row"><span>Conv. on traffic</span><span class="v up">2.1%</span></div>
+          </div>
+        </div>
+        <div class="mcard">
+          <h5>Surface Pro launch</h5>
+          <div class="moment-date">Sep 22 – Oct 20</div>
+          <div class="channel-block">
+            <div class="channel-name">Email</div>
+            <div class="row"><span>Traffic driven</span><span class="v">241K</span></div>
+            <div class="row"><span>Conv. on traffic</span><span class="v up">4.2%</span></div>
+          </div>
+          <div class="channel-block">
+            <div class="channel-name">Paid Media</div>
+            <div class="row"><span>Traffic driven</span><span class="v">1.6M</span></div>
+            <div class="row"><span>Conv. on traffic</span><span class="v up">2.8%</span></div>
+          </div>
+        </div>
+        <div class="mcard">
+          <h5>Holiday / Cyber</h5>
+          <div class="moment-date">Nov 10 – Dec 31</div>
+          <div class="channel-block">
+            <div class="channel-name">Email</div>
+            <div class="row"><span>Traffic driven</span><span class="v">410K</span></div>
+            <div class="row"><span>Conv. on traffic</span><span class="v up">3.9%</span></div>
+          </div>
+          <div class="channel-block">
+            <div class="channel-name">Paid Media</div>
+            <div class="row"><span>Traffic driven</span><span class="v">2.4M</span></div>
+            <div class="row"><span>Conv. on traffic</span><span class="v down">1.6%</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal-foot">
+      Each moment card combines Email + Paid Media into one view, focused on traffic driven and conversion on that traffic.
+    </div>
+  </div>
+
+</div>
+
+<script>
+(function() {
+  const backdrop = document.getElementById('modal-backdrop');
+  const modals = backdrop.querySelectorAll('[data-modal-content]');
+
+  function openModal(id) {
+    modals.forEach(m => m.hidden = (m.id !== id));
+    backdrop.classList.add('open');
+    document.body.classList.add('modal-open');
+  }
+  function closeModal() {
+    backdrop.classList.remove('open');
+    modals.forEach(m => m.hidden = true);
+    document.body.classList.remove('modal-open');
+  }
+
+  document.querySelectorAll('[data-modal]').forEach(trigger => {
+    const id = trigger.getAttribute('data-modal');
+    trigger.addEventListener('click', e => {
+      if (e.target.closest('a')) return;
+      openModal(id);
+    });
+    trigger.addEventListener('keydown', e => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        openModal(id);
+      }
+    });
+  });
+
+  backdrop.addEventListener('click', e => {
+    if (e.target === backdrop) closeModal();
+  });
+  backdrop.querySelectorAll('.modal-close').forEach(btn => {
+    btn.addEventListener('click', closeModal);
+  });
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape' && backdrop.classList.contains('open')) closeModal();
+  });
+})();
+</script>
+
+</body>
+</html>
