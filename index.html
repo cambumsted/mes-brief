@@ -1039,6 +1039,32 @@
   }
   .hub-down.teal { background: var(--c-teal); }
   .hub-down.teal::after { border-top-color: var(--c-teal); }
+  /* upward-feeding arrow (data sources -> hub) */
+  .hub-up {
+    width: 2px; height: 22px;
+    background: var(--c-teal);
+    position: relative;
+  }
+  .hub-up::after {
+    content: "";
+    position: absolute;
+    top: -1px; left: 50%;
+    transform: translateX(-50%);
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-bottom: 7px solid var(--c-teal);
+  }
+  .hub-tier.sources {
+    margin-top: 0.1rem;
+  }
+  .hub-sources-label {
+    font-size: 0.72rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--ink-soft);
+    margin-top: 0.1rem;
+  }
   .hub-core {
     background: var(--c-dark-blue);
     color: white;
@@ -1402,13 +1428,16 @@
       <div class="hub-down"></div>
       <div class="hub-core">
         <div class="hub-title">Self-service Hub</div>
-        <div class="hub-sub">one destination · organized by question</div>
+        <div class="hub-sub">powered by Marketing IQ</div>
       </div>
-      <div class="hub-down teal"></div>
-      <div class="hub-tier">
+      <div class="hub-up"></div>
+      <div class="hub-sources-label">Data feeding the hub</div>
+      <div class="hub-tier sources">
         <div class="hub-pill c">Manually curated reports</div>
-        <div class="hub-pill c">Pre-segmented dashboard links</div>
-        <div class="hub-pill c">Marketing IQ</div>
+        <div class="hub-pill c">Web data</div>
+        <div class="hub-pill c">Campaign data</div>
+        <div class="hub-pill c">CRM data</div>
+        <div class="hub-pill c">Budget data</div>
       </div>
     </div>
 
