@@ -814,10 +814,11 @@
     padding-left: 0.35rem;
     padding-right: 0.35rem;
   }
-  .live-grid colgroup col.col-name      { width: 12%; }
-  .live-grid colgroup col.col-offer     { width: 13%; }
-  .live-grid colgroup col.col-num       { width: 9.3%; }
-  .live-grid colgroup col.col-revenue   { width: 9.9%; }
+  .live-grid colgroup col.col-name      { width: 10%; }
+  .live-grid colgroup col.col-audience  { width: 9%; }
+  .live-grid colgroup col.col-offer     { width: 11%; }
+  .live-grid colgroup col.col-num       { width: 9%; }
+  .live-grid colgroup col.col-revenue   { width: 7%; }
 
   .live-grid td.offer-cell {
     font-size: 0.75rem;
@@ -1813,6 +1814,7 @@
       <table class="live-grid" id="amex-q2-grid">
         <colgroup>
           <col class="col-name">
+          <col class="col-audience">
           <col class="col-offer">
           <col class="col-num"><col class="col-num"><col class="col-num">
           <col class="col-num"><col class="col-num"><col class="col-num">
@@ -1821,6 +1823,7 @@
         <thead>
           <tr>
             <th data-def="Region or market/segment rollup for the AMEX campaign row.">Region / Market</th>
+            <th data-def="Audience segment within the region (used by Americas to break out Consumer No-Spend, SB Lookalike, Consumer Spend, and Small Business).">Audience</th>
             <th data-def="The offer construct presented to cardholders (spend threshold and reward).">Offer</th>
             <th data-def="Intent step: customer accepted/opted into the offer.">Enrollments</th>
             <th data-def="Conversion step: qualifying purchase made by an enrolled customer.">Redemptions</th>
@@ -1837,6 +1840,7 @@
         <tbody class="region-group collapsed" data-region="emea" data-period-start="2025-11-11" data-period-end="2026-01-15">
           <tr class="region-total" data-metric-enrollments="72955" data-metric-redemptions="1088" data-metric-redrate="0.0149" data-metric-redspend="2125887.41" data-metric-offercost="138304.40" data-metric-aov="1953.94" data-metric-roi="15.37">
             <td>EMEA<span class="region-period">Nov 11, 2025 – Jan 15, 2026</span></td>
+            <td></td>
             <td class="offer-cell mixed">Spend 500/100 (local currency)<br><span style="color:var(--ink-soft);font-size:0.68rem;">Same offer, 4 markets</span></td>
             <td class="num sourced" data-src-file="EMEA_AMEX calc template.xlsx" data-src-sheet="AMEX FY26 Q2" data-src-cell="D55 (Total row)" data-src-derived="Sum of FR + DE + UK + IT enrollments">72,955</td>
             <td class="num sourced" data-src-file="EMEA_AMEX calc template.xlsx" data-src-sheet="AMEX FY26 Q2" data-src-cell="H55 (Total row)" data-src-derived="Sum of FR + DE + UK + IT redemptions">1,088</td>
@@ -1849,6 +1853,7 @@
           </tr>
           <tr class="market-row" data-metric-enrollments="4053" data-metric-redemptions="33" data-metric-redrate="0.0081" data-metric-redspend="46837.46" data-metric-offercost="3837.88" data-metric-aov="1306.41" data-metric-roi="12.20">
             <td>FR <span style="color:var(--c-n35);font-weight:400;">(cap 8,000)</span></td>
+            <td></td>
             <td class="offer-cell">Spend €500, get €100</td>
             <td class="num sourced" data-src-file="EMEA_AMEX calc template.xlsx" data-src-sheet="AMEX FY26 Q2" data-src-cell="D16 (FR Total row)">4,053</td>
             <td class="num sourced" data-src-file="EMEA_AMEX calc template.xlsx" data-src-sheet="AMEX FY26 Q2" data-src-cell="H16 (FR Total row)">33</td>
@@ -1861,6 +1866,7 @@
           </tr>
           <tr class="market-row" data-metric-enrollments="17545" data-metric-redemptions="286" data-metric-redrate="0.0163" data-metric-redspend="362022.14" data-metric-offercost="33215.19" data-metric-aov="1166.55" data-metric-roi="10.90">
             <td>DE <span style="color:var(--c-n35);font-weight:400;">(cap 22,000)</span></td>
+            <td></td>
             <td class="offer-cell">Spend €500, get €100</td>
             <td class="num sourced" data-src-file="EMEA_AMEX calc template.xlsx" data-src-sheet="AMEX FY26 Q2" data-src-cell="D25 (DE Total)">17,545</td>
             <td class="num sourced" data-src-file="EMEA_AMEX calc template.xlsx" data-src-sheet="AMEX FY26 Q2" data-src-cell="H25 (DE Total)">286</td>
@@ -1873,6 +1879,7 @@
           </tr>
           <tr class="market-row" data-metric-enrollments="45943" data-metric-redemptions="733" data-metric-redrate="0.0160" data-metric-redspend="1636366.21" data-metric-offercost="97060.91" data-metric-aov="2077.12" data-metric-roi="16.86">
             <td>UK <span style="color:var(--c-n35);font-weight:400;">(cap 44,000)</span></td>
+            <td></td>
             <td class="offer-cell">Spend £500, get £100</td>
             <td class="num sourced" data-src-file="EMEA_AMEX calc template.xlsx" data-src-sheet="AMEX FY26 Q2" data-src-cell="D34 (UK Total)" data-src-warn="UK exceeded its cap (45,943 vs 44,000 = 104%). Common when feature placements drive higher-than-modeled enrollment.">45,943</td>
             <td class="num sourced" data-src-file="EMEA_AMEX calc template.xlsx" data-src-sheet="AMEX FY26 Q2" data-src-cell="H34 (UK Total)">733</td>
@@ -1885,6 +1892,7 @@
           </tr>
           <tr class="market-row" data-metric-enrollments="5414" data-metric-redemptions="36" data-metric-redrate="0.0066" data-metric-redspend="80661.60" data-metric-offercost="4190.42" data-metric-aov="1925.86" data-metric-roi="19.25">
             <td>IT <span style="color:var(--c-n35);font-weight:400;">(cap 8,000)</span></td>
+            <td></td>
             <td class="offer-cell">Spend €500, get €100</td>
             <td class="num sourced" data-src-file="EMEA_AMEX calc template.xlsx" data-src-sheet="AMEX FY26 Q2" data-src-cell="D43 (IT Total)">5,414</td>
             <td class="num sourced" data-src-file="EMEA_AMEX calc template.xlsx" data-src-sheet="AMEX FY26 Q2" data-src-cell="H43 (IT Total)">36</td>
@@ -1901,6 +1909,7 @@
         <tbody class="region-group collapsed" data-region="asia" data-period-start="2025-11-18" data-period-end="2025-12-28">
           <tr class="region-total" data-metric-enrollments="72000" data-metric-redemptions="996" data-metric-redrate="0.0138" data-metric-redspend="1240095" data-metric-offercost="154803" data-metric-aov="1245.07" data-metric-roi="8.01">
             <td>Asia<span class="region-period">Nov 18 – Dec 28, 2025</span></td>
+            <td></td>
             <td class="offer-cell mixed">Mixed offers<br><span style="color:var(--ink-soft);font-size:0.68rem;">3 markets · 3 offer templates</span></td>
             <td class="num sourced flagged" data-src-file="Asia_AMEX-Campaign-FY25-Q4.xlsx" data-src-sheet="FY26 Q2" data-src-cell="Derived from R13–R17" data-src-derived="Sum of AU Con + AU SBS + JP Con + JP SBS + SG = 72,000 (each market hit its cap)" data-src-warn="Asia FY26 Q2 interim block does not list enrollments directly. Derived = Redemptions ÷ Redemption Rate per market, which equals the enrollment cap for every market — implies all caps hit.">72,000</td>
             <td class="num sourced" data-src-file="Asia_AMEX-Campaign-FY25-Q4.xlsx" data-src-sheet="FY26 Q2" data-src-cell="H18 (INTERIM RESULTS 16/01/2026, TOTAL row)">996</td>
@@ -1913,6 +1922,7 @@
           </tr>
           <tr class="market-row" data-metric-enrollments="20000" data-metric-redemptions="427" data-metric-redrate="0.0214" data-metric-redspend="504682" data-metric-offercost="56141" data-metric-aov="1181.93" data-metric-roi="8.99">
             <td>AU Consumer <span style="color:var(--c-n35);font-weight:400;">(cap 20,000)</span></td>
+            <td></td>
             <td class="offer-cell">Spend AUD$800, get AUD$200</td>
             <td class="num sourced flagged" data-src-file="Asia_AMEX-Campaign-FY25-Q4.xlsx" data-src-sheet="FY26 Q2" data-src-cell="Derived (427 ÷ 2.135%)" data-src-derived="Equals enrollment cap — implies cap reached" data-src-warn="Enrollments not listed in interim block. Computed = Redemptions ÷ Redemption Rate.">20,000</td>
             <td class="num sourced" data-src-file="Asia_AMEX-Campaign-FY25-Q4.xlsx" data-src-sheet="FY26 Q2" data-src-cell="H13">427</td>
@@ -1925,6 +1935,7 @@
           </tr>
           <tr class="market-row" data-metric-enrollments="10000" data-metric-redemptions="153" data-metric-redrate="0.0153" data-metric-redspend="266978" data-metric-offercost="20226" data-metric-aov="1744.95" data-metric-roi="13.20">
             <td>AU SBS <span style="color:var(--c-n35);font-weight:400;">(cap 10,000)</span></td>
+            <td></td>
             <td class="offer-cell">Spend AUD$800, get AUD$200</td>
             <td class="num sourced flagged" data-src-file="Asia_AMEX-Campaign-FY25-Q4.xlsx" data-src-sheet="FY26 Q2" data-src-cell="Derived (153 ÷ 1.53%)" data-src-derived="Equals enrollment cap" data-src-warn="Computed from Redemptions ÷ Redemption Rate.">10,000</td>
             <td class="num sourced" data-src-file="Asia_AMEX-Campaign-FY25-Q4.xlsx" data-src-sheet="FY26 Q2" data-src-cell="H14">153</td>
@@ -1937,6 +1948,7 @@
           </tr>
           <tr class="market-row" data-metric-enrollments="20000" data-metric-redemptions="310" data-metric-redrate="0.0155" data-metric-redspend="326214" data-metric-offercost="59819" data-metric-aov="1052.30" data-metric-roi="5.45">
             <td>JP Consumer <span style="color:var(--c-n35);font-weight:400;">(cap 20,000)</span></td>
+            <td></td>
             <td class="offer-cell">Spend ¥150,000, get ¥30,000</td>
             <td class="num sourced flagged" data-src-file="Asia_AMEX-Campaign-FY25-Q4.xlsx" data-src-sheet="FY26 Q2" data-src-cell="Derived (310 ÷ 1.55%)" data-src-derived="Equals enrollment cap" data-src-warn="Computed from Redemptions ÷ Redemption Rate.">20,000</td>
             <td class="num sourced" data-src-file="Asia_AMEX-Campaign-FY25-Q4.xlsx" data-src-sheet="FY26 Q2" data-src-cell="H15">310</td>
@@ -1949,6 +1961,7 @@
           </tr>
           <tr class="market-row" data-metric-enrollments="10000" data-metric-redemptions="58" data-metric-redrate="0.0058" data-metric-redspend="70530" data-metric-offercost="11185" data-metric-aov="1216.03" data-metric-roi="6.31">
             <td>JP SBS <span style="color:var(--c-n35);font-weight:400;">(cap 10,000)</span></td>
+            <td></td>
             <td class="offer-cell">Spend ¥150,000, get ¥30,000</td>
             <td class="num sourced flagged" data-src-file="Asia_AMEX-Campaign-FY25-Q4.xlsx" data-src-sheet="FY26 Q2" data-src-cell="Derived (58 ÷ 0.58%)" data-src-derived="Equals enrollment cap" data-src-warn="Computed from Redemptions ÷ Redemption Rate.">10,000</td>
             <td class="num sourced" data-src-file="Asia_AMEX-Campaign-FY25-Q4.xlsx" data-src-sheet="FY26 Q2" data-src-cell="H16">58</td>
@@ -1961,6 +1974,7 @@
           </tr>
           <tr class="market-row" data-metric-enrollments="12000" data-metric-redemptions="48" data-metric-redrate="0.0040" data-metric-redspend="71691" data-metric-offercost="7432" data-metric-aov="1493.56" data-metric-roi="9.65">
             <td>SG (All) <span style="color:var(--c-n35);font-weight:400;">(cap 12,000)</span></td>
+            <td></td>
             <td class="offer-cell">Spend S$800, get S$200</td>
             <td class="num sourced flagged" data-src-file="Asia_AMEX-Campaign-FY25-Q4.xlsx" data-src-sheet="FY26 Q2" data-src-cell="Derived (48 ÷ 0.4%)" data-src-derived="Equals enrollment cap" data-src-warn="Computed from Redemptions ÷ Redemption Rate.">12,000</td>
             <td class="num sourced" data-src-file="Asia_AMEX-Campaign-FY25-Q4.xlsx" data-src-sheet="FY26 Q2" data-src-cell="H17">48</td>
@@ -1977,6 +1991,7 @@
         <tbody class="region-group collapsed" data-region="americas" data-period-start="2025-11-22" data-period-end="2026-01-17">
           <tr class="region-total" data-metric-enrollments="156834" data-metric-redemptions="1223" data-metric-redrate="0.0078" data-metric-redspend="576722.64" data-metric-offercost="64915" data-metric-aov="471.56" data-metric-roi="8.88">
             <td>Americas<span class="region-period">Nov 22, 2025 – Jan 17, 2026</span></td>
+            <td></td>
             <td class="offer-cell mixed">Mixed offers<br><span style="color:var(--ink-soft);font-size:0.68rem;">4 segments · 4 offers concurrent</span></td>
             <td class="num sourced" data-src-file="Americas_FY26 - AMEX Performance Tracker.xlsx" data-src-sheet="Key Metrics Worksheet" data-src-cell="I10 (Grand Total, Sum of Cumulative Enrollments)" data-src-derived="Sum across 4 audience segments">156,834</td>
             <td class="num sourced" data-src-file="Americas_FY26 - AMEX Performance Tracker.xlsx" data-src-sheet="Key Metrics Worksheet" data-src-cell="I11 (Grand Total, Cumulative Redemptions)">1,223</td>
@@ -1988,6 +2003,7 @@
             <td class="tbd">TBD</td>
           </tr>
           <tr class="market-row" data-metric-enrollments="89990" data-metric-redemptions="920" data-metric-redrate="0.0102" data-metric-redspend="154396.79" data-metric-offercost="13800" data-metric-aov="167.82" data-metric-roi="11.19">
+            <td>Americas</td>
             <td>Consumer – No Spend</td>
             <td class="offer-cell">Spend $70, get $15</td>
             <td class="num sourced" data-src-file="Americas_FY26 - AMEX Performance Tracker.xlsx" data-src-sheet="Key Metrics Worksheet" data-src-cell="J10">89,990</td>
@@ -2000,6 +2016,7 @@
             <td class="tbd">TBD</td>
           </tr>
           <tr class="market-row" data-metric-enrollments="22000" data-metric-redemptions="124" data-metric-redrate="0.0056" data-metric-redspend="172204.43" data-metric-offercost="31000" data-metric-aov="1388.75" data-metric-roi="5.55">
+            <td>Americas</td>
             <td>Consumer – SB Lookalike</td>
             <td class="offer-cell">Spend $1,000, get $250</td>
             <td class="num sourced" data-src-file="Americas_FY26 - AMEX Performance Tracker.xlsx" data-src-sheet="Key Metrics Worksheet" data-src-cell="K10">22,000</td>
@@ -2012,6 +2029,7 @@
             <td class="tbd">TBD</td>
           </tr>
           <tr class="market-row" data-metric-enrollments="20000" data-metric-redemptions="118" data-metric-redrate="0.0059" data-metric-redspend="140393.81" data-metric-offercost="9440" data-metric-aov="1189.78" data-metric-roi="14.87">
+            <td>Americas</td>
             <td>Consumer – Spend</td>
             <td class="offer-cell">Spend $450, get $80</td>
             <td class="num sourced" data-src-file="Americas_FY26 - AMEX Performance Tracker.xlsx" data-src-sheet="Key Metrics Worksheet" data-src-cell="L10">20,000</td>
@@ -2024,6 +2042,7 @@
             <td class="tbd">TBD</td>
           </tr>
           <tr class="market-row" data-metric-enrollments="24844" data-metric-redemptions="61" data-metric-redrate="0.0025" data-metric-redspend="109727.61" data-metric-offercost="10675" data-metric-aov="1798.81" data-metric-roi="10.28">
+            <td>Americas</td>
             <td>Small Business</td>
             <td class="offer-cell">Spend $1,000, get $175</td>
             <td class="num sourced" data-src-file="Americas_FY26 - AMEX Performance Tracker.xlsx" data-src-sheet="Key Metrics Worksheet" data-src-cell="M10">24,844</td>
@@ -2039,6 +2058,7 @@
         <tfoot id="amex-totals">
           <tr class="totals-row">
             <td>Totals <span class="region-period">Selected regions only</span></td>
+            <td></td>
             <td class="offer-cell mixed">—</td>
             <td class="num" data-total-metric="enrollments">—</td>
             <td class="num" data-total-metric="redemptions">—</td>
