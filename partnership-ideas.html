@@ -549,6 +549,12 @@
     outline: 1px solid #2F8F46;
     outline-offset: -1px;
   }
+  .live-grid td.cell-rejected {
+    background: #F6A6A6 !important;
+    color: #5C1111 !important;
+    outline: 1px solid #B43C3C;
+    outline-offset: -1px;
+  }
   .live-grid td.cell-cleared {
     background: #FFFFFF !important;
     color: var(--ink) !important;
@@ -2309,7 +2315,7 @@
 
 <script>
 (function () {
-  // Click once = green, click again = white for AMEX value cells.
+  // Click cycle for AMEX value cells: green -> red -> white.
   const grid = document.getElementById('amex-q2-grid');
   if (!grid) return;
 
@@ -2319,9 +2325,14 @@
 
     if (cell.classList.contains('cell-selected')) {
       cell.classList.remove('cell-selected');
+      cell.classList.add('cell-rejected');
+      cell.classList.remove('cell-cleared');
+    } else if (cell.classList.contains('cell-rejected')) {
+      cell.classList.remove('cell-rejected');
       cell.classList.add('cell-cleared');
     } else {
       cell.classList.add('cell-selected');
+      cell.classList.remove('cell-rejected');
       cell.classList.remove('cell-cleared');
     }
   });
