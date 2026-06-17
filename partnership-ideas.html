@@ -561,6 +561,12 @@
     outline: 1px solid #DDE3E8;
     outline-offset: -1px;
   }
+  .live-grid td.cell-cleared-total {
+    background: var(--bg) !important;
+    color: var(--ink) !important;
+    outline: 1px solid #DDE3E8;
+    outline-offset: -1px;
+  }
   .live-grid tr.region-total td {
     background: var(--bg);
     font-weight: 700;
@@ -2322,18 +2328,24 @@
   grid.addEventListener('click', function (e) {
     const cell = e.target.closest('td.num, td.tbd');
     if (!cell || !grid.contains(cell)) return;
+    const isRegionTotal = !!cell.closest('tr.region-total');
 
     if (cell.classList.contains('cell-selected')) {
       cell.classList.remove('cell-selected');
       cell.classList.add('cell-rejected');
       cell.classList.remove('cell-cleared');
+      cell.classList.remove('cell-cleared-total');
     } else if (cell.classList.contains('cell-rejected')) {
       cell.classList.remove('cell-rejected');
-      cell.classList.add('cell-cleared');
+      cell.classList.remove('cell-selected');
+      cell.classList.remove('cell-cleared');
+      cell.classList.remove('cell-cleared-total');
+      cell.classList.add(isRegionTotal ? 'cell-cleared-total' : 'cell-cleared');
     } else {
       cell.classList.add('cell-selected');
       cell.classList.remove('cell-rejected');
       cell.classList.remove('cell-cleared');
+      cell.classList.remove('cell-cleared-total');
     }
   });
 })();
