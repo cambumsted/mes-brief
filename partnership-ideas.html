@@ -540,6 +540,18 @@
   }
   .live-grid td.flagged { background: #FFFCF1; }
   .live-grid td.missing { color: var(--c-n50); font-style: italic; }
+  .live-grid td.cell-selected {
+    background: #8FE7A2 !important;
+    color: #0B3A1C !important;
+    outline: 1px solid #2F8F46;
+    outline-offset: -1px;
+  }
+  .live-grid td.cell-cleared {
+    background: #FFFFFF !important;
+    color: var(--ink) !important;
+    outline: 1px solid #DDE3E8;
+    outline-offset: -1px;
+  }
   .live-grid tr.region-total td {
     background: var(--bg);
     font-weight: 700;
@@ -2286,6 +2298,27 @@
         row.parentElement.classList.toggle('collapsed');
       }
     });
+  });
+})();
+</script>
+
+<script>
+(function () {
+  // Click once = green, click again = white for AMEX value cells.
+  const grid = document.getElementById('amex-q2-grid');
+  if (!grid) return;
+
+  grid.addEventListener('click', function (e) {
+    const cell = e.target.closest('td.num, td.tbd');
+    if (!cell || !grid.contains(cell)) return;
+
+    if (cell.classList.contains('cell-selected')) {
+      cell.classList.remove('cell-selected');
+      cell.classList.add('cell-cleared');
+    } else {
+      cell.classList.add('cell-selected');
+      cell.classList.remove('cell-cleared');
+    }
   });
 })();
 </script>
