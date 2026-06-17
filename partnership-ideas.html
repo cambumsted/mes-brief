@@ -516,6 +516,9 @@
     border-bottom: 2px solid var(--ms-blue);
     white-space: nowrap;
   }
+  .live-grid th[data-def] {
+    cursor: help;
+  }
   .live-grid th:first-child, .live-grid td:first-child {
     text-align: left;
     font-weight: 600;
@@ -1805,16 +1808,16 @@
         </colgroup>
         <thead>
           <tr>
-            <th>Region / Market</th>
-            <th>Offer</th>
-            <th>Enrollments</th>
-            <th>Redemptions</th>
-            <th>Red. Rate</th>
-            <th>Red. Spend (USD)</th>
-            <th>Offer Cost (USD)</th>
-            <th>AOV Redeemers (USD)<span class="open-flag">confirm</span></th>
-            <th>ROI</th>
-            <th>Revenue (USD)<span class="open-flag">tbd</span></th>
+            <th data-def="Region or market/segment rollup for the AMEX campaign row.">Region / Market</th>
+            <th data-def="The offer construct presented to cardholders (spend threshold and reward).">Offer</th>
+            <th data-def="Intent step: customer accepted/opted into the offer.">Enrollments</th>
+            <th data-def="Conversion step: qualifying purchase made by an enrolled customer.">Redemptions</th>
+            <th data-def="Redemption Rate = Redemptions divided by Enrollments.">Red. Rate</th>
+            <th data-def="Total customer spend in qualifying purchases that triggered the offer (USD).">Red. Spend (USD)</th>
+            <th data-def="Cost to Microsoft of fulfilling offer rewards (USD).">Offer Cost (USD)</th>
+            <th data-def="Average order value of redeeming customers (USD). Confirm this is the canonical AOV lens.">AOV Redeemers (USD)<span class="open-flag">confirm</span></th>
+            <th data-def="ROI = Redemption Spend divided by Offer Cost.">ROI</th>
+            <th data-def="TBD. Needs final definition (for example: Redemption Spend only vs broader attributed revenue).">Revenue (USD)<span class="open-flag">tbd</span></th>
           </tr>
         </thead>
 
@@ -2233,14 +2236,16 @@
   }
 
   function show(el, e) {
+    const def = el.getAttribute('data-def');
     const file = el.getAttribute('data-src-file');
     const sheet = el.getAttribute('data-src-sheet');
     const cell = el.getAttribute('data-src-cell');
     const derived = el.getAttribute('data-src-derived');
     const warn = el.getAttribute('data-src-warn');
-    if (!file && !sheet && !cell) return;
+    if (!file && !sheet && !cell && !def) return;
     activeEl = el;
-    let html = '<span class="tt-eyebrow">↳ Source</span>';
+    let html = '<span class="tt-eyebrow">↳ ' + (def ? 'Definition' : 'Source') + '</span>';
+    if (def)  html += '<div class="tt-row"><span class="lbl">Meaning</span><span class="val">' + escapeHtml(def) + '</span></div>';
     if (file)  html += '<div class="tt-row"><span class="lbl">File</span><span class="val">' + escapeHtml(file) + '</span></div>';
     if (sheet) html += '<div class="tt-row"><span class="lbl">Sheet</span><span class="val">' + escapeHtml(sheet) + '</span></div>';
     if (cell)  html += '<div class="tt-row"><span class="lbl">Cell</span><span class="val">' + escapeHtml(cell) + '</span></div>';
@@ -2259,7 +2264,7 @@
   }
 
   document.addEventListener('mouseover', function (e) {
-    const el = e.target.closest('[data-src-file], [data-src-sheet], [data-src-cell]');
+    const el = e.target.closest('[data-def], [data-src-file], [data-src-sheet], [data-src-cell]');
     if (el && el !== activeEl) show(el, e);
   });
   document.addEventListener('mousemove', function (e) {
@@ -2271,7 +2276,7 @@
     if (!to || !activeEl.contains(to)) hide();
   });
   document.addEventListener('focusin', function (e) {
-    const el = e.target.closest('[data-src-file], [data-src-sheet], [data-src-cell]');
+    const el = e.target.closest('[data-def], [data-src-file], [data-src-sheet], [data-src-cell]');
     if (el) {
       const r = el.getBoundingClientRect();
       show(el, { clientX: r.left + 12, clientY: r.bottom + 6 });
