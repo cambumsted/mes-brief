@@ -1244,27 +1244,37 @@
   }
 
   /* Q3 partnership reporting inventory */
-  .inv-region-title {
-    font-size: 1.15rem;
-    margin: 1.6rem 0 0.8rem;
-    padding-bottom: 0.35rem;
-    border-bottom: 2px solid var(--ms-blue);
-    color: var(--ms-blue-dark);
+  .inv-filters {
+    display: flex; flex-wrap: wrap; align-items: flex-end; gap: 0.9rem;
+    margin: 0 0 1.1rem;
   }
-  .inv-region-title .inv-count {
-    font-size: 0.72rem; font-weight: 500; color: var(--ink-soft);
-    text-transform: uppercase; letter-spacing: 1px; margin-left: 0.4rem;
+  .inv-filter {
+    display: flex; flex-direction: column; gap: 0.25rem;
+    font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.5px;
+    color: var(--ink-soft); font-weight: 600;
   }
-  .inv-lob { margin: 0 0 1.4rem; }
-  .inv-lob-title {
-    display: inline-block;
-    font-size: 0.7rem; text-transform: uppercase; letter-spacing: 1px;
+  .inv-filter select {
+    font-family: inherit; font-size: 0.85rem; font-weight: 400;
+    text-transform: none; letter-spacing: 0;
+    color: var(--ink); background: var(--c-white);
+    border: 1px solid var(--line); border-radius: 6px;
+    padding: 0.4rem 0.6rem; min-width: 180px; cursor: pointer;
+  }
+  .inv-filter select:focus { outline: 2px solid var(--ms-blue); outline-offset: 1px; }
+  .inv-reset {
+    font-family: inherit; font-size: 0.8rem; font-weight: 600;
     color: var(--ms-blue-dark); background: var(--ms-blue-light);
-    padding: 0.3rem 0.6rem; border-radius: 4px; margin: 0 0 0.5rem;
+    border: 1px solid var(--line); border-radius: 6px;
+    padding: 0.45rem 0.9rem; cursor: pointer;
+  }
+  .inv-reset:hover { background: var(--c-aqua); }
+  .inv-result-count {
+    font-size: 0.78rem; color: var(--ink-soft); font-weight: 600;
+    margin-left: auto; align-self: center;
   }
   table.inv-table {
     width: 100%; border-collapse: collapse;
-    font-size: 0.86rem; min-width: 640px;
+    font-size: 0.86rem; min-width: 820px;
   }
   table.inv-table th, table.inv-table td {
     padding: 0.5rem 0.7rem;
@@ -1275,7 +1285,10 @@
     background: var(--bg); color: var(--ink-soft);
     font-size: 0.72rem; font-weight: 600;
     text-transform: uppercase; letter-spacing: 0.5px;
+    position: sticky; top: 0;
   }
+  table.inv-table td.inv-region-cell { font-weight: 600; color: var(--ms-blue-dark); white-space: nowrap; }
+  table.inv-table td.inv-lob-cell { color: var(--ink); white-space: nowrap; }
   table.inv-table td:last-child {
     white-space: nowrap; color: var(--ink-soft);
     font-weight: 600; font-size: 0.8rem;
@@ -2131,205 +2144,92 @@
   <!-- ============================================ -->
   <section class="block" id="q3-inventory">
     <h2>Q3 partnership reporting inventory <span style="font-size:0.7rem;font-weight:500;color:var(--ink-soft);text-transform:uppercase;letter-spacing:1px;margin-left:0.4rem;">FY26 Q3 · DDS/RDS Opex</span><button type="button" class="section-toggle" aria-label="Collapse section" aria-expanded="true"><span class="chev">▾</span></button></h2>
-    <p class="lede">Every FY26 Q3 partner-marketing initiative we are running, grouped by region → line of business → program. This is the working inventory we use to confirm <em>how each one is reported on</em> with the regional teams. Source: DDS RDS Opex Marketing Spend (Q3).</p>
-    <h3 class="inv-region-title">EMEA <span class="inv-count">11 initiatives</span></h3>
-    <div class="inv-lob">
-      <h4 class="inv-lob-title">Surface Consumer</h4>
-      <div class="grid-wrap">
-      <table class="inv-table">
-        <thead><tr><th>Partnership</th><th>Initiative</th><th>Markets</th></tr></thead>
-        <tbody>
-          <tr><td><span class="inv-tag">Amex</span></td><td>Amex cashback (spend 500, get 100 back), AOV $1,500.</td><td>UK, DE, FR, IT</td></tr>
-          <tr><td><span class="inv-tag">Trade-In</span></td><td>Trade-In top-up.</td><td>UK, DE, FR, IT, ES</td></tr>
-          <tr><td><span class="inv-tag">Partnership</span></td><td>Extension of Paylead. 10% CPA on min $399 purchase, get up to 8.5% cashback from banking partners.</td><td>FR, BE, ES</td></tr>
-          <tr><td><span class="inv-tag">Partnership</span></td><td>UNiDAYS relaunch and marketing package. BSKU &amp; Laptop 13&quot; closed-loop offers.</td><td>UK, FR, DE, IT</td></tr>
-          <tr><td><span class="inv-tag">Partnership</span></td><td>Extension of Student Beans partnership. 3% CPA on BSKU &amp; Pro 12&quot; closed-loop offers.</td><td>UK, DE, FR</td></tr>
-          <tr><td><span class="inv-tag">Partnership</span></td><td>XDL Promo Code Test (15% discount) — repurposed from &#x27;I am Student&#x27; Spring BTS partnership.</td><td>DE</td></tr>
-          <tr><td><span class="inv-tag">Partnership</span></td><td>ShowRoom Privé: 45% saving on Refurbished Pro 11 BSKU (all SKUs) via vanity promocode.</td><td>FR</td></tr>
-          <tr><td><span class="inv-tag">Other</span></td><td>Behind the Cart feature onboarding to scraping tool.</td><td>UK, FR, DE</td></tr>
-        </tbody>
-      </table>
-      </div>
+    <div class="inv-filters">
+      <label class="inv-filter">Region<select id="filt-region"><option value="">All regions</option><option value="EMEA">EMEA</option><option value="Americas">Americas</option><option value="Asia">Asia</option></select></label>
+      <label class="inv-filter">Line of business<select id="filt-lob"><option value="">All LOBs</option><option value="Surface Consumer">Surface Consumer</option><option value="Surface Commercial">Surface Commercial</option><option value="Gaming HW">Gaming HW</option><option value="M365">M365</option><option value="Surface Consumer, Surface Commercial">Surface Consumer, Surface Commercial</option><option value="Surface Consumer, Surface Commercial, Gaming HW">Surface Consumer, Surface Commercial, Gaming HW</option><option value="Surface Consumer &amp; Commercial">Surface Consumer &amp; Commercial</option><option value="Cross LOB">Cross LOB</option></select></label>
+      <label class="inv-filter">Partnership<select id="filt-partner"><option value="">All partnerships</option><option value="Alipay">Alipay</option><option value="Amex">Amex</option><option value="Mastercard">Mastercard</option><option value="Other">Other</option><option value="Partnership">Partnership</option><option value="Rakuten">Rakuten</option><option value="Trade-In">Trade-In</option><option value="Visa/Mastercard">Visa/Mastercard</option><option value="WeChat">WeChat</option></select></label>
+      <button type="button" id="filt-reset" class="inv-reset">Reset</button>
+      <span class="inv-result-count"></span>
     </div>
-    <div class="inv-lob">
-      <h4 class="inv-lob-title">Surface Commercial</h4>
-      <div class="grid-wrap">
-      <table class="inv-table">
-        <thead><tr><th>Partnership</th><th>Initiative</th><th>Markets</th></tr></thead>
-        <tbody>
-          <tr><td><span class="inv-tag">Trade-In</span></td><td>Trade-In top-up.</td><td>UK, DE, FR, IT, ES</td></tr>
-        </tbody>
-      </table>
-      </div>
-    </div>
-    <div class="inv-lob">
-      <h4 class="inv-lob-title">Gaming HW</h4>
-      <div class="grid-wrap">
-      <table class="inv-table">
-        <thead><tr><th>Partnership</th><th>Initiative</th><th>Markets</th></tr></thead>
-        <tbody>
-          <tr><td><span class="inv-tag">Trade-In</span></td><td>Trade-In top-up.</td><td>UK, DE, FR, IT, ES</td></tr>
-        </tbody>
-      </table>
-      </div>
-    </div>
-    <div class="inv-lob">
-      <h4 class="inv-lob-title">M365</h4>
-      <div class="grid-wrap">
-      <table class="inv-table">
-        <thead><tr><th>Partnership</th><th>Initiative</th><th>Markets</th></tr></thead>
-        <tbody>
-          <tr><td><span class="inv-tag">Partnership</span></td><td>PayPal Cashback (get 15% cashback up to max €100).</td><td>UK</td></tr>
-        </tbody>
-      </table>
-      </div>
-    </div>
-    <h3 class="inv-region-title">Americas <span class="inv-count">9 initiatives</span></h3>
-    <div class="inv-lob">
-      <h4 class="inv-lob-title">Surface Consumer</h4>
-      <div class="grid-wrap">
-      <table class="inv-table">
-        <thead><tr><th>Partnership</th><th>Initiative</th><th>Markets</th></tr></thead>
-        <tbody>
-          <tr><td><span class="inv-tag">Mastercard</span></td><td>Marketing Partnership – Mastercard: Get 15% back on purchases $1,000+.</td><td>US</td></tr>
-          <tr><td><span class="inv-tag">Trade-In</span></td><td>Trade-In Plus Up.</td><td>US, CA</td></tr>
-        </tbody>
-      </table>
-      </div>
-    </div>
-    <div class="inv-lob">
-      <h4 class="inv-lob-title">Surface Commercial</h4>
-      <div class="grid-wrap">
-      <table class="inv-table">
-        <thead><tr><th>Partnership</th><th>Initiative</th><th>Markets</th></tr></thead>
-        <tbody>
-          <tr><td><span class="inv-tag">Trade-In</span></td><td>Trade-In Plus Up campaign.</td><td>US, CA</td></tr>
-          <tr><td><span class="inv-tag">Trade-In</span></td><td>Trade-In Plus Up: multiple assisted opportunities in play with customers that will exhaust current funding.</td><td>US</td></tr>
-        </tbody>
-      </table>
-      </div>
-    </div>
-    <div class="inv-lob">
-      <h4 class="inv-lob-title">Gaming HW</h4>
-      <div class="grid-wrap">
-      <table class="inv-table">
-        <thead><tr><th>Partnership</th><th>Initiative</th><th>Markets</th></tr></thead>
-        <tbody>
-          <tr><td><span class="inv-tag">Amex</span></td><td>Marketing Partnership – AMEX: Spend $70 get $15 back; Spend $450 get $80 back.</td><td>US</td></tr>
-          <tr><td><span class="inv-tag">Trade-In</span></td><td>Trade-In Plus Up campaign.</td><td>US</td></tr>
-        </tbody>
-      </table>
-      </div>
-    </div>
-    <div class="inv-lob">
-      <h4 class="inv-lob-title">M365</h4>
-      <div class="grid-wrap">
-      <table class="inv-table">
-        <thead><tr><th>Partnership</th><th>Initiative</th><th>Markets</th></tr></thead>
-        <tbody>
-          <tr><td><span class="inv-tag">Mastercard</span></td><td>Marketing Partnership – Mastercard: Get 20% back on purchases of $99.99+.</td><td>US</td></tr>
-        </tbody>
-      </table>
-      </div>
-    </div>
-    <div class="inv-lob">
-      <h4 class="inv-lob-title">Surface Consumer, Surface Commercial</h4>
-      <div class="grid-wrap">
-      <table class="inv-table">
-        <thead><tr><th>Partnership</th><th>Initiative</th><th>Markets</th></tr></thead>
-        <tbody>
-          <tr><td><span class="inv-tag">Amex</span></td><td>Marketing Partnership – AMEX: Spend $1,000, get $X back.</td><td>US</td></tr>
-        </tbody>
-      </table>
-      </div>
-    </div>
-    <div class="inv-lob">
-      <h4 class="inv-lob-title">Surface Consumer, Surface Commercial, Gaming HW</h4>
-      <div class="grid-wrap">
-      <table class="inv-table">
-        <thead><tr><th>Partnership</th><th>Initiative</th><th>Markets</th></tr></thead>
-        <tbody>
-          <tr><td><span class="inv-tag">Partnership</span></td><td>Marketing Partnership – PayPal: Get 15% back on purchases, up to $175.</td><td>US</td></tr>
-        </tbody>
-      </table>
-      </div>
-    </div>
-    <h3 class="inv-region-title">Asia <span class="inv-count">24 initiatives</span></h3>
-    <div class="inv-lob">
-      <h4 class="inv-lob-title">Surface Consumer</h4>
-      <div class="grid-wrap">
-      <table class="inv-table">
-        <thead><tr><th>Partnership</th><th>Initiative</th><th>Markets</th></tr></thead>
-        <tbody>
-          <tr><td><span class="inv-tag">Amex</span></td><td>Amex Cashback Campaign.</td><td>ANZ, JPN, SKI</td></tr>
-          <tr><td><span class="inv-tag">Amex</span></td><td>Q1 Amex campaign overspend cost.</td><td>JPN</td></tr>
-          <tr><td><span class="inv-tag">Rakuten</span></td><td>Rakuten Advertising Bronze.</td><td>JPN</td></tr>
-          <tr><td><span class="inv-tag">Trade-In</span></td><td>Trade-In Plus Up [ANZ – 50K, SKI – 15K].</td><td>ANZ, SKI</td></tr>
-          <tr><td><span class="inv-tag">Visa/Mastercard</span></td><td>Visa/Mastercard Co-marketing.</td><td>ANZ</td></tr>
-          <tr><td><span class="inv-tag">Partnership</span></td><td>UNiDAYS Co-marketing.</td><td>ANZ</td></tr>
-          <tr><td><span class="inv-tag">Partnership</span></td><td>Amazon Prime Day (Prime Day $30K / Rakuten $30K / Paid Media top-up $40K).</td><td>JPN</td></tr>
-          <tr><td><span class="inv-tag">Alipay</span></td><td>Alipay Co-marketing.</td><td>GCR</td></tr>
-          <tr><td><span class="inv-tag">Other</span></td><td>3PP Gifts.</td><td>GCR</td></tr>
-          <tr><td><span class="inv-tag">Alipay</span></td><td>Alipay Co-marketing.</td><td>GCR</td></tr>
-        </tbody>
-      </table>
-      </div>
-    </div>
-    <div class="inv-lob">
-      <h4 class="inv-lob-title">Surface Commercial</h4>
-      <div class="grid-wrap">
-      <table class="inv-table">
-        <thead><tr><th>Partnership</th><th>Initiative</th><th>Markets</th></tr></thead>
-        <tbody>
-          <tr><td><span class="inv-tag">Amex</span></td><td>Amex Cashback Campaign.</td><td>ANZ, JPN, SKI</td></tr>
-          <tr><td><span class="inv-tag">Partnership</span></td><td>*NEW* Partnership marketing with Intel.</td><td>ANZ, JPN</td></tr>
-          <tr><td><span class="inv-tag">WeChat</span></td><td>New pipeline acquisition through WeChat Ads.</td><td>GCR</td></tr>
-          <tr><td><span class="inv-tag">Other</span></td><td>Customize Brand Love gift to increase the un-assisted CVR.</td><td>GCR</td></tr>
-          <tr><td><span class="inv-tag">Other</span></td><td>12 stages free instalment.</td><td>GCR</td></tr>
-          <tr><td><span class="inv-tag">Other</span></td><td>Amex Co-marketing top-up due to outperformance while keeping strong ROI.</td><td>AU</td></tr>
-        </tbody>
-      </table>
-      </div>
-    </div>
-    <div class="inv-lob">
-      <h4 class="inv-lob-title">Gaming HW</h4>
-      <div class="grid-wrap">
-      <table class="inv-table">
-        <thead><tr><th>Partnership</th><th>Initiative</th><th>Markets</th></tr></thead>
-        <tbody>
-          <tr><td><span class="inv-tag">Alipay</span></td><td>Alipay Co-marketing Pilot.</td><td>GCR</td></tr>
-          <tr><td><span class="inv-tag">Trade-In</span></td><td>Trade-In Plus Up for 2TB.</td><td>ANZ</td></tr>
-          <tr><td><span class="inv-tag">Other</span></td><td>3PP Gifts.</td><td>GCR</td></tr>
-          <tr><td><span class="inv-tag">Other</span></td><td>PC Attach Co-marketing.</td><td>GCR</td></tr>
-          <tr><td><span class="inv-tag">Other</span></td><td>Loyalty program: customize store membership.</td><td>GCR</td></tr>
-          <tr><td><span class="inv-tag">Other</span></td><td>Top-up of Xbox Attach programme to drive additional $30K (1:4 ROI) in Gaming Accessories.</td><td>CN</td></tr>
-        </tbody>
-      </table>
-      </div>
-    </div>
-    <div class="inv-lob">
-      <h4 class="inv-lob-title">Surface Consumer &amp; Commercial</h4>
-      <div class="grid-wrap">
-      <table class="inv-table">
-        <thead><tr><th>Partnership</th><th>Initiative</th><th>Markets</th></tr></thead>
-        <tbody>
-          <tr><td><span class="inv-tag">Trade-In</span></td><td>Q2 Trade-In Plus Up campaign overspend.</td><td>AU</td></tr>
-        </tbody>
-      </table>
-      </div>
-    </div>
-    <div class="inv-lob">
-      <h4 class="inv-lob-title">Cross LOB</h4>
-      <div class="grid-wrap">
-      <table class="inv-table">
-        <thead><tr><th>Partnership</th><th>Initiative</th><th>Markets</th></tr></thead>
-        <tbody>
-          <tr><td><span class="inv-tag">Amex</span></td><td>Additional funding to support Amex campaign overperformance in Q3.</td><td>JPN</td></tr>
-        </tbody>
-      </table>
-      </div>
+    <div class="grid-wrap">
+    <table class="inv-table" id="q3-table">
+      <thead><tr><th>Region</th><th>Line of business</th><th>Partnership</th><th>Initiative</th><th>Markets</th></tr></thead>
+      <tbody>
+        <tr data-region="EMEA" data-lob="Surface Consumer" data-partner="Amex"><td class="inv-region-cell">EMEA</td><td class="inv-lob-cell">Surface Consumer</td><td><span class="inv-tag">Amex</span></td><td>Amex cashback (spend 500, get 100 back), AOV $1,500.</td><td>UK, DE, FR, IT</td></tr>
+        <tr data-region="EMEA" data-lob="Surface Consumer" data-partner="Trade-In"><td class="inv-region-cell">EMEA</td><td class="inv-lob-cell">Surface Consumer</td><td><span class="inv-tag">Trade-In</span></td><td>Trade-In top-up.</td><td>UK, DE, FR, IT, ES</td></tr>
+        <tr data-region="EMEA" data-lob="Surface Consumer" data-partner="Partnership"><td class="inv-region-cell">EMEA</td><td class="inv-lob-cell">Surface Consumer</td><td><span class="inv-tag">Partnership</span></td><td>Extension of Paylead. 10% CPA on min $399 purchase, get up to 8.5% cashback from banking partners.</td><td>FR, BE, ES</td></tr>
+        <tr data-region="EMEA" data-lob="Surface Consumer" data-partner="Partnership"><td class="inv-region-cell">EMEA</td><td class="inv-lob-cell">Surface Consumer</td><td><span class="inv-tag">Partnership</span></td><td>UNiDAYS relaunch and marketing package. BSKU &amp; Laptop 13&quot; closed-loop offers.</td><td>UK, FR, DE, IT</td></tr>
+        <tr data-region="EMEA" data-lob="Surface Consumer" data-partner="Partnership"><td class="inv-region-cell">EMEA</td><td class="inv-lob-cell">Surface Consumer</td><td><span class="inv-tag">Partnership</span></td><td>Extension of Student Beans partnership. 3% CPA on BSKU &amp; Pro 12&quot; closed-loop offers.</td><td>UK, DE, FR</td></tr>
+        <tr data-region="EMEA" data-lob="Surface Consumer" data-partner="Partnership"><td class="inv-region-cell">EMEA</td><td class="inv-lob-cell">Surface Consumer</td><td><span class="inv-tag">Partnership</span></td><td>XDL Promo Code Test (15% discount) — repurposed from &#x27;I am Student&#x27; Spring BTS partnership.</td><td>DE</td></tr>
+        <tr data-region="EMEA" data-lob="Surface Consumer" data-partner="Partnership"><td class="inv-region-cell">EMEA</td><td class="inv-lob-cell">Surface Consumer</td><td><span class="inv-tag">Partnership</span></td><td>ShowRoom Privé: 45% saving on Refurbished Pro 11 BSKU (all SKUs) via vanity promocode.</td><td>FR</td></tr>
+        <tr data-region="EMEA" data-lob="Surface Consumer" data-partner="Other"><td class="inv-region-cell">EMEA</td><td class="inv-lob-cell">Surface Consumer</td><td><span class="inv-tag">Other</span></td><td>Behind the Cart feature onboarding to scraping tool.</td><td>UK, FR, DE</td></tr>
+        <tr data-region="EMEA" data-lob="Surface Commercial" data-partner="Trade-In"><td class="inv-region-cell">EMEA</td><td class="inv-lob-cell">Surface Commercial</td><td><span class="inv-tag">Trade-In</span></td><td>Trade-In top-up.</td><td>UK, DE, FR, IT, ES</td></tr>
+        <tr data-region="EMEA" data-lob="Gaming HW" data-partner="Trade-In"><td class="inv-region-cell">EMEA</td><td class="inv-lob-cell">Gaming HW</td><td><span class="inv-tag">Trade-In</span></td><td>Trade-In top-up.</td><td>UK, DE, FR, IT, ES</td></tr>
+        <tr data-region="EMEA" data-lob="M365" data-partner="Partnership"><td class="inv-region-cell">EMEA</td><td class="inv-lob-cell">M365</td><td><span class="inv-tag">Partnership</span></td><td>PayPal Cashback (get 15% cashback up to max €100).</td><td>UK</td></tr>
+        <tr data-region="Americas" data-lob="Surface Consumer" data-partner="Mastercard"><td class="inv-region-cell">Americas</td><td class="inv-lob-cell">Surface Consumer</td><td><span class="inv-tag">Mastercard</span></td><td>Marketing Partnership – Mastercard: Get 15% back on purchases $1,000+.</td><td>US</td></tr>
+        <tr data-region="Americas" data-lob="Surface Consumer" data-partner="Trade-In"><td class="inv-region-cell">Americas</td><td class="inv-lob-cell">Surface Consumer</td><td><span class="inv-tag">Trade-In</span></td><td>Trade-In Plus Up.</td><td>US, CA</td></tr>
+        <tr data-region="Americas" data-lob="Surface Commercial" data-partner="Trade-In"><td class="inv-region-cell">Americas</td><td class="inv-lob-cell">Surface Commercial</td><td><span class="inv-tag">Trade-In</span></td><td>Trade-In Plus Up campaign.</td><td>US, CA</td></tr>
+        <tr data-region="Americas" data-lob="Surface Commercial" data-partner="Trade-In"><td class="inv-region-cell">Americas</td><td class="inv-lob-cell">Surface Commercial</td><td><span class="inv-tag">Trade-In</span></td><td>Trade-In Plus Up: multiple assisted opportunities in play with customers that will exhaust current funding.</td><td>US</td></tr>
+        <tr data-region="Americas" data-lob="Gaming HW" data-partner="Amex"><td class="inv-region-cell">Americas</td><td class="inv-lob-cell">Gaming HW</td><td><span class="inv-tag">Amex</span></td><td>Marketing Partnership – AMEX: Spend $70 get $15 back; Spend $450 get $80 back.</td><td>US</td></tr>
+        <tr data-region="Americas" data-lob="Gaming HW" data-partner="Trade-In"><td class="inv-region-cell">Americas</td><td class="inv-lob-cell">Gaming HW</td><td><span class="inv-tag">Trade-In</span></td><td>Trade-In Plus Up campaign.</td><td>US</td></tr>
+        <tr data-region="Americas" data-lob="M365" data-partner="Mastercard"><td class="inv-region-cell">Americas</td><td class="inv-lob-cell">M365</td><td><span class="inv-tag">Mastercard</span></td><td>Marketing Partnership – Mastercard: Get 20% back on purchases of $99.99+.</td><td>US</td></tr>
+        <tr data-region="Americas" data-lob="Surface Consumer, Surface Commercial" data-partner="Amex"><td class="inv-region-cell">Americas</td><td class="inv-lob-cell">Surface Consumer, Surface Commercial</td><td><span class="inv-tag">Amex</span></td><td>Marketing Partnership – AMEX: Spend $1,000, get $X back.</td><td>US</td></tr>
+        <tr data-region="Americas" data-lob="Surface Consumer, Surface Commercial, Gaming HW" data-partner="Partnership"><td class="inv-region-cell">Americas</td><td class="inv-lob-cell">Surface Consumer, Surface Commercial, Gaming HW</td><td><span class="inv-tag">Partnership</span></td><td>Marketing Partnership – PayPal: Get 15% back on purchases, up to $175.</td><td>US</td></tr>
+        <tr data-region="Asia" data-lob="Surface Consumer" data-partner="Amex"><td class="inv-region-cell">Asia</td><td class="inv-lob-cell">Surface Consumer</td><td><span class="inv-tag">Amex</span></td><td>Amex Cashback Campaign.</td><td>ANZ, JPN, SKI</td></tr>
+        <tr data-region="Asia" data-lob="Surface Consumer" data-partner="Amex"><td class="inv-region-cell">Asia</td><td class="inv-lob-cell">Surface Consumer</td><td><span class="inv-tag">Amex</span></td><td>Q1 Amex campaign overspend cost.</td><td>JPN</td></tr>
+        <tr data-region="Asia" data-lob="Surface Consumer" data-partner="Rakuten"><td class="inv-region-cell">Asia</td><td class="inv-lob-cell">Surface Consumer</td><td><span class="inv-tag">Rakuten</span></td><td>Rakuten Advertising Bronze.</td><td>JPN</td></tr>
+        <tr data-region="Asia" data-lob="Surface Consumer" data-partner="Trade-In"><td class="inv-region-cell">Asia</td><td class="inv-lob-cell">Surface Consumer</td><td><span class="inv-tag">Trade-In</span></td><td>Trade-In Plus Up [ANZ – 50K, SKI – 15K].</td><td>ANZ, SKI</td></tr>
+        <tr data-region="Asia" data-lob="Surface Consumer" data-partner="Visa/Mastercard"><td class="inv-region-cell">Asia</td><td class="inv-lob-cell">Surface Consumer</td><td><span class="inv-tag">Visa/Mastercard</span></td><td>Visa/Mastercard Co-marketing.</td><td>ANZ</td></tr>
+        <tr data-region="Asia" data-lob="Surface Consumer" data-partner="Partnership"><td class="inv-region-cell">Asia</td><td class="inv-lob-cell">Surface Consumer</td><td><span class="inv-tag">Partnership</span></td><td>UNiDAYS Co-marketing.</td><td>ANZ</td></tr>
+        <tr data-region="Asia" data-lob="Surface Consumer" data-partner="Partnership"><td class="inv-region-cell">Asia</td><td class="inv-lob-cell">Surface Consumer</td><td><span class="inv-tag">Partnership</span></td><td>Amazon Prime Day (Prime Day $30K / Rakuten $30K / Paid Media top-up $40K).</td><td>JPN</td></tr>
+        <tr data-region="Asia" data-lob="Surface Consumer" data-partner="Alipay"><td class="inv-region-cell">Asia</td><td class="inv-lob-cell">Surface Consumer</td><td><span class="inv-tag">Alipay</span></td><td>Alipay Co-marketing.</td><td>GCR</td></tr>
+        <tr data-region="Asia" data-lob="Surface Consumer" data-partner="Other"><td class="inv-region-cell">Asia</td><td class="inv-lob-cell">Surface Consumer</td><td><span class="inv-tag">Other</span></td><td>3PP Gifts.</td><td>GCR</td></tr>
+        <tr data-region="Asia" data-lob="Surface Consumer" data-partner="Alipay"><td class="inv-region-cell">Asia</td><td class="inv-lob-cell">Surface Consumer</td><td><span class="inv-tag">Alipay</span></td><td>Alipay Co-marketing.</td><td>GCR</td></tr>
+        <tr data-region="Asia" data-lob="Surface Commercial" data-partner="Amex"><td class="inv-region-cell">Asia</td><td class="inv-lob-cell">Surface Commercial</td><td><span class="inv-tag">Amex</span></td><td>Amex Cashback Campaign.</td><td>ANZ, JPN, SKI</td></tr>
+        <tr data-region="Asia" data-lob="Surface Commercial" data-partner="Partnership"><td class="inv-region-cell">Asia</td><td class="inv-lob-cell">Surface Commercial</td><td><span class="inv-tag">Partnership</span></td><td>*NEW* Partnership marketing with Intel.</td><td>ANZ, JPN</td></tr>
+        <tr data-region="Asia" data-lob="Surface Commercial" data-partner="WeChat"><td class="inv-region-cell">Asia</td><td class="inv-lob-cell">Surface Commercial</td><td><span class="inv-tag">WeChat</span></td><td>New pipeline acquisition through WeChat Ads.</td><td>GCR</td></tr>
+        <tr data-region="Asia" data-lob="Surface Commercial" data-partner="Other"><td class="inv-region-cell">Asia</td><td class="inv-lob-cell">Surface Commercial</td><td><span class="inv-tag">Other</span></td><td>Customize Brand Love gift to increase the un-assisted CVR.</td><td>GCR</td></tr>
+        <tr data-region="Asia" data-lob="Surface Commercial" data-partner="Other"><td class="inv-region-cell">Asia</td><td class="inv-lob-cell">Surface Commercial</td><td><span class="inv-tag">Other</span></td><td>12 stages free instalment.</td><td>GCR</td></tr>
+        <tr data-region="Asia" data-lob="Surface Commercial" data-partner="Other"><td class="inv-region-cell">Asia</td><td class="inv-lob-cell">Surface Commercial</td><td><span class="inv-tag">Other</span></td><td>Amex Co-marketing top-up due to outperformance while keeping strong ROI.</td><td>AU</td></tr>
+        <tr data-region="Asia" data-lob="Gaming HW" data-partner="Alipay"><td class="inv-region-cell">Asia</td><td class="inv-lob-cell">Gaming HW</td><td><span class="inv-tag">Alipay</span></td><td>Alipay Co-marketing Pilot.</td><td>GCR</td></tr>
+        <tr data-region="Asia" data-lob="Gaming HW" data-partner="Trade-In"><td class="inv-region-cell">Asia</td><td class="inv-lob-cell">Gaming HW</td><td><span class="inv-tag">Trade-In</span></td><td>Trade-In Plus Up for 2TB.</td><td>ANZ</td></tr>
+        <tr data-region="Asia" data-lob="Gaming HW" data-partner="Other"><td class="inv-region-cell">Asia</td><td class="inv-lob-cell">Gaming HW</td><td><span class="inv-tag">Other</span></td><td>3PP Gifts.</td><td>GCR</td></tr>
+        <tr data-region="Asia" data-lob="Gaming HW" data-partner="Other"><td class="inv-region-cell">Asia</td><td class="inv-lob-cell">Gaming HW</td><td><span class="inv-tag">Other</span></td><td>PC Attach Co-marketing.</td><td>GCR</td></tr>
+        <tr data-region="Asia" data-lob="Gaming HW" data-partner="Other"><td class="inv-region-cell">Asia</td><td class="inv-lob-cell">Gaming HW</td><td><span class="inv-tag">Other</span></td><td>Loyalty program: customize store membership.</td><td>GCR</td></tr>
+        <tr data-region="Asia" data-lob="Gaming HW" data-partner="Other"><td class="inv-region-cell">Asia</td><td class="inv-lob-cell">Gaming HW</td><td><span class="inv-tag">Other</span></td><td>Top-up of Xbox Attach programme to drive additional $30K (1:4 ROI) in Gaming Accessories.</td><td>CN</td></tr>
+        <tr data-region="Asia" data-lob="Surface Consumer &amp; Commercial" data-partner="Trade-In"><td class="inv-region-cell">Asia</td><td class="inv-lob-cell">Surface Consumer &amp; Commercial</td><td><span class="inv-tag">Trade-In</span></td><td>Q2 Trade-In Plus Up campaign overspend.</td><td>AU</td></tr>
+        <tr data-region="Asia" data-lob="Cross LOB" data-partner="Amex"><td class="inv-region-cell">Asia</td><td class="inv-lob-cell">Cross LOB</td><td><span class="inv-tag">Amex</span></td><td>Additional funding to support Amex campaign overperformance in Q3.</td><td>JPN</td></tr>
+      </tbody>
+    </table>
     </div>
     <p class="footer-note" style="margin-top:1.25rem;">44 initiatives total across EMEA, Americas and Asia. Reporting source/cadence to be confirmed per initiative with regional teams.</p>
+    <script>
+    (function () {
+      var sec = document.getElementById("q3-inventory");
+      if (!sec) return;
+      var rows = Array.prototype.slice.call(sec.querySelectorAll("#q3-table tbody tr"));
+      var fR = sec.querySelector("#filt-region");
+      var fL = sec.querySelector("#filt-lob");
+      var fP = sec.querySelector("#filt-partner");
+      var count = sec.querySelector(".inv-result-count");
+      function apply() {
+        var r = fR.value, l = fL.value, p = fP.value, n = 0;
+        rows.forEach(function (tr) {
+          var ok = (!r || tr.dataset.region === r)
+                && (!l || tr.dataset.lob === l)
+                && (!p || tr.dataset.partner === p);
+          tr.style.display = ok ? "" : "none";
+          if (ok) n++;
+        });
+        count.textContent = n + " of " + rows.length + " initiatives";
+      }
+      [fR, fL, fP].forEach(function (s) { s.addEventListener("change", apply); });
+      sec.querySelector("#filt-reset").addEventListener("click", function () {
+        fR.value = ""; fL.value = ""; fP.value = ""; apply();
+      });
+      apply();
+    })();
+    </script>
   </section>
 
   <p class="footer-note">This is a working scratch-pad. Edit the HTML directly to add partnerships, KPIs, or ideas — or send notes to Cam.</p>

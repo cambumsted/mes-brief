@@ -95,39 +95,88 @@ def build_section():
                'text-transform:uppercase;letter-spacing:1px;margin-left:0.4rem;">FY26 Q3 \u00b7 DDS/RDS Opex</span>'
                '<button type="button" class="section-toggle" aria-label="Collapse section" aria-expanded="true">'
                '<span class="chev">\u25be</span></button></h2>')
-    out.append('    <p class="lede">Every FY26 Q3 partner-marketing initiative we are running, grouped by '
-               'region \u2192 line of business \u2192 program. This is the working inventory we use to confirm '
-               '<em>how each one is reported on</em> with the regional teams. Source: DDS\u00a0RDS\u00a0Opex Marketing Spend (Q3).</p>')
 
     total = len(RECORDS)
-    for region in REGION_ORDER:
-        region_recs = [r for r in RECORDS if r[0] == region]
-        if not region_recs:
-            continue
-        out.append(f'    <h3 class="inv-region-title">{esc(region)} '
-                   f'<span class="inv-count">{len(region_recs)} initiatives</span></h3>')
 
-        lobs = sorted({r[1] for r in region_recs}, key=lob_rank)
-        for lob in lobs:
-            lob_recs = [r for r in region_recs if r[1] == lob]
-            out.append('    <div class="inv-lob">')
-            out.append(f'      <h4 class="inv-lob-title">{esc(lob)}</h4>')
-            out.append('      <div class="grid-wrap">')
-            out.append('      <table class="inv-table">')
-            out.append('        <thead><tr><th>Partnership</th><th>Initiative</th><th>Markets</th></tr></thead>')
-            out.append('        <tbody>')
-            for _, _, partner, desc, markets in lob_recs:
-                out.append('          <tr>'
-                           f'<td><span class="inv-tag">{esc(partner)}</span></td>'
-                           f'<td>{esc(desc)}</td>'
-                           f'<td>{esc(markets)}</td></tr>')
-            out.append('        </tbody>')
-            out.append('      </table>')
-            out.append('      </div>')
-            out.append('    </div>')
+    # Filter controls
+    regions = [r for r in REGION_ORDER if any(rec[0] == r for rec in RECORDS)]
+    lobs = sorted({rec[1] for rec in RECORDS}, key=lob_rank)
+    partners = sorted({rec[2] for rec in RECORDS}, key=str.lower)
+
+    out.append('    <div class="inv-filters">')
+    out.append('      <label class="inv-filter">Region'
+               '<select id="filt-region"><option value="">All regions</option>'
+               + ''.join(f'<option value="{esc(r)}">{esc(r)}</option>' for r in regions)
+               + '</select></label>')
+    out.append('      <label class="inv-filter">Line of business'
+               '<select id="filt-lob"><option value="">All LOBs</option>'
+               + ''.join(f'<option value="{esc(l)}">{esc(l)}</option>' for l in lobs)
+               + '</select></label>')
+    out.append('      <label class="inv-filter">Partnership'
+               '<select id="filt-partner"><option value="">All partnerships</option>'
+               + ''.join(f'<option value="{esc(p)}">{esc(p)}</option>' for p in partners)
+               + '</select></label>')
+    out.append('      <button type="button" id="filt-reset" class="inv-reset">Reset</button>')
+    out.append('      <span class="inv-result-count"></span>')
+    out.append('    </div>')
+
+    # Single flat table
+    out.append('    <div class="grid-wrap">')
+    out.append('    <table class="inv-table" id="q3-table">')
+    out.append('      <thead><tr>'
+               '<th>Region</th><th>Line of business</th><th>Partnership</th>'
+               '<th>Initiative</th><th>Markets</th>'
+               '</tr></thead>')
+    out.append('      <tbody>')
+    ordered = sorted(
+        RECORDS,
+        key=lambda rec: (REGION_ORDER.index(rec[0]) if rec[0] in REGION_ORDER else 99,
+                         lob_rank(rec[1])),
+    )
+    for region, lob, partner, desc, markets in ordered:
+        out.append('        <tr '
+                   f'data-region="{esc(region)}" data-lob="{esc(lob)}" data-partner="{esc(partner)}">'
+                   f'<td class="inv-region-cell">{esc(region)}</td>'
+                   f'<td class="inv-lob-cell">{esc(lob)}</td>'
+                   f'<td><span class="inv-tag">{esc(partner)}</span></td>'
+                   f'<td>{esc(desc)}</td>'
+                   f'<td>{esc(markets)}</td></tr>')
+    out.append('      </tbody>')
+    out.append('    </table>')
+    out.append('    </div>')
 
     out.append(f'    <p class="footer-note" style="margin-top:1.25rem;">{total} initiatives total across '
                'EMEA, Americas and Asia. Reporting source/cadence to be confirmed per initiative with regional teams.</p>')
+
+    # Filter behaviour
+    out.append('    <script>')
+    out.append('    (function () {')
+    out.append('      var sec = document.getElementById("q3-inventory");')
+    out.append('      if (!sec) return;')
+    out.append('      var rows = Array.prototype.slice.call(sec.querySelectorAll("#q3-table tbody tr"));')
+    out.append('      var fR = sec.querySelector("#filt-region");')
+    out.append('      var fL = sec.querySelector("#filt-lob");')
+    out.append('      var fP = sec.querySelector("#filt-partner");')
+    out.append('      var count = sec.querySelector(".inv-result-count");')
+    out.append('      function apply() {')
+    out.append('        var r = fR.value, l = fL.value, p = fP.value, n = 0;')
+    out.append('        rows.forEach(function (tr) {')
+    out.append('          var ok = (!r || tr.dataset.region === r)')
+    out.append('                && (!l || tr.dataset.lob === l)')
+    out.append('                && (!p || tr.dataset.partner === p);')
+    out.append('          tr.style.display = ok ? "" : "none";')
+    out.append('          if (ok) n++;')
+    out.append('        });')
+    out.append('        count.textContent = n + " of " + rows.length + " initiatives";')
+    out.append('      }')
+    out.append('      [fR, fL, fP].forEach(function (s) { s.addEventListener("change", apply); });')
+    out.append('      sec.querySelector("#filt-reset").addEventListener("click", function () {')
+    out.append('        fR.value = ""; fL.value = ""; fP.value = ""; apply();')
+    out.append('      });')
+    out.append('      apply();')
+    out.append('    })();')
+    out.append('    </script>')
+
     out.append('  </section>')
     out.append('')
     return "\n".join(out)
@@ -135,27 +184,37 @@ def build_section():
 
 CSS = """
   /* Q3 partnership reporting inventory */
-  .inv-region-title {
-    font-size: 1.15rem;
-    margin: 1.6rem 0 0.8rem;
-    padding-bottom: 0.35rem;
-    border-bottom: 2px solid var(--ms-blue);
-    color: var(--ms-blue-dark);
+  .inv-filters {
+    display: flex; flex-wrap: wrap; align-items: flex-end; gap: 0.9rem;
+    margin: 0 0 1.1rem;
   }
-  .inv-region-title .inv-count {
-    font-size: 0.72rem; font-weight: 500; color: var(--ink-soft);
-    text-transform: uppercase; letter-spacing: 1px; margin-left: 0.4rem;
+  .inv-filter {
+    display: flex; flex-direction: column; gap: 0.25rem;
+    font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.5px;
+    color: var(--ink-soft); font-weight: 600;
   }
-  .inv-lob { margin: 0 0 1.4rem; }
-  .inv-lob-title {
-    display: inline-block;
-    font-size: 0.7rem; text-transform: uppercase; letter-spacing: 1px;
+  .inv-filter select {
+    font-family: inherit; font-size: 0.85rem; font-weight: 400;
+    text-transform: none; letter-spacing: 0;
+    color: var(--ink); background: var(--c-white);
+    border: 1px solid var(--line); border-radius: 6px;
+    padding: 0.4rem 0.6rem; min-width: 180px; cursor: pointer;
+  }
+  .inv-filter select:focus { outline: 2px solid var(--ms-blue); outline-offset: 1px; }
+  .inv-reset {
+    font-family: inherit; font-size: 0.8rem; font-weight: 600;
     color: var(--ms-blue-dark); background: var(--ms-blue-light);
-    padding: 0.3rem 0.6rem; border-radius: 4px; margin: 0 0 0.5rem;
+    border: 1px solid var(--line); border-radius: 6px;
+    padding: 0.45rem 0.9rem; cursor: pointer;
+  }
+  .inv-reset:hover { background: var(--c-aqua); }
+  .inv-result-count {
+    font-size: 0.78rem; color: var(--ink-soft); font-weight: 600;
+    margin-left: auto; align-self: center;
   }
   table.inv-table {
     width: 100%; border-collapse: collapse;
-    font-size: 0.86rem; min-width: 640px;
+    font-size: 0.86rem; min-width: 820px;
   }
   table.inv-table th, table.inv-table td {
     padding: 0.5rem 0.7rem;
@@ -166,7 +225,10 @@ CSS = """
     background: var(--bg); color: var(--ink-soft);
     font-size: 0.72rem; font-weight: 600;
     text-transform: uppercase; letter-spacing: 0.5px;
+    position: sticky; top: 0;
   }
+  table.inv-table td.inv-region-cell { font-weight: 600; color: var(--ms-blue-dark); white-space: nowrap; }
+  table.inv-table td.inv-lob-cell { color: var(--ink); white-space: nowrap; }
   table.inv-table td:last-child {
     white-space: nowrap; color: var(--ink-soft);
     font-weight: 600; font-size: 0.8rem;
@@ -184,8 +246,13 @@ CSS = """
 def main():
     text = PAGE.read_text(encoding="utf-8")
 
-    # 1) inject CSS before </style>
-    if ".inv-region-title" not in text:
+    # 1) inject or replace CSS (block runs from its start comment to </style>)
+    css_start = "\n  /* Q3 partnership reporting inventory */"
+    if css_start in text:
+        s = text.index(css_start)
+        e = text.index("</style>", s)
+        text = text[:s] + CSS + text[e:]
+    else:
         text = text.replace("</style>", CSS + "</style>", 1)
 
     # 2) add page-nav link after the amex-grid nav link
