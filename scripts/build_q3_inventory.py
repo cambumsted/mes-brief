@@ -104,19 +104,25 @@ def build_section():
     lobs = sorted({rec[1] for rec in RECORDS}, key=lob_rank)
     partners = sorted({rec[2] for rec in RECORDS}, key=str.lower)
 
+    def multiselect(fid, label, all_label, values):
+        opts = ''.join(
+            f'<label class="inv-ms-opt"><input type="checkbox" value="{esc(v)}">'
+            f'<span>{esc(v)}</span></label>'
+            for v in values
+        )
+        return (
+            f'      <div class="inv-filter inv-ms" data-filter="{fid}">'
+            f'<span class="inv-ms-label">{esc(label)}</span>'
+            f'<button type="button" class="inv-ms-toggle" aria-expanded="false">'
+            f'<span class="inv-ms-text">{esc(all_label)}</span><span class="inv-ms-chev">\u25be</span></button>'
+            f'<div class="inv-ms-panel" hidden>{opts}</div>'
+            f'</div>'
+        )
+
     out.append('    <div class="inv-filters">')
-    out.append('      <label class="inv-filter">Region'
-               '<select id="filt-region"><option value="">All regions</option>'
-               + ''.join(f'<option value="{esc(r)}">{esc(r)}</option>' for r in regions)
-               + '</select></label>')
-    out.append('      <label class="inv-filter">Line of business'
-               '<select id="filt-lob"><option value="">All LOBs</option>'
-               + ''.join(f'<option value="{esc(l)}">{esc(l)}</option>' for l in lobs)
-               + '</select></label>')
-    out.append('      <label class="inv-filter">Partnership'
-               '<select id="filt-partner"><option value="">All partnerships</option>'
-               + ''.join(f'<option value="{esc(p)}">{esc(p)}</option>' for p in partners)
-               + '</select></label>')
+    out.append(multiselect('region', 'Region', 'All regions', regions))
+    out.append(multiselect('lob', 'Line of business', 'All LOBs', lobs))
+    out.append(multiselect('partner', 'Partnership', 'All partnerships', partners))
     out.append('      <button type="button" id="filt-reset" class="inv-reset">Reset</button>')
     out.append('      <span class="inv-result-count"></span>')
     out.append('    </div>')
@@ -158,24 +164,57 @@ def build_section():
     out.append('      var sec = document.getElementById("q3-inventory");')
     out.append('      if (!sec) return;')
     out.append('      var rows = Array.prototype.slice.call(sec.querySelectorAll("#q3-table tbody tr"));')
-    out.append('      var fR = sec.querySelector("#filt-region");')
-    out.append('      var fL = sec.querySelector("#filt-lob");')
-    out.append('      var fP = sec.querySelector("#filt-partner");')
+    out.append('      var widgets = Array.prototype.slice.call(sec.querySelectorAll(".inv-ms"));')
     out.append('      var count = sec.querySelector(".inv-result-count");')
+    out.append('      function selected(w) {')
+    out.append('        return Array.prototype.slice.call(w.querySelectorAll("input:checked")).map(function (c) { return c.value; });')
+    out.append('      }')
+    out.append('      function syncLabel(w) {')
+    out.append('        var sel = selected(w);')
+    out.append('        var txt = w.querySelector(".inv-ms-text");')
+    out.append('        var all = w.querySelector(".inv-ms-toggle").getAttribute("data-all") || txt.textContent;')
+    out.append('        w.querySelector(".inv-ms-toggle").setAttribute("data-all", all);')
+    out.append('        if (sel.length === 0) { txt.textContent = all; w.classList.remove("has-sel"); }')
+    out.append('        else if (sel.length === 1) { txt.textContent = sel[0]; w.classList.add("has-sel"); }')
+    out.append('        else { txt.textContent = sel.length + " selected"; w.classList.add("has-sel"); }')
+    out.append('      }')
     out.append('      function apply() {')
-    out.append('        var r = fR.value, l = fL.value, p = fP.value, n = 0, sum = 0;')
+    out.append('        var sel = {};')
+    out.append('        widgets.forEach(function (w) { sel[w.dataset.filter] = selected(w); });')
+    out.append('        var n = 0, sum = 0;')
     out.append('        rows.forEach(function (tr) {')
-    out.append('          var ok = (!r || tr.dataset.region === r)')
-    out.append('                && (!l || tr.dataset.lob === l)')
-    out.append('                && (!p || tr.dataset.partner === p);')
+    out.append('          var ok = (!sel.region.length  || sel.region.indexOf(tr.dataset.region) > -1)')
+    out.append('                && (!sel.lob.length     || sel.lob.indexOf(tr.dataset.lob) > -1)')
+    out.append('                && (!sel.partner.length || sel.partner.indexOf(tr.dataset.partner) > -1);')
     out.append('          tr.style.display = ok ? "" : "none";')
     out.append('          if (ok) { n++; sum += parseInt(tr.dataset.budget, 10) || 0; }')
     out.append('        });')
     out.append('        count.textContent = n + " of " + rows.length + " initiatives \u00b7 $" + sum.toLocaleString() + " budget";')
     out.append('      }')
-    out.append('      [fR, fL, fP].forEach(function (s) { s.addEventListener("change", apply); });')
+    out.append('      widgets.forEach(function (w) {')
+    out.append('        var toggle = w.querySelector(".inv-ms-toggle");')
+    out.append('        var panel = w.querySelector(".inv-ms-panel");')
+    out.append('        toggle.addEventListener("click", function (e) {')
+    out.append('          e.stopPropagation();')
+    out.append('          var open = !panel.hidden;')
+    out.append('          widgets.forEach(function (o) { o.querySelector(".inv-ms-panel").hidden = true; o.querySelector(".inv-ms-toggle").setAttribute("aria-expanded", "false"); });')
+    out.append('          panel.hidden = open;')
+    out.append('          toggle.setAttribute("aria-expanded", open ? "false" : "true");')
+    out.append('        });')
+    out.append('        panel.addEventListener("click", function (e) { e.stopPropagation(); });')
+    out.append('        w.querySelectorAll("input").forEach(function (c) {')
+    out.append('          c.addEventListener("change", function () { syncLabel(w); apply(); });')
+    out.append('        });')
+    out.append('      });')
+    out.append('      document.addEventListener("click", function () {')
+    out.append('        widgets.forEach(function (o) { o.querySelector(".inv-ms-panel").hidden = true; o.querySelector(".inv-ms-toggle").setAttribute("aria-expanded", "false"); });')
+    out.append('      });')
     out.append('      sec.querySelector("#filt-reset").addEventListener("click", function () {')
-    out.append('        fR.value = ""; fL.value = ""; fP.value = ""; apply();')
+    out.append('        widgets.forEach(function (w) {')
+    out.append('          w.querySelectorAll("input:checked").forEach(function (c) { c.checked = false; });')
+    out.append('          syncLabel(w);')
+    out.append('        });')
+    out.append('        apply();')
     out.append('      });')
     out.append('      apply();')
     out.append('    })();')
@@ -197,19 +236,44 @@ CSS = """
     font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.5px;
     color: var(--ink-soft); font-weight: 600;
   }
-  .inv-filter select {
+  .inv-ms { position: relative; }
+  .inv-ms-label {
+    font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.5px;
+    color: var(--ink-soft); font-weight: 600;
+  }
+  .inv-ms-toggle {
     font-family: inherit; font-size: 0.85rem; font-weight: 400;
     text-transform: none; letter-spacing: 0;
     color: var(--ink); background: var(--c-white);
     border: 1px solid var(--line); border-radius: 6px;
-    padding: 0.4rem 0.6rem; min-width: 180px; cursor: pointer;
+    padding: 0.4rem 0.6rem; min-width: 200px; cursor: pointer;
+    display: flex; align-items: center; justify-content: space-between; gap: 0.5rem;
   }
-  .inv-filter select:focus { outline: 2px solid var(--ms-blue); outline-offset: 1px; }
+  .inv-ms-toggle:focus { outline: 2px solid var(--ms-blue); outline-offset: 1px; }
+  .inv-ms.has-sel .inv-ms-toggle {
+    border-color: var(--ms-blue); color: var(--ms-blue-dark); font-weight: 600;
+  }
+  .inv-ms-text { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .inv-ms-chev { color: var(--ink-soft); flex-shrink: 0; font-size: 0.7rem; }
+  .inv-ms-panel {
+    position: absolute; top: calc(100% + 4px); left: 0; z-index: 50;
+    min-width: 100%; max-width: 320px; max-height: 280px; overflow-y: auto;
+    background: var(--c-white); border: 1px solid var(--line); border-radius: 6px;
+    box-shadow: var(--shadow); padding: 0.35rem;
+  }
+  .inv-ms-opt {
+    display: flex; align-items: center; gap: 0.5rem;
+    padding: 0.35rem 0.5rem; border-radius: 4px; cursor: pointer;
+    font-size: 0.85rem; font-weight: 400; text-transform: none; letter-spacing: 0;
+    color: var(--ink); white-space: nowrap;
+  }
+  .inv-ms-opt:hover { background: var(--ms-blue-light); }
+  .inv-ms-opt input { cursor: pointer; accent-color: var(--ms-blue); margin: 0; }
   .inv-reset {
     font-family: inherit; font-size: 0.8rem; font-weight: 600;
     color: var(--ms-blue-dark); background: var(--ms-blue-light);
     border: 1px solid var(--line); border-radius: 6px;
-    padding: 0.45rem 0.9rem; cursor: pointer;
+    padding: 0.45rem 0.9rem; cursor: pointer; align-self: flex-end;
   }
   .inv-reset:hover { background: var(--c-aqua); }
   .inv-result-count {

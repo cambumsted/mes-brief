@@ -1253,19 +1253,44 @@
     font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.5px;
     color: var(--ink-soft); font-weight: 600;
   }
-  .inv-filter select {
+  .inv-ms { position: relative; }
+  .inv-ms-label {
+    font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.5px;
+    color: var(--ink-soft); font-weight: 600;
+  }
+  .inv-ms-toggle {
     font-family: inherit; font-size: 0.85rem; font-weight: 400;
     text-transform: none; letter-spacing: 0;
     color: var(--ink); background: var(--c-white);
     border: 1px solid var(--line); border-radius: 6px;
-    padding: 0.4rem 0.6rem; min-width: 180px; cursor: pointer;
+    padding: 0.4rem 0.6rem; min-width: 200px; cursor: pointer;
+    display: flex; align-items: center; justify-content: space-between; gap: 0.5rem;
   }
-  .inv-filter select:focus { outline: 2px solid var(--ms-blue); outline-offset: 1px; }
+  .inv-ms-toggle:focus { outline: 2px solid var(--ms-blue); outline-offset: 1px; }
+  .inv-ms.has-sel .inv-ms-toggle {
+    border-color: var(--ms-blue); color: var(--ms-blue-dark); font-weight: 600;
+  }
+  .inv-ms-text { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .inv-ms-chev { color: var(--ink-soft); flex-shrink: 0; font-size: 0.7rem; }
+  .inv-ms-panel {
+    position: absolute; top: calc(100% + 4px); left: 0; z-index: 50;
+    min-width: 100%; max-width: 320px; max-height: 280px; overflow-y: auto;
+    background: var(--c-white); border: 1px solid var(--line); border-radius: 6px;
+    box-shadow: var(--shadow); padding: 0.35rem;
+  }
+  .inv-ms-opt {
+    display: flex; align-items: center; gap: 0.5rem;
+    padding: 0.35rem 0.5rem; border-radius: 4px; cursor: pointer;
+    font-size: 0.85rem; font-weight: 400; text-transform: none; letter-spacing: 0;
+    color: var(--ink); white-space: nowrap;
+  }
+  .inv-ms-opt:hover { background: var(--ms-blue-light); }
+  .inv-ms-opt input { cursor: pointer; accent-color: var(--ms-blue); margin: 0; }
   .inv-reset {
     font-family: inherit; font-size: 0.8rem; font-weight: 600;
     color: var(--ms-blue-dark); background: var(--ms-blue-light);
     border: 1px solid var(--line); border-radius: 6px;
-    padding: 0.45rem 0.9rem; cursor: pointer;
+    padding: 0.45rem 0.9rem; cursor: pointer; align-self: flex-end;
   }
   .inv-reset:hover { background: var(--c-aqua); }
   .inv-result-count {
@@ -2146,9 +2171,9 @@
   <section class="block" id="q3-inventory">
     <h2>Q3 partnership reporting inventory <span style="font-size:0.7rem;font-weight:500;color:var(--ink-soft);text-transform:uppercase;letter-spacing:1px;margin-left:0.4rem;">FY26 Q3 · DDS/RDS Opex</span><button type="button" class="section-toggle" aria-label="Collapse section" aria-expanded="true"><span class="chev">▾</span></button></h2>
     <div class="inv-filters">
-      <label class="inv-filter">Region<select id="filt-region"><option value="">All regions</option><option value="EMEA">EMEA</option><option value="Americas">Americas</option><option value="Asia">Asia</option></select></label>
-      <label class="inv-filter">Line of business<select id="filt-lob"><option value="">All LOBs</option><option value="Surface Consumer">Surface Consumer</option><option value="Surface Commercial">Surface Commercial</option><option value="Gaming HW">Gaming HW</option><option value="M365">M365</option><option value="Surface Consumer, Surface Commercial">Surface Consumer, Surface Commercial</option><option value="Surface Consumer, Surface Commercial, Gaming HW">Surface Consumer, Surface Commercial, Gaming HW</option><option value="Cross LOB">Cross LOB</option></select></label>
-      <label class="inv-filter">Partnership<select id="filt-partner"><option value="">All partnerships</option><option value="Alipay">Alipay</option><option value="Amazon / Rakuten">Amazon / Rakuten</option><option value="Amex">Amex</option><option value="Intel">Intel</option><option value="Mastercard">Mastercard</option><option value="Other">Other</option><option value="Paylead">Paylead</option><option value="PayPal">PayPal</option><option value="Rakuten">Rakuten</option><option value="ShowRoom Privé">ShowRoom Privé</option><option value="Student Beans">Student Beans</option><option value="Trade-In">Trade-In</option><option value="UNiDAYS">UNiDAYS</option><option value="Visa/Mastercard">Visa/Mastercard</option><option value="WeChat">WeChat</option><option value="XDL">XDL</option></select></label>
+      <div class="inv-filter inv-ms" data-filter="region"><span class="inv-ms-label">Region</span><button type="button" class="inv-ms-toggle" aria-expanded="false"><span class="inv-ms-text">All regions</span><span class="inv-ms-chev">▾</span></button><div class="inv-ms-panel" hidden><label class="inv-ms-opt"><input type="checkbox" value="EMEA"><span>EMEA</span></label><label class="inv-ms-opt"><input type="checkbox" value="Americas"><span>Americas</span></label><label class="inv-ms-opt"><input type="checkbox" value="Asia"><span>Asia</span></label></div></div>
+      <div class="inv-filter inv-ms" data-filter="lob"><span class="inv-ms-label">Line of business</span><button type="button" class="inv-ms-toggle" aria-expanded="false"><span class="inv-ms-text">All LOBs</span><span class="inv-ms-chev">▾</span></button><div class="inv-ms-panel" hidden><label class="inv-ms-opt"><input type="checkbox" value="Surface Consumer"><span>Surface Consumer</span></label><label class="inv-ms-opt"><input type="checkbox" value="Surface Commercial"><span>Surface Commercial</span></label><label class="inv-ms-opt"><input type="checkbox" value="Gaming HW"><span>Gaming HW</span></label><label class="inv-ms-opt"><input type="checkbox" value="M365"><span>M365</span></label><label class="inv-ms-opt"><input type="checkbox" value="Surface Consumer, Surface Commercial"><span>Surface Consumer, Surface Commercial</span></label><label class="inv-ms-opt"><input type="checkbox" value="Surface Consumer, Surface Commercial, Gaming HW"><span>Surface Consumer, Surface Commercial, Gaming HW</span></label><label class="inv-ms-opt"><input type="checkbox" value="Cross LOB"><span>Cross LOB</span></label></div></div>
+      <div class="inv-filter inv-ms" data-filter="partner"><span class="inv-ms-label">Partnership</span><button type="button" class="inv-ms-toggle" aria-expanded="false"><span class="inv-ms-text">All partnerships</span><span class="inv-ms-chev">▾</span></button><div class="inv-ms-panel" hidden><label class="inv-ms-opt"><input type="checkbox" value="Alipay"><span>Alipay</span></label><label class="inv-ms-opt"><input type="checkbox" value="Amazon / Rakuten"><span>Amazon / Rakuten</span></label><label class="inv-ms-opt"><input type="checkbox" value="Amex"><span>Amex</span></label><label class="inv-ms-opt"><input type="checkbox" value="Intel"><span>Intel</span></label><label class="inv-ms-opt"><input type="checkbox" value="Mastercard"><span>Mastercard</span></label><label class="inv-ms-opt"><input type="checkbox" value="Other"><span>Other</span></label><label class="inv-ms-opt"><input type="checkbox" value="Paylead"><span>Paylead</span></label><label class="inv-ms-opt"><input type="checkbox" value="PayPal"><span>PayPal</span></label><label class="inv-ms-opt"><input type="checkbox" value="Rakuten"><span>Rakuten</span></label><label class="inv-ms-opt"><input type="checkbox" value="ShowRoom Privé"><span>ShowRoom Privé</span></label><label class="inv-ms-opt"><input type="checkbox" value="Student Beans"><span>Student Beans</span></label><label class="inv-ms-opt"><input type="checkbox" value="Trade-In"><span>Trade-In</span></label><label class="inv-ms-opt"><input type="checkbox" value="UNiDAYS"><span>UNiDAYS</span></label><label class="inv-ms-opt"><input type="checkbox" value="Visa/Mastercard"><span>Visa/Mastercard</span></label><label class="inv-ms-opt"><input type="checkbox" value="WeChat"><span>WeChat</span></label><label class="inv-ms-opt"><input type="checkbox" value="XDL"><span>XDL</span></label></div></div>
       <button type="button" id="filt-reset" class="inv-reset">Reset</button>
       <span class="inv-result-count"></span>
     </div>
@@ -2209,24 +2234,57 @@
       var sec = document.getElementById("q3-inventory");
       if (!sec) return;
       var rows = Array.prototype.slice.call(sec.querySelectorAll("#q3-table tbody tr"));
-      var fR = sec.querySelector("#filt-region");
-      var fL = sec.querySelector("#filt-lob");
-      var fP = sec.querySelector("#filt-partner");
+      var widgets = Array.prototype.slice.call(sec.querySelectorAll(".inv-ms"));
       var count = sec.querySelector(".inv-result-count");
+      function selected(w) {
+        return Array.prototype.slice.call(w.querySelectorAll("input:checked")).map(function (c) { return c.value; });
+      }
+      function syncLabel(w) {
+        var sel = selected(w);
+        var txt = w.querySelector(".inv-ms-text");
+        var all = w.querySelector(".inv-ms-toggle").getAttribute("data-all") || txt.textContent;
+        w.querySelector(".inv-ms-toggle").setAttribute("data-all", all);
+        if (sel.length === 0) { txt.textContent = all; w.classList.remove("has-sel"); }
+        else if (sel.length === 1) { txt.textContent = sel[0]; w.classList.add("has-sel"); }
+        else { txt.textContent = sel.length + " selected"; w.classList.add("has-sel"); }
+      }
       function apply() {
-        var r = fR.value, l = fL.value, p = fP.value, n = 0, sum = 0;
+        var sel = {};
+        widgets.forEach(function (w) { sel[w.dataset.filter] = selected(w); });
+        var n = 0, sum = 0;
         rows.forEach(function (tr) {
-          var ok = (!r || tr.dataset.region === r)
-                && (!l || tr.dataset.lob === l)
-                && (!p || tr.dataset.partner === p);
+          var ok = (!sel.region.length  || sel.region.indexOf(tr.dataset.region) > -1)
+                && (!sel.lob.length     || sel.lob.indexOf(tr.dataset.lob) > -1)
+                && (!sel.partner.length || sel.partner.indexOf(tr.dataset.partner) > -1);
           tr.style.display = ok ? "" : "none";
           if (ok) { n++; sum += parseInt(tr.dataset.budget, 10) || 0; }
         });
         count.textContent = n + " of " + rows.length + " initiatives · $" + sum.toLocaleString() + " budget";
       }
-      [fR, fL, fP].forEach(function (s) { s.addEventListener("change", apply); });
+      widgets.forEach(function (w) {
+        var toggle = w.querySelector(".inv-ms-toggle");
+        var panel = w.querySelector(".inv-ms-panel");
+        toggle.addEventListener("click", function (e) {
+          e.stopPropagation();
+          var open = !panel.hidden;
+          widgets.forEach(function (o) { o.querySelector(".inv-ms-panel").hidden = true; o.querySelector(".inv-ms-toggle").setAttribute("aria-expanded", "false"); });
+          panel.hidden = open;
+          toggle.setAttribute("aria-expanded", open ? "false" : "true");
+        });
+        panel.addEventListener("click", function (e) { e.stopPropagation(); });
+        w.querySelectorAll("input").forEach(function (c) {
+          c.addEventListener("change", function () { syncLabel(w); apply(); });
+        });
+      });
+      document.addEventListener("click", function () {
+        widgets.forEach(function (o) { o.querySelector(".inv-ms-panel").hidden = true; o.querySelector(".inv-ms-toggle").setAttribute("aria-expanded", "false"); });
+      });
       sec.querySelector("#filt-reset").addEventListener("click", function () {
-        fR.value = ""; fL.value = ""; fP.value = ""; apply();
+        widgets.forEach(function (w) {
+          w.querySelectorAll("input:checked").forEach(function (c) { c.checked = false; });
+          syncLabel(w);
+        });
+        apply();
       });
       apply();
     })();
