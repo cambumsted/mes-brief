@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Making the grid live — Archived — Marketing Effectiveness Solution</title>
+<style>
+  :root {
+    --c-dark-blue: #091F2E;
+    --c-med-blue: #0078D4;
+    --c-teal: #49C5B1;
+    --c-white: #FFFFFF;
+    --c-n05: #F2F2F2;
+    --c-n15: #D9D9D9;
+    --c-n50: #7F7F7F;
+    --c-aqua: #B9DCD2;
+    --ms-blue: var(--c-med-blue);
+    --ms-blue-dark: var(--c-dark-blue);
+    --ms-blue-light: #E6F2FB;
+    --ink: var(--c-dark-blue);
+    --ink-soft: var(--c-n50);
+    --line: var(--c-n15);
+    --bg: var(--c-n05);
+    --shadow: 0 1.6px 3.6px rgba(9,31,46,0.08), 0 0.3px 0.9px rgba(9,31,46,0.06);
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; font-family: "Segoe UI", -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif; color: var(--ink); background: var(--bg); line-height: 1.55; font-size: 16px; }
+  a { color: var(--ms-blue-dark); }
+  h1 { font-size: 2rem; font-weight: 600; letter-spacing: -0.5px; margin: 0 0 0.4rem; }
+  h2 { font-size: 1.5rem; font-weight: 600; margin: 0 0 0.4rem; }
+  h3 { font-size: 1.05rem; font-weight: 600; margin: 0; }
+  p { margin: 0.5rem 0; }
+
+  .nav {
+    position: sticky; top: 0; z-index: 100;
+    background: rgba(255,255,255,0.96);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line);
+    padding: 0 1.5rem;
+    height: 56px;
+    display: flex; align-items: center; gap: 1.25rem;
+  }
+  .nav .brand { font-weight: 600; color: var(--ms-blue-dark); margin-right: auto; flex-shrink: 0; font-size: 0.95rem; }
+  .nav a { color: var(--ink-soft); text-decoration: none; font-size: 0.85rem; padding: 0.25rem 0.5rem; border-radius: 4px; flex-shrink: 0; }
+  .nav a:hover { background: var(--ms-blue-light); color: var(--ms-blue-dark); }
+
+  .page-header {
+    background:
+      radial-gradient(ellipse at 20% 60%, rgba(255,255,255,0.9), rgba(200,228,247,0) 60%),
+      linear-gradient(135deg, #E6F0F8 0%, #F4FAFE 60%, #FFFFFF 100%);
+    border-bottom: 1px solid var(--c-n15);
+    padding: 1.4rem 1.5rem 2.4rem;
+  }
+  .page-header .ph-inner { max-width: 1100px; margin: 0 auto 1.5rem; display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
+  .page-header .ph-brand { display: inline-flex; align-items: center; gap: 0.55rem; }
+  .page-header .ph-logo { width: 22px; height: 22px; flex-shrink: 0; }
+  .page-header .ph-wordmark { font-size: 1rem; font-weight: 600; color: var(--c-dark-blue); }
+  .page-header .ph-confidential { font-size: 0.72rem; color: var(--c-n50); }
+  .page-header .ph-title-row { max-width: 1100px; margin: 0 auto; }
+  .page-header .ph-meta { font-size: 0.72rem; letter-spacing: 1.5px; text-transform: uppercase; color: var(--c-n50); font-weight: 600; margin-bottom: 0.4rem; }
+  .page-header h1 { font-size: 2.25rem; font-weight: 600; letter-spacing: -0.5px; color: var(--c-dark-blue); margin: 0 0 0.5rem; line-height: 1.15; }
+  .page-header .ph-lede { font-size: 1rem; color: var(--c-dark-blue); opacity: 0.78; max-width: 780px; margin: 0; }
+
+  main { max-width: 1100px; margin: 0 auto; padding: 2rem 1.5rem 4rem; }
+
+  .archive-banner {
+    background: #FFF4CE; border: 1px solid #F0DEA0; color: #8A6D00;
+    padding: 0.6rem 1rem; font-size: 0.85rem; border-radius: 6px;
+    margin-bottom: 1.5rem;
+  }
+  .archive-banner a { color: #8A6D00; text-decoration: underline; }
+
+  /* ===== Live data options ===== */
+  .live-options { display: grid; grid-template-columns: 1fr; gap: 1rem; margin-top: 1rem; }
+  .live-option {
+    background: var(--c-white);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 1.1rem 1.3rem 1rem;
+    box-shadow: var(--shadow);
+  }
+  .live-option .opt-head { display: flex; align-items: baseline; gap: 0.6rem; margin-bottom: 0.45rem; flex-wrap: wrap; }
+  .live-option .opt-num { background: var(--c-dark-blue); color: white; font-size: 0.7rem; font-weight: 700; letter-spacing: 0.5px; padding: 0.2rem 0.55rem; border-radius: 3px; }
+  .live-option h3 { margin: 0; font-size: 1.05rem; }
+  .live-option .opt-effort { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.6px; font-weight: 700; color: var(--ink-soft); margin-left: auto; }
+  .live-option .opt-effort.low  { color: #1E6657; }
+  .live-option .opt-effort.med  { color: #8A6D00; }
+  .live-option .opt-effort.high { color: #993333; }
+  .live-option .opt-summary { font-size: 0.92rem; color: var(--ink); line-height: 1.5; margin: 0.3rem 0 0.7rem; }
+  .live-option .opt-meta { display: flex; gap: 1.2rem; flex-wrap: wrap; font-size: 0.78rem; color: var(--ink-soft); margin-top: 0.4rem; }
+  .live-option .opt-meta strong { color: var(--ink); font-weight: 600; }
+
+  .live-option details.dev-view { margin-top: 0.85rem; padding-top: 0.7rem; border-top: 1px dashed var(--line); }
+  .live-option details.dev-view summary {
+    cursor: pointer; font-size: 0.78rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.6px;
+    color: var(--ms-blue-dark); list-style: none;
+    display: inline-flex; align-items: center; gap: 0.4rem; padding: 0.25rem 0;
+  }
+  .live-option details.dev-view summary::-webkit-details-marker { display: none; }
+  .live-option details.dev-view summary::before { content: "▸"; font-size: 0.75em; transition: transform 0.15s ease; }
+  .live-option details.dev-view[open] summary::before { transform: rotate(90deg); }
+  .live-option details.dev-view .dev-body {
+    margin-top: 0.7rem; background: var(--c-n05); border: 1px solid var(--line);
+    border-radius: 6px; padding: 0.9rem 1.05rem; font-size: 0.85rem; line-height: 1.55; color: var(--ink);
+  }
+  .live-option details.dev-view .dev-body p { margin: 0.4rem 0; }
+  .live-option details.dev-view .dev-body ul { margin: 0.4rem 0; padding-left: 1.2rem; }
+  .live-option details.dev-view .dev-body li { margin: 0.25rem 0; }
+  .live-option details.dev-view .dev-body code {
+    background: var(--c-white); padding: 0.1rem 0.4rem; border-radius: 3px;
+    font-size: 0.82rem; font-family: Consolas, monospace; border: 1px solid var(--line);
+  }
+  .live-option details.dev-view .dev-body h5 {
+    font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.6px;
+    color: var(--ink-soft); margin: 0.85rem 0 0.3rem;
+  }
+  .live-option details.dev-view .dev-body h5:first-child { margin-top: 0; }
+</style>
+</head>
+<body>
+
+<header class="page-header">
+  <div class="ph-inner">
+    <div class="ph-brand">
+      <svg class="ph-logo" viewBox="0 0 23 23" aria-hidden="true">
+        <rect x="0" y="0" width="10" height="10" fill="#F25022"/>
+        <rect x="13" y="0" width="10" height="10" fill="#7FBA00"/>
+        <rect x="0" y="13" width="10" height="10" fill="#00A4EF"/>
+        <rect x="13" y="13" width="10" height="10" fill="#FFB900"/>
+      </svg>
+      <span class="ph-wordmark">Microsoft</span>
+    </div>
+    <div class="ph-confidential">Microsoft Confidential</div>
+  </div>
+  <div class="ph-title-row">
+    <div class="ph-meta">Working note · Archived</div>
+    <h1>Making the grid live</h1>
+    <p class="ph-lede">Four options for moving the AMEX partnership grid from a hand-coded HTML table to a live data surface — ordered low to high effort.</p>
+  </div>
+</header>
+
+<nav class="nav" aria-label="Primary navigation">
+  <span class="brand">Marketing Effectiveness Solution</span>
+  <a href="brief.html">Brief</a>
+  <a href="timeline.html">Timeline</a>
+  <a href="partnership-ideas.html">Partnerships reporting</a>
+  <a href="marketing-iq.html">Marketing IQ</a>
+  <a href="web-metrics-notes.html">Notes</a>
+  <a href="reports.html">Reports inventory</a>
+  <a href="archive.html" style="color: var(--ms-blue-dark); font-weight: 600;">Archive</a>
+</nav>
+
+<main>
+
+  <div class="archive-banner">
+    <strong>Archived working note</strong> — originally part of the partnership-ideas page. Kept for reference. The live partnership grid is on <a href="partnership-ideas.html">Partnerships reporting</a>.
+  </div>
+
+  <div class="live-options">
+
+    <!-- ===================== OPTION 1 ===================== -->
+    <div class="live-option">
+      <div class="opt-head">
+        <span class="opt-num">Option 1</span>
+        <h3>Stay manual, refresh on a cadence</h3>
+        <span class="opt-effort low">Effort: Low</span>
+      </div>
+      <p class="opt-summary">
+        Keep the grid as it is. After each campaign closes, someone (likely us) opens each regional Excel file, copies the totals, and updates the HTML. ~30 min per region per quarter.
+      </p>
+      <div class="opt-meta">
+        <span><strong>Cost:</strong> $0</span>
+        <span><strong>Latency:</strong> Days to weeks after campaign close</span>
+        <span><strong>IT involvement:</strong> None</span>
+      </div>
+
+      <details class="dev-view">
+        <summary>Developer view</summary>
+        <div class="dev-body">
+          <h5>What it actually is</h5>
+          <p>The current state — a hand-coded HTML table with hard-coded values and per-cell <code>data-src-*</code> attributes for provenance tooltips. No backend, no auth, no data pipeline.</p>
+          <h5>Tradeoffs</h5>
+          <ul>
+            <li>Zero infrastructure cost and zero maintenance burden between refreshes.</li>
+            <li>Refresh is gated on a human remembering to do it; cadence drifts as people get busy.</li>
+            <li>Data lineage is documented inline (the tooltip cells already point at sheet + cell ranges), which makes the manual refresh fast — but it doesn't catch sheet restructures.</li>
+            <li>Fine for a working draft / leadership preview. Not a long-term answer if the grid becomes a primary decision surface.</li>
+          </ul>
+        </div>
+      </details>
+    </div>
+
+    <!-- ===================== OPTION 2 ===================== -->
+    <div class="live-option">
+      <div class="opt-head">
+        <span class="opt-num">Option 2</span>
+        <h3>Owners publish a flat data file, page reads it</h3>
+        <span class="opt-effort low">Effort: Low–Medium</span>
+      </div>
+      <p class="opt-summary">
+        Each regional owner (or a shared script) exports their Excel to a simple CSV/JSON file in a known location. The HTML page reads that file each time it loads. Same grid you have today — just sourced from a file rather than typed in.
+      </p>
+      <div class="opt-meta">
+        <span><strong>Cost:</strong> $0</span>
+        <span><strong>Latency:</strong> Hours after owner exports</span>
+        <span><strong>IT involvement:</strong> Minimal</span>
+      </div>
+
+      <details class="dev-view">
+        <summary>Developer view</summary>
+        <div class="dev-body">
+          <h5>Architecture</h5>
+          <p>Three JSON files committed to the repo (one per region) + a single <code>fetch()</code> on page load that hydrates the grid from those files. The existing <code>data-src-*</code> attributes become the data contract — the JSON keys map to the same metric / region / market shape.</p>
+          <h5>What it takes to build</h5>
+          <ul>
+            <li>Define a minimal JSON schema: <code>{ region, period, markets[{ name, offer, enrollments, redemptions, ... }] }</code>.</li>
+            <li>Write a one-shot PowerShell script (or Excel macro) per region that reads the workbook and emits the JSON — ~30 lines each. The Excel-COM extractor we already ran for analysis is 80% of this.</li>
+            <li>Refactor the grid HTML into a template that <code>fetch()</code>es and renders. ~150 lines of vanilla JS.</li>
+            <li>Decide where the JSON lives: committed to the GitHub repo (publishes on push), or hosted in SharePoint and fetched cross-origin (needs CORS / shared link).</li>
+          </ul>
+          <h5>Tradeoffs</h5>
+          <ul>
+            <li>Still no auth, still works on GitHub Pages.</li>
+            <li>Reliance on regional owners running the export. If they don't, the page silently shows stale data — needs a "last refreshed" timestamp on the grid.</li>
+            <li>Sheet restructures still break things, but break them in JS at render time (visible) rather than in a tooltip (hidden).</li>
+          </ul>
+        </div>
+      </details>
+    </div>
+
+    <!-- ===================== OPTION 3 ===================== -->
+    <div class="live-option">
+      <div class="opt-head">
+        <span class="opt-num">Option 3</span>
+        <h3>Read the Excel files directly via Microsoft Graph</h3>
+        <span class="opt-effort high">Effort: Medium–High</span>
+      </div>
+      <p class="opt-summary">
+        Microsoft has an API (Graph) that can read live Excel files in SharePoint and return the cell values. The grid would call that API on load — whatever's in the spreadsheets right now is what shows up. No human exports, no stale data. Requires IT approval and some auth plumbing.
+      </p>
+      <div class="opt-meta">
+        <span><strong>Cost:</strong> $0–10/month</span>
+        <span><strong>Latency:</strong> Real-time</span>
+        <span><strong>IT involvement:</strong> Entra app registration, tenant consent</span>
+      </div>
+
+      <details class="dev-view">
+        <summary>Developer view</summary>
+        <div class="dev-body">
+          <h5>Architecture</h5>
+          <p>Graph exposes workbook ranges as JSON via endpoints like <code>GET /drives/{drive-id}/items/{item-id}/workbook/worksheets/{name}/range(address='D5:S55')</code>. Two auth patterns:</p>
+          <ul>
+            <li><strong>Delegated</strong> — each viewer signs in with their Microsoft account; the page calls Graph with their token. Keeps the site fully static. Best for an internal-only leadership tool. MSAL.js handles the flow.</li>
+            <li><strong>App-only</strong> — a service principal reads the files on a schedule (Azure Function on a timer) and writes a cached JSON to the site. Viewers never authenticate. Tiny server-side piece required.</li>
+          </ul>
+          <h5>What it takes to build</h5>
+          <ul>
+            <li>Entra ID app registration (Marketing IT / IT ticket — typically 1–2 week SLA).</li>
+            <li>Tenant admin consent for <code>Files.Read.All</code> or scoped <code>Sites.Selected</code>.</li>
+            <li>Move from GitHub Pages → <strong>Azure Static Web Apps</strong> (free tier; supports Entra-protected routes and Functions natively). The existing <code>staticwebapp.config.json</code> in the repo means we're already partway set up.</li>
+            <li>~200 lines of JS for Graph calls and parsing; another ~100 for token handling if going delegated.</li>
+          </ul>
+          <h5>Tradeoffs</h5>
+          <ul>
+            <li>Genuinely live — no stale data, no human in the loop.</li>
+            <li>Cell-address-based reads break if a row gets inserted upstream. Mitigation: lock layout via a data contract, or address by named ranges / Excel Tables instead of cell coordinates.</li>
+            <li>Auth-protected sites have higher friction for sharing — every viewer needs an MS account that has permission to the source files (which they probably do, but worth confirming).</li>
+          </ul>
+        </div>
+      </details>
+    </div>
+
+    <!-- ===================== OPTION 4 ===================== -->
+    <div class="live-option">
+      <div class="opt-head">
+        <span class="opt-num">Option 4</span>
+        <h3>Build a Power BI model, embed the report</h3>
+        <span class="opt-effort high">Effort: High</span>
+      </div>
+      <p class="opt-summary">
+        Pipe the three regional files into a Power BI dataset with scheduled refresh, model the metric definitions as DAX, build visuals, and embed the report in the brief page. Numbers stay live; the narrative wrapper stays in HTML.
+      </p>
+      <div class="opt-meta">
+        <span><strong>Cost:</strong> Existing Power BI Pro licenses</span>
+        <span><strong>Latency:</strong> Up to refresh schedule (typically daily)</span>
+        <span><strong>IT involvement:</strong> Workspace + gateway setup</span>
+      </div>
+
+      <details class="dev-view">
+        <summary>Developer view</summary>
+        <div class="dev-body">
+          <h5>Architecture</h5>
+          <p>Power BI Desktop ingests the three Excel files via SharePoint connectors. A semantic model unifies them: shared dimensions (region, market, period), conformed metric definitions in DAX, and the comparability footnotes baked in as calculated columns or report-level annotations. Publishes to a Power BI workspace; scheduled refresh runs daily; the report is embedded in the brief via <code>&lt;iframe&gt;</code> using the "Publish to web" or "Embed for your organization" flow.</p>
+          <h5>What it takes to build</h5>
+          <ul>
+            <li>2–3 weeks for the data model: connectors, transformations in Power Query, DAX measures for the shared metric definitions, region/market dimensional model.</li>
+            <li>Workspace + scheduled refresh setup (data gateway not needed if files live in SharePoint Online).</li>
+            <li>Embed code generation; iframe drop-in to the partnership-ideas page.</li>
+            <li>Ongoing model ownership — someone needs to maintain DAX when sheet shapes drift.</li>
+          </ul>
+          <h5>Tradeoffs</h5>
+          <ul>
+            <li>Strongest for the live-numbers job: Power BI is purpose-built for this and handles refresh, caching, and visual interactivity natively.</li>
+            <li>Weak fit for everything else this page does — the narrative, the metric definitions table, the per-cell provenance tooltips, the "what's not comparable" footnotes. Those don't translate to Power BI native experiences.</li>
+            <li>Best as the data layer behind a hybrid: Power BI for the grid visual, HTML for the wrapper. The two embedded together is what gets you the leadership-ready surface.</li>
+          </ul>
+        </div>
+      </details>
+    </div>
+
+  </div>
+
+  <p style="font-size:0.85rem;color:var(--ink-soft);margin-top:1.2rem;">
+    <strong>Pragmatic path:</strong> stay on Option 1 through the next 1–2 partnerships joining the grid. If leadership is actually consulting it, move to Option 2 to prove auto-refresh adds adoption value. Only graduate to Option 3 or 4 once we know the grid is a primary decision surface AND the regional sheet formats are stable enough to act as a data contract.
+  </p>
+
+</main>
+
+</body>
+</html>
