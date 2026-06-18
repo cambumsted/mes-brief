@@ -9,57 +9,57 @@ import pathlib
 
 PAGE = pathlib.Path(__file__).resolve().parent.parent / "partnership-ideas.html"
 
-# (region, lob, partner, description, markets) — partner = source "Activity" column
+# (region, lob, partner, description, markets, budget) — partner = source "Activity" column, budget = Funding Ask (USD)
 RECORDS = [
     # ---- EMEA ----
-    ("EMEA", "Surface Consumer", "Amex", "Amex cashback (spend 500, get 100 back), AOV $1,500.", "UK, DE, FR, IT"),
-    ("EMEA", "Surface Consumer", "Trade-In", "Trade-In top-up.", "UK, DE, FR, IT, ES"),
-    ("EMEA", "Surface Consumer", "Partnership", "Extension of Paylead. 10% CPA on min $399 purchase, get up to 8.5% cashback from banking partners.", "FR, BE, ES"),
-    ("EMEA", "Surface Consumer", "Partnership", "UNiDAYS relaunch and marketing package. BSKU & Laptop 13\" closed-loop offers.", "UK, FR, DE, IT"),
-    ("EMEA", "Surface Consumer", "Partnership", "Extension of Student Beans partnership. 3% CPA on BSKU & Pro 12\" closed-loop offers.", "UK, DE, FR"),
-    ("EMEA", "Surface Consumer", "Partnership", "XDL Promo Code Test (15% discount) \u2014 repurposed from 'I am Student' Spring BTS partnership.", "DE"),
-    ("EMEA", "Surface Consumer", "Partnership", "ShowRoom Priv\u00e9: 45% saving on Refurbished Pro 11 BSKU (all SKUs) via vanity promocode.", "FR"),
-    ("EMEA", "Surface Consumer", "Other", "Behind the Cart feature onboarding to scraping tool.", "UK, FR, DE"),
-    ("EMEA", "Surface Commercial", "Trade-In", "Trade-In top-up.", "UK, DE, FR, IT, ES"),
-    ("EMEA", "Gaming HW", "Trade-In", "Trade-In top-up.", "UK, DE, FR, IT, ES"),
-    ("EMEA", "M365", "Partnership", "PayPal Cashback (get 15% cashback up to max \u20ac100).", "UK"),
+    ("EMEA", "Surface Consumer", "Amex", "Amex cashback (spend 500, get 100 back), AOV $1,500.", "UK, DE, FR, IT", 125000),
+    ("EMEA", "Surface Consumer", "Trade-In", "Trade-In top-up.", "UK, DE, FR, IT, ES", 55000),
+    ("EMEA", "Surface Consumer", "Partnership", "Extension of Paylead. 10% CPA on min $399 purchase, get up to 8.5% cashback from banking partners.", "FR, BE, ES", 9800),
+    ("EMEA", "Surface Consumer", "Partnership", "UNiDAYS relaunch and marketing package. BSKU & Laptop 13\" closed-loop offers.", "UK, FR, DE, IT", 30000),
+    ("EMEA", "Surface Consumer", "Partnership", "Extension of Student Beans partnership. 3% CPA on BSKU & Pro 12\" closed-loop offers.", "UK, DE, FR", 15000),
+    ("EMEA", "Surface Consumer", "Partnership", "XDL Promo Code Test (15% discount) \u2014 repurposed from 'I am Student' Spring BTS partnership.", "DE", 10000),
+    ("EMEA", "Surface Consumer", "Partnership", "ShowRoom Priv\u00e9: 45% saving on Refurbished Pro 11 BSKU (all SKUs) via vanity promocode.", "FR", 11500),
+    ("EMEA", "Surface Consumer", "Other", "Behind the Cart feature onboarding to scraping tool.", "UK, FR, DE", 2700),
+    ("EMEA", "Surface Commercial", "Trade-In", "Trade-In top-up.", "UK, DE, FR, IT, ES", 15000),
+    ("EMEA", "Gaming HW", "Trade-In", "Trade-In top-up.", "UK, DE, FR, IT, ES", 5000),
+    ("EMEA", "M365", "Partnership", "PayPal Cashback (get 15% cashback up to max \u20ac100).", "UK", 40000),
 
     # ---- Americas ----
-    ("Americas", "Surface Consumer, Surface Commercial", "Amex", "Marketing Partnership \u2013 AMEX: Spend $1,000, get $X back.", "US"),
-    ("Americas", "Surface Consumer", "Mastercard", "Marketing Partnership \u2013 Mastercard: Get 15% back on purchases $1,000+.", "US"),
-    ("Americas", "Surface Consumer", "Trade-In", "Trade-In Plus Up.", "US, CA"),
-    ("Americas", "Surface Commercial", "Trade-In", "Trade-In Plus Up campaign.", "US, CA"),
-    ("Americas", "Surface Commercial", "Trade-In", "Trade-In Plus Up: multiple assisted opportunities in play with customers that will exhaust current funding.", "US"),
-    ("Americas", "Surface Consumer, Surface Commercial, Gaming HW", "Partnership", "Marketing Partnership \u2013 PayPal: Get 15% back on purchases, up to $175.", "US"),
-    ("Americas", "Gaming HW", "Amex", "Marketing Partnership \u2013 AMEX: Spend $70 get $15 back; Spend $450 get $80 back.", "US"),
-    ("Americas", "Gaming HW", "Trade-In", "Trade-In Plus Up campaign.", "US"),
-    ("Americas", "M365", "Mastercard", "Marketing Partnership \u2013 Mastercard: Get 20% back on purchases of $99.99+.", "US"),
+    ("Americas", "Surface Consumer, Surface Commercial", "Amex", "Marketing Partnership \u2013 AMEX: Spend $1,000, get $X back.", "US", 50000),
+    ("Americas", "Surface Consumer", "Mastercard", "Marketing Partnership \u2013 Mastercard: Get 15% back on purchases $1,000+.", "US", 30000),
+    ("Americas", "Surface Consumer", "Trade-In", "Trade-In Plus Up.", "US, CA", 50000),
+    ("Americas", "Surface Commercial", "Trade-In", "Trade-In Plus Up campaign.", "US, CA", 15000),
+    ("Americas", "Surface Commercial", "Trade-In", "Trade-In Plus Up: multiple assisted opportunities in play with customers that will exhaust current funding.", "US", 30000),
+    ("Americas", "Surface Consumer, Surface Commercial, Gaming HW", "Partnership", "Marketing Partnership \u2013 PayPal: Get 15% back on purchases, up to $175.", "US", 25000),
+    ("Americas", "Gaming HW", "Amex", "Marketing Partnership \u2013 AMEX: Spend $70 get $15 back; Spend $450 get $80 back.", "US", 20000),
+    ("Americas", "Gaming HW", "Trade-In", "Trade-In Plus Up campaign.", "US", 10000),
+    ("Americas", "M365", "Mastercard", "Marketing Partnership \u2013 Mastercard: Get 20% back on purchases of $99.99+.", "US", 20000),
 
     # ---- Asia ----
-    ("Asia", "Surface Consumer", "Amex", "Amex Cashback Campaign.", "ANZ, JPN, SKI"),
-    ("Asia", "Surface Consumer", "Amex", "Q1 Amex campaign overspend cost.", "JPN"),
-    ("Asia", "Surface Consumer", "Rakuten", "Rakuten Advertising Bronze.", "JPN"),
-    ("Asia", "Surface Consumer", "Trade-In", "Trade-In Plus Up [ANZ \u2013 50K, SKI \u2013 15K].", "ANZ, SKI"),
-    ("Asia", "Surface Consumer", "Visa/Mastercard", "Visa/Mastercard Co-marketing.", "ANZ"),
-    ("Asia", "Surface Consumer", "Partnership", "UNiDAYS Co-marketing.", "ANZ"),
-    ("Asia", "Surface Consumer", "Partnership", "Amazon Prime Day (Prime Day $30K / Rakuten $30K / Paid Media top-up $40K).", "JPN"),
-    ("Asia", "Surface Consumer", "Alipay", "Alipay Co-marketing.", "GCR"),
-    ("Asia", "Surface Commercial", "Amex", "Amex Cashback Campaign.", "ANZ, JPN, SKI"),
-    ("Asia", "Surface Commercial", "Partnership", "*NEW* Partnership marketing with Intel.", "ANZ, JPN"),
-    ("Asia", "Surface Commercial", "WeChat", "New pipeline acquisition through WeChat Ads.", "GCR"),
-    ("Asia", "Surface Commercial", "Other", "Customize Brand Love gift to increase the un-assisted CVR.", "GCR"),
-    ("Asia", "Surface Commercial", "Other", "12 stages free instalment.", "GCR"),
-    ("Asia", "Surface Commercial", "Other", "Amex Co-marketing top-up due to outperformance while keeping strong ROI.", "AU"),
-    ("Asia", "Gaming HW", "Alipay", "Alipay Co-marketing Pilot.", "GCR"),
-    ("Asia", "Gaming HW", "Trade-In", "Trade-In Plus Up for 2TB.", "ANZ"),
-    ("Asia", "Gaming HW", "Other", "3PP Gifts.", "GCR"),
-    ("Asia", "Gaming HW", "Other", "PC Attach Co-marketing.", "GCR"),
-    ("Asia", "Gaming HW", "Other", "Loyalty program: customize store membership.", "GCR"),
-    ("Asia", "Gaming HW", "Other", "Top-up of Xbox Attach programme to drive additional $30K (1:4 ROI) in Gaming Accessories.", "CN"),
-    ("Asia", "Surface Consumer", "Other", "3PP Gifts.", "GCR"),
-    ("Asia", "Surface Consumer", "Alipay", "Alipay Co-marketing.", "GCR"),
-    ("Asia", "Surface Consumer & Commercial", "Trade-In", "Q2 Trade-In Plus Up campaign overspend.", "AU"),
-    ("Asia", "Cross LOB", "Amex", "Additional funding to support Amex campaign overperformance in Q3.", "JPN"),
+    ("Asia", "Surface Consumer", "Amex", "Amex Cashback Campaign.", "ANZ, JPN, SKI", 130000),
+    ("Asia", "Surface Consumer", "Amex", "Q1 Amex campaign overspend cost.", "JPN", 36000),
+    ("Asia", "Surface Consumer", "Rakuten", "Rakuten Advertising Bronze.", "JPN", 100000),
+    ("Asia", "Surface Consumer", "Trade-In", "Trade-In Plus Up [ANZ \u2013 50K, SKI \u2013 15K].", "ANZ, SKI", 55000),
+    ("Asia", "Surface Consumer", "Visa/Mastercard", "Visa/Mastercard Co-marketing.", "ANZ", 50000),
+    ("Asia", "Surface Consumer", "Partnership", "UNiDAYS Co-marketing.", "ANZ", 20000),
+    ("Asia", "Surface Consumer", "Partnership", "Amazon Prime Day (Prime Day $30K / Rakuten $30K / Paid Media top-up $40K).", "JPN", 100000),
+    ("Asia", "Surface Consumer", "Alipay", "Alipay Co-marketing.", "GCR", 100000),
+    ("Asia", "Surface Commercial", "Amex", "Amex Cashback Campaign.", "ANZ, JPN, SKI", 50000),
+    ("Asia", "Surface Commercial", "Partnership", "*NEW* Partnership marketing with Intel.", "ANZ, JPN", 50000),
+    ("Asia", "Surface Commercial", "WeChat", "New pipeline acquisition through WeChat Ads.", "GCR", 20000),
+    ("Asia", "Surface Commercial", "Other", "Customize Brand Love gift to increase the un-assisted CVR.", "GCR", 10000),
+    ("Asia", "Surface Commercial", "Other", "12 stages free instalment.", "GCR", 5000),
+    ("Asia", "Surface Commercial", "Other", "Amex Co-marketing top-up due to outperformance while keeping strong ROI.", "AU", 20000),
+    ("Asia", "Gaming HW", "Alipay", "Alipay Co-marketing Pilot.", "GCR", 15000),
+    ("Asia", "Gaming HW", "Trade-In", "Trade-In Plus Up for 2TB.", "ANZ", 10000),
+    ("Asia", "Gaming HW", "Other", "3PP Gifts.", "GCR", 10000),
+    ("Asia", "Gaming HW", "Other", "PC Attach Co-marketing.", "GCR", 25000),
+    ("Asia", "Gaming HW", "Other", "Loyalty program: customize store membership.", "GCR", 10000),
+    ("Asia", "Gaming HW", "Other", "Top-up of Xbox Attach programme to drive additional $30K (1:4 ROI) in Gaming Accessories.", "CN", 7000),
+    ("Asia", "Surface Consumer", "Other", "3PP Gifts.", "GCR", 30000),
+    ("Asia", "Surface Consumer", "Alipay", "Alipay Co-marketing.", "GCR", 30000),
+    ("Asia", "Surface Consumer", "Trade-In", "Q2 Trade-In Plus Up campaign overspend.", "AU", 13000),
+    ("Asia", "Cross LOB", "Amex", "Additional funding to support Amex campaign overperformance in Q3.", "JPN", 53000),
 ]
 
 REGION_ORDER = ["EMEA", "Americas", "Asia"]
@@ -97,6 +97,7 @@ def build_section():
                '<span class="chev">\u25be</span></button></h2>')
 
     total = len(RECORDS)
+    grand_total = sum(rec[5] for rec in RECORDS)
 
     # Filter controls
     regions = [r for r in REGION_ORDER if any(rec[0] == r for rec in RECORDS)]
@@ -125,7 +126,7 @@ def build_section():
     out.append('    <table class="inv-table" id="q3-table">')
     out.append('      <thead><tr>'
                '<th>Region</th><th>Line of business</th><th>Partnership</th>'
-               '<th>Initiative</th><th>Markets</th>'
+               '<th>Initiative</th><th>Markets</th><th class="inv-budget-col">Budget</th>'
                '</tr></thead>')
     out.append('      <tbody>')
     ordered = sorted(
@@ -133,20 +134,23 @@ def build_section():
         key=lambda rec: (REGION_ORDER.index(rec[0]) if rec[0] in REGION_ORDER else 99,
                          lob_rank(rec[1])),
     )
-    for region, lob, partner, desc, markets in ordered:
+    for region, lob, partner, desc, markets, budget in ordered:
         out.append('        <tr '
-                   f'data-region="{esc(region)}" data-lob="{esc(lob)}" data-partner="{esc(partner)}">'
+                   f'data-region="{esc(region)}" data-lob="{esc(lob)}" data-partner="{esc(partner)}" '
+                   f'data-budget="{budget}">'
                    f'<td class="inv-region-cell">{esc(region)}</td>'
                    f'<td class="inv-lob-cell">{esc(lob)}</td>'
                    f'<td><span class="inv-tag">{esc(partner)}</span></td>'
                    f'<td>{esc(desc)}</td>'
-                   f'<td>{esc(markets)}</td></tr>')
+                   f'<td>{esc(markets)}</td>'
+                   f'<td class="inv-budget-col">${budget:,}</td></tr>')
     out.append('      </tbody>')
     out.append('    </table>')
     out.append('    </div>')
 
     out.append(f'    <p class="footer-note" style="margin-top:1.25rem;">{total} initiatives total across '
-               'EMEA, Americas and Asia. Reporting source/cadence to be confirmed per initiative with regional teams.</p>')
+               f'EMEA, Americas and Asia \u00b7 ${grand_total:,} combined budget. '
+               'Reporting source/cadence to be confirmed per initiative with regional teams.</p>')
 
     # Filter behaviour
     out.append('    <script>')
@@ -159,15 +163,15 @@ def build_section():
     out.append('      var fP = sec.querySelector("#filt-partner");')
     out.append('      var count = sec.querySelector(".inv-result-count");')
     out.append('      function apply() {')
-    out.append('        var r = fR.value, l = fL.value, p = fP.value, n = 0;')
+    out.append('        var r = fR.value, l = fL.value, p = fP.value, n = 0, sum = 0;')
     out.append('        rows.forEach(function (tr) {')
     out.append('          var ok = (!r || tr.dataset.region === r)')
     out.append('                && (!l || tr.dataset.lob === l)')
     out.append('                && (!p || tr.dataset.partner === p);')
     out.append('          tr.style.display = ok ? "" : "none";')
-    out.append('          if (ok) n++;')
+    out.append('          if (ok) { n++; sum += parseInt(tr.dataset.budget, 10) || 0; }')
     out.append('        });')
-    out.append('        count.textContent = n + " of " + rows.length + " initiatives";')
+    out.append('        count.textContent = n + " of " + rows.length + " initiatives \u00b7 $" + sum.toLocaleString() + " budget";')
     out.append('      }')
     out.append('      [fR, fL, fP].forEach(function (s) { s.addEventListener("change", apply); });')
     out.append('      sec.querySelector("#filt-reset").addEventListener("click", function () {')
@@ -214,7 +218,7 @@ CSS = """
   }
   table.inv-table {
     width: 100%; border-collapse: collapse;
-    font-size: 0.86rem; min-width: 820px;
+    font-size: 0.86rem; min-width: 900px;
   }
   table.inv-table th, table.inv-table td {
     padding: 0.5rem 0.7rem;
@@ -229,9 +233,10 @@ CSS = """
   }
   table.inv-table td.inv-region-cell { font-weight: 600; color: var(--ms-blue-dark); white-space: nowrap; }
   table.inv-table td.inv-lob-cell { color: var(--ink); white-space: nowrap; }
-  table.inv-table td:last-child {
-    white-space: nowrap; color: var(--ink-soft);
-    font-weight: 600; font-size: 0.8rem;
+  table.inv-table .inv-budget-col {
+    text-align: right; white-space: nowrap;
+    font-variant-numeric: tabular-nums; font-weight: 600;
+    color: var(--ink);
   }
   table.inv-table tbody tr:hover { background: var(--bg); }
   .inv-tag {
