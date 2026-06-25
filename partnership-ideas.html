@@ -1098,6 +1098,32 @@
     opacity: 0.7;
     margin-bottom: 0.25rem;
   }
+  .ptn-goal .ptn-goal-funnel {
+    list-style: none;
+    margin: 0.7rem 0 0;
+    padding: 0;
+    display: grid;
+    gap: 0.45rem;
+  }
+  .ptn-goal .ptn-goal-funnel li {
+    font-size: 0.82rem;
+    font-weight: 400;
+    line-height: 1.4;
+    opacity: 0.9;
+    padding-left: 0.85rem;
+    position: relative;
+  }
+  .ptn-goal .ptn-goal-funnel li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0.55em;
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.7);
+  }
+  .ptn-goal .ptn-goal-funnel strong { font-weight: 700; }
 
   /* ============================================ */
   /* Partnerships-only timeline (mini gantt)       */
@@ -1450,8 +1476,13 @@
     <h2 id="ptn-goal-heading">Evaluate partnership performance globally</h2>
     <p class="ptn-goal-lead">All of this work — the grid, the metric definitions, and the move to Marketing IQ — exists to give us one consistent, global view of how our partnerships perform, so we can answer two questions with confidence:</p>
     <div class="ptn-goal-questions">
-      <div class="ptn-goal-q"><span>Question 1</span>Where do I invest incremental dollars?</div>
-      <div class="ptn-goal-q"><span>Question 2</span>What is the ROI of partnerships?</div>
+      <div class="ptn-goal-q">
+        What is the ROI of partnerships?
+        <ul class="ptn-goal-funnel">
+          <li><strong>Upper funnel</strong> — what are we getting beyond revenue, i.e. traffic, exposure?</li>
+          <li><strong>Lower funnel</strong> — where are we seeing the greatest return?</li>
+        </ul>
+      </div>
     </div>
   </section>
 
