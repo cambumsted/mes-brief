@@ -2621,6 +2621,13 @@
 (function () {
   // Section toggles
   document.querySelectorAll('section.block .section-toggle').forEach(function (btn) {
+    // Start every section collapsed
+    const startSection = btn.closest('section.block');
+    if (startSection) {
+      startSection.classList.add('collapsed');
+      btn.setAttribute('aria-expanded', 'false');
+      btn.setAttribute('aria-label', 'Expand section');
+    }
     btn.addEventListener('click', function (e) {
       e.stopPropagation();
       const section = btn.closest('section.block');
