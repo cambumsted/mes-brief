@@ -4,7 +4,6 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Partnerships Reporting — Marketing Effectiveness Solution</title>
-<link rel="stylesheet" href="notes-widget.css" />
 <style>
   :root {
     --c-dark-blue: #091F2E;
@@ -1147,6 +1146,131 @@
     margin-top: 0.45rem;
     line-height: 1.4;
   }
+  .ptn-goal .funnel-kpi {
+    display: inline-block;
+    margin-left: 0.4rem;
+    background: var(--c-amber);
+    color: #3a2e00;
+    font-size: 0.64rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    padding: 0.1rem 0.5rem;
+    border-radius: 999px;
+    vertical-align: middle;
+  }
+
+  /* ============================================ */
+  /* Next steps — the ask                          */
+  /* ============================================ */
+  .ask-lede {
+    color: var(--ink-soft);
+    font-size: 0.98rem;
+    max-width: 760px;
+    margin: 0 0 1.2rem;
+  }
+  .ask-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1rem;
+  }
+  .ask-card {
+    background: white;
+    border: 1px solid var(--line);
+    border-top: 4px solid var(--c-med-blue);
+    border-radius: 10px;
+    padding: 1.4rem 1.3rem 1.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.55rem;
+    box-shadow: var(--shadow);
+    position: relative;
+  }
+  .ask-card .ask-num {
+    position: absolute;
+    top: -14px;
+    left: 18px;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background: var(--c-med-blue);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 0.9rem;
+    box-shadow: 0 1px 3px rgba(9,31,46,0.2);
+  }
+  .ask-card .ask-icon {
+    width: 58px;
+    height: 58px;
+    border-radius: 50%;
+    background: var(--ms-blue-light);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--c-med-blue);
+    margin-top: 0.35rem;
+  }
+  .ask-card .ask-icon svg {
+    width: 30px;
+    height: 30px;
+    stroke: currentColor;
+    fill: none;
+    stroke-width: 1.8;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+  .ask-card h3 {
+    font-size: 1.1rem;
+    margin: 0.4rem 0 0;
+  }
+  .ask-card p {
+    font-size: 0.92rem;
+    color: var(--ink-soft);
+    margin: 0;
+  }
+  .ask-reassure {
+    margin-top: 1.1rem;
+    background: linear-gradient(135deg, #F4FBFF 0%, #ECF7F3 100%);
+    border: 1px solid var(--c-aqua);
+    border-left: 4px solid var(--c-teal);
+    border-radius: 8px;
+    padding: 1rem 1.2rem;
+    display: flex;
+    gap: 0.85rem;
+    align-items: center;
+  }
+  .ask-reassure .ask-reassure-icon {
+    color: var(--c-teal);
+    flex-shrink: 0;
+    display: flex;
+  }
+  .ask-reassure .ask-reassure-icon svg {
+    width: 30px;
+    height: 30px;
+    stroke: currentColor;
+    fill: none;
+    stroke-width: 1.8;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+  .ask-reassure p {
+    margin: 0;
+    font-size: 0.96rem;
+    line-height: 1.5;
+  }
+  .ask-reassure strong { color: var(--ink); }
+
+  /* Nested "example" sub-sections inside a parent block */
+  section.block section.block {
+    margin-bottom: 1.1rem;
+    box-shadow: none;
+    background: var(--bg);
+  }
+  section.block section.block:last-child { margin-bottom: 0; }
 
   /* ============================================ */
   /* Partnerships-only timeline (mini gantt)       */
@@ -1481,11 +1605,9 @@
 <nav class="page-nav" aria-label="On-page sections">
   <span class="page-nav-label">On this page</span>
   <a href="#ptn-goal-heading">Goal</a>
-  <a href="#timeline">Timeline</a>
-  <a href="#path">The path</a>
+  <a href="#next-steps">Next steps</a>
   <a href="#grid">Partnership KPI grid</a>
-  <a href="#amex">AMEX metric definitions</a>
-  <a href="#amex-grid">AMEX FY26 Q2 grid</a>
+  <a href="#amex-example">AMEX example</a>
   <a href="#q3-inventory">Q3 inventory</a>
 </nav>
 
@@ -1496,16 +1618,16 @@
   <!-- ============================ -->
   <section class="ptn-goal" aria-labelledby="ptn-goal-heading">
     <p class="ptn-goal-eyebrow">Why we're doing this</p>
-    <h2 id="ptn-goal-heading">Evaluate partnership performance globally</h2>
-    <p class="ptn-goal-lead">All of this work — the grid, the metric definitions, and the move to Marketing IQ — exists to give us one consistent, global view of how our partnerships perform.</p>
+    <h2 id="ptn-goal-heading">Evaluate partnership performance globally in one place</h2>
+    <p class="ptn-goal-lead"><strong>The goal:</strong> understand the true ROI of our partnerships — in one view we can compare across every region and partner.</p>
     <div class="ptn-goal-questions">
       <div class="ptn-goal-q">
         What is the ROI of partnerships?
         <ul class="ptn-goal-funnel">
-          <li><strong>Upper funnel</strong> — what are we getting beyond revenue, i.e. traffic, exposure?</li>
-          <li><strong>Lower funnel</strong> — where are we seeing the greatest return?</li>
+          <li><strong>Upper funnel</strong> — what we get beyond revenue: traffic, exposure. <span class="funnel-kpi">KPI · Traffic</span></li>
+          <li><strong>Lower funnel</strong> — where we see the greatest return. <span class="funnel-kpi">KPI · ROI</span></li>
         </ul>
-        <p class="ptn-goal-context">Today, reporting on partnerships is disparate across regions, and there is no one view telling the story between regions or across partners that helps us understand the overall effectiveness of this channel. This makes it hard to assess performance, as benchmarking &amp; goal setting can only be done at the lowest campaign level.</p>
+        <p class="ptn-goal-context">Today partnership reporting is scattered across regions — no single view, so we can only benchmark at the campaign level.</p>
         <figure class="ptn-goal-figure">
           <svg viewBox="0 0 760 215" role="img" aria-labelledby="ptn-goal-fig-title ptn-goal-fig-desc">
             <title id="ptn-goal-fig-title">From disparate regional reporting to one comparable global view</title>
@@ -1589,233 +1711,35 @@
   </section>
 
   <!-- ============================ -->
-  <!-- Partnerships Timeline (mini) -->
-  <!-- Mirrors the workstream timeline page, filtered to partnership work. -->
+  <!-- Next steps — the ask         -->
   <!-- ============================ -->
-  <section class="block" id="timeline">
-    <h2>Partnerships Timeline<button type="button" class="section-toggle" aria-label="Collapse section" aria-expanded="true"><span class="chev">▾</span></button></h2>
-    <div class="ptn-tl">
-      <p class="ptn-tl-meta">Partnership-related workstreams pulled from the <a href="timeline.html">full workstream timeline</a>. May 2026 – Apr 2027.</p>
-
-      <div class="ptn-tl-scroll">
-      <div class="ptn-tl-gantt">
-        <div class="ptn-tl-header">
-          <div>Workstream</div>
-          <div>May 26</div><div>Jun</div><div>Jul</div><div>Aug</div><div>Sep</div><div>Oct</div>
-          <div>Nov</div><div>Dec</div><div>Jan 27</div><div>Feb</div><div>Mar</div><div>Apr</div>
-        </div>
-
-        <!-- CRAWL -->
-        <div class="ptn-tl-row phase-head crawl">
-          <div class="label">Phase 1 · Crawl</div>
-          <div class="ptn-tl-cells">
-            <div class="col"></div><div class="col"></div><div class="col"></div>
-            <div class="col"></div><div class="col"></div><div class="col"></div>
-            <div class="col"></div><div class="col"></div><div class="col"></div>
-            <div class="col"></div><div class="col"></div><div class="col"></div>
-          </div>
-        </div>
-        <div class="ptn-tl-row">
-          <div class="label">
-            <a href="timeline.html#ws-partnership-template">Partnership grid template (v1)</a>
-            <span class="ptn-status-badge">In progress</span>
-          </div>
-          <div class="ptn-tl-cells">
-            <div class="col"></div><div class="col"></div><div class="col"></div>
-            <div class="col"></div><div class="col"></div><div class="col"></div>
-            <div class="col"></div><div class="col"></div><div class="col"></div>
-            <div class="col"></div><div class="col"></div><div class="col"></div>
-            <div class="ptn-tl-bar crawl status-progress" style="left: 0%; right: 87.5%;"></div>
-            <span class="ptn-milestone" tabindex="0" style="left: 12.5%;" data-label="Jun Wk2 · AMEX partnership grid live"></span>
-          </div>
-        </div>
-        <div class="ptn-tl-row">
-          <div class="label">
-            <a href="timeline.html#ws-amex-rds-share">Share V1 AMEX partnership reporting template with RDS stakeholders</a>
-            <span class="ptn-status-badge">In progress</span>
-          </div>
-          <div class="ptn-tl-cells">
-            <div class="col"></div><div class="col"></div><div class="col"></div>
-            <div class="col"></div><div class="col"></div><div class="col"></div>
-            <div class="col"></div><div class="col"></div><div class="col"></div>
-            <div class="col"></div><div class="col"></div><div class="col"></div>
-            <div class="ptn-tl-bar crawl status-progress" style="left: 12.5%; right: 79.17%;"></div>
-            <span class="ptn-milestone" tabindex="0" style="left: 20.83%;" data-label="Jul Wk2 · Share V1 AMEX template with RDS stakeholders"></span>
-          </div>
-        </div>
-        <div class="ptn-tl-row">
-          <div class="label">
-            <a href="timeline.html#ws-assemble-other-partnerships">Assemble data sources for all other partnership types</a>
-            <span class="ptn-status-badge">In progress</span>
-          </div>
-          <div class="ptn-tl-cells">
-            <div class="col"></div><div class="col"></div><div class="col"></div>
-            <div class="col"></div><div class="col"></div><div class="col"></div>
-            <div class="col"></div><div class="col"></div><div class="col"></div>
-            <div class="col"></div><div class="col"></div><div class="col"></div>
-            <div class="ptn-tl-bar crawl status-progress" style="left: 16.67%; right: 75%;"></div>
-          </div>
-        </div>
-
-        <!-- WALK -->
-        <div class="ptn-tl-row phase-head walk">
-          <div class="label">Phase 2 · Walk</div>
-          <div class="ptn-tl-cells">
-            <div class="col"></div><div class="col"></div><div class="col"></div>
-            <div class="col"></div><div class="col"></div><div class="col"></div>
-            <div class="col"></div><div class="col"></div><div class="col"></div>
-            <div class="col"></div><div class="col"></div><div class="col"></div>
-          </div>
-        </div>
-        <div class="ptn-tl-row">
-          <div class="label">
-            <a href="timeline.html#ws-amalgamate-grid">Amalgamate all of the data into 'the grid'</a>
-          </div>
-          <div class="ptn-tl-cells">
-            <div class="col"></div><div class="col"></div><div class="col"></div>
-            <div class="col"></div><div class="col"></div><div class="col"></div>
-            <div class="col"></div><div class="col"></div><div class="col"></div>
-            <div class="col"></div><div class="col"></div><div class="col"></div>
-            <div class="ptn-tl-bar walk" style="left: 25%; right: 58.33%;"></div>
-          </div>
-        </div>
-        <div class="ptn-tl-row">
-          <div class="label">
-            <a href="timeline.html#ws-read-good-performance">Understand how to read 'good performance' from the grid</a>
-          </div>
-          <div class="ptn-tl-cells">
-            <div class="col"></div><div class="col"></div><div class="col"></div>
-            <div class="col"></div><div class="col"></div><div class="col"></div>
-            <div class="col"></div><div class="col"></div><div class="col"></div>
-            <div class="col"></div><div class="col"></div><div class="col"></div>
-            <div class="ptn-tl-bar walk" style="left: 33.33%; right: 50%;"></div>
-          </div>
-        </div>
-        <div class="ptn-tl-row">
-          <div class="label">
-            <a href="timeline.html#ws-teach-marketing-iq">Teach to Marketing IQ</a>
-            <ul class="ptn-tl-sublist">
-              <li>Where the data comes from</li>
-              <li>How to find the right data</li>
-              <li>What good performance looks like</li>
-            </ul>
-          </div>
-          <div class="ptn-tl-cells">
-            <div class="col"></div><div class="col"></div><div class="col"></div>
-            <div class="col"></div><div class="col"></div><div class="col"></div>
-            <div class="col"></div><div class="col"></div><div class="col"></div>
-            <div class="col"></div><div class="col"></div><div class="col"></div>
-            <div class="ptn-tl-bar walk" style="left: 41.67%; right: 41.67%;"></div>
-          </div>
-        </div>
-
-        <!-- RUN -->
-        <div class="ptn-tl-row phase-head run">
-          <div class="label">Phase 3 · Run</div>
-          <div class="ptn-tl-cells">
-            <div class="col"></div><div class="col"></div><div class="col"></div>
-            <div class="col"></div><div class="col"></div><div class="col"></div>
-            <div class="col"></div><div class="col"></div><div class="col"></div>
-            <div class="col"></div><div class="col"></div><div class="col"></div>
-          </div>
-        </div>
-        <div class="ptn-tl-row">
-          <div class="label">
-            <a href="timeline.html#ws-operationalize-grid">Utilize Marketing IQ to assemble partnerships grid</a>
-          </div>
-          <div class="ptn-tl-cells">
-            <div class="col"></div><div class="col"></div><div class="col"></div>
-            <div class="col"></div><div class="col"></div><div class="col"></div>
-            <div class="col"></div><div class="col"></div><div class="col"></div>
-            <div class="col"></div><div class="col"></div><div class="col"></div>
-            <div class="ptn-tl-bar run" style="left: 50%; right: 0%;"></div>
-          </div>
-        </div>
+  <section class="block" id="next-steps">
+    <h2>Next steps<button type="button" class="section-toggle" aria-label="Collapse section" aria-expanded="true"><span class="chev">▾</span></button></h2>
+    <p class="ask-lede">We have the output in mind. To start building, here's all we need from each region — nothing more.</p>
+    <div class="ask-grid">
+      <div class="ask-card">
+        <span class="ask-num">1</span>
+        <span class="ask-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><path d="M8 6h12"/><path d="M8 12h12"/><path d="M8 18h12"/><circle cx="4" cy="6" r="1"/><circle cx="4" cy="12" r="1"/><circle cx="4" cy="18" r="1"/></svg>
+        </span>
+        <h3>The partnerships</h3>
+        <p>A list of the partnerships running in your region.</p>
       </div>
-      </div>
-
-      <div class="ptn-tl-legend">
-        <span><span class="ms-sw"></span>Milestone (hover for label)</span>
-        <span><span class="sw crawl"></span>Crawl</span>
-        <span><span class="sw walk"></span>Walk</span>
-        <span><span class="sw run"></span>Run</span>
-        <span><span class="ptn-status-badge" style="margin-right:0.1rem;">In progress</span></span>
+      <div class="ask-card">
+        <span class="ask-num">2</span>
+        <span class="ask-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><path d="M5 4h11l3 3v13H5z"/><path d="M16 4v3h3"/><path d="M8 12h8M8 15h5"/></svg>
+        </span>
+        <h3>The source</h3>
+        <p>Where each one's performance lives today — the file, report, or dashboard.</p>
       </div>
     </div>
-  </section>
-
-  <!-- ============================ -->
-  <!-- AMEX V1 MVP · The path       -->
-  <!-- ============================ -->
-  <section class="block" id="path">
-    <h2>AMEX V1 MVP · The path<button type="button" class="section-toggle" aria-label="Collapse section" aria-expanded="true"><span class="chev">▾</span></button></h2>
-    <div class="flow">
-
-      <div class="flow-step">
-        <span class="step-icon" aria-hidden="true">
-          <svg viewBox="0 0 24 24"><path d="M5 4h11l3 3v13H5z"/><path d="M16 4v3h3"/><path d="M8 11h8M8 14h8M8 17h5"/></svg>
-        </span>
-        <span class="role">Define</span>
-        <h4>Set the AMEX KPI list per region</h4>
-        <ul>
-          <li>Lock the KPIs we'll report on for AMEX in Americas, Asia, and EMEA.</li>
-          <li>Mark each as primary or secondary based on the region's goal.</li>
-        </ul>
-      </div>
-
-      <div class="flow-step">
-        <span class="step-icon" aria-hidden="true">
-          <svg viewBox="0 0 24 24"><path d="M12 4v16"/><path d="M5 7h14"/><path d="M5 7l-2 5h4z"/><path d="M19 7l-2 5h4z"/><path d="M8 20h8"/></svg>
-        </span>
-        <span class="role">Align</span>
-        <h4>Confirm definitions are comparable</h4>
-        <ul>
-          <li>Pressure-test that ROI / Conversions / Traffic mean the same thing in every region.</li>
-          <li>Align on currency, attribution window, and what counts as a conversion.</li>
-          <li>Catch this before locating cells — saves rework downstream.</li>
-        </ul>
-      </div>
-
-      <div class="flow-step">
-        <span class="step-icon" aria-hidden="true">
-          <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="6"/><path d="M16 16l5 5"/><path d="M8 11h6M11 8v6"/></svg>
-        </span>
-        <span class="role">Locate</span>
-        <h4>Find each KPI in regional reports</h4>
-        <ul>
-          <li>For every KPI × region cell, pinpoint the exact source.</li>
-          <li>Example: "EMEA AMEX ROI → EMEA Partnership Monthly, tab 3, cell D14."</li>
-          <li>Cross-reference against the <a href="reports.html">Reports inventory</a>.</li>
-        </ul>
-      </div>
-
-      <div class="flow-step">
-        <span class="step-icon" aria-hidden="true">
-          <svg viewBox="0 0 24 24"><circle cx="9" cy="9" r="3"/><path d="M3 19c0-3 3-5 6-5s6 2 6 5"/><circle cx="17" cy="7" r="2.5"/><path d="M14 14c2-1 4-1 6 0s2 3 2 5"/></svg>
-        </span>
-        <span class="role">Socialize</span>
-        <h4>Share with RDS Partnerships teams</h4>
-        <ul>
-          <li>Walk RDS through the AMEX MVP.</li>
-          <li>Frame it as the model for every partnership going forward.</li>
-          <li>Gather feedback on definitions, feasibility, and ownership.</li>
-        </ul>
-      </div>
-
-      <div class="flow-step">
-        <span class="step-icon" aria-hidden="true">
-          <svg viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M8 9h8M8 13h8M8 17h5"/><path d="M16 17l2 2 4-4"/></svg>
-        </span>
-        <span class="role">Standardize</span>
-        <h4>Template for all partnerships</h4>
-        <ul>
-          <li>Bake learnings into one template every RDS Partnerships team fills out.</li>
-          <li>Include KPI definitions, source-of-truth pointers, and refresh cadence.</li>
-        </ul>
-      </div>
-
+    <div class="ask-reassure">
+      <span class="ask-reassure-icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24"><path d="M12 3l7 3v5c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V6z"/><path d="M9 12l2 2 4-4"/></svg>
+      </span>
+      <p><strong>No new work.</strong> We'll build from the reporting tools you already use — just point us to the data so we can start.</p>
     </div>
-
   </section>
 
   <!-- ================================ -->
@@ -1833,11 +1757,8 @@
             <th>Goal</th>
             <th>Reach / Impressions</th>
             <th>Traffic</th>
-            <th>Engagement</th>
             <th>Conversions</th>
-            <th>Revenue / Pipeline</th>
             <th>ROI</th>
-            <th>Brand Lift</th>
           </tr>
         </thead>
         <tbody>
@@ -1845,9 +1766,6 @@
             <td>NFL</td>
             <td><span class="region">Americas</span></td>
             <td>Traffic</td>
-            <td class="blank">—</td>
-            <td class="blank">—</td>
-            <td class="blank">—</td>
             <td class="blank">—</td>
             <td class="blank">—</td>
             <td class="blank">—</td>
@@ -1861,9 +1779,6 @@
             <td class="blank">—</td>
             <td class="blank">—</td>
             <td class="blank">—</td>
-            <td class="blank">—</td>
-            <td class="blank">—</td>
-            <td class="blank">—</td>
           </tr>
           <tr>
             <td>AMEX (Asia)</td>
@@ -1873,9 +1788,6 @@
             <td class="blank">—</td>
             <td class="blank">—</td>
             <td class="blank">—</td>
-            <td class="blank">—</td>
-            <td class="blank">—</td>
-            <td class="blank">—</td>
           </tr>
           <tr>
             <td>Add partnership…</td>
@@ -1885,16 +1797,10 @@
             <td class="blank">—</td>
             <td class="blank">—</td>
             <td class="blank">—</td>
-            <td class="blank">—</td>
-            <td class="blank">—</td>
-            <td class="blank">—</td>
           </tr>
           <tr>
             <td>Add partnership…</td>
             <td><span class="region">—</span></td>
-            <td class="blank">—</td>
-            <td class="blank">—</td>
-            <td class="blank">—</td>
             <td class="blank">—</td>
             <td class="blank">—</td>
             <td class="blank">—</td>
@@ -1907,10 +1813,14 @@
   </section>
 
   <!-- ====================================== -->
-  <!-- AMEX metric definitions + FY26 Q2 grid -->
+  <!-- AMEX example: metric definitions + grid -->
   <!-- ====================================== -->
-  <section class="block" id="amex">
-    <h2>AMEX metric definitions <span style="font-size:0.7rem;font-weight:500;color:var(--ink-soft);text-transform:uppercase;letter-spacing:1px;margin-left:0.4rem;">v0 · starting point</span><button type="button" class="section-toggle" aria-label="Collapse section" aria-expanded="true"><span class="chev">▾</span></button></h2>
+  <section class="block" id="amex-example">
+    <h2>AMEX example <span style="font-size:0.7rem;font-weight:500;color:var(--ink-soft);text-transform:uppercase;letter-spacing:1px;margin-left:0.4rem;">worked example</span><button type="button" class="section-toggle" aria-label="Collapse section" aria-expanded="true"><span class="chev">▾</span></button></h2>
+    <p class="ask-lede">One partnership, end to end — how we define the metrics and how a live quarter reads. Expand each piece below.</p>
+
+    <section class="block" id="amex-defs">
+      <h2>AMEX metric definitions <span style="font-size:0.7rem;font-weight:500;color:var(--ink-soft);text-transform:uppercase;letter-spacing:1px;margin-left:0.4rem;">v0 · starting point</span><button type="button" class="section-toggle" aria-label="Collapse section" aria-expanded="true"><span class="chev">▾</span></button></h2>
 
     <table class="metric-defs">
       <thead>
@@ -2382,6 +2292,7 @@
         </tfoot>
       </table>
     </div>
+    </section>
   </section>
 
   <!-- ============================================ -->
@@ -2511,7 +2422,7 @@
     </script>
   </section>
 
-  <p class="footer-note">This is a working scratch-pad. Edit the HTML directly to add partnerships, KPIs, or ideas — or send notes to Cam.</p>
+  <p class="footer-note">This is a working scratch-pad. Edit the HTML directly to add partnerships, KPIs, or ideas.</p>
 
 </main>
 
@@ -2786,8 +2697,6 @@
   });
 })();
 </script>
-
-<script src="notes-widget.js"></script>
 
 </body>
 </html>
