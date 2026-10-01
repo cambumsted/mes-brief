@@ -799,24 +799,32 @@
   .compare-panel .cmp-row .cmp-delta.neg { color: #993333; font-weight: 700; }
   .compare-panel .cmp-row .cmp-delta.flat { color: var(--ink-soft); }
 
-  /* ===== Live grid: even column spacing + header wrap ===== */
-  .live-grid { table-layout: fixed; width: 100%; }
+  /* ===== Live grid: readable alignment + no mid-number wraps ===== */
+  .live-grid { table-layout: auto; width: 100%; }
   .live-grid th, .live-grid td { word-wrap: break-word; overflow-wrap: break-word; }
   .live-grid thead th {
     white-space: normal;
-    line-height: 1.2;
+    line-height: 1.25;
     vertical-align: bottom;
     /* Only wrap at whitespace — never mid-word (prevents "Enrollment-s" splits) */
     word-break: keep-all;
     overflow-wrap: normal;
     hyphens: none;
-    padding-left: 0.35rem;
-    padding-right: 0.35rem;
+    padding-left: 0.55rem;
+    padding-right: 0.55rem;
   }
-  .live-grid colgroup col.col-name      { width: 10%; }
+  /* Consistent alignment: first three (text) columns left, metric columns right —
+     so every header sits directly over its data. */
+  .live-grid th:nth-child(-n+3),
+  .live-grid td:nth-child(-n+3) { text-align: left; }
+  .live-grid th:nth-child(n+4),
+  .live-grid td:nth-child(n+4) { text-align: right; }
+  /* Keep money / number values on a single line so figures never split. */
+  .live-grid td.num { white-space: nowrap; }
+  .live-grid colgroup col.col-name      { width: 11%; }
   .live-grid colgroup col.col-audience  { width: 9%; }
-  .live-grid colgroup col.col-offer     { width: 11%; }
-  .live-grid colgroup col.col-num       { width: 9%; }
+  .live-grid colgroup col.col-offer     { width: 12%; }
+  .live-grid colgroup col.col-num       { width: 9.5%; }
 
   .live-grid td.offer-cell {
     font-size: 0.75rem;
@@ -2571,7 +2579,7 @@
     redrate:      v => (v * 100).toFixed(2) + '%',
     redspend:     v => '$' + Math.round(v).toLocaleString(),
     offercost:    v => '$' + Math.round(v).toLocaleString(),
-    aov:          v => '$' + v.toFixed(2),
+    aov:          v => '$' + v.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 }),
     roi:          v => v.toFixed(2) + 'x'
   };
 
